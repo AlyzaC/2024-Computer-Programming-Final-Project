@@ -1,3 +1,4 @@
 public class Astronaut{
-    string Name;
+    String Name;
+    String dateOfBirth;
 }
