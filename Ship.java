@@ -1,9 +1,8 @@
-Hello world
-
-
-
-
-
+public class Ship ();
+{
+    double fuel;
+    
+}
 
 
 
