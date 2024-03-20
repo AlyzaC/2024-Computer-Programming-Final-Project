@@ -1,14 +1,13 @@
 import java.util.Scanner;
-
 public class AstroRemoval {
     //Fields
         Astronaut[] astrosToBeRemoved;
 
-    //Constructor?
+    //Constructor
     /**
      * @param numToRemove The number of astronauts to be removed
      */
-        public AstroRemoval(int numToRemove) {
+        public AstroRemoval(int numToRemove){
             astrosToBeRemoved = new Astronaut[numToRemove];
         }
 
@@ -17,9 +16,9 @@ public class AstroRemoval {
      * @param a A user supplied astronaut that is to be removed
      */
         public void addAstro(Astronaut a) {
-            for (int count : astrosToBeRemoved) {
-                if (astrosToBeRemoved[count] == null) {
-                    astrosToBeRemoved[count] = a;
+            for (Astronaut astro : astrosToBeRemoved) {
+                if (astro == null) {
+                    astro = a;
                     break;
                 }
             }
@@ -30,13 +29,13 @@ public class AstroRemoval {
          */
         private boolean verifyRemoval() {
             Scanner kbd = new Scanner(System.in);
-            String astronauts = "";
+            String astronautList = "";
             boolean verified;
-            for (int count : astrosToBeRemoved) {
-                astronauts += astrosToBeRemoved[count].getName() + "\n";
+            for (Astronaut astro : astrosToBeRemoved) {
+                astronautList += astro.Name + "\n";
             }
             System.out.println("The following astronauts have been chosen for removal:" +
-                                 astronauts + "\n" +
+                                 astronautList + "\n" +
                                  "Do you wish to proceed with removal?\n" +
                                  "1. Yes\n" +
                                  "2. No");
