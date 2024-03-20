@@ -12,8 +12,8 @@ public class Astronaut{
     double weight;
 
     public void spaceWalk(){
-
+        
     }
     
-    System.out.println("This is a test:");
+    
 }
