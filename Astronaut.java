@@ -11,8 +11,15 @@ public class Astronaut{
     double payRate;
     double weight;
 
+        //Makes the astronaut go on a space walk? Not sure. ;-;
     public void spaceWalk(){
-        System.out.println("This is a test.");
+        //more code goes here? not sure what though xd
+    }
+
+        //CREATES SERIAL NUMBER
+    public static String generateSerialNumber(){
+        //put more code that creates a Serial Number
+        return serialNumber;
     }
     
     
