@@ -1,4 +1,12 @@
 public class Astronaut{
     String Name;
     String dateOfBirth;
+    String serialNumber;
+    String address;
+    String email;
+    String phoneNumber;
+    String nextOfKin;
+    String status;
+    double payRate;
+    double weight;
 }
