@@ -1,3 +1,5 @@
+//(Does this need to be here?) import java.util.Scanner;
+
 public class Astronaut{
     //Strings and doubles
     String Name;
@@ -19,7 +21,17 @@ public class Astronaut{
         //CREATES SERIAL NUMBER
     public static String generateSerialNumber(){
         //put more code that creates a Serial Number
+
+        //creates a random number to be serialNumber
+        Random random = new Random();
+        int randomNumber = random.nextInt(99999);
+
+        //
+        String serialNumber = "SN" + randomNumber;
+
         return serialNumber;
+
+        System.out.println("This is a test");
     }
     
     
