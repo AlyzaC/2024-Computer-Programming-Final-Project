@@ -1,4 +1,4 @@
-//(Does this need to be here?) import java.util.Scanner;
+import java.util.Random;
 
 public class Astronaut{
     //Strings and doubles
@@ -30,9 +30,6 @@ public class Astronaut{
         String serialNumber = "SN" + randomNumber;
 
         return serialNumber;
-
-        System.out.println("This is a test");
     }
-    
     
 }
