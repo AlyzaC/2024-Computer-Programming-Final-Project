@@ -1,11 +1,11 @@
 import java.util.Scanner;
 public class AstroRemoval {
     //Fields
-        Astronaut[] astrosToBeRemoved;
+        private Astronaut[] astrosToBeRemoved;
 
     //Constructor
     /**
-     * The constructor for the class. Asks for the number of astronauts to be removed
+     * The constructor for the class. Asks for the number of astronauts to be removed.
      * @param numToRemove The number of astronauts to be removed
      */
         public AstroRemoval(int numToRemove){
@@ -26,10 +26,10 @@ public class AstroRemoval {
             }
         }
 
-        /**
-         * Verifies whether to remove the astronaut information
-         * @return A boolean for whether the removal has been approved by the user
-         */
+    /**
+     * Verifies whether to remove the astronaut information
+     * @return A boolean for whether the removal has been approved by the user
+     */
         private boolean verifyRemoval() {
             Scanner kbd = new Scanner(System.in);
             String astronautList = "";
@@ -59,12 +59,14 @@ public class AstroRemoval {
             return verified;
         }
 
-        /**
-         * Removes astronauts added to list after verification from the user
-         */
+    /**
+     * Removes astronauts added to list, after verification from the user
+     */
         public void removeAstronauts() {
             if (verifyRemoval()) {
-                //Code to remove astronauts
+                /*for (Astronaut a : astrosToBeRemoved) {
+                    Code to remove astronauts
+                }*/
                 System.out.println("Astronauts have been successfully removed.");
             }
         }
