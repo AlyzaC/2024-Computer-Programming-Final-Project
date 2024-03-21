@@ -5,6 +5,7 @@ public class AstroRemoval {
 
     //Constructor
     /**
+     * The constructor for the class. Asks for the number of astronauts to be removed
      * @param numToRemove The number of astronauts to be removed
      */
         public AstroRemoval(int numToRemove){
@@ -13,6 +14,7 @@ public class AstroRemoval {
 
     //Methods
     /**
+     * Adds an astronaut to the list of Astronauts to be removed
      * @param a A user supplied astronaut that is to be removed
      */
         public void addAstro(Astronaut a) {
@@ -25,6 +27,7 @@ public class AstroRemoval {
         }
 
         /**
+         * Verifies whether to remove the astronaut information
          * @return A boolean for whether the removal has been approved by the user
          */
         private boolean verifyRemoval() {
@@ -56,6 +59,9 @@ public class AstroRemoval {
             return verified;
         }
 
+        /**
+         * Removes astronauts added to list after verification from the user
+         */
         public void removeAstronauts() {
             if (verifyRemoval()) {
                 //Code to remove astronauts
