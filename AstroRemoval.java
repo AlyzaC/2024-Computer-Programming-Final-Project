@@ -35,7 +35,7 @@ public class AstroRemoval {
                 astronautList += astro.Name + "\n";
             }
             System.out.println("The following astronauts have been chosen for removal:" +
-                                 astronautList + "\n" +
+                                 astronautList +
                                  "Do you wish to proceed with removal?\n" +
                                  "1. Yes\n" +
                                  "2. No");
@@ -58,7 +58,7 @@ public class AstroRemoval {
 
         public void removeAstronauts() {
             if (verifyRemoval()) {
-                //
+                //Code to remove astronauts
                 System.out.println("Astronauts have been successfully removed.");
             }
         }
