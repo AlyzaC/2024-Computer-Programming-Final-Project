@@ -22,17 +22,17 @@ public class Astronaut{
         //CREATES SERIAL NUMBER
     public  String generateSerialNumber(){
         //put more code that creates a Serial Number
-
+        private static int counter = 0;
         //creates a random number to be serialNumber
         Random random = new Random();
-        int randomNumber = random.nextInt(99999);
+        int randomNumber = random.nextInt(99999, ++counter);
 
         //Outputs the Serial Number
         String serialNumber = "SN" + randomNumber;
             
         return serialNumber;
 
-        //Need to figure out how to make it a "*Sequentially* Generated Serial Number"
+        //Need to figure out how to make it a "*Sequentially* Generated Serial Number" (1, 2, 3, 4, 5,)
     }
     
 }
