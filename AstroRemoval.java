@@ -14,7 +14,7 @@ public class AstroRemoval {
 
     //Methods
     /**
-     * Adds an astronaut to the list of Astronauts to be removed
+     * Adds an astronaut to the list of Astronauts to be removed.
      * @param a A user supplied astronaut that is to be removed
      */
         public void addAstro(Astronaut a) {
@@ -27,7 +27,7 @@ public class AstroRemoval {
         }
 
     /**
-     * Verifies whether to remove the astronaut information
+     * Verifies whether to remove the astronaut information.
      * @return A boolean for whether the removal has been approved by the user
      */
         private boolean verifyRemoval() {
@@ -38,10 +38,10 @@ public class AstroRemoval {
                 astronautList += astro.Name + "\n";
             }
             System.out.println("The following astronauts have been chosen for removal:" +
-                                 astronautList +
-                                 "Do you wish to proceed with removal?\n" +
-                                 "1. Yes\n" +
-                                 "2. No");
+                               astronautList +
+                               "Do you wish to proceed with removal?\n" +
+                               "1. Yes\n" +
+                               "2. No");
             int choice = kbd.nextInt();
             while (choice != 1 && choice != 2) {
                 System.out.println("Please enter a number 1-2.\n" +
@@ -60,11 +60,11 @@ public class AstroRemoval {
         }
 
     /**
-     * Removes astronauts added to list, after verification from the user
+     * Removes astronauts added to list, after verification from the user.
      */
         public void removeAstronauts() {
             if (verifyRemoval()) {
-                /*for (Astronaut a : astrosToBeRemoved) {
+                /*for (Astronaut astro : astrosToBeRemoved) {
                     Code to remove astronauts
                 }*/
                 System.out.println("Astronauts have been successfully removed.");
