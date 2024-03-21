@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class Ship
 {
@@ -8,28 +7,24 @@ public class Ship
   //crew = Astronaut[] 99% sure this dosent work
   int numOfCrew;
   boolean parachutesDeployed;
-  Scanner keyboard = new Scanner
-System.out.println("blah blah blah gimme a number between 1-4");
-System.out.println("1 to add astronaut, 2 to launch, 3 to deploy parachutes 4 to open doors");
-int choice = keyboard.nextInt();
-//nextline
 
-public void addAstro()
+
+public void addAstro(int choice)
 {
-if (choice = 1)
+if (choice == 1)
 {
  System.out.println ("which one?");
 }
 }
 
-public void launch()
+public void launch(int choice)
 {
-if (choice = 2)
+if (choice == 2)
 {
  if (numOfCrew < shipCapacity)
  {
    System.out.println ("not enough people in ship make new choice");
-   choice = keyboard.nextInt();
+   
    //next line
  } else{
 
@@ -40,25 +35,25 @@ if (choice = 2)
 }
 
 
-public void deployParachutes()
+public void deployParachutes(int choice)
 {
-  if (choice = 3)
+  if (choice == 3)
   {
     System.out.println ("Deploying parachutes");
   }
 }
 
-public void openDoors()
+public void openDoors(int choice)
 {
-  if (choice = 4)
+  if (choice == 4)
   {
     System.out.println ("teaching astronauts how doorknobs work...");
   }
 }
 
-  public void explode()
+  public void explode(int choice)
   {
-    if (choice = 800177)
+    if (choice == 800177)
     {
 
     System.out.println  ("kaboom?");
