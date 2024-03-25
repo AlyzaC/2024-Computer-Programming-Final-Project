@@ -25,9 +25,118 @@ public static void main(String[] args){
                 do {
                     System.out.println(astro menu);
                     int choice2 = kbd.nextInt();
+                    int field;
                     switch (choice2) {
                     case 1:
-                        Code for adding astro
+                        System.out.print("Please enter the astronaut's full name (First Last): ")
+                        String astroname = (kbd.nextLine()).trim(); I don't know if that works?
+                        System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
+                        String astroDateOfBirth = (kbd.nextLine()).trim();
+                        System.out.print("Please enter the astronaut's address ():");
+                        String astroAddress = (kbd.nextLine()).trim();
+                        System.out.print("Please enter the astronaut's email: ");
+                        String astroEmail = (kbd.nextLine()).trim();
+                        System.out.print("Please enter the astronaut's phone number: ");
+                        String astroPhone = (kbd.nextLine()).trim();
+                        System.out.print("Please enter the full name of the astronaut's next of kin: ");
+                        String astroNextOfKin = (kbd.nextLine()).trim();
+                        System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
+                        String astroStatus = (kbd.nextLine()).trim();
+                        System.out.print("Please enter the astronaut's pay rate: ");
+                        double astroPayRate = kbd.nextDouble();
+                        System.out.print("Please enter the astronaut's weight: ");
+                        double astroWeight = kbd.nextDouble();
+                        System.out.println("Please verify information before saving:\n" +
+                                           "Name: " + astroName + "\n" +
+                                           "Date of Birth: " + astroDateOfBirth + "\n" +
+                                           "Address: " + astroAddress + "\n" +
+                                           "Email: " + astroEmail + "\n" +
+                                           "Phone Number: " + astroPhone + "\n" +
+                                           "Next of Kin: " + astroNextOfKin + "\n" +
+                                           "Status: " + astroStatus + "\n" +
+                                           "Pay Rate: " + astroPayRate + "\n" +
+                                           "Weight: " + astroWeight);
+                        do {
+                            System.out.println("Please verify information before saving:\n" +
+                                           "Name: " + astroName + "\n" +
+                                           "Date of Birth: " + astroDateOfBirth + "\n" +
+                                           "Address: " + astroAddress + "\n" +
+                                           "Email: " + astroEmail + "\n" +
+                                           "Phone Number: " + astroPhone + "\n" +
+                                           "Next of Kin: " + astroNextOfKin + "\n" +
+                                           "Status: " + astroStatus + "\n" +
+                                           "Pay Rate: " + astroPayRate + "\n" +
+                                           "Weight: " + astroWeight);
+                            System.out.println("Is there anything you wish to change?");
+                            String change = (kbd.nextLine()).trim();
+                            if (change.equalsIgnoreCase("yes")) {
+                                System.out.println("Which field do you wish to change?");
+                                System.out.println("1. Name\n" +
+                                                   "2. Date of Birth\n" +
+                                                   "3. Address\n" +
+                                                   "4. Email\n" + 
+                                                   "5. Phone Number\n" +
+                                                   "6. Next of Kin\n" +
+                                                   "7. Status\n" +
+                                                   "8. Pay Rate\n" +
+                                                   "9. Weight\n" +);
+                                System.out.print("Please enter the corresponding integer: ");
+                                field = kbd.nextInt();
+                                switch (field) {
+                                    case 1:
+                                        System.out.print("Please enter the astronaut's full name (First Last): ")
+                                        String astroname = (kbd.nextLine()).trim();
+                                        break;
+                                    
+                                    case 2:
+                                        System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
+                                        String astroDateOfBirth = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 3:
+                                        System.out.print("Please enter the astronaut's address ():");
+                                        String astroAddress = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 4: 
+                                        System.out.print("Please enter the astronaut's email: ");
+                                        String astroEmail = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 5: 
+                                        System.out.print("Please enter the astronaut's phone number: ");
+                                        String astroPhone = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 6: 
+                                        System.out.print("Please enter the full name of the astronaut's next of kin: ");
+                                        String astroNextOfKin = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 7: 
+                                        System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
+                                        String astroStatus = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 8: 
+                                        System.out.print("Please enter the astronaut's pay rate: ");
+                                        double astroPayRate = kbd.nextDouble();
+                                        break;
+
+                                    case 9: 
+                                        System.out.print("Please enter the astronaut's weight: ");
+                                        double astroWeight = kbd.nextDouble();
+                                        break;
+
+                                    default: 
+                                        System.out.println("Please enter a number 1-9.")
+                                        break;
+                                }
+                                
+                            }
+                        } while (!field.equalsIgnoreCase("no"));
+                        Astronaut astro = new Astronaut();
+                        code saving astro to separate file/database
                         break;
 
                     case 2:
@@ -39,7 +148,7 @@ public static void main(String[] args){
                         break;
 
                     case 4:
-                        message for going back
+                        System.out.println("Going back to main menu.")
                         break;
 
                     default:
@@ -73,7 +182,7 @@ public static void main(String[] args){
                             break;
 
                         case 4:
-                            message for going back
+                            System.out.println("Going back to main menu.")
                             break;
 
                         default:
@@ -85,15 +194,13 @@ public static void main(String[] args){
 
             case 3:
                 * - Fuel? (Does it make more sense for fuel to be here or in the ship inventory?)
-                *    - Check fuel
-                *    - Add fuel
                 * - Launch
                 do {
                     System.out.println(string for launch menu);
                     int choice2 = kbd.nextInt();
                     switch (choice2) {
                         case 1:
-                            another menu for check/add fuel & another switch for options
+                            code for checking & adding fuel
                             break;
 
                         case 2:
@@ -101,7 +208,7 @@ public static void main(String[] args){
                             break;
 
                         case 3:
-                            message for going back
+                            System.out.println("Going back to main menu.")
                             break;
 
                         default:
