@@ -57,7 +57,7 @@ public static void main(String[] args){
                                            "Pay Rate: " + astroPayRate + "\n" +
                                            "Weight: " + astroWeight);
                         do {
-                            System.out.println("Please verify information before saving:\n" +
+                            System.out.println("Please verify information before saving.\n" +
                                            "Name: " + astroName + "\n" +
                                            "Date of Birth: " + astroDateOfBirth + "\n" +
                                            "Address: " + astroAddress + "\n" +
@@ -67,7 +67,7 @@ public static void main(String[] args){
                                            "Status: " + astroStatus + "\n" +
                                            "Pay Rate: " + astroPayRate + "\n" +
                                            "Weight: " + astroWeight);
-                            System.out.println("Is there anything you wish to change?");
+                            System.out.println("Is there anything you wish to change? (yes/no)");
                             String change = (kbd.nextLine()).trim();
                             if (change.equalsIgnoreCase("yes")) {
                                 System.out.println("Which field do you wish to change?");
@@ -134,7 +134,7 @@ public static void main(String[] args){
                                 }
                                 
                             }
-                        } while (!field.equalsIgnoreCase("no"));
+                        } while (!change.equalsIgnoreCase("no"));
                         Astronaut astro = new Astronaut();
                         code saving astro to separate file/database
                         break;
@@ -168,9 +168,60 @@ public static void main(String[] args){
                 do{
                     System.out.println(string for rocket/ship menu);
                     int choice2 = kbd.nextInt();
+                    int field;
                     switch (choice2) {
                         case 1:
-                            code for adding ship
+                            System.out.println("Please enter the ship's name: ");
+                            String shipName = (kbd.nextLine()).trim();
+                            System.out.println("Please enter the ship's fuel capacity: ");
+                            double shipFuelCapacity = kbd.nextDouble();
+                            System.out.println("Please enter the ship's current fuel level: ");
+                            double shipCurrentFuel = kbd.nextDouble();
+                            System.out.println("Please enter the ship's crew capacity: ");
+                            int shipCrewCapacity = kbd.nextInt();
+                            do {
+                                System.out.println("Please verify information before saving.\n" +
+                                                   "Name: " + shipName + "\n" +
+                                                   "Fuel Capacity: " + shipFuelCapacity + "\n" +
+                                                   "Current Fuel: " + shipCurrentFuel + "\n" +
+                                                   "Crew Capacity: " + shipCrewCapacity);
+                                System.out.println("Is there anything you wish to change? (yes/no)");
+                                String change = (kbd.nextLine).trim();
+                                if (change.equalsIgnoreCase("yes")) {
+                                    System.out.println("Which field do you wish to change?");
+                                    System.out.println("1. Name" +
+                                                       "2. Fuel Capacity" +
+                                                       "3. Current Fuel" +
+                                                       "4. Crew Capacity");
+                                    System.out.print("Please enter the corresponding number: ");
+                                    field = nextInt();
+                                    switch (field) {
+                                        case 1:
+                                        System.out.println("Please enter the ship's name: ");
+                                        String shipName = (kbd.nextLine()).trim();
+                                        break;
+
+                                        case 2:
+                                        System.out.println("Please enter the ship's fuel capacity: ");
+                                        double shipFuelCapacity = kbd.nextDouble();
+                                        break;
+
+                                        case 3:
+                                        System.out.println("Please enter the ship's current fuel level: ");
+                                        double shipCurrentFuel = kbd.nextDouble();
+                                        break;
+
+                                        case 4:
+                                        System.out.println("Please enter the ship's crew capacity: ");
+                                        int shipCrewCapacity = kbd.nextInt();
+                                        break;
+
+                                        default:
+                                        System.out.println("Please enter a number 1-4");
+                                        break;
+                                    }
+                                }
+                            } while (!change.equalsCaseIgnore("no"));
                             break;
 
                         case 2:
