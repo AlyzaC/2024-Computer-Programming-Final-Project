@@ -25,8 +25,9 @@ public class Astronaut{
         //more code goes here? not sure what though xd
     }
 
-    public int getSerialNumber() {
-        return serialNumber;
-    }
+    // Did in new class commented out because we don't need it anymore.
+    // public int getSerialNumber() {
+    //     return serialNumber;
+    // }
     
 }
