@@ -10,7 +10,6 @@ public static void main(String[] args){
         //Scanner kbd = new Scanner(System.in)
 
     //Login
-
     
     /* Main menu
      * - Astronauts
@@ -152,10 +151,7 @@ public static void main(String[] args){
                         break;
 
                     default:
-                        while (choice2 > 4 || choice2 < 1) {
-                            System.out.println("Please enter a number from 1-4");
-                        }
-                        break;
+                        System.out.println("Please enter a number from 1-4");
                     }
                 } while ( != 4);
                 break;
@@ -237,7 +233,7 @@ public static void main(String[] args){
                             break;
 
                         default:
-                            ask for valid number
+                            System.out.println("Please enter a number 1-4.");
                             break;
                     }
                 } while ( != 4)
@@ -263,14 +259,14 @@ public static void main(String[] args){
                             break;
 
                         default:
-                            ask for valid number
+                            System.out.println("Please enter a number 1-3.");
                             break;
                     }
                 } while ( != 4)
                 break;
 
             case 4:
-                System.out.println();
+                System.out.println(Closing program now.);
                 break;
 
             default:
