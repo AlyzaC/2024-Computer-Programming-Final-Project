@@ -17,7 +17,7 @@ public class SerialNumberGenerator {
             return serialNumber;
         }
         
-        //Need to figure out how to make it a "*Sequentially* Generated Serial Number" (1, 2, 3, 4, 5,)
+        //Gives a Sequentially Generated Serial Number & outputs it
     
         public static void main(String[] args){
             SerialNumberGenerator generator = new SerialNumberGenerator(1000);
