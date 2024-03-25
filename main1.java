@@ -39,7 +39,7 @@ public static void main(String[] args){
                         break;
 
                     case 4:
-                        System.out.println(back);
+                        message for going back
                         break;
 
                     default:
@@ -61,50 +61,51 @@ public static void main(String[] args){
                     int choice2 = kbd.nextInt();
                     switch (choice2) {
                         case 1:
+                            code for adding ship
                             break;
 
                         case 2:
+                            code for editing existing ship
                             break;
 
                         case 3:
+                            code for deleting a ship
                             break;
 
                         case 4:
+                            message for going back
                             break;
 
                         default:
+                            ask for valid number
                             break;
                     }
                 } while ( != 4)
                 break;
 
             case 3:
-                * Launch
                 * - Fuel? (Does it make more sense for fuel to be here or in the ship inventory?)
                 *    - Check fuel
                 *    - Add fuel
                 * - Launch
-                * Rocket/Ship menu
-                * - Add
-                * - Edit info
-                * - Delete 
                 do {
                     System.out.println(string for launch menu);
                     int choice2 = kbd.nextInt();
                     switch (choice2) {
                         case 1:
+                            another menu for check/add fuel & another switch for options
                             break;
 
                         case 2:
+                            code for launch
                             break;
 
                         case 3:
-                            break;
-
-                        case 4:
+                            message for going back
                             break;
 
                         default:
+                            ask for valid number
                             break;
                     }
                 } while ( != 4)
