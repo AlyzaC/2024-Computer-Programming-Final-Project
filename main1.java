@@ -2,7 +2,7 @@ public class main1 {
 public static void main(String[] args){
     Astronaut guy = new Astronaut();
     guy.spaceWalk();
-    System.out.println(guy.generateSerialNumber());
+    System.out.println(guy.getSerialNumber());
     //General outline idea? (Make changes if you want to)
     //Variables & Objects
 
