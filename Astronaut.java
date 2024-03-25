@@ -20,10 +20,13 @@ public class Astronaut{
     }
 
         //CREATES SERIAL NUMBER
-    public  String generateSerialNumber(){
+    public String generateSerialNumber(){
         //put more code that creates a Serial Number
+
+        //ERROR MESSAGE HERE. Might be the private static int being wrong
         private static int counter = 0;
         //creates a random number to be serialNumber
+        //Counter makes it sequential
         Random random = new Random();
         int randomNumber = random.nextInt(99999, ++counter);
 
