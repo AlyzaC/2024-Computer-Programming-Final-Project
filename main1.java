@@ -1,14 +1,14 @@
+import java.util.Scanner;
 public class main1 {
 public static void main(String[] args){
     Astronaut guy = new Astronaut();
     guy.spaceWalk();
     System.out.println(guy.getSerialNumber());
-    //General outline idea? (Make changes if you want to)
     //Variables & Objects
         //String[] shipNames;
 
-    //Scanner(s)?
-        //Scanner kbd = new Scanner(System.in);
+    //Scanner
+        Scanner kbd = new Scanner(System.in);
 
     /* Login
      * Ask for sign up / sign in
@@ -381,7 +381,7 @@ public static void main(String[] args){
         }
     }*/
 
-    //kbd.close();
-    //System.exit(0);
+    kbd.close();
+    System.exit(0);
 }
 }
