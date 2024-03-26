@@ -263,16 +263,85 @@ public static void main(String[] args){
                 * - Select a ship
                 * - Back
                 do {
-                    System.out.println("Please select a ship to launch:");
-                    for (string s : shipNames) {
-                        if (s != null) {
-                            
-                        }
-                    }
+                    System.out.println("1. Select a Ship\n" +
+                                       "2. Back to main menu");
                     int choice2 = kbd.nextInt();
                     switch (choice2) {
                         case 1:
-                            code for launch
+                            System.out.println("Please select a ship to launch.");
+                            int count = 0;
+                            for (string s : shipNames) {
+                                if (s != null) {
+                                    count++;
+                                    System.out.println(count + ". " + s.getName());
+                                }
+                            }
+                            System.out.print("Please enter the corresponding number: ");
+                            int shipChoice = kbd.nextInt();
+                            string verify;
+                            do {
+                                System.out.println("Ship selected: " + shipNames[shipChoice]);
+                                System.out.println("Is this the correct ship? (yes/no)");
+                                if (verify.equalsCaseIgnore("no")) {
+                                    System.out.println("Please select a ship to launch:");
+                                    count = 0;
+                                    for (string s : shipNames) {
+                                        if (s != null) {
+                                            count++;
+                                            System.out.println(count + ". " + s.getName());
+                                    }
+                                    shipChoice = kbd.nextInt();
+                                }
+                            } while (!verify.equalsCaseIgnore("yes"));
+                            retrieve ship
+                            System.out.println("Please select a field.");
+                            System.out.println("1. Name\n" +
+                                               "2. Fuel Capacity\n" +
+                                               "3. Current Fuel\n" +
+                                               "4. Crew Capacity");
+                            System.out.print("Please enter the corresponding number:");
+                            int field = kbd.nextInt();
+                            do {
+                                System.out.println("Field selected: " + field);
+                                System.out.println("Is this the correct field? (yes/no)");
+                                verify = (kbd.nextLine).trim();
+                                if (verify.equalsCaseIgnore("no")) {
+                                    System.out.println("Please select a field.");
+                                    System.out.println("1. Name\n" +
+                                                       "2. Fuel Capacity\n" +
+                                                       "3. Current Fuel\n" +
+                                                       "4. Crew Capacity");
+                                    field = kbd.nextInt();
+                                }
+                            } while (!verify.equalsCaseIgnore("yes"));
+                            switch (field) {
+                                case 1:
+                                    System.out.println("Please enter the ship's name: ");
+                                    String shipName = (kbd.nextLine()).trim();
+                                    break;
+
+                                case 2:
+                                    System.out.println("Please enter the ship's fuel capacity: ");
+                                    double shipFuelCapacity = kbd.nextDouble();
+                                    break;
+
+                                case 3:
+                                    System.out.println("Please enter the ship's current fuel level: ");
+                                    double shipCurrentFuel = kbd.nextDouble();
+                                    break;
+
+                                case 4:
+                                    System.out.println("Please enter the ship's crew capacity: ");
+                                    int shipCrewCapacity = kbd.nextInt();
+                                    break;
+
+                                default:
+                                    System.out.println("Please enter a number 1-4");
+                                    break;
+                            }
+                            edit ship info
+                            notify user
+                            move ship to external container
                             break;
 
                         case 2:
