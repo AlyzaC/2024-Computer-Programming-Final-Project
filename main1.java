@@ -11,17 +11,13 @@ public static void main(String[] args){
         Scanner kbd = new Scanner(System.in);
 
     /* Login
-     * Ask for sign up / sign in
-     * Sign up
-     * - Ask user to create a username
-     * - - verify username does not already exist
+     * First time application is run
      * - Create password and display for user to write down
      * - Notify user of account creation and move on
-     * Sign in
-     * - Ask for username & password
+     * Any time after 1st
      * - give option to reset password using administrator password
      * - - ask for administrator password and verify
-     * - - give new account password
+     * - - reset password
      * - verify password
      * - - move on if valid
      */
