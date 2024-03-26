@@ -7,7 +7,7 @@ public static void main(String[] args){
     //Variables & Objects
 
     //Scanner(s)?
-        //Scanner kbd = new Scanner(System.in)
+        //Scanner kbd = new Scanner(System.in);
 
     //Login
     
@@ -139,15 +139,25 @@ public static void main(String[] args){
                         break;
 
                     case 2:
-                        code for editing astro
+                        ask which astronaut the user wants to edit
+                        retrieve astronaut from external container
+                        verify that its the correct astronaut
+                        no: ask for the correct astronaut, retrieve, verify again
+                        yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+                        send astronaut back to external container
                         break;
 
                     case 3:
-                        code for deleting astro
+                        ask for astronaut to delete
+                        pull astronaut and verify that it is the correct one
+                        no: ask for correct astronaut, verify
+                        yes: ask for key to delete
+                        incorrect key: notiy that it is the incorrect key, ask again
+                        correct key: delete astronaut, notify user
                         break;
 
                     case 4:
-                        System.out.println("Going back to main menu.")
+                        System.out.println("Going back to main menu.");
                         break;
 
                     default:
@@ -221,15 +231,25 @@ public static void main(String[] args){
                             break;
 
                         case 2:
-                            code for editing existing ship
+                            ask which ship the user wants to edit
+                            retrieve ship from external container
+                            verify that its the correct ship
+                            no: ask for the correct ship, retrieve, verify again
+                            yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+                            send ship back to external container
                             break;
 
                         case 3:
-                            code for deleting a ship
+                            ask for ship to delete
+                            pull ship and verify that it is the correct one
+                            no: ask for correct ship, verify
+                            yes: ask for key to delete
+                            incorrect key: notiy that it is the incorrect key, ask again
+                            correct key: delete ship, notify user
                             break;
 
                         case 4:
-                            System.out.println("Going back to main menu.")
+                            System.out.println("Going back to main menu.");
                             break;
 
                         default:
@@ -240,29 +260,30 @@ public static void main(String[] args){
                 break;
 
             case 3:
-                * - Fuel? (Does it make more sense for fuel to be here or in the ship inventory?)
-                * - Launch
+                * - Select a ship
+                * - Back
                 do {
-                    System.out.println(string for launch menu);
+                    System.out.println("Please select a ship to launch:");
+                    for (string s : shipNames) {
+                        if (s != null) {
+                            
+                        }
+                    }
                     int choice2 = kbd.nextInt();
                     switch (choice2) {
                         case 1:
-                            code for checking & adding fuel
-                            break;
-
-                        case 2:
                             code for launch
                             break;
 
-                        case 3:
+                        case 2:
                             System.out.println("Going back to main menu.")
                             break;
 
                         default:
-                            System.out.println("Please enter a number 1-3.");
+                            System.out.println("Please enter a number 1-2.");
                             break;
                     }
-                } while ( != 4)
+                } while ( != 2)
                 break;
 
             case 4:
