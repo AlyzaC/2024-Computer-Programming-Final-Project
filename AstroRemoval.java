@@ -19,7 +19,7 @@ public class AstroRemoval {
      */
         public void addAstro(Astronaut a) {
             for (Astronaut astro : astrosToBeRemoved) {
-                if (astro == null) {
+                if (astro != null) {
                     astro = a;
                     break;
                 }
