@@ -20,7 +20,7 @@ public class SerialNumberGenerator {
         //Gives a Sequentially Generated Serial Number & outputs it
     
         public static void main(String[] args){
-            SerialNumberGenerator generator = new SerialNumberGenerator(1000);
+            SerialNumberGenerator generator = new SerialNumberGenerator(0);
             for (int i = 0; i < 10; i++){
                 System.out.println(generator.generateNextSerial());
             }
