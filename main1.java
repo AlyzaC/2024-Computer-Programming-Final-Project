@@ -30,6 +30,8 @@ public static void main(String[] args){
      //* - - ask for administrator password and verify
      //* - - reset password
      //* - verify password
+
+        //I'm not sure how to have the computer remember the password
      //* - - move on if valid
      
     //code
