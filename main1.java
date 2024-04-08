@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 public class main1 {
 public static void main(String[] args){
@@ -10,17 +11,27 @@ public static void main(String[] args){
     //Scanner
         Scanner kbd = new Scanner(System.in);
 
-    /* Login
-     * First time application is run
-     * - Create password and display for user to write down
-     * - Notify user of account creation and move on
-     * Any time after 1st
-     * - give option to reset password using administrator password
-     * - - ask for administrator password and verify
-     * - - reset password
-     * - verify password
-     * - - move on if valid
-     */
+     // Login
+     //* First time application is run
+     //* - Create password and display for user to write down
+    System.out.println("Creating Password...");
+
+      Random r = new Random();
+    Integer num = 0;
+    for(int i=0;i<1;i++){
+        num=r.nextInt(20000);
+    System.out.println("Please Write Down The Following Password: " + num);
+    }
+     //* - Notify user of account creation and move on
+    System.out.println("*Account Created*");
+
+     //* Any time after 1st
+     //* - give option to reset password using administrator password
+     //* - - ask for administrator password and verify
+     //* - - reset password
+     //* - verify password
+     //* - - move on if valid
+     
     //code
     
     /* Main menu
