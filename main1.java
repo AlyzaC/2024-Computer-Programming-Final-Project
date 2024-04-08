@@ -10,9 +10,13 @@ public static void main(String[] args){
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
-
+     
+        //Need To make it so we know when it was runned for the first time and when it was not
      // Login
      //* First time application is run
+     public class LoggingInPassword{
+
+
      //* - Create password and display for user to write down
     System.out.println("Creating Password...");
 
@@ -33,7 +37,7 @@ public static void main(String[] args){
 
         //I'm not sure how to have the computer remember the password
      //* - - move on if valid
-     
+}
     //code
     
     /* Main menu
