@@ -11,33 +11,8 @@ public static void main(String[] args){
     //Scanner
         Scanner kbd = new Scanner(System.in);
      
-        //Need To make it so we know when it was runned for the first time and when it was not
-     // Login
-     //* First time application is run
-     public class LoggingInPassword{
+  
 
-
-     //* - Create password and display for user to write down
-    System.out.println("Creating Password...");
-
-      Random r = new Random();
-    Integer num = 0;
-    for(int i=0;i<1;i++){
-        num=r.nextInt(20000);
-    System.out.println("Please Write Down The Following Password: " + num);
-    }
-     //* - Notify user of account creation and move on
-    System.out.println("*Account Created*");
-
-     //* Any time after 1st
-     //* - give option to reset password using administrator password
-     //* - - ask for administrator password and verify
-     //* - - reset password
-     //* - verify password
-
-        //I'm not sure how to have the computer remember the password
-     //* - - move on if valid
-}
     //code
     
     /* Main menu
@@ -396,5 +371,37 @@ public static void main(String[] args){
 
     kbd.close();
     System.exit(0);
+}
+
+public void LoggingInPassword(){
+    boolean createPassword = true;
+    if(createPassword){
+
+              //Need To make it so we know when it was runned for the first time and when it was not
+     // Login
+     //* First time application is run
+
+     //* - Create password and display for user to write down
+    System.out.println("Creating Password...");
+
+    Random r = new Random();
+  Integer num = 0;
+  for(int i=0;i<1;i++){
+      num=r.nextInt(20000);
+  System.out.println("Please Write Down The Following Password: " + num);
+  }
+   //* - Notify user of account creation and move on
+  System.out.println("*Account Created*");
+
+   //* Any time after 1st
+   //* - give option to reset password using administrator password
+   //* - - ask for administrator password and verify
+   //* - - reset password
+   //* - verify password
+
+      //I'm not sure how to have the computer remember the password
+   //* - - move on if valid
+
+    }
 }
 }
