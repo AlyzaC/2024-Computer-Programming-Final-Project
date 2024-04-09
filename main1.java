@@ -11,8 +11,6 @@ public static void main(String[] args){
     //Scanner
         Scanner kbd = new Scanner(System.in);
      
-  
-
     //code
     
     /* Main menu
@@ -377,7 +375,7 @@ public void LoggingInPassword(){
     boolean createPassword = true;
     if(createPassword){
 
-              //Need To make it so we know when it was runned for the first time and when it was not
+     //Need To make it so we know when it was runned for the first time and when it was not
      // Login
      //* First time application is run
 
@@ -394,14 +392,18 @@ public void LoggingInPassword(){
   System.out.println("*Account Created*");
 
    //* Any time after 1st
+   createPassword = false;
+} else {
+
    //* - give option to reset password using administrator password
    //* - - ask for administrator password and verify
    //* - - reset password
    //* - verify password
 
+}
+
       //I'm not sure how to have the computer remember the password
    //* - - move on if valid
 
     }
-}
 }
