@@ -370,9 +370,11 @@ public static void main(String[] args){
     kbd.close();
     System.exit(0);
 }
-//I need the keyboard down here but I get a error when I put it down there??
 
 public void LoggingInPassword(){
+
+    Scanner kbd2 = new Scanner(System.in);
+
     boolean createPassword = true;
     if(createPassword){
 
@@ -397,6 +399,8 @@ public void LoggingInPassword(){
 } else {
 
    //* - give option to reset password using administrator password
+   System.out.println("Do you wish to reset the password with using the adminstartor password?");
+
    //* - - ask for administrator password and verify
    //* - - reset password
    //* - verify password
@@ -405,6 +409,7 @@ public void LoggingInPassword(){
 
       //I'm not sure how to have the computer remember the password
    //* - - move on if valid
-
+   kbd2.close();
     }
+
 }
