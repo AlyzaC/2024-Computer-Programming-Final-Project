@@ -370,6 +370,7 @@ public static void main(String[] args){
     kbd.close();
     System.exit(0);
 }
+//I need the keyboard down here but I get a error when I put it down there??
 
 public void LoggingInPassword(){
     boolean createPassword = true;
