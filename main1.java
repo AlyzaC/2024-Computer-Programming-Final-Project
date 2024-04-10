@@ -7,6 +7,7 @@ public static void main(String[] args){
     System.out.println(guy.getSerialNumber());
     //Variables & Objects
         //String[] shipNames;
+        String mainMenu;
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
