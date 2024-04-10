@@ -20,9 +20,9 @@ public static void main(String[] args){
     // - Quit
     do {
         System.out.println(mainMenu);
-        /*int choice = kbd.nextInt();
-        switch (choice) {
-            case 1:
+        int choice = kbd.nextInt();
+         switch(choice) {
+          /*  case 1:
                 do {
                     System.out.println(astro menu);
                     int choice2 = kbd.nextInt();
