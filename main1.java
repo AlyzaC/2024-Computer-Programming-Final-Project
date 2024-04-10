@@ -134,8 +134,8 @@ public static void main(String[] args){
                                         break;
                                 }
                                 
-                            }
-                        } while (!change.equalsIgnoreCase("no"));
+                            */      // }
+                        } /* while (!change.equalsIgnoreCase("no"));
                         Astronaut astro = new Astronaut();
                         code saving astro to separate file/database
                         break;
