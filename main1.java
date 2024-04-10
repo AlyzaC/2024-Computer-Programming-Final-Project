@@ -11,8 +11,6 @@ public static void main(String[] args){
     //Scanner
         Scanner kbd = new Scanner(System.in);
      
-    //code
-    
     /* Main menu
      * - Astronauts
      * - Rocket/Ship Inventory
