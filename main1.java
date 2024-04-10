@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 public class main1 {
+
 public static void main(String[] args){
     Astronaut guy = new Astronaut();
     guy.spaceWalk();
@@ -12,14 +13,14 @@ public static void main(String[] args){
     //Scanner
         Scanner kbd = new Scanner(System.in);
      
-    /* Main menu
-     * - Astronauts
-     * - Rocket/Ship Inventory
-     * - Launch
-     * - Quit
+    // Main menu
+    // - Astronauts
+    // - Rocket/Ship Inventory
+    // - Launch
+    // - Quit
     do {
-        System.out.println(String for main menu);
-        int choice = kbd.nextInt();
+        System.out.println(mainMenu);
+        /*int choice = kbd.nextInt();
         switch (choice) {
             case 1:
                 do {
@@ -363,8 +364,8 @@ public static void main(String[] args){
             default:
                 System.out.println("Please select a number 1-4");
                 break;
-        }
-    }*/
+        }*/
+    }
 
     kbd.close();
     System.exit(0);
