@@ -158,6 +158,7 @@ public static void main(String[] args){
 
                     case 3:
                         ask for astronaut to delete
+                        System.out.println("Which astronaut would you like to delete?");
                         pull astronaut and verify that it is the correct one
                         no: ask for correct astronaut, verify
                         yes: ask for key to delete
