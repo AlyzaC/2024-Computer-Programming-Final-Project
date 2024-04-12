@@ -5,7 +5,7 @@ public class AstroRemoval {
 
     //Constructor
     /**
-     * The constructor for the class. Asks for the number of astronauts to be removed.
+     * The constructor for the AstroRemoval class. Asks for the number of astronauts to be removed.
      * @param numToRemove The number of astronauts to be removed
      */
         public AstroRemoval(int numToRemove){
