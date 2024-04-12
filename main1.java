@@ -30,7 +30,7 @@ public static void main(String[] args){
                     switch (choice2) {
                     case 1:
                         System.out.print("Please enter the astronaut's full name (First Last): ")
-                        String astroname = (kbd.nextLine()).trim(); // I don't know if that works?
+                        String astroName = (kbd.nextLine()).trim(); // I don't know if that works?
                         System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                         String astroDateOfBirth = (kbd.nextLine()).trim();
                         System.out.print("Please enter the astronaut's address ():");
@@ -57,7 +57,7 @@ public static void main(String[] args){
                                            "Status: " + astroStatus + "\n" +
                                            "Pay Rate: " + astroPayRate + "\n" +
                                            "Weight: " + astroWeight);
-                 /*       do {
+                        do {
                             System.out.println("Please verify information before saving.\n" +
                                            "Name: " + astroName + "\n" +
                                            "Date of Birth: " + astroDateOfBirth + "\n" +
@@ -86,47 +86,47 @@ public static void main(String[] args){
                                 switch (field) {
                                     case 1:
                                         System.out.print("Please enter the astronaut's full name (First Last): ")
-                                        String astroname = (kbd.nextLine()).trim();
+                                         astroName = (kbd.nextLine()).trim();
                                         break;
                                     
                                     case 2:
                                         System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
-                                        String astroDateOfBirth = (kbd.nextLine()).trim();
+                                         astroDateOfBirth = (kbd.nextLine()).trim();
                                         break;
 
                                     case 3:
                                         System.out.print("Please enter the astronaut's address ():");
-                                        String astroAddress = (kbd.nextLine()).trim();
+                                         astroAddress = (kbd.nextLine()).trim();
                                         break;
 
                                     case 4: 
                                         System.out.print("Please enter the astronaut's email: ");
-                                        String astroEmail = (kbd.nextLine()).trim();
+                                         astroEmail = (kbd.nextLine()).trim();
                                         break;
 
                                     case 5: 
                                         System.out.print("Please enter the astronaut's phone number: ");
-                                        String astroPhone = (kbd.nextLine()).trim();
+                                         astroPhone = (kbd.nextLine()).trim();
                                         break;
 
                                     case 6: 
                                         System.out.print("Please enter the full name of the astronaut's next of kin: ");
-                                        String astroNextOfKin = (kbd.nextLine()).trim();
+                                         astroNextOfKin = (kbd.nextLine()).trim();
                                         break;
 
                                     case 7: 
                                         System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
-                                        String astroStatus = (kbd.nextLine()).trim();
+                                         astroStatus = (kbd.nextLine()).trim();
                                         break;
 
                                     case 8: 
                                         System.out.print("Please enter the astronaut's pay rate: ");
-                                        double astroPayRate = kbd.nextDouble();
+                                         astroPayRate = kbd.nextDouble();
                                         break;
 
                                     case 9: 
                                         System.out.print("Please enter the astronaut's weight: ");
-                                        double astroWeight = kbd.nextDouble();
+                                         astroWeight = kbd.nextDouble();
                                         break;
 
                                     default: 
@@ -134,8 +134,8 @@ public static void main(String[] args){
                                         break;
                                 }
                                 
-                            */ // }
-                        } /* while (!change.equalsIgnoreCase("no"));
+                             /* }
+                        }  while (!change.equalsIgnoreCase("no"));
                         Astronaut astro = new Astronaut();
                         code saving astro to separate file/database
                         break;
