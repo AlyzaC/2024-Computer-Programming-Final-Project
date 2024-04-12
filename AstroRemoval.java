@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.sql.*;
 public class AstroRemoval {
     //Fields
         private Astronaut[] astrosToBeRemoved;
@@ -61,28 +62,35 @@ public class AstroRemoval {
 
     /**
      * Removes astronauts added to list, after verification from the user.
+     * @param c A SQL connection provided by the user
      */
-        public void removeAstronauts() {
+        public void removeAstronauts(Connection c) {
             if (verifyRemoval()) {
-                /*for (Astronaut astro : astrosToBeRemoved) {
-                    open sql connection?
-                    open database?
-                    find astronaut in database
-                    delete all info
-                    close connection?
+                for (Astronaut astro : astrosToBeRemoved) {
+                    /*try {
+                        open sql connection?
+                        open database?
+                        find astronaut in database
+                        delete all info
+                        close connection?
+                    } catch (SQLException e) {
+                        System.out.println("Error occured: " + e.getMessage());
+                    }
+                    */
+
                     String emptyString = null;
                     astro.setName(emptyString);
-                    astro.setDateOfBirth(emptyString);
-                    astro.setSerialNumber(null);
+                    astro.setdateOfBirth(emptyString);
+                    astro.setSerialNumber(0);
                     astro.setAddress(emptyString);
                     astro.setEmail(emptyString);
                     astro.setPhoneNumber(emptyString);
                     astro.setNextOfKin(emptyString);
                     astro.setStatus(emptyString);
-                    astro.setPayRate(null);
-                    astro.setWeight(null);
+                    astro.setPayRate(0);
+                    astro.setWeight(0);
                     astro = null;
-                }*/
+                }
                 System.out.println("Astronauts have been successfully removed.");
             }
         }
