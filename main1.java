@@ -29,7 +29,7 @@ public static void main(String[] args){
                     int field;
                     switch (choice2) {
                     case 1:
-                        System.out.print("Please enter the astronaut's full name (First Last): ")
+                        System.out.print("Please enter the astronaut's full name (First Last): ");
                         String astroName = (kbd.nextLine()).trim(); // I don't know if that works?
                         System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                         String astroDateOfBirth = (kbd.nextLine()).trim();
@@ -80,12 +80,12 @@ public static void main(String[] args){
                                                    "6. Next of Kin\n" +
                                                    "7. Status\n" +
                                                    "8. Pay Rate\n" +
-                                                   "9. Weight\n" +);
+                                                   "9. Weight\n" );
                                 System.out.print("Please enter the corresponding integer: ");
                                 field = kbd.nextInt();
                                 switch (field) {
                                     case 1:
-                                        System.out.print("Please enter the astronaut's full name (First Last): ")
+                                        System.out.print("Please enter the astronaut's full name (First Last): ");
                                          astroName = (kbd.nextLine()).trim();
                                         break;
                                     
@@ -130,7 +130,7 @@ public static void main(String[] args){
                                         break;
 
                                     default: 
-                                        System.out.println("Please enter a number 1-9.")
+                                        System.out.println("Please enter a number 1-9.");
                                         break;
                                 }
                                 
@@ -401,6 +401,7 @@ public void LoggingInPassword(){
    //* - give option to reset password using administrator password
    System.out.println("Do you wish to reset the password with using the adminstartor password?");
 
+   //  ***NEED TO FINISH THIS PART***
    //* - - ask for administrator password and verify
    //* - - reset password
    //* - verify password
