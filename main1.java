@@ -287,7 +287,7 @@ public static void main(String[] args){
                             }
                             System.out.print("Please enter the corresponding number: ");
                             int shipChoice = kbd.nextInt();
-                            string verify;
+                            String verify;
                             do {
                                 System.out.println("Ship selected: " + shipNames[shipChoice]);
                                 System.out.println("Is this the correct ship? (yes/no)");
@@ -354,7 +354,7 @@ public static void main(String[] args){
                             break;
 
                         case 2:
-                            System.out.println("Going back to main menu.")
+                            System.out.println("Going back to main menu.");
                             break;
 
                         default:
@@ -365,7 +365,7 @@ public static void main(String[] args){
                 break;
 
             case 4:
-                System.out.println(Closing program now.);
+                System.out.println("Closing program now.");
                 break;
 
             default:
