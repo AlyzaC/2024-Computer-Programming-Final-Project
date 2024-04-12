@@ -22,15 +22,15 @@ public static void main(String[] args){
         System.out.println(mainMenu);
         int choice = kbd.nextInt();
          switch(choice) {
-          /*  case 1:
-                do {
-                    System.out.println(astro menu);
+            case 1:
+                  do {
+                   System.out.println("Menu:");
                     int choice2 = kbd.nextInt();
                     int field;
                     switch (choice2) {
                     case 1:
                         System.out.print("Please enter the astronaut's full name (First Last): ")
-                        String astroname = (kbd.nextLine()).trim(); I don't know if that works?
+                        String astroname = (kbd.nextLine()).trim(); // I don't know if that works?
                         System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                         String astroDateOfBirth = (kbd.nextLine()).trim();
                         System.out.print("Please enter the astronaut's address ():");
@@ -57,7 +57,7 @@ public static void main(String[] args){
                                            "Status: " + astroStatus + "\n" +
                                            "Pay Rate: " + astroPayRate + "\n" +
                                            "Weight: " + astroWeight);
-                        do {
+                 /*       do {
                             System.out.println("Please verify information before saving.\n" +
                                            "Name: " + astroName + "\n" +
                                            "Date of Birth: " + astroDateOfBirth + "\n" +
@@ -134,7 +134,7 @@ public static void main(String[] args){
                                         break;
                                 }
                                 
-                            */      // }
+                            */ // }
                         } /* while (!change.equalsIgnoreCase("no"));
                         Astronaut astro = new Astronaut();
                         code saving astro to separate file/database
