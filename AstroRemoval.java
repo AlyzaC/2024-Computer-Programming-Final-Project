@@ -70,10 +70,18 @@ public class AstroRemoval {
                     find astronaut in database
                     delete all info
                     close connection?
-                    emptyString = null;
+                    String emptyString = null;
                     astro.setName(emptyString);
                     astro.setDateOfBirth(emptyString);
-                    astro.
+                    astro.setSerialNumber(null);
+                    astro.setAddress(emptyString);
+                    astro.setEmail(emptyString);
+                    astro.setPhoneNumber(emptyString);
+                    astro.setNextOfKin(emptyString);
+                    astro.setStatus(emptyString);
+                    astro.setPayRate(null);
+                    astro.setWeight(null);
+                    astro = null;
                 }*/
                 System.out.println("Astronauts have been successfully removed.");
             }
