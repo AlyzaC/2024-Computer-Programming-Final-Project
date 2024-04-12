@@ -1,16 +1,9 @@
-import java.util.Random;
-import java.util.Scanner;
-
-public class main1 {
-
-public static void main(String[] args){
-    Astronaut guy = new Astronaut();
+Astronaut guy = new Astronaut();
     guy.spaceWalk();
     System.out.println(guy.getSerialNumber());
     //Variables & Objects
         //String[] shipNames;
-        String mainMenu = "";
-        int choice;
+        String mainMenu;
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
@@ -22,13 +15,12 @@ public static void main(String[] args){
     // - Quit
     do {
         System.out.println(mainMenu);
-        choice = kbd.nextInt();
+        int choice = kbd.nextInt();
          switch(choice) {
             case 1:
-                int choice2;
-                do {
+                  do {
                    System.out.println("Menu:");
-                    choice2 = kbd.nextInt();
+                    int choice2 = kbd.nextInt();
                     int field;
                     switch (choice2) {
                     case 1:
@@ -60,7 +52,6 @@ public static void main(String[] args){
                                            "Status: " + astroStatus + "\n" +
                                            "Pay Rate: " + astroPayRate + "\n" +
                                            "Weight: " + astroWeight);
-                        String change;
                         do {
                             System.out.println("Please verify information before saving.\n" +
                                            "Name: " + astroName + "\n" +
@@ -73,7 +64,7 @@ public static void main(String[] args){
                                            "Pay Rate: " + astroPayRate + "\n" +
                                            "Weight: " + astroWeight);
                             System.out.println("Is there anything you wish to change? (yes/no)");
-                            change = (kbd.nextLine()).trim();
+                            String change = (kbd.nextLine()).trim();
                             if (change.equalsIgnoreCase("yes")) {
                                 System.out.println("Which field do you wish to change?");
                                 System.out.println("1. Name\n" +
@@ -138,17 +129,14 @@ public static void main(String[] args){
                                         break;
                                 }
                                 
-                            }
+                             /* }
                         }  while (!change.equalsIgnoreCase("no"));
-                        //UNCOMMENT THIS OUT AFTER USING astro
-                       //Astronaut astro = new Astronaut();
-
-                        //code saving astro to separate file/database
+                        Astronaut astro = new Astronaut();
+                        code saving astro to separate file/database
                         break;
 
-                    /*case 2:
+                    case 2:
                         ask which astronaut the user wants to edit
-                        System.out.println("Which astronaut would you like to edit?");
                         retrieve astronaut from external container
                         verify that its the correct astronaut
                         no: ask for the correct astronaut, retrieve, verify again
@@ -170,9 +158,9 @@ public static void main(String[] args){
                         break;
 
                     default:
-                        System.out.println("Please enter a number from 1-4");*/
+                        System.out.println("Please enter a number from 1-4");
                     }
-                } while (choice2 != 4);/*
+                } while ( != 4);
                 break;
 
             case 2:
@@ -370,55 +358,9 @@ public static void main(String[] args){
 
             default:
                 System.out.println("Please select a number 1-4");
-                break;*/
-        }
-    } while (choice != 4);
+                break;
+        }*/
+    }
 
     kbd.close();
     System.exit(0);
-}
-
-    public void LoggingInPassword() {
-
-        Scanner kbd2 = new Scanner(System.in);
-
-        boolean createPassword = true;
-        if (createPassword) {
-
-            // Need To make it so we know when it was runned for the first time and when it
-            // was not
-            // Login
-            // * First time application is run
-
-            // * - Create password and display for user to write down
-            System.out.println("Creating Password...");
-
-            Random r = new Random();
-            Integer num = 0;
-            for (int i = 0; i < 1; i++) {
-                num = r.nextInt(20000);
-                System.out.println("Please Write Down The Following Password: " + num);
-            }
-            // * - Notify user of account creation and move on
-            System.out.println("*Account Created*");
-
-            // * Any time after 1st
-            createPassword = false;
-        } else {
-
-            // * - give option to reset password using administrator password
-            System.out.println("Do you wish to reset the password with using the adminstartor password?");
-
-            // ***NEED TO FINISH THIS PART***
-            // * - - ask for administrator password and verify
-            // * - - reset password
-            // * - verify password
-
-        }
-
-        // I'm not sure how to have the computer remember the password
-        // * - - move on if valid
-        kbd2.close();
-    }
-
-}
