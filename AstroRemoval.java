@@ -65,7 +65,15 @@ public class AstroRemoval {
         public void removeAstronauts() {
             if (verifyRemoval()) {
                 /*for (Astronaut astro : astrosToBeRemoved) {
-                    Code to remove astronauts
+                    open sql connection?
+                    open database?
+                    find astronaut in database
+                    delete all info
+                    close connection?
+                    emptyString = null;
+                    astro.setName(emptyString);
+                    astro.setDateOfBirth(emptyString);
+                    astro.
                 }*/
                 System.out.println("Astronauts have been successfully removed.");
             }
