@@ -1,28 +1,28 @@
 import java.util.Random;
 import java.util.Scanner;
 public class main1 {
+
 public static void main(String[] args){
     Astronaut guy = new Astronaut();
     guy.spaceWalk();
     System.out.println(guy.getSerialNumber());
     //Variables & Objects
         //String[] shipNames;
+        String mainMenu;
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
      
-    //code
-    
-    /* Main menu
-     * - Astronauts
-     * - Rocket/Ship Inventory
-     * - Launch
-     * - Quit
+    // Main menu
+    // - Astronauts
+    // - Rocket/Ship Inventory
+    // - Launch
+    // - Quit
     do {
-        System.out.println(String for main menu);
+        System.out.println(mainMenu);
         int choice = kbd.nextInt();
-        switch (choice) {
-            case 1:
+         switch(choice) {
+          /*  case 1:
                 do {
                     System.out.println(astro menu);
                     int choice2 = kbd.nextInt();
@@ -134,8 +134,8 @@ public static void main(String[] args){
                                         break;
                                 }
                                 
-                            }
-                        } while (!change.equalsIgnoreCase("no"));
+                            */      // }
+                        } /* while (!change.equalsIgnoreCase("no"));
                         Astronaut astro = new Astronaut();
                         code saving astro to separate file/database
                         break;
@@ -364,15 +364,17 @@ public static void main(String[] args){
             default:
                 System.out.println("Please select a number 1-4");
                 break;
-        }
-    }*/
+        }*/
+    }
 
     kbd.close();
     System.exit(0);
 }
-//I need the keyboard down here but I get a error when I put it down there??
 
 public void LoggingInPassword(){
+
+    Scanner kbd2 = new Scanner(System.in);
+
     boolean createPassword = true;
     if(createPassword){
 
@@ -397,6 +399,8 @@ public void LoggingInPassword(){
 } else {
 
    //* - give option to reset password using administrator password
+   System.out.println("Do you wish to reset the password with using the adminstartor password?");
+
    //* - - ask for administrator password and verify
    //* - - reset password
    //* - verify password
@@ -405,6 +409,7 @@ public void LoggingInPassword(){
 
       //I'm not sure how to have the computer remember the password
    //* - - move on if valid
-
+   kbd2.close();
     }
+
 }
