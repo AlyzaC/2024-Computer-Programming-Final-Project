@@ -254,22 +254,30 @@ public static void main(String[] args){
                             } while (!change.equalsIgnoreCase("no"));
                             break;
 
-                  /*      case 2:
-                            ask which ship the user wants to edit
-                            retrieve ship from external container
-                            verify that its the correct ship
-                            no: ask for the correct ship, retrieve, verify again
-                            yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                            send ship back to external container
+                          case 2:
+                            // ask which ship the user wants to edit
+                            System.out.println("What ship would you like to edit?");
+                            // retrieve ship from external container
+
+                            // verify that its the correct ship
+
+                            // no: ask for the correct ship, retrieve, verify again
+                            // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+
+                            // send ship back to external container
+
                             break;
 
                         case 3:
-                            ask for ship to delete
-                            pull ship and verify that it is the correct one
-                            no: ask for correct ship, verify
-                            yes: ask for key to delete
-                            incorrect key: notiy that it is the incorrect key, ask again
-                            correct key: delete ship, notify user
+                            // ask for ship to delete
+                            System.out.println("What ship would you like to delete?");
+                            // pull ship and verify that it is the correct one
+
+                            // no: ask for correct ship, verify
+                            // yes: ask for key to delete
+                            // incorrect key: notiy that it is the incorrect key, ask again
+                            // correct key: delete ship, notify user
+
                             break;
 
                         case 4:
@@ -278,18 +286,19 @@ public static void main(String[] args){
 
                         default:
                             System.out.println("Please enter a number 1-4.");
-                            break;*/
+                            break;
                     }
                 } while (choice != 4);
-                /*break;
+
+                break;
 
             case 3:
-                * - Select a ship
-                * - Back
+                // * - Select a ship
+                // * - Back
                 do {
                     System.out.println("1. Select a Ship\n" +
                                        "2. Back to main menu");
-                    int choice2 = kbd.nextInt();
+                     choice2 = kbd.nextInt();
                     switch (choice2) {
                         case 1:
                             System.out.println("Please select a ship to launch.");
@@ -313,11 +322,11 @@ public static void main(String[] args){
                                         if (s != null) {
                                             count++;
                                             System.out.println(count + ". " + s.getName());
-                                    }
+                                        }
                                     shipChoice = kbd.nextInt();
                                 }
                             } while (!verify.equalsCaseIgnore("yes"));
-                            retrieve ship
+                            //retrieve ship
                             System.out.println("Please select a field.");
                             System.out.println("1. Name\n" +
                                                "2. Fuel Capacity\n" +
@@ -363,9 +372,9 @@ public static void main(String[] args){
                                     System.out.println("Please enter a number 1-4");
                                     break;
                             }
-                            edit ship info
-                            notify user
-                            move ship to external container
+                            // edit ship info
+                            // notify user
+                            // move ship to external container
                             break;
 
                         case 2:
@@ -385,7 +394,7 @@ public static void main(String[] args){
 
             default:
                 System.out.println("Please select a number 1-4");
-                break;*/
+                break;
         }
     } while (choice != 4);
 
