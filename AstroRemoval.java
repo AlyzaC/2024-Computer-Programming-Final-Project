@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.sql.*;
+
 public class AstroRemoval {
     //Fields
         private Astronaut[] astrosToBeRemoved;
@@ -22,7 +23,6 @@ public class AstroRemoval {
             for (Astronaut astro : astrosToBeRemoved) {
                 if (astro != null) {
                     astro = a;
-                    break;
                 }
             }
         }
@@ -32,7 +32,7 @@ public class AstroRemoval {
      * @return A boolean for whether the removal has been approved by the user
      */
         private boolean verifyRemoval() {
-            Scanner kbd = new Scanner(System.in);
+            Scanner keyboard = new Scanner(System.in);
             String astronautList = "";
             boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
@@ -43,20 +43,20 @@ public class AstroRemoval {
                                "Do you wish to proceed with removal?\n" +
                                "1. Yes\n" +
                                "2. No");
-            int choice = kbd.nextInt();
+            int choice = keyboard.nextInt();
             while (choice != 1 && choice != 2) {
                 System.out.println("Please enter a number 1-2.\n" +
                                    "Do you wish to proceed with removal?\n" +
                                    "1. Yes\n" +
                                    "2. No");
-                choice = kbd.nextInt();
+                choice = keyboard.nextInt();
             }
             if (choice == 1) {
                 verified = true;
             } else {
                 verified = false;
             }
-            kbd.close();
+            keyboard.close();
             return verified;
         }
 
@@ -89,6 +89,7 @@ public class AstroRemoval {
                     astro.setStatus(emptyString);
                     astro.setPayRate(0);
                     astro.setWeight(0);
+                    //yield the null to code to ensure deleted astronauts are not able to be referenced??
                     astro = null;
                 }
                 System.out.println("Astronauts have been successfully removed.");
