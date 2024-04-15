@@ -8,7 +8,7 @@ public static void main(String[] args){
     guy.spaceWalk();
     System.out.println(guy.getSerialNumber());
     //Variables & Objects
-        //String[] shipNames;
+        String[] shipNames;
         String mainMenu = "";
         int choice;
 
@@ -303,7 +303,7 @@ public static void main(String[] args){
                         case 1:
                             System.out.println("Please select a ship to launch.");
                             int count = 0;
-                            for (string s : shipNames) {
+                            for (String s : shipNames) {
                                 if (s != null) {
                                     count++;
                                     System.out.println(count + ". " + s.getName());
@@ -315,17 +315,18 @@ public static void main(String[] args){
                             do {
                                 System.out.println("Ship selected: " + shipNames[shipChoice]);
                                 System.out.println("Is this the correct ship? (yes/no)");
-                                if (verify.equalsCaseIgnore("no")) {
+                                if (verify.equalsIgnoreCase("no")) {
                                     System.out.println("Please select a ship to launch:");
                                     count = 0;
-                                    for (string s : shipNames) {
+                                    for (String s : shipNames) {
                                         if (s != null) {
                                             count++;
                                             System.out.println(count + ". " + s.getName());
                                         }
                                     shipChoice = kbd.nextInt();
+                                    }
                                 }
-                            } while (!verify.equalsCaseIgnore("yes"));
+                            } while (!verify.equalsIgnoreCase("yes"));
                             //retrieve ship
                             System.out.println("Please select a field.");
                             System.out.println("1. Name\n" +
@@ -337,8 +338,9 @@ public static void main(String[] args){
                             do {
                                 System.out.println("Field selected: " + field);
                                 System.out.println("Is this the correct field? (yes/no)");
-                                verify = (kbd.nextLine).trim();
-                                if (verify.equalsCaseIgnore("no")) {
+                                String v = kbd.nextLine();
+                                verify = v.trim();
+                                if (verify.equalsIgnoreCase("no")) {
                                     System.out.println("Please select a field.");
                                     System.out.println("1. Name\n" +
                                                        "2. Fuel Capacity\n" +
@@ -346,7 +348,7 @@ public static void main(String[] args){
                                                        "4. Crew Capacity");
                                     field = kbd.nextInt();
                                 }
-                            } while (!verify.equalsCaseIgnore("yes"));
+                            } while (!verify.equalsIgnoreCase("yes"));
                             switch (field) {
                                 case 1:
                                     System.out.println("Please enter the ship's name: ");
@@ -385,8 +387,8 @@ public static void main(String[] args){
                             System.out.println("Please enter a number 1-2.");
                             break;
                     }
-                } while ( != 2)
-                break;
+                    break;
+                } while (choice2 != 2);
 
             case 4:
                 System.out.println("Closing program now.");
