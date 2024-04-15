@@ -160,29 +160,34 @@ public static void main(String[] args){
      //--------->       //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
                         
                         //send astronaut back to external container
+                        
                         break;
                     }
-                    /*case 3:
-                        ask for astronaut to delete
-                        System.out.println("Which astronaut would you like to delete?");
-                        pull astronaut and verify that it is the correct one
-                        no: ask for correct astronaut, verify
-                        yes: ask for key to delete
-                        incorrect key: notiy that it is the incorrect key, ask again
-                        correct key: delete astronaut, notify user
-                        break;
+                      case 3:
+                      do{
+                    //   ask for astronaut to delete
+                         System.out.println("Which astronaut would you like to delete?");
 
+                    //     pull astronaut and verify that it is the correct one
+                    
+                    //     no: ask for correct astronaut, verify
+                    //     yes: ask for key to delete
+                    //     incorrect key: notiy that it is the incorrect key, ask again
+                    //     correct key: delete astronaut, notify user
+
+                         break;
+                      }
                     case 4:
                         System.out.println("Going back to main menu.");
                         break;
 
                     default:
-                        System.out.println("Please enter a number from 1-4");*/
+                        System.out.println("Please enter a number from 1-4");
                     }
-                } while (choice2 != 4);/*
+                } while (choice2 != 4);
                 break;
 
-            case 2:
+           /* case 2:
                 * Rocket/Ship menu
                 * - Add
                 * - Edit info
