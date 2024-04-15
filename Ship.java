@@ -16,7 +16,10 @@ public class Ship
   int numOfCrew;
   
 
-
+/**
+ * Adds an astronaut to the ship's crew
+ * @param choice ??
+ */
 public void addAstro(int choice)
 {
 if (choice == 1)
@@ -32,12 +35,16 @@ if (choice == 1)
 }
 }
 
+/**
+ * Launches the ship after checking the current number of crew and fuel measure
+ * @param choice ??
+ */
 public void launch(int choice)
 {
 if (choice == 2)
 {
   
- if (numOfCrew < shipCapacity)
+ if (numOfCrew <= shipCapacity)
  {
    System.out.println ("not enough people in ship make new choice");
    // code will bring back up menu and ask for a new choice
@@ -57,7 +64,10 @@ if (choice == 2)
 }
 }
 
-
+/**
+ * Deploys the ship's parachutes
+ * @param choice
+ */
 public void deployParachutes(int choice)
 {
   if (choice == 3)
@@ -69,6 +79,10 @@ public void deployParachutes(int choice)
   }
 }
 
+/**
+ * Opens the ship's exterior doors
+ * @param choice
+ */
 public void openDoors(int choice)
 {
   if (choice == 4)
@@ -85,6 +99,10 @@ public void openDoors(int choice)
   }
 }
 
+/**
+ * The ship explodes
+ * @param choice
+ */
   public void explode(int choice)
   {
     if (choice == 800177)
