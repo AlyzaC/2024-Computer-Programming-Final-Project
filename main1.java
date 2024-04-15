@@ -146,17 +146,23 @@ public static void main(String[] args){
                         //code saving astro to separate file/database
                         break;
 
-                    /*case 2:
-                        ask which astronaut the user wants to edit
+                    case 2:
+                    do{
+                       // ask which astronaut the user wants to edit
                         System.out.println("Which astronaut would you like to edit?");
-                        retrieve astronaut from external container
-                        verify that its the correct astronaut
-                        no: ask for the correct astronaut, retrieve, verify again
-                        yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                        send astronaut back to external container
-                        break;
 
-                    case 3:
+                        //retrieve astronaut from external container
+                        
+                        //verify that its the correct astronaut
+                        System.out.println("This is the correct astronaut?");
+                       
+                        //no: ask for the correct astronaut, retrieve, verify again
+     //--------->       //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+                        
+                        //send astronaut back to external container
+                        break;
+                    }
+                    /*case 3:
                         ask for astronaut to delete
                         System.out.println("Which astronaut would you like to delete?");
                         pull astronaut and verify that it is the correct one
