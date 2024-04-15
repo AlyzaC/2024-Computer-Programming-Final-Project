@@ -140,10 +140,11 @@ public static void main(String[] args){
                                 
                             }
                         }  while (!change.equalsIgnoreCase("no"));
-                        //UNCOMMENT THIS OUT AFTER USING astro
-                       //Astronaut astro = new Astronaut();
+                        
+                       Astronaut astro = new Astronaut();
 
                         //code saving astro to separate file/database
+
                         break;
 
                     case 2:
@@ -157,9 +158,12 @@ public static void main(String[] args){
                         System.out.println("This is the correct astronaut?");
                        
                         //no: ask for the correct astronaut, retrieve, verify again
+                        System.out.println("");
+
                         //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                        
-                        //send astronaut back to external container
+                        System.out.println("");
+
+                        //send astronaut back to external container  <-- idk what this means or if i have to do anything with it
                     }
                         break;
                     
@@ -171,7 +175,11 @@ public static void main(String[] args){
                     //     pull astronaut and verify that it is the correct one
                     
                     //     no: ask for correct astronaut, verify
+                           System.out.println("Who is the correct astronaut?");
+
                     //     yes: ask for key to delete
+                           System.out.println("Please provide the key for deletion.");
+
                     //     incorrect key: notiy that it is the incorrect key, ask again
                     //     correct key: delete astronaut, notify user
 
@@ -195,7 +203,7 @@ public static void main(String[] args){
                     do{
                     //**LINE AFTER THIS NEEDS TO BE EDITED**  
                     //System.out.println(string for rocket/ship menu);
-                     choice2 = kbd.nextInt();
+                    //choice2 = kbd.nextInt(write in choices. 1. title 2. title, 3. title, etc.);
                     int field;
                     switch (choice2) {
                         case 1:
