@@ -161,7 +161,69 @@ public static void main(String[] args){
                         System.out.println("");
 
                         //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                        System.out.println("");
+                        System.out.println("Field" +
+                                            "1. Name\n" +
+                                            "2. Date of Birth\n" + 
+                                            "3. Address\n" +
+                                            "4. Email\n" +
+                                            "5. Phone Number\n" + 
+                                            "6. Next of Kin\n" +
+                                            "7. Status\n" +
+                                            "8. Pay Rate\n" +
+                                            "9. Weight\n");
+
+                        System.out.println("Please select a field");
+                        field = kbd.nextInt();
+                        switch (field) {
+                            case 1:
+                                System.out.print("Please edit the astronaut's full name (First Last): ");
+                                astroName = (kbd.nextLine()).trim();
+                                break;
+                                    
+                                    case 2:
+                                        System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
+                                         astroDateOfBirth = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 3:
+                                        System.out.print("Please edit the astronaut's address ():");
+                                         astroAddress = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 4: 
+                                        System.out.print("Please edit the astronaut's email: ");
+                                         astroEmail = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 5: 
+                                        System.out.print("Please edit the astronaut's phone number: ");
+                                         astroPhone = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 6: 
+                                        System.out.print("Please edit the full name of the astronaut's next of kin: ");
+                                         astroNextOfKin = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 7: 
+                                        System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
+                                         astroStatus = (kbd.nextLine()).trim();
+                                        break;
+
+                                    case 8: 
+                                        System.out.print("Please edit the astronaut's pay rate: ");
+                                         astroPayRate = kbd.nextDouble();
+                                        break;
+
+                                    case 9: 
+                                        System.out.print("Please edit the astronaut's weight: ");
+                                         astroWeight = kbd.nextDouble();
+                                        break;
+
+                                    default: 
+                                        System.out.println("Please enter a number 1-9.");
+                                        break;
+                                }
 
                         //send astronaut back to external container  <-- idk what this means or if i have to do anything with it
                     }
