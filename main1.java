@@ -256,7 +256,7 @@ public static void main(String[] args){
                                         break;
                                 }
 
-                        //send astronaut back to external container  <-- idk what this means or if i have to do anything with it
+                        //send astronaut back to external container  <-- FILE STUFF !!
                     }
                         break;
                     
@@ -443,6 +443,7 @@ public static void main(String[] args){
                                     System.out.println("Please enter a number 1-4");
                                     break;
                                 }
+
                             // send ship back to external container
 
                             break;
@@ -450,12 +451,26 @@ public static void main(String[] args){
                         case 3:
                             // ask for ship to delete
                             System.out.println("What ship would you like to delete?");
+
                             // pull ship and verify that it is the correct one
 
                             // no: ask for correct ship, verify
+
                             // yes: ask for key to delete
-                            // incorrect key: notiy that it is the incorrect key, ask again
+                            //TO HELP ME, TYPE "yes: ask for" IN THE SERACH BAR AND BASE IT OFF OF WHAT COMES UP :)
+                            System.out.println("Type \"yes\" for deletion.\n" +
+                                              "If you wish to go back enter \"Go back\".");
+                           String theKey = kbd.nextLine();
+                           if (theKey.equalsIgnoreCase("yes")) {
+
+                           }
+
+                            // incorrect key: notify that it is the incorrect key, ask again
+                            System.out.println("Wrong key");
+                            System.out.println("Type \"THIS NEEDS TO HAVE A KEY\" for deletion.");   //this needs to be edited
+
                             // correct key: delete ship, notify user
+
 
                             break;
 
