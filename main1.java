@@ -178,6 +178,37 @@ public static void main(String[] args){
                             case 1:
                                 System.out.print("Please edit the astronaut's full name (First Last): ");
                                 astroName = (kbd.nextLine()).trim();
+
+                                //pull current value
+                                String currentName = ""; //Add actual value later
+                                System.out.println("The astronaut's current name in the database is " + currentName + "\n" +
+                                                   "You entered: " + astroName + "\n" +
+                                                   "If this correct, please enter \"Correct\".\n" +
+                                                   "If you wish to go back enter \"Go back\".");
+                                                   String correctAstroName = kbd.nextLine();
+                                                 
+                                 if (correctAstroName.equalsIgnoreCase("Correct")) {
+
+                                    //Replace the astronaut's name with the new value (astroName)
+                                    //change the astro part
+                                    //astro.setName(astroName); 
+
+                                    //Change the name inside the database
+
+                                    //Move on
+                                    
+                                 } else if (correctAstroName.equalsIgnoreCase("Go back")) {
+                                    break;
+                                 } else {
+                                    while (!(correctAstroName.equalsIgnoreCase("Correct")) && !(correctAstroName.equalsIgnoreCase("()"))) {
+                                        System.out.println("The astronaut's current name in the database is " + currentName + "\n" +
+                                                   "You entered: " + astroName + "\n" +
+                                                   "If this correct, please enter \"Correct\".\n" +
+                                                   "If you wish to go back enter ().");
+                                                   correctAstroName = kbd.nextLine();
+                                    }
+                                 }
+
                                 break;
                                     
                                     case 2:
@@ -230,6 +261,7 @@ public static void main(String[] args){
                         break;
                     
                       case 3:
+                      String theKey;
                       do{
                     //   ask for astronaut to delete
                          System.out.println("Which astronaut would you like to delete?");
@@ -240,13 +272,30 @@ public static void main(String[] args){
                            System.out.println("Who is the correct astronaut?");
 
                     //     yes: ask for key to delete
-                           System.out.println("Please provide the key for deletion.");
+                           System.out.println("Type \"yes\" for deletion.\n" +
+                                              "If you wish to go back enter \"Go back\".");
+                           theKey = kbd.nextLine();
+                           if (theKey.equalsIgnoreCase("yes")) {
+                            //correct key: delete astronaut, notify user
 
-                    //     incorrect key: notiy that it is the incorrect key, ask again
-                    //     correct key: delete astronaut, notify user
-
+                            AstroRemoval removeAstro = new AstroRemoval(1);
+                            //removeAstro.addAstro(astronaut);
+                            //removeAstro.removeAstronauts(SQL connection);
+                        
+                           } else if (theKey.equalsIgnoreCase("Go back")) {
+                            break;
+                           } else {
+                            while (!(theKey.equalsIgnoreCase("yes"))) {
+                                //incorrect key: notiy that it is the incorrect key, ask again
+                                System.out.println("bro how did u enter the wrong key???");
+                                System.out.println("Type \"yes\" for deletion.");
+                                theKey = kbd.nextLine();
+                            }
+                            
+                           }
+                        } while (theKey.equalsIgnoreCase("Go back"));
                          break;
-                      }
+
                     case 4:
                         System.out.println("Going back to main menu.");
                         break;
@@ -289,7 +338,7 @@ public static void main(String[] args){
                                 change = c.trim();
                                 if (change.equalsIgnoreCase("yes")) {
                                     System.out.println("Which field do you wish to change?");
-                                    System.out.println("1. Name" +
+                                    System.out.println("1. Ship Name" +
                                                        "2. Fuel Capacity" +
                                                        "3. Current Fuel" +
                                                        "4. Crew Capacity");
@@ -332,8 +381,68 @@ public static void main(String[] args){
                             // verify that its the correct ship
 
                             // no: ask for the correct ship, retrieve, verify again
-                            // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
 
+                            // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+                                System.out.println("Fields\n" +
+                                                   "1. Ship name\n" +
+                                                   "2. Fuel Capacity\n" +
+                                                   "3. Fuel\n" +
+                                                   "4. Ship Capacity");
+                                field = kbd.nextInt();
+                                switch (field) {
+                                    case 1:
+                                    String theKey;
+                                    boolean changeSuccessful = false;
+                                    do {
+                                        System.out.println("Please edit the ship's name: ");
+                                        shipName = (kbd.nextLine()).trim();
+                                        String currentShipName = ""; //pull actual value from database
+                                        System.out.println("The ship's current name in the database is \'" + currentShipName + "\'.\n" +
+                                                        "You entered the name \'" + shipName + "\'.\n" +
+                                                        "If this is correct, enter \"correct\".\n" +
+                                                        "If you wish to go back, enter \"Go back\".");
+                                        String correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("correct")) {
+                                            //Replace the ship's name with the new value (shipName)
+                                            //change the ship part
+                                            //ship.setName(shipName); 
+
+                                            //Change the name inside the database
+
+                                            changeSuccessful = true;
+                                        } else if (correct.equalsIgnoreCase("go back")) {
+                                            break;
+                                        } else {
+                                            while (!(correct.equalsIgnoreCase("correct")) && !(correct.equalsIgnoreCase("go back"))) {
+                                                System.out.println("Try Again");
+                                                System.out.println("Type \"correct\" to edit.\n" +
+                                                                "Type \"go back\" if you wish to go back");
+                                                theKey = kbd.nextLine();
+                                            }
+                                        }
+                                    } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                    
+                                    break;
+
+                                    case 2:
+                                    System.out.println("Please edit the ship's fuel capacity: ");
+                                    shipFuelCapacity = kbd.nextDouble();
+                                    break;
+
+                                    case 3:
+                                    System.out.println("Please edit the ship's current fuel level: ");
+                                    shipCurrentFuel = kbd.nextDouble();
+                                    break;
+
+                                    case 4:
+                                    System.out.println("Please edit the ship's crew capacity: ");
+                                    shipCrewCapacity = kbd.nextInt();
+                                    break;
+
+                                    default:
+                                    System.out.println("Please enter a number 1-4");
+                                    break;
+                                }
                             // send ship back to external container
 
                             break;
