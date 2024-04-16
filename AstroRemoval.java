@@ -36,7 +36,7 @@ public class AstroRemoval {
             String astronautList = "";
             boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
-                astronautList += "- " + astro.Name + "\n";
+                astronautList += "- " + astro.getName() + "\n";
             }
             System.out.println("The following astronauts have been chosen for removal:" +
                                astronautList +
