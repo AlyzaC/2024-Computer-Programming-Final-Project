@@ -503,7 +503,7 @@ public static void main(String[] args){
                             for (String s : shipNames) {
                                 if (s != null) {
                                     count++;
-                                    System.out.println(count + ". " + s.getName());
+                                    System.out.println(count + ". " + s);
                                 }
                             }
                             System.out.print("Please enter the corresponding number: ");
@@ -518,7 +518,7 @@ public static void main(String[] args){
                                     for (String s : shipNames) {
                                         if (s != null) {
                                             count++;
-                                            System.out.println(count + ". " + s.getName());
+                                            System.out.println(count + ". " + s);
                                         }
                                     shipChoice = kbd.nextInt();
                                     }
