@@ -158,7 +158,6 @@ public static void main(String[] args){
                         System.out.println("Is this the correct astronaut?");
                        
                         //no: ask for the correct astronaut, retrieve, verify again
-                        System.out.println("");
 
                         //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
                         System.out.println("Field" +
@@ -191,7 +190,7 @@ public static void main(String[] args){
 
                                     //Replace the astronaut's name with the new value (astroName)
                                     //change the astro part
-                                    //astro.setName(astroName); 
+                                    astro.setName(astroName); //this was commented out but i didnt see why so i uncommented it out lol
 
                                     //Change the name inside the database
 
@@ -617,10 +616,10 @@ public static void main(String[] args){
             System.out.println("Creating Password...");
 
             Random r = new Random();
-            Integer num = 0;
+            Integer passNum = 0;
             for (int i = 0; i < 1; i++) {
-                num = r.nextInt(20000);
-                System.out.println("Please write down the following password: " + num);
+                passNum = r.nextInt(20000);
+                System.out.println("Please write down the following password: " + passNum);
             }
             // * - Notify user of account creation and move on
             System.out.println("*Account Created*");
