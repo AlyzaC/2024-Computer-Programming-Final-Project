@@ -1,12 +1,12 @@
 import java.util.Scanner;
 import java.sql.*;
 
-public class shipRemoval {
+public class ShipRemoval {
     //Fields
         private Ship shipToRemove;
 
     //Constructor
-        public shipRemoval(Ship s) {
+        public ShipRemoval(Ship s) {
             shipToRemove = s;
         }
 
