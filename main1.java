@@ -85,7 +85,7 @@ public static void main(String[] args){
                                                    "7. Status\n" +
                                                    "8. Pay Rate\n" +
                                                    "9. Weight\n" );
-                                System.out.print("Please enter the corresponding integer: ");
+                                System.out.print("Please enter the corresponding option/integer: ");
                                 field = kbd.nextInt();
                                 switch (field) {
                                     case 1:
@@ -155,7 +155,7 @@ public static void main(String[] args){
                         //retrieve astronaut from external container
                         
                         //verify that its the correct astronaut
-                        System.out.println("This is the correct astronaut?");
+                        System.out.println("Is this the correct astronaut?");
                        
                         //no: ask for the correct astronaut, retrieve, verify again
                         System.out.println("");
@@ -620,7 +620,7 @@ public static void main(String[] args){
             Integer num = 0;
             for (int i = 0; i < 1; i++) {
                 num = r.nextInt(20000);
-                System.out.println("Please Write Down The Following Password: " + num);
+                System.out.println("Please write down the following password: " + num);
             }
             // * - Notify user of account creation and move on
             System.out.println("*Account Created*");
