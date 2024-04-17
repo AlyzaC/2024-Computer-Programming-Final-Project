@@ -463,7 +463,9 @@ public static void main(String[] args){
                            String theKey = kbd.nextLine();
                            if (theKey.equalsIgnoreCase("yes")) {
                             // *** NEED A WAY TO DELETE THE SHIP ***
-                            ShipRemoval removeShip = new ShipRemoval(1);
+                            //ShipRemoval removeShip = new ShipRemoval(ship);
+                            //removeShip.removeShip(SQL connection);
+                            
                            }
 
                             // incorrect key: notify that it is the incorrect key, ask again
