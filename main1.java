@@ -143,7 +143,7 @@ public static void main(String[] args){
                         
                        Astronaut astro = new Astronaut();
 
-                        //code saving astro to separate file/database
+                        //code saving astro to separate file/database 
 
                         break;
 
@@ -196,7 +196,6 @@ public static void main(String[] args){
                                     //Change the name inside the database
 
                                     //Move on
-                                    
                                  } else if (correctAstroName.equalsIgnoreCase("Go back")) {
                                     break;
                                  } else {
@@ -276,8 +275,8 @@ public static void main(String[] args){
                                               "If you wish to go back enter \"Go back\".");
                            theKey = kbd.nextLine();
                            if (theKey.equalsIgnoreCase("yes")) {
-                            //correct key: delete astronaut, notify user
 
+                            //correct key: delete astronaut, notify user
                             AstroRemoval removeAstro = new AstroRemoval(1);
                             //removeAstro.addAstro(astronaut);
                             //removeAstro.removeAstronauts(SQL connection);
@@ -286,8 +285,8 @@ public static void main(String[] args){
                             break;
                            } else {
                             while (!(theKey.equalsIgnoreCase("yes"))) {
-                                //incorrect key: notiy that it is the incorrect key, ask again
-                                System.out.println("bro how did u enter the wrong key???");
+                                //incorrect key: notify that it is the incorrect key, ask again
+                                System.out.println("Wrong key, try again.");
                                 System.out.println("Type \"yes\" for deletion.");
                                 theKey = kbd.nextLine();
                             }
@@ -376,6 +375,7 @@ public static void main(String[] args){
                           case 2:
                             // ask which ship the user wants to edit
                             System.out.println("What ship would you like to edit?");
+
                             // retrieve ship from external container
 
                             // verify that its the correct ship
@@ -463,6 +463,7 @@ public static void main(String[] args){
                            String theKey = kbd.nextLine();
                            if (theKey.equalsIgnoreCase("yes")) {
                             // *** NEED A WAY TO DELETE THE SHIP ***
+                            ShipRemoval removeShip = new ShipRemoval(1);
                            }
 
                             // incorrect key: notify that it is the incorrect key, ask again
