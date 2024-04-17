@@ -18,7 +18,7 @@ public class shipRemoval {
         private boolean verifyRemoval() {
             Scanner keyboard = new Scanner(System.in);
             boolean verified;
-            System.out.println("The following ship has been chosen for removal: " + shipToRemove.getName() + "\n" +
+            System.out.println("The following ship has been chosen for removal: " + shipToRemove.getSName() + "\n" +
                                "Do you wish to procede with removal?\n" +
                                "1. Yes\n" +
                                "2. No");
