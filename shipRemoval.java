@@ -57,10 +57,10 @@ public class shipRemoval {
                 */
 
                 String emptyString = null;
-                shipToRemove.setName(emptyString);
-                shipToRemove.setShipCapacity(0);
-                shipToRemove.setFuelCapacity(0);
-                shipToRemove.setFuel(0);
+                shipToRemove.setSName(emptyString);
+                shipToRemove.setSCap(0);
+                shipToRemove.setFCap(0);
+                shipToRemove.setFuel(0.0);
                 shipToRemove = null;
                 System.out.println("Ship has been successfully removed.");
             }
