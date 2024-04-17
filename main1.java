@@ -85,7 +85,7 @@ public static void main(String[] args){
                                                    "7. Status\n" +
                                                    "8. Pay Rate\n" +
                                                    "9. Weight\n" );
-                                System.out.print("Please enter the corresponding integer: ");
+                                System.out.print("Please enter the corresponding option/integer: ");
                                 field = kbd.nextInt();
                                 switch (field) {
                                     case 1:
@@ -155,10 +155,9 @@ public static void main(String[] args){
                         //retrieve astronaut from external container
                         
                         //verify that its the correct astronaut
-                        System.out.println("This is the correct astronaut?");
+                        System.out.println("Is this the correct astronaut?");
                        
                         //no: ask for the correct astronaut, retrieve, verify again
-                        System.out.println("");
 
                         //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
                         System.out.println("Field" +
@@ -191,7 +190,7 @@ public static void main(String[] args){
 
                                     //Replace the astronaut's name with the new value (astroName)
                                     //change the astro part
-                                    //astro.setName(astroName); 
+                                    astro.setName(astroName); //this was commented out but i didnt see why so i uncommented it out lol
 
                                     //Change the name inside the database
 
@@ -463,7 +462,9 @@ public static void main(String[] args){
                            String theKey = kbd.nextLine();
                            if (theKey.equalsIgnoreCase("yes")) {
                             // *** NEED A WAY TO DELETE THE SHIP ***
-                            ShipRemoval removeShip = new ShipRemoval(1);
+                            //ShipRemoval removeShip = new ShipRemoval(ship);
+                            //removeShip.removeShip(SQL connection);
+                            
                            }
 
                             // incorrect key: notify that it is the incorrect key, ask again
@@ -501,7 +502,7 @@ public static void main(String[] args){
                             for (String s : shipNames) {
                                 if (s != null) {
                                     count++;
-                                    System.out.println(count + ". " + s.getName());
+                                    System.out.println(count + ". " + s);
                                 }
                             }
                             System.out.print("Please enter the corresponding number: ");
@@ -516,7 +517,7 @@ public static void main(String[] args){
                                     for (String s : shipNames) {
                                         if (s != null) {
                                             count++;
-                                            System.out.println(count + ". " + s.getName());
+                                            System.out.println(count + ". " + s);
                                         }
                                     shipChoice = kbd.nextInt();
                                     }
@@ -615,10 +616,10 @@ public static void main(String[] args){
             System.out.println("Creating Password...");
 
             Random r = new Random();
-            Integer num = 0;
+            Integer passNum = 0;
             for (int i = 0; i < 1; i++) {
-                num = r.nextInt(20000);
-                System.out.println("Please Write Down The Following Password: " + num);
+                passNum = r.nextInt(20000);
+                System.out.println("Please write down the following password: " + passNum);
             }
             // * - Notify user of account creation and move on
             System.out.println("*Account Created*");
