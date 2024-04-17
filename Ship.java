@@ -1,17 +1,48 @@
 
 public class Ship
 {
-  // I have no idea what I am doing :(
-    double fuel;
-    String shipName;
-    int shipCapacity;
-    double fuelCapacity;
+    
+    private double fuel;
+    private String shipName;
+   private  int shipCapacity;
+    private double fuelCapacity;
     boolean inSpace = false;
     boolean parachutesDeployed = false;
     boolean doorIsOpen = false;
     boolean failure = false;
 
-
+public String getSName()
+{
+  return shipName;
+}
+public void setSName(String newSName)
+{
+  this.shipName = newSName;
+}
+public double getFCap()
+{
+  return fuelCapacity;
+}
+public void setFCap(double newFCap)
+{
+  this.fuelCapacity = newFCap;
+}
+public double getFuel()
+{
+  return fuel;
+}
+public void setFuel(Double newFuel)
+{
+  this.fuel = newFuel;
+}
+public int getSCap()
+{
+  return shipCapacity;
+}
+public void setSCap(int newSCap)
+{
+  this.shipCapacity = newSCap;
+}
   //crew = Astronaut[] 99% sure this dosent work
   int numOfCrew;
   
