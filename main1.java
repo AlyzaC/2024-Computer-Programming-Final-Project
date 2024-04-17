@@ -462,7 +462,7 @@ public static void main(String[] args){
                                               "If you wish to go back enter \"Go back\".");
                            String theKey = kbd.nextLine();
                            if (theKey.equalsIgnoreCase("yes")) {
-
+                            // *** NEED A WAY TO DELETE THE SHIP ***
                            }
 
                             // incorrect key: notify that it is the incorrect key, ask again
