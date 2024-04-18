@@ -609,7 +609,7 @@ public static void main(String[] args){
         boolean allowedEntry = false;
 
         File file = new File("ApplicationPassword.csv");
-        int applicationPassword;
+        int applicationPassword = -800;
         if (file.exists()) {
             FileInputStream passFile = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(passFile);
@@ -627,14 +627,14 @@ public static void main(String[] args){
             int passNum;
 
             createPassword = false;
-        file.createNewFile();
-        FileOutputStream passFile = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(passFile);
-        oos.writeObject(passNum);
-        oos.close();
-        passFile.close();
-        createPassword = false;
- 
+            file.createNewFile();
+            FileOutputStream passFile = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(passFile);
+            oos.writeObject(passNum);
+            oos.close();
+            passFile.close();
+            createPassword = false;
+    
             // Login
             // * First time application is run
 
@@ -662,15 +662,19 @@ public static void main(String[] args){
                     if (enteredPassword == applicationPassword) {
                         allowedEntry = true;
                     } else {
-                        int choice3;
+                        String choice3;
                         while (!(enteredPassword == applicationPassword)) {
 
                             //* notify that the incorrect password has been entered
                             // ask for password again and give option to go back
-
-                            choice3 = kbd2.nextInt();
-                            if (/*user chose to go back*/) {
+                            System.out.println("You input the wrong password.");
+                            System.out.println("Reenter the password or type \"Go back\"");
+                            //use a scanner to edit
+                            choice3 = kbd2.nextLine();
+                            if (choice3.equalsIgnoreCase("Go back")) {
                                 break;
+                            } else {
+                                enteredPassword = Integer.parseInt(choice3);
                             }
                         }
                     }
