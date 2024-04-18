@@ -1,7 +1,7 @@
 
 public class Ship
 {
-    
+
     private double fuel;
     private String shipName;
    private  int shipCapacity;
@@ -10,47 +10,48 @@ public class Ship
     boolean parachutesDeployed = false;
     boolean doorIsOpen = false;
     boolean failure = false;
-
+    double fuelBurnRate; //ship will accelerate 30 per second per pound of fuel burned
+    double speed; // goes above 3000 in atmos = death
+    double accel; //  burning fuel increases this. (no shit)
+    double deccel; //gravity, parachute slows this
 public String getSName()
 {
-  return shipName;
+ return shipName;
 }
 public void setSName(String newSName)
 {
-  this.shipName = newSName;
+ this.shipName = newSName;
 }
 public double getFCap()
 {
-  return fuelCapacity;
+ return fuelCapacity;
 }
 public void setFCap(double newFCap)
 {
-  this.fuelCapacity = newFCap;
+ this.fuelCapacity = newFCap;
 }
 public double getFuel()
 {
-  return fuel;
+ return fuel;
 }
 public void setFuel(Double newFuel)
 {
-  this.fuel = newFuel;
+ this.fuel = newFuel;
 }
 public int getSCap()
 {
-  return shipCapacity;
+ return shipCapacity;
 }
 public void setSCap(int newSCap)
 {
-  this.shipCapacity = newSCap;
+ this.shipCapacity = newSCap;
 }
-  //crew = Astronaut[] 99% sure this dosent work
-  int numOfCrew;
-  
-
+ //crew = Astronaut[] 99% sure this dosent work
+ int numOfCrew;  
 /**
- * Adds an astronaut to the ship's crew
- * @param choice ??
- */
+* Adds an astronaut to the ship's crew
+* @param choice ??
+*/
 public void addAstro(int choice)
 {
 if (choice == 1)
@@ -104,12 +105,10 @@ public void deployParachutes(int choice)
   if (choice == 3)
   {
     // code will check if this is possible
-    // code will determine the outcome of this
     //code will set a boolean to true
     System.out.println ("Deploying parachutes");
   }
 }
-
 /**
  * Opens the ship's exterior doors
  * @param choice
@@ -118,18 +117,12 @@ public void openDoors(int choice)
 {
   if (choice == 4)
   {
-    //code will check the outcome of this
-    // if not a good outcome ask if the user is sure about doing this
-    //if they chicken out send them back to the menu and ask for a new choice
-    //if they dont back down, open the doors anyways
     //code will set boolean to true
-    // if already in space, and not doing spacewalk, kill all astronauts and set a boolean
     // if doing spacewalk, idk
     // if still on ground, do nothing
     System.out.println ("teaching astronauts how doorknobs work...");
   }
 }
-
 /**
  * The ship explodes
  * @param choice
@@ -138,17 +131,9 @@ public void openDoors(int choice)
   {
     if (choice == 800177)
     {
-   //pretty clear what this does kaboom = funny
    // set a boolean to true cus why not
     System.out.println  ("kaboom?");
     System.out.println ("Yes " + shipName + ", kaboom.");
   }
 }
 }
-
-
-
-
-
-
-
