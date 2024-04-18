@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 public class Ship
 {
 
@@ -10,10 +10,16 @@ public class Ship
     boolean parachutesDeployed = false;
     boolean doorIsOpen = false;
     boolean failure = false;
+    boolean returning = false;
     double fuelBurnRate; //ship will accelerate 30 per second per pound of fuel burned
     double speed; // goes above 3000 in atmos = death
     double accel; //  burning fuel increases this. (no shit)
-    double deccel; //gravity, parachute slows this
+    double deccel = 9.81; //gravity pulls at 9.81 meters a second
+    double altitude = 0;
+
+    int choice; //gravity, parachute slows this
+
+//setters and getters
 public String getSName()
 {
  return shipName;
@@ -46,16 +52,61 @@ public void setSCap(int newSCap)
 {
  this.shipCapacity = newSCap;
 }
+
+//end of setters and getters
+
+public void Space()
+{
+  if (altitude > 70000)
+  {
+    inSpace = true;
+  }
+}
+
+public void ship(int speed,boolean inSpace )
+{
+
+  if (speed > 3000 && inSpace == false)
+  {
+ System.out.println ("the ship burned in the atmosphere");
+ failure = true;
+  }
+
+ if (speed > 7 && altitude == 0 && returning == true)
+ {
+  System.out.println("You crashed attempting to land");
+  failure = true;
+ }
+
+ 
+  }
+  
+
+  
+
+
+
+public void shipMenu ()
+{
+ System.out.println("test message");
+ choice = scanner.nextInt();
+}
+Scanner scanner = new Scanner(System.in);
  //crew = Astronaut[] 99% sure this dosent work
  int numOfCrew;  
 /**
 * Adds an astronaut to the ship's crew
 * @param choice ??
 */
+
+
+// everything below may not be useful and could be changed.
 public void addAstro(int choice)
 {
+  
 if (choice == 1)
 {
+  
   //code will check that there is room
   //if not the code will tell the user that this is not possible and will send them back to the menu to make a new choice
  System.out.println ("which one?");
@@ -73,6 +124,7 @@ if (choice == 1)
  */
 public void launch(int choice)
 {
+  
 if (choice == 2)
 {
   
@@ -98,14 +150,13 @@ if (choice == 2)
 
 /**
  * Deploys the ship's parachutes
- * @param choice
+ * 
  */
-public void deployParachutes(int choice)
+public void deployParachutes()
 {
-  if (choice == 3)
+  if (altitude < 10000 && returning == true)
   {
-    // code will check if this is possible
-    //code will set a boolean to true
+    //this will lower speed to no more than 7 meters per second by the time the ship lands
     System.out.println ("Deploying parachutes");
   }
 }
@@ -118,8 +169,6 @@ public void openDoors(int choice)
   if (choice == 4)
   {
     //code will set boolean to true
-    // if doing spacewalk, idk
-    // if still on ground, do nothing
     System.out.println ("teaching astronauts how doorknobs work...");
   }
 }
@@ -135,5 +184,5 @@ public void openDoors(int choice)
     System.out.println  ("kaboom?");
     System.out.println ("Yes " + shipName + ", kaboom.");
   }
-}
+  }
 }
