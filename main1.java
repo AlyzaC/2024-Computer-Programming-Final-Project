@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.io.*;
 
 public class main1 {
 
@@ -570,9 +571,11 @@ public static void main(String[] args){
                                     System.out.println("Please enter a number 1-4");
                                     break;
                             }
+                            
                             // edit ship info
                             // notify user
                             // move ship to external container
+
                             break;
 
                         case 2:
@@ -600,15 +603,54 @@ public static void main(String[] args){
     System.exit(0);
 }
 
-    public void LoggingInPassword() {
+    public boolean LoggingInPassword() {
+
+        boolean createPassword = true;
+        boolean allowedEntry = false;
+
+        File file = new File("ApplicationPassword.csv");
+        int applicationPassword = -800;
+        if (file.exists()) {
+            try {
+                FileInputStream passFile = new FileInputStream(file);
+                ObjectInputStream ois = new ObjectInputStream(passFile);
+                applicationPassword = (int) ois.readObject();
+                ois.close();
+                passFile.close();
+                createPassword = false;
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("An error occured: " + e.getMessage());
+            }
+            
+        }
 
         Scanner kbd2 = new Scanner(System.in);
 
-        boolean createPassword = true;
+         createPassword = true;
         if (createPassword) {
 
-            // Need To make it so we know when it was runned for the first time and when it
-            // was not
+            int passNum;
+
+            createPassword = false;
+            try {
+                file.createNewFile();
+                FileOutputStream passFile = new FileOutputStream(file);
+                ObjectOutputStream oos = new ObjectOutputStream(passFile);
+                oos.writeObject(passNum);
+                oos.close();
+                passFile.close();
+                createPassword = false;
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("An error occured: " + e.getMessage());
+            }
+            
+    
             // Login
             // * First time application is run
 
@@ -616,7 +658,7 @@ public static void main(String[] args){
             System.out.println("Creating Password...");
 
             Random r = new Random();
-            Integer passNum = 0;
+             passNum = 0;
             for (int i = 0; i < 1; i++) {
                 passNum = r.nextInt(20000);
                 System.out.println("Please write down the following password: " + passNum);
@@ -627,6 +669,88 @@ public static void main(String[] args){
             // * Any time after 1st
             createPassword = false;
         } else {
+            // ask for password or to reset password with the administrator password
+            int loginChoice = kbd2.nextInt();
+            switch (loginChoice) {
+                case 1:
+                    System.out.println("Please enter the password for the application: ");
+                    int enteredPassword = kbd2.nextInt();
+                    if (enteredPassword == applicationPassword) {
+                        allowedEntry = true;
+                    } else {
+                        String choice3;
+                        while (!(enteredPassword == applicationPassword)) {
+
+                            //* notify that the incorrect password has been entered
+                            // ask for password again and give option to go back
+                            System.out.println("You input the wrong password.");
+                            System.out.println("Reenter the password or type \"Go back\"");
+                            //use a scanner to edit
+                            choice3 = kbd2.nextLine();
+                            if (choice3.equalsIgnoreCase("Go back")) {
+                                break;
+                            } else {
+                                enteredPassword = Integer.parseInt(choice3);
+                            }
+                        }
+                    }
+                    break;
+    
+                case 2:
+                    // ask for adminPass
+                    int trueAdminPass = -298756;
+                    int adminPass = kbd2.nextInt();
+                    File adminFile = new File("adminPassword.dat");
+                    try {
+                        FileInputStream adminPassFile = new FileInputStream(adminFile);
+                        trueAdminPass = adminPassFile.read();
+                        adminPassFile.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                    }
+                    
+                    if (adminPass == trueAdminPass) {
+                        // create a new password for application and show it to user to write down
+                        System.out.println("Creating Password...");
+
+                        Random r = new Random();
+                         int passNum = 0;
+                        for (int i = 0; i < 1; i++) {
+                            passNum = r.nextInt(20000);
+                            System.out.println("Please write down the following password: " + passNum);
+                        }
+
+                        allowedEntry = true;
+                    } else {
+                        while (!(adminPass == trueAdminPass)) {
+
+                            // notify that incorrect pass has been entered
+                            // ask for pass again and give option to go back
+                            System.out.println("You input the wrong password.");
+                            System.out.println("Reenter the password or type \"Go back\"");
+                            //use the scanner to get input -- 
+                            String inputA = kbd2.nextLine();
+
+                           if (inputA.equalsIgnoreCase("Go back")) {
+                                break;
+                            } else {
+                                adminPass = Integer.parseInt(inputA);
+                            }
+                        }
+                    }
+                    break;
+    
+                default:
+                    while ((loginChoice != 1) && (loginChoice != 2)) {
+                        System.out.println("Please enter the number 1 or 2.");
+                       // ask for password or to reset password with the administrator password
+                        loginChoice = kbd2.nextInt();
+                    }
+                    break;
+            }
+        }
 
             // * - give option to reset password using administrator password
             System.out.println("Do you wish to reset the password with using the adminstartor password?");
@@ -636,11 +760,9 @@ public static void main(String[] args){
             // * - - reset password
             // * - verify password
 
+            // I'm not sure how to have the computer remember the password
+            // * - - move on if valid
+            kbd2.close();
+            return allowedEntry;
         }
-
-        // I'm not sure how to have the computer remember the password
-        // * - - move on if valid
-        kbd2.close();
     }
-
-}
