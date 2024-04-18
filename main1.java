@@ -611,12 +611,21 @@ public static void main(String[] args){
         File file = new File("ApplicationPassword.csv");
         int applicationPassword = -800;
         if (file.exists()) {
-            FileInputStream passFile = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(passFile);
-            applicationPassword = (int) ois.readObject();
-            ois.close();
-            passFile.close();
-            createPassword = false;
+            try {
+                FileInputStream passFile = new FileInputStream(file);
+                ObjectInputStream ois = new ObjectInputStream(passFile);
+                applicationPassword = (int) ois.readObject();
+                ois.close();
+                passFile.close();
+                createPassword = false;
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("An error occured: " + e.getMessage());
+            }
+            
         }
 
         Scanner kbd2 = new Scanner(System.in);
@@ -627,13 +636,20 @@ public static void main(String[] args){
             int passNum;
 
             createPassword = false;
-            file.createNewFile();
-            FileOutputStream passFile = new FileOutputStream(file);
-            ObjectOutputStream oos = new ObjectOutputStream(passFile);
-            oos.writeObject(passNum);
-            oos.close();
-            passFile.close();
-            createPassword = false;
+            try {
+                file.createNewFile();
+                FileOutputStream passFile = new FileOutputStream(file);
+                ObjectOutputStream oos = new ObjectOutputStream(passFile);
+                oos.writeObject(passNum);
+                oos.close();
+                passFile.close();
+                createPassword = false;
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("An error occured: " + e.getMessage());
+            }
+            
     
             // Login
             // * First time application is run
@@ -682,11 +698,19 @@ public static void main(String[] args){
     
                 case 2:
                     // ask for adminPass
+                    int trueAdminPass = -298756;
                     int adminPass = kbd2.nextInt();
                     File adminFile = new File("adminPassword.dat");
-                    FileInputStream adminPassFile = new FileInputStream(adminFile);
-                    int trueAdminPass = adminPassFile.read();
-                    adminPassFile.close();
+                    try {
+                        FileInputStream adminPassFile = new FileInputStream(adminFile);
+                        trueAdminPass = adminPassFile.read();
+                        adminPassFile.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                    } catch (IOException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                    }
+                    
                     if (adminPass == trueAdminPass) {
                         // create a new password for application and show it to user to write down
                         System.out.println("Creating Password...");
