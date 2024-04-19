@@ -5,12 +5,8 @@ import java.io.*;
 public class main1 {
 
 public static void main(String[] args){
-    Astronaut guy = new Astronaut();
-    guy.spaceWalk();
-    System.out.println(guy.getSerialNumber());
     //Variables & Objects
         String[] shipNames = new String[10]; //Temporary value?
-        String mainMenu = "";
         int choice;
 
     //Temporary Variables/Object
@@ -30,7 +26,7 @@ public static void main(String[] args){
         do {
             System.out.println("Main Menu\n" +
                                "1. Astronauts\n" +
-                               "2. Ships" + 
+                               "2. Ships\n" + 
                                "3. Launch");
             choice = kbd.nextInt();
             int choice2 = 0;
