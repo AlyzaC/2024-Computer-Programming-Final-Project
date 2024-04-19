@@ -7,6 +7,7 @@ public class main1 {
 public static void main(String[] args){
     //Variables & Objects
         String[] shipNames = new String[10]; //Temporary value?
+        String[] astroNames = new String[20]; //temporary value?
         int choice;
 
     //Temporary Variables/Object
@@ -22,7 +23,7 @@ public static void main(String[] args){
     // - Rocket/Ship Inventory
     // - Launch
     // - Quit
-    if (LoggingInPassword()) {
+    if (LoggingInPassword(kbd)) {
         do {
             System.out.println("Main Menu\n" +
                                "1. Astronauts\n" +
@@ -43,10 +44,11 @@ public static void main(String[] args){
                         switch (choice2) {
                         case 1:
                             System.out.print("Please enter the astronaut's full name (First Last): ");
-                            String astroName = (kbd.nextLine()).trim(); // I don't know if that works?
+                            kbd.nextLine();
+                            String astroName = kbd.nextLine().trim();
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                             String astroDateOfBirth = (kbd.nextLine()).trim();
-                            System.out.print("Please enter the astronaut's address ():");
+                            System.out.print("Please enter the astronaut's address: ");
                             String astroAddress = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's email: ");
                             String astroEmail = (kbd.nextLine()).trim();
@@ -58,7 +60,7 @@ public static void main(String[] args){
                             String astroStatus = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's pay rate: ");
                             double astroPayRate = kbd.nextDouble();
-                            System.out.print("Please enter the astronaut's weight: ");
+                            System.out.print("Please enter the astronaut's weight in pounds: ");
                             double astroWeight = kbd.nextDouble();
                             System.out.println("Please verify information before saving:\n" +
                                             "Name: " + astroName + "\n" +
@@ -100,46 +102,55 @@ public static void main(String[] args){
                                     switch (field) {
                                         case 1:
                                             System.out.print("Please enter the astronaut's full name (First Last): ");
+                                            kbd.nextLine();
                                             astroName = (kbd.nextLine()).trim();
                                             break;
                                         
                                         case 2:
                                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
+                                            kbd.nextLine();
                                             astroDateOfBirth = (kbd.nextLine()).trim();
                                             break;
 
                                         case 3:
                                             System.out.print("Please enter the astronaut's address ():");
+                                            kbd.nextLine();
                                             astroAddress = (kbd.nextLine()).trim();
                                             break;
 
                                         case 4: 
                                             System.out.print("Please enter the astronaut's email: ");
+                                            kbd.nextLine();
                                             astroEmail = (kbd.nextLine()).trim();
                                             break;
 
                                         case 5: 
                                             System.out.print("Please enter the astronaut's phone number: ");
+                                            kbd.nextLine();
                                             astroPhone = (kbd.nextLine()).trim();
                                             break;
 
                                         case 6: 
                                             System.out.print("Please enter the full name of the astronaut's next of kin: ");
+                                            kbd.nextLine();
                                             astroNextOfKin = (kbd.nextLine()).trim();
                                             break;
 
                                         case 7: 
                                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
+                                            kbd.nextLine();
                                             astroStatus = (kbd.nextLine()).trim();
                                             break;
 
                                         case 8: 
                                             System.out.print("Please enter the astronaut's pay rate: ");
+                                            kbd.nextLine();
                                             astroPayRate = kbd.nextDouble();
                                             break;
 
                                         case 9: 
                                             System.out.print("Please enter the astronaut's weight: ");
+                                            kbd.nextLine();
                                             astroWeight = kbd.nextDouble();
                                             break;
 
@@ -152,7 +163,9 @@ public static void main(String[] args){
                             }  while (!change.equalsIgnoreCase("no"));
                             
                             astro = new Astronaut();
+                            for (String name : astroNames) {
 
+                            }
                             //code saving astro to separate file/database 
 
                             break;
@@ -626,7 +639,7 @@ public static void main(String[] args){
     System.exit(0);
 }
 
-    public static boolean LoggingInPassword() {
+    public static boolean LoggingInPassword(Scanner scan) {
 
         boolean createPassword = true;
         boolean allowedEntry = false;
@@ -650,8 +663,6 @@ public static void main(String[] args){
             }
             
         }
-
-        Scanner kbd2 = new Scanner(System.in);
 
          createPassword = true;
         if (createPassword) {
@@ -694,11 +705,11 @@ public static void main(String[] args){
             allowedEntry = true;
         } else {
             // ask for password or to reset password with the administrator password
-            int loginChoice = kbd2.nextInt();
+            int loginChoice = scan.nextInt();
             switch (loginChoice) {
                 case 1:
                     System.out.println("Please enter the password for the application: ");
-                    int enteredPassword = kbd2.nextInt();
+                    int enteredPassword = scan.nextInt();
                     if (enteredPassword == applicationPassword) {
                         allowedEntry = true;
                     } else {
@@ -710,7 +721,7 @@ public static void main(String[] args){
                             System.out.println("You input the wrong password.");
                             System.out.println("Reenter the password or type \"Go back\"");
                             //use a scanner to edit
-                            choice3 = kbd2.nextLine();
+                            choice3 = scan.nextLine();
                             if (choice3.equalsIgnoreCase("Go back")) {
                                 break;
                             } else {
@@ -723,7 +734,7 @@ public static void main(String[] args){
                 case 2:
                     // ask for adminPass
                     int trueAdminPass = -298756;
-                    int adminPass = kbd2.nextInt();
+                    int adminPass = scan.nextInt();
                     File adminFile = new File("adminPassword.dat");
                     try {
                         FileInputStream adminPassFile = new FileInputStream(adminFile);
@@ -755,7 +766,7 @@ public static void main(String[] args){
                             System.out.println("You input the wrong password.");
                             System.out.println("Reenter the password or type \"Go back\"");
                             //use the scanner to get input -- 
-                            String inputA = kbd2.nextLine();
+                            String inputA = scan.nextLine();
 
                            if (inputA.equalsIgnoreCase("Go back")) {
                                 break;
@@ -770,7 +781,7 @@ public static void main(String[] args){
                     while ((loginChoice != 1) && (loginChoice != 2)) {
                         System.out.println("Please enter the number 1 or 2.");
                        // ask for password or to reset password with the administrator password
-                        loginChoice = kbd2.nextInt();
+                        loginChoice = scan.nextInt();
                     }
                     break;
             }
@@ -783,7 +794,6 @@ public static void main(String[] args){
 
             // I'm not sure how to have the computer remember the password
             // * - - move on if valid
-            kbd2.close();
             return allowedEntry;
         }
     }
