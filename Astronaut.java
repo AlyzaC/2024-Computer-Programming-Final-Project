@@ -3,16 +3,16 @@
 public class Astronaut{
     
     //Strings, doubles and the ints.
-    String Name;
-    String dateOfBirth;
-    int serialNumber;
-    String address;
-    String email;
-    String phoneNumber;
-    String nextOfKin;
-    String status;
-    double payRate;
-    double weight;
+    private String Name;
+    private String dateOfBirth;
+    private int serialNumber;
+    private String address;
+    private String email;
+    private String phoneNumber;
+    private String nextOfKin;
+    private String status;
+    private double payRate;
+    private double weight;
 
     /**
      * The constructor for the astronaut class. Asks for field values and creates a serial number for the astronaut.
