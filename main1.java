@@ -277,7 +277,7 @@ public static void main(String[] args){
                     //     pull astronaut and verify that it is the correct one
                     
                     //     no: ask for correct astronaut, verify
-                           System.out.println("Who is the correct astronaut?");
+                           System.out.println("Who is the correct astronaut?"); //STILL NEED TO VERIFY
 
                     //     yes: ask for key to delete
                            System.out.println("Type \"yes\" for deletion.\n" +
@@ -319,10 +319,14 @@ public static void main(String[] args){
             //     * - Add
             //     * - Edit info
             //     * - Delete 
+            //i dont think i did this menu correctly
                     do{
-                    //**LINE AFTER THIS NEEDS TO BE EDITED**  
-                    //System.out.println(string for rocket/ship menu);
-                    //choice2 = kbd.nextInt(write in choices. 1. title 2. title, 3. title, etc.);
+                    System.out.println("Ship Menu \n" +
+                                       "1. Add Ship \n" +
+                                       "2. Edit Ship Information \n" +
+                                       "3. Delete Ship \n" +
+                                       "4. Go Back");
+                    choice2 = kbd.nextInt();
                     int field;
                     switch (choice2) {
                         case 1:
