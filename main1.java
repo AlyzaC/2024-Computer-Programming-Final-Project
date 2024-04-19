@@ -28,13 +28,20 @@ public static void main(String[] args){
     // - Quit
     if (LoggingInPassword()) {
         do {
-            System.out.println(mainMenu);
+            System.out.println("Main Menu\n" +
+                               "1. Astronauts\n" +
+                               "2. Ships" + 
+                               "3. Launch");
             choice = kbd.nextInt();
             int choice2 = 0;
             switch(choice) {
                 case 1:
                     do {
-                    System.out.println("Menu:");
+                    System.out.println("Astronaut Menu\n" + 
+                                       "1. Add Astronaut\n" +
+                                       "2. Edit Astronaut\n" +
+                                       "3. Delete Astronaut\n" +
+                                       "4. Go Back");
                         choice2 = kbd.nextInt();
                         int field;
                         switch (choice2) {
@@ -322,7 +329,11 @@ public static void main(String[] args){
                 //     * - Delete 
                         do{
                         //**LINE AFTER THIS NEEDS TO BE EDITED**  
-                        //System.out.println(string for rocket/ship menu);
+                        System.out.println("Ship Menu\n" +
+                                           "1. Add Ship\n" +
+                                           "2. Edit Ship\n" +
+                                           "3. Delete Ship\n" +
+                                           "4. Go Back");
                         //choice2 = kbd.nextInt(write in choices. 1. title 2. title, 3. title, etc.);
                         int field;
                         switch (choice2) {
