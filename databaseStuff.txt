@@ -1,0 +1,60 @@
+(WIP at the moment)
+
+IN MAIN1
+With imports at top of file:
+//import java.sql.*;
+
+Create new object section for SQL stuff
+//
+Class.forName(driver);
+String url, username, password
+Connection connection = DriverManager.getConnect(url, username, password);
+Statement statement = connection.createStatement();
+ResultSet resultSet = null; //used later in code
+
+While creating an astronaut, starting on the line after "Astronaut astro = new Astronaut();"
+//
+
+While editing an astronaut:
+ - starting after "//retrieve astronaut from external container"
+//
+
+ - starting at "//pull current value"
+//
+
+ - starting at "//send astronaut back to external container"
+//
+
+While deleting astronaut
+ - starting at "//     pull astronaut and verify that it is the correct one"
+//
+
+While creating a ship: 
+//
+
+While editing a ship:
+ - Starting at "// retrieve ship from external container"
+//
+
+ - Starting at "// send ship back to external container"
+//
+
+While deleting a ship
+//
+
+While launching a ship: 
+//
+
+While closing objects and main
+//
+resultSet.close();
+statement.close();
+connection.close();
+
+IN ASTRO_REMOVAL
+ - In removeAstronauts():
+//
+
+IN SHIP_REMOVAL
+ - In removeShip():
+//

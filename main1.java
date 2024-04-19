@@ -28,13 +28,20 @@ public static void main(String[] args){
     // - Quit
     if (LoggingInPassword()) {
         do {
-            System.out.println(mainMenu);
+            System.out.println("Main Menu\n" +
+                               "1. Astronauts\n" +
+                               "2. Ships" + 
+                               "3. Launch");
             choice = kbd.nextInt();
             int choice2 = 0;
             switch(choice) {
                 case 1:
                     do {
-                    System.out.println("Menu:");
+                    System.out.println("Astronaut Menu\n" + 
+                                       "1. Add Astronaut\n" +
+                                       "2. Edit Astronaut\n" +
+                                       "3. Delete Astronaut\n" +
+                                       "4. Go Back");
                         choice2 = kbd.nextInt();
                         int field;
                         switch (choice2) {
@@ -278,7 +285,7 @@ public static void main(String[] args){
                         //     pull astronaut and verify that it is the correct one
                         
                         //     no: ask for correct astronaut, verify
-                            System.out.println("Who is the correct astronaut?"); //STILL NEED TO VERIFY
+                            System.out.println("Who is the correct astronaut?");
 
                         //     yes: ask for key to delete
                             System.out.println("Type \"yes\" for deletion.\n" +
@@ -320,14 +327,14 @@ public static void main(String[] args){
                 //     * - Add
                 //     * - Edit info
                 //     * - Delete 
-                //i dont think i did this menu correctly
                         do{
-                        System.out.println("Ship Menu \n" +
-                                        "1. Add Ship \n" +
-                                        "2. Edit Ship Information \n" +
-                                        "3. Delete Ship \n" +
-                                        "4. Go Back");
-                        choice2 = kbd.nextInt();
+                        //**LINE AFTER THIS NEEDS TO BE EDITED**  
+                        System.out.println("Ship Menu\n" +
+                                           "1. Add Ship\n" +
+                                           "2. Edit Ship\n" +
+                                           "3. Delete Ship\n" +
+                                           "4. Go Back");
+                        //choice2 = kbd.nextInt(write in choices. 1. title 2. title, 3. title, etc.);
                         int field;
                         switch (choice2) {
                             case 1:
@@ -417,10 +424,9 @@ public static void main(String[] args){
                                                             "If you wish to go back, enter \"Go back\".");
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                
                                                 //Replace the ship's name with the new value (shipName)
                                                 //change the ship part
-                                            // ship.setName(shipName); <-- maybe its suppose to be Ship.setSName(shipName); idk
+                                                //ship.setName(shipName); 
 
                                                 //Change the name inside the database
 
@@ -472,11 +478,11 @@ public static void main(String[] args){
                                 // no: ask for correct ship, verify
 
                                 // yes: ask for key to delete
+                                //TO HELP ME, TYPE "yes: ask for" IN THE SERACH BAR AND BASE IT OFF OF WHAT COMES UP :)
                                 System.out.println("Type \"yes\" for deletion.\n" +
                                                 "If you wish to go back enter \"Go back\".");
                             String theKey = kbd.nextLine();
                             if (theKey.equalsIgnoreCase("yes")) {
-
                                 // *** NEED A WAY TO DELETE THE SHIP ***
                                 //ShipRemoval removeShip = new ShipRemoval(ship);
                                 //removeShip.removeShip(SQL connection);
@@ -673,7 +679,7 @@ public static void main(String[] args){
             
     
             // Login
-            // * First time application is run (THIS PART IS (I HOPE) DONE)
+            // * First time application is run
 
             // * - Create password and display for user to write down
             System.out.println("Creating Password...");
@@ -689,6 +695,7 @@ public static void main(String[] args){
 
             // * Any time after 1st
             createPassword = false;
+            allowedEntry = true;
         } else {
             // ask for password or to reset password with the administrator password
             int loginChoice = kbd2.nextInt();
@@ -773,12 +780,10 @@ public static void main(String[] args){
             }
         }
 
-            // * - give option to reset password using administrator password
-            System.out.println("Do you wish to reset the password with using the adminstartor password?");
-
+            // ***NEED TO FINISH THIS PART***
             // * - - ask for administrator password and verify
-            // * - - reset password 
-            // * - verify password (THIS PART IS DONE)
+            // * - - reset password
+            // * - verify password
 
             // I'm not sure how to have the computer remember the password
             // * - - move on if valid
