@@ -24,7 +24,7 @@ public class Astronaut{
      * @param astroNextOfKIn The name of the astronaut's next of kin
      * @param astroStatus Whether the astronaut is currently in space or on Earth
      * @param astroPayRate The astronaut's pay rate
-     * @param astroWeight The astronauts weight in kiligrams
+     * @param astroWeight The astronauts weight in pounds
      */
     public Astronaut(){
         SerialNumberGenerator snGenerator = new SerialNumberGenerator(0);
@@ -196,7 +196,7 @@ public class Astronaut{
 
     //double weight
     /**
-     * Gives the value of the astronaut's weight in kiligrams
+     * Gives the value of the astronaut's weight in pounds
      * @return The double value of the astronaut's weight
      */
     public double weight(){
@@ -204,7 +204,7 @@ public class Astronaut{
     }
     /**
      * Overwrites the astronaut's weight with a new, user-supplied value
-     * @param newWeight The new double value of the astronaut's weight in kiligrams
+     * @param newWeight The new double value of the astronaut's weight in pounds
      */
     public void setWeight(double newWeight){
         this.weight = newWeight;
