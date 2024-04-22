@@ -26,9 +26,21 @@ public class Astronaut{
      * @param astroPayRate The astronaut's pay rate
      * @param astroWeight The astronauts weight in pounds
      */
-    public Astronaut(){
+    public Astronaut(String astroName, String astroDateOfBirth, String astroAddress, String astroEmail, String astroPhoneNumber,
+                     String astroNextOfKIn, String astroStatus, double astroPayRate, double astroWeight){
+
         SerialNumberGenerator snGenerator = new SerialNumberGenerator(0);
         serialNumber = snGenerator.generateNextSerial();
+
+        Name = astroName;
+        dateOfBirth = astroDateOfBirth;
+        address = astroAddress;
+        email = astroEmail;
+        phoneNumber = astroPhoneNumber;
+        nextOfKin = astroNextOfKIn;
+        status = astroStatus;
+        payRate = astroPayRate;
+        weight = astroWeight;
 
     }
 
@@ -36,8 +48,39 @@ public class Astronaut{
      * Makes an astronaut go on a spacewalk
      * @param astro The astronaut sent on a spacewalk
      */
-    public void spaceWalk(){
-        //more code goes here? not sure what though xd
+    public void spaceWalk(Astronaut astro){
+        System.out.println("The astronaut is going on a spacewalk.");
+        //art of the astronuat getting out of spaceship
+        System.out.println(
+            "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒▒▒▒▒▒▒▒▒▒▒▒░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒░░░\n" +
+            "▒▒▒▒▒▒▒▒▒▒▒▒░░█░░█░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░▒▒\n" +
+            "▒▒▒░▒▒▒▒▒▒▒▒░█░░░░█░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒▒▒▒▒▒▒▒░██░░░░░░██░░▒▒▒▒▒░▒▒▒▒▒▒▒▒▒░▒\n" +
+            "▒▒▒▒▒▒▒▒▒▒░█░░░██░░░█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒▒▒▒▒▒▒░██░░█░░█░░██▒▒▒░▒▒▒▒▒▒▒▒▒▒▒▒░▒\n" +
+            "▒▒▒▒▒▒▒▒░██░░░████░░░██░▒▒▒░▒▒░██▒▒▒▒▒░░\n" +
+            "▒▒▒▒▒▒░░██░░░██░░██░░░██░▄▄▄█▀┼┼┼┼▒▒▒▒▒░\n" +
+            "▒▒░▒▒░██░█░░░█░░░░█░░░█░██░░▒▒░┼┼▒▒▒▒▒▒▒\n" +
+            "▒▒▒░██░░░█░░░█░░░░█░░░█░░░██░▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒█░░░░░█░░░█░░░░█░░░█░░░░░█░░▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒░░█░░░░█░░█░████░█░░█░░░░█░░▒▒▒▒▒░▒▒▒░\n" +
+            "▒░░░░█████░█░░░░░░░░█░█████░▒▒▒▒▒░▒▒▒▒▒▒\n" +
+            "▒▒▒▒░░░░░██░░░░░░░░░░██░░▒▒░▒▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒▒▒▒░░░██░░██████░░██░▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒\n" +
+            "▒░▒▒▒▒▒▒░░░██░░░░░░██░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒▒░▒▒▒▒▒▒░░██████░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒\n" +
+            "▒▒▒▒░▒▒▒▒▒▒▒▒▒░░░░░▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▒\n" +
+            "▒░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒\n" +
+            "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒░░\n" +
+            "░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░\n" +
+            "░░░░░░░▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░\n" +
+            "░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░\n" 
+          
+        );
+
+        //art of the astronuat doing a space walk (for 30 seconds)
+        //art of the astronuat going back into the spaceship
     }
 
         //***We Need this***
