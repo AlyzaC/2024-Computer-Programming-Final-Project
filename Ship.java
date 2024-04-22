@@ -6,6 +6,8 @@ public class Ship
     private String shipName;
    private  int shipCapacity;
     private double fuelCapacity;
+    private int crewNum;
+    private Astronaut[] crew; //dont forget to get crew names from 
     boolean inSpace = false;
     boolean parachutesDeployed = false;
     boolean doorIsOpen = false;
@@ -15,11 +17,24 @@ public class Ship
     double speed; // goes above 3000 in atmos = death
     double accel; //  burning fuel increases this. (no shit)
     double deccel = 9.81; //gravity pulls at 9.81 meters a second
-    double altitude = 0;
+    double altitude = 0; //above 70k in space.
 
-    int choice; //gravity, parachute slows this
+    int choice; 
 
 //setters and getters
+public Astronaut[] getCrew()
+{
+  return crew;
+}
+//public void setCrew()
+public int getCN()
+{
+  return crewNum;
+}
+public void setCN(int newCN)
+{
+  this.crewNum = newCN;
+}
 public String getSName()
 {
  return shipName;
@@ -61,6 +76,11 @@ public void Space()
   {
     inSpace = true;
   }
+  if (altitude < 70000 && inSpace == true)
+  {
+    inSpace = false;
+    returning = true;
+  }
 }
 
 public void ship(int speed,boolean inSpace )
@@ -76,6 +96,13 @@ public void ship(int speed,boolean inSpace )
  {
   System.out.println("You crashed attempting to land");
   failure = true;
+ }
+ if (speed < 7 && altitude == 0 & returning ==true)
+ {
+  System.out.println ("The ship has landed sucessfully");
+  doorIsOpen = true;
+  //remove crew from ship and assume fuel is completely empty
+
  }
 
  
@@ -104,7 +131,7 @@ Scanner scanner = new Scanner(System.in);
 public void addAstro(int choice)
 {
   
-if (choice == 1)
+if (choice == 1 && shipCapacity > crewNum )
 {
   
   //code will check that there is room
@@ -113,8 +140,21 @@ if (choice == 1)
  //user will give the astronauts name
  //check that astronaut is both real and alive
  //code will add person to crew, telling them this has happend
+ System.out.println ("astronaut has been added to ship.");
+ if (shipCapacity > crewNum)
+ {
+  System.out.println ("Would you like to add another");
+ }
+ else
+ {
+  System.out.println("The ship is now full");
+ }
  //code will ask if theres another astronaut to add if not full
  //code will bring back up the menu and ask for a new choice
+}
+else
+{
+  System.out.println ("The ship is already full");
 }
 }
 
@@ -130,15 +170,18 @@ if (choice == 2)
   
  if (numOfCrew <= shipCapacity)
  {
-   System.out.println ("not enough people in ship make new choice");
+   System.out.println ("There are not enough crew to start the ship.");
    // code will bring back up menu and ask for a new choice
    
   
- } else
+ } else if (fuel < fuelCapacity)
+ {
+System.out.println("The Ship needs more fuel for a sucessful launch.");
+ }
  //code will check if it has enough fuel
  //if not it will fail
  //set boolean
- {
+ else {
 
   //code will set boolean to true
   //
