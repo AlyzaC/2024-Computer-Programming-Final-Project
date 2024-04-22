@@ -204,15 +204,16 @@ public static void main(String[] args){
 
                             astroToEdit = astros[astroChoice - 1];
                             System.out.println("This is the current information for " + astroToEdit.getName());
-                            System.out.println("1. Name: " + astroToEdit.getName() + "\n" +
-                                               "2. Date of Birth: " + astroToEdit.dateOfBirth() + "\n" + 
-                                               "3. Address: " + astroToEdit.address() + "\n" +
-                                               "4. Email: " + astroToEdit.email() + "\n" +
-                                               "5. Phone Number: " + astroToEdit.phoneNumber() + "\n" + 
-                                               "6. Next of Kin: " + astroToEdit.nextOfKin() + "\n" +
-                                               "7. Status: " + astroToEdit.status() + "\n" +
-                                               "8. Pay Rate: " + astroToEdit.payRate() + "\n" +
-                                               "9. Weight: " + astroToEdit.weight());
+                            System.out.println("Name: " + astroToEdit.getName() + "\n" +
+                                               "Serial Number: " + astroToEdit.getSerialNumber() + "\n" +
+                                               "Date of Birth: " + astroToEdit.dateOfBirth() + "\n" + 
+                                               "Address: " + astroToEdit.address() + "\n" +
+                                               "Email: " + astroToEdit.email() + "\n" +
+                                               "Phone Number: " + astroToEdit.phoneNumber() + "\n" + 
+                                               "Next of Kin: " + astroToEdit.nextOfKin() + "\n" +
+                                               "Status: " + astroToEdit.status() + "\n" +
+                                               "Pay Rate: " + astroToEdit.payRate() + "\n" +
+                                               "Weight: " + astroToEdit.weight());
                             
                             //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
                             System.out.println("Field\n" +
@@ -263,7 +264,7 @@ public static void main(String[] args){
                                     astroDateOfBirth = (kbd.nextLine()).trim();
                                     String correct = "";
                                     do {
-                                        System.out.println("The astronaut's current name in the database is " + astroToEdit.dateOfBirth() + "\n" +
+                                        System.out.println("The astronaut's current date of birth in the database is " + astroToEdit.dateOfBirth() + "\n" +
                                                     "You entered: " + astroDateOfBirth + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
@@ -286,49 +287,187 @@ public static void main(String[] args){
                                 case 3:
                                     System.out.print("Please edit the astronaut's address:");
                                     astroAddress = (kbd.nextLine()).trim();
-                                    
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current address in the database is " + astroToEdit.address() + "\n" +
+                                                    "You entered: " + astroAddress + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setAddress(astroAddress);
+
+                                            //Change the address inside the database
+
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
+                                            System.out.print("Please edit the astronaut's address: ");
+                                            astroAddress = (kbd.nextLine()).trim();
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
                                     break;
 
                                 case 4: 
                                     System.out.print("Please edit the astronaut's email (name@example.com): ");
                                     astroEmail = (kbd.nextLine()).trim();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current email in the database is " + astroToEdit.email() + "\n" +
+                                                    "You entered: " + astroEmail + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setEmail(astroEmail);
+
+                                            //Change the email inside the database
+
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
+                                            System.out.print("Please edit the astronaut's email (name@example.com): ");
+                                            astroEmail = (kbd.nextLine()).trim();
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
                                     break;
 
                                 case 5: 
                                     System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                     astroPhone = (kbd.nextLine()).trim();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current phone number in the database is " + astroToEdit.phoneNumber() + "\n" +
+                                                    "You entered: " + astroPhone + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setPhoneNumber(astroPhone);
+
+                                            //Change the phone number inside the database
+
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
+                                            System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                            astroPhone = (kbd.nextLine()).trim();
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
                                     break;
 
-                                        case 6: 
-                                            System.out.print("Please edit the full name of the astronaut's next of kin: ");
-                                            astroNextOfKin = (kbd.nextLine()).trim();
+                                case 6: 
+                                    System.out.print("Please edit the full name of the astronaut's next of kin: ");
+                                    astroNextOfKin = (kbd.nextLine()).trim();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current next of kin in the database is " + astroToEdit.nextOfKin() + "\n" +
+                                                        "You entered: " + astroNextOfKin + "\n" +
+                                                        "If this correct, please enter \"Correct\".\n" +
+                                                        "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.nextOfKin(astroNextOfKin);
+    
+                                            //Change the next of kin inside the database
+    
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
+                                        } else {
+                                            System.out.print("Please edit the full name of the astronaut's next of kin: ");
+                                            astroDateOfBirth = (kbd.nextLine()).trim();
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
+                                    break;
 
-                                        case 7: 
+                                case 7: 
+                                    System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
+                                    astroStatus = (kbd.nextLine()).trim();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current planetary status in the database is " + astroToEdit.status() + "\n" +
+                                                        "You entered: " + astroStatus + "\n" +
+                                                        "If this correct, please enter \"Correct\".\n" +
+                                                        "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setStatus(astroStatus);
+    
+                                            //Change the status inside the database
+    
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
                                             System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
                                             astroStatus = (kbd.nextLine()).trim();
-                                            break;
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
+                                    break;
 
-                                        case 8: 
+                                case 8: 
+                                    System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
+                                    astroPayRate = kbd.nextDouble();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current pay rate in the database is " + astroToEdit.payRate() + "\n" +
+                                                        "You entered: " + astroPayRate + "\n" +
+                                                        "If this correct, please enter \"Correct\".\n" +
+                                                        "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setPayRate(astroPayRate);
+    
+                                            //Change the pay rate inside the database
+    
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
                                             System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
-                                            astroPayRate = kbd.nextDouble();
-                                            break;
+                                            astroPayRate = (kbd.nextLine()).trim();
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
+                                    break;
 
-                                        case 9: 
-                                            System.out.print("Please edit the astronaut's weight in pounds: ");
-                                            astroWeight = kbd.nextDouble();
-                                            break;
+                                case 9: 
+                                    System.out.print("Please edit the astronaut's weight in pounds: ");
+                                    astroWeight = kbd.nextDouble();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current weight in the database is " + astroToEdit.weight() + "\n" +
+                                                    "You entered: " + astroWeight + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setWeight(astroWeight);
 
-                                        case 10:
-                                            System.out.println("Going back");
-                                            break;
+                                            //Change the weight inside the database
 
-                                        default: 
-                                            System.out.println("Please enter a number 1-10.");
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
-                                    }
+                                        } else {
+                                            System.out.print("Please edit the weight in pounds: ");
+                                            astroWeight = (kbd.nextLine()).trim();
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
+                                    break;
 
-                            //send astronaut back to external container  <-- FILE STUFF !!
+                                case 10:
+                                    System.out.println("Going back");
+                                    break;
+
+                                default: 
+                                    System.out.println("Please enter a number 1-10.");
+                                    break;
+                            }
+                            astros[astroChoice - 1] = astroToEdit;
                             } while (field != 10);
                             break;
                         
