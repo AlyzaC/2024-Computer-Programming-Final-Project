@@ -6,18 +6,17 @@ public class main1 {
 
 public static void main(String[] args){
     //Variables & Objects
-        String[] shipNames = new String[10]; //Temporary value?
-        String[] astroNames = new String[20]; //temporary value?
+        Ship[] ships = new Ship[10]; //Temporary value?
+        Astronaut[] astros = new Astronaut[20]; //temporary value?
         int choice;
-
-    //Temporary Variables/Object
-        Astronaut temporaryAstro = new Astronaut();
-        Astronaut astro = new Astronaut();
-        Ship temporaryShip = new Ship();
+        int choice2;
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
      
+
+    //Code for getting astros and ships from database
+
     // Main menu
     // - Astronauts
     // - Rocket/Ship Inventory
@@ -30,7 +29,6 @@ public static void main(String[] args){
                                "2. Ships\n" + 
                                "3. Launch");
             choice = kbd.nextInt();
-            int choice2 = 0;
             switch(choice) {
                 case 1:
                     do {
@@ -50,15 +48,15 @@ public static void main(String[] args){
                             String astroDateOfBirth = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's address: ");
                             String astroAddress = (kbd.nextLine()).trim();
-                            System.out.print("Please enter the astronaut's email: ");
+                            System.out.print("Please enter the astronaut's email (name@example.com): ");
                             String astroEmail = (kbd.nextLine()).trim();
-                            System.out.print("Please enter the astronaut's phone number: ");
+                            System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                             String astroPhone = (kbd.nextLine()).trim();
                             System.out.print("Please enter the full name of the astronaut's next of kin: ");
                             String astroNextOfKin = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
                             String astroStatus = (kbd.nextLine()).trim();
-                            System.out.print("Please enter the astronaut's pay rate: ");
+                            System.out.print("Please enter the astronaut's pay rate (X,XXX.XX): ");
                             double astroPayRate = kbd.nextDouble();
                             System.out.print("Please enter the astronaut's weight in pounds: ");
                             double astroWeight = kbd.nextDouble();
@@ -113,19 +111,19 @@ public static void main(String[] args){
                                             break;
 
                                         case 3:
-                                            System.out.print("Please enter the astronaut's address ():");
+                                            System.out.print("Please enter the astronaut's address: ");
                                             kbd.nextLine();
                                             astroAddress = (kbd.nextLine()).trim();
                                             break;
 
                                         case 4: 
-                                            System.out.print("Please enter the astronaut's email: ");
+                                            System.out.print("Please enter the astronaut's email (name@example.com): ");
                                             kbd.nextLine();
                                             astroEmail = (kbd.nextLine()).trim();
                                             break;
 
                                         case 5: 
-                                            System.out.print("Please enter the astronaut's phone number: ");
+                                            System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                             kbd.nextLine();
                                             astroPhone = (kbd.nextLine()).trim();
                                             break;
@@ -143,13 +141,13 @@ public static void main(String[] args){
                                             break;
 
                                         case 8: 
-                                            System.out.print("Please enter the astronaut's pay rate: ");
+                                            System.out.print("Please enter the astronaut's pay rate (X,XXX.XX): ");
                                             kbd.nextLine();
                                             astroPayRate = kbd.nextDouble();
                                             break;
 
                                         case 9: 
-                                            System.out.print("Please enter the astronaut's weight: ");
+                                            System.out.print("Please enter the astronaut's weight in pounds: ");
                                             kbd.nextLine();
                                             astroWeight = kbd.nextDouble();
                                             break;
@@ -162,38 +160,72 @@ public static void main(String[] args){
                                 }
                             }  while (!change.equalsIgnoreCase("no"));
                             
-                            astro = new Astronaut();
-                            for (String name : astroNames) {
-
+                            for (int count = 0; count < astros.length; count++) {
+                                if (astros[count] == null) {
+                                    astros[count] = new Astronaut(astroName, astroDateOfBirth, astroAddress, astroEmail, astroPhone, astroNextOfKin, astroStatus, astroPayRate, astroWeight);
+                                }
                             }
+
                             //code saving astro to separate file/database 
 
                             break;
 
                         case 2:
                         do {
-                        // ask which astronaut the user wants to edit
+                            Astronaut astroToEdit;
+                            // ask which astronaut the user wants to edit
                             System.out.println("Which astronaut would you like to edit?");
-
-                            //retrieve astronaut from external container
-                            
+                            int count = 0;
+                            for (Astronaut a : astros) {
+                                if (a != null) {
+                                    count++;
+                                    System.out.println(count + " " + a.getName() + "\n");
+                                }
+                            }
+                            int astroChoice = kbd.nextInt();
+                            String astroConfirmation = "";
                             //verify that its the correct astronaut
-                            System.out.println("Is this the correct astronaut?");
-                        
-                            //no: ask for the correct astronaut, retrieve, verify again
+                            do {
+                                System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
+                                System.out.println("Is this the correct astronaut? (Yes/No)");
+                                kbd.nextLine();
+                                astroConfirmation = (kbd.nextLine()).trim();
+                                if (astroConfirmation.equalsIgnoreCase("no")) {
+                                    count = 0;
+                                    for (Astronaut a : astros) {
+                                        if (a != null) {
+                                            count++;
+                                            System.out.println(count + " " + a.getName() + "\n");
+                                        }
+                                    }
+                                    astroChoice = kbd.nextInt();
+                                }
+                            } while (!astroConfirmation.equalsIgnoreCase("yes"));
 
+                            astroToEdit = astros[astroChoice - 1];
+                            System.out.println("This is the current information for " + astroToEdit.getName());
+                            System.out.println("1. Name: " + astroToEdit.getName() + "\n" +
+                                               "2. Date of Birth: " + astroToEdit.dateOfBirth() + "\n" + 
+                                               "3. Address: " + astroToEdit.address() + "\n" +
+                                               "4. Email: " + astroToEdit.email() + "\n" +
+                                               "5. Phone Number: " + astroToEdit.phoneNumber() + "\n" + 
+                                               "6. Next of Kin: " + astroToEdit.nextOfKin() + "\n" +
+                                               "7. Status: " + astroToEdit.status() + "\n" +
+                                               "8. Pay Rate: " + astroToEdit.payRate() + "\n" +
+                                               "9. Weight: " + astroToEdit.weight());
+                            
                             //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                            System.out.println("Field" +
-                                                "1. Name\n" +
-                                                "2. Date of Birth\n" + 
-                                                "3. Address\n" +
-                                                "4. Email\n" +
-                                                "5. Phone Number\n" + 
-                                                "6. Next of Kin\n" +
-                                                "7. Status\n" +
-                                                "8. Pay Rate\n" +
-                                                "9. Weight\n" +
-                                                "10. Go back");
+                            System.out.println("Field\n" +
+                                               "1. Name\n" +
+                                               "2. Date of Birth\n" + 
+                                               "3. Address\n" +
+                                               "4. Email\n" +
+                                               "5. Phone Number\n" + 
+                                               "6. Next of Kin\n" +
+                                               "7. Status\n" +
+                                               "8. Pay Rate\n" +
+                                               "9. Weight\n" +
+                                               "10. Go back");
 
                             System.out.println("Please select a field");
                             field = kbd.nextInt();
@@ -203,54 +235,69 @@ public static void main(String[] args){
                                     astroName = (kbd.nextLine()).trim();
 
                                     //pull current value if astronaut does not already exist in code
-                                    System.out.println("The astronaut's current name in the database is " + astro.getName() + "\n" +
+                                    
+                                    String correctAstroName = "";
+                                    do {
+                                        System.out.println("The astronaut's current name in the database is " + astroToEdit.getName() + "\n" +
                                                     "You entered: " + astroName + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                                    String correctAstroName = kbd.nextLine();
-                                                    
-                                    if (correctAstroName.equalsIgnoreCase("Correct")) {
+                                        correctAstroName = kbd.nextLine();
+                                        if (correctAstroName.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setName(astroName);
 
-                                        //Replace the astronaut's name with the new value (astroName)
-                                        //change the astro part
-                                        //astro.setName(astroName); //this was commented out but i didnt see why so i uncommented it out lol
+                                            //Change the name inside the database
 
-                                        //Change the name inside the database
-
-                                        //Move on
-                                    } else if (correctAstroName.equalsIgnoreCase("Go back")) {
-                                        break;
-                                    } else {
-                                        while (!(correctAstroName.equalsIgnoreCase("Correct")) && !(correctAstroName.equalsIgnoreCase("()"))) {
-                                            System.out.println("The astronaut's current name in the database is " + astro.getName() + "\n" +
-                                                    "You entered: " + astroName + "\n" +
-                                                    "If this correct, please enter \"Correct\".\n" +
-                                                    "If you wish to go back enter ().");
-                                                    correctAstroName = kbd.nextLine();
+                                            //Move on
+                                        } else if (correctAstroName.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
+                                            System.out.print("Please edit the astronaut's full name (First Last): ");
+                                            astroName = (kbd.nextLine()).trim();
                                         }
-                                    }
-
+                                    } while (!correctAstroName.equalsIgnoreCase("correct"));
                                     break;
                                         
-                                        case 2:
+                                case 2:
+                                    System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
+                                    astroDateOfBirth = (kbd.nextLine()).trim();
+                                    String correct = "";
+                                    do {
+                                        System.out.println("The astronaut's current name in the database is " + astroToEdit.dateOfBirth() + "\n" +
+                                                    "You entered: " + astroDateOfBirth + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                        correct = kbd.nextLine();
+                                        if (correct.equalsIgnoreCase("Correct")) {
+                                            astroToEdit.setdateOfBirth(astroDateOfBirth);
+
+                                            //Change the DOB inside the database
+
+                                            //Move on
+                                        } else if (correct.equalsIgnoreCase("Go back")) {
+                                            break;
+                                        } else {
                                             System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
                                             astroDateOfBirth = (kbd.nextLine()).trim();
-                                            break;
+                                        }
+                                    } while (!correct.equalsIgnoreCase("correct"));
+                                    break;
 
-                                        case 3:
-                                            System.out.print("Please edit the astronaut's address ():");
-                                            astroAddress = (kbd.nextLine()).trim();
-                                            break;
+                                case 3:
+                                    System.out.print("Please edit the astronaut's address:");
+                                    astroAddress = (kbd.nextLine()).trim();
+                                    
+                                    break;
 
-                                        case 4: 
-                                            System.out.print("Please edit the astronaut's email: ");
-                                            astroEmail = (kbd.nextLine()).trim();
-                                            break;
+                                case 4: 
+                                    System.out.print("Please edit the astronaut's email (name@example.com): ");
+                                    astroEmail = (kbd.nextLine()).trim();
+                                    break;
 
-                                        case 5: 
-                                            System.out.print("Please edit the astronaut's phone number: ");
-                                            astroPhone = (kbd.nextLine()).trim();
-                                            break;
+                                case 5: 
+                                    System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                    astroPhone = (kbd.nextLine()).trim();
+                                    break;
 
                                         case 6: 
                                             System.out.print("Please edit the full name of the astronaut's next of kin: ");
@@ -263,12 +310,12 @@ public static void main(String[] args){
                                             break;
 
                                         case 8: 
-                                            System.out.print("Please edit the astronaut's pay rate: ");
+                                            System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
                                             astroPayRate = kbd.nextDouble();
                                             break;
 
                                         case 9: 
-                                            System.out.print("Please edit the astronaut's weight: ");
+                                            System.out.print("Please edit the astronaut's weight in pounds: ");
                                             astroWeight = kbd.nextDouble();
                                             break;
 
@@ -327,23 +374,24 @@ public static void main(String[] args){
 
                         default:
                             System.out.println("Please enter a number from 1-4");
+                            break;
                         }
                     } while (choice2 != 4);
                     break;
 
-                    case 2:
+                case 2:
                 //     * Rocket/Ship menu
                 //     * - Add
                 //     * - Edit info
                 //     * - Delete 
-                        do{
+                    do{
                         //**LINE AFTER THIS NEEDS TO BE EDITED**  
                         System.out.println("Ship Menu\n" +
                                            "1. Add Ship\n" +
                                            "2. Edit Ship\n" +
                                            "3. Delete Ship\n" +
                                            "4. Go Back");
-                        //choice2 = kbd.nextInt(write in choices. 1. title 2. title, 3. title, etc.);
+                        choice2 = kbd.nextInt();
                         int field;
                         switch (choice2) {
                             case 1:
@@ -380,12 +428,12 @@ public static void main(String[] args){
                                             break;
 
                                             case 2:
-                                            System.out.println("Please enter the ship's fuel capacity: ");
+                                            System.out.println("Please enter the ship's fuel capacity in pounds: ");
                                             shipFuelCapacity = kbd.nextDouble();
                                             break;
 
                                             case 3:
-                                            System.out.println("Please enter the ship's current fuel level: ");
+                                            System.out.println("Please enter the ship's current fuel level in pounds: ");
                                             shipCurrentFuel = kbd.nextDouble();
                                             break;
 
@@ -455,12 +503,12 @@ public static void main(String[] args){
                                         break;
 
                                         case 2:
-                                        System.out.println("Please edit the ship's fuel capacity: ");
+                                        System.out.println("Please edit the ship's fuel capacity in pounds: ");
                                         shipFuelCapacity = kbd.nextDouble();
                                         break;
 
                                         case 3:
-                                        System.out.println("Please edit the ship's current fuel level: ");
+                                        System.out.println("Please edit the ship's current fuel level in pounds: ");
                                         shipCurrentFuel = kbd.nextDouble();
                                         break;
 
@@ -524,92 +572,49 @@ public static void main(String[] args){
                     // * - Back
                     do {
                         System.out.println("1. Select a Ship\n" +
-                                        "2. Back to main menu");
+                                           "2. Back to main menu");
                         choice2 = kbd.nextInt();
+                        int shipChoice;
                         switch (choice2) {
                             case 1:
                                 System.out.println("Please select a ship to launch.");
                                 int count = 0;
-                                for (String s : shipNames) {
+                                for (Ship s : ships) {
                                     if (s != null) {
                                         count++;
-                                        System.out.println(count + ". " + s);
+                                        System.out.println(count + ". " + s.getSName());
                                     }
                                 }
                                 System.out.print("Please enter the corresponding number: ");
-                                int shipChoice = kbd.nextInt();
+                                shipChoice = kbd.nextInt();
                                 String verify = "";
                                 do {
-                                    System.out.println("Ship selected: " + shipNames[shipChoice]);
+                                    System.out.println("Ship selected: " + ships[shipChoice].getSName());
                                     System.out.println("Is this the correct ship? (yes/no)");
                                     if (verify.equalsIgnoreCase("no")) {
                                         System.out.println("Please select a ship to launch:");
                                         count = 0;
-                                        for (String s : shipNames) {
+                                        for (Ship s : ships) {
                                             if (s != null) {
                                                 count++;
-                                                System.out.println(count + ". " + s);
+                                                System.out.println(count + ". " + s.getSName());
                                             }
                                         shipChoice = kbd.nextInt();
                                         }
                                     }
                                 } while (!verify.equalsIgnoreCase("yes"));
-                                //retrieve ship
-                                System.out.println("Please select a field.");
-                                System.out.println("1. Name\n" +
-                                                "2. Fuel Capacity\n" +
-                                                "3. Current Fuel\n" +
-                                                "4. Crew Capacity");
-                                System.out.print("Please enter the corresponding number:");
-                                int field = kbd.nextInt();
+                                String launchConfirmation = "";
                                 do {
-                                    System.out.println("Field selected: " + field);
-                                    System.out.println("Is this the correct field? (yes/no)");
-                                    String v = kbd.nextLine();
-                                    verify = v.trim();
-                                    if (verify.equalsIgnoreCase("no")) {
-                                        System.out.println("Please select a field.");
-                                        System.out.println("1. Name\n" +
-                                                        "2. Fuel Capacity\n" +
-                                                        "3. Current Fuel\n" +
-                                                        "4. Crew Capacity");
-                                        field = kbd.nextInt();
+                                    System.out.println("WARNING: Launching is irreversible and can result in death when gone wrong.\n" +
+                                                       "Are you sure you wish to proceed? (Yes/No)");
+                                    kbd.nextLine();
+                                    launchConfirmation = (kbd.nextLine()).trim();
+                                    if (launchConfirmation.equalsIgnoreCase("yes")) {
+                                        ships[shipChoice - 1].launch();  //<-- Temporary value pass?
+                                    } else if (launchConfirmation.equalsIgnoreCase("no")) {
+                                        System.out.println("The ship will not be launched.");
                                     }
-                                } while (!verify.equalsIgnoreCase("yes"));
-                                switch (field) {
-                                    case 1:
-                                        System.out.println("Please enter the ship's name: ");
-                                        String shipName = (kbd.nextLine()).trim();
-                                        temporaryShip.setSName(shipName);
-                                        break;
-
-                                    case 2:
-                                        System.out.println("Please enter the ship's fuel capacity: ");
-                                        double shipFuelCapacity = kbd.nextDouble();
-                                        temporaryShip.setFCap(shipFuelCapacity);
-                                        break;
-
-                                    case 3:
-                                        System.out.println("Please enter the ship's current fuel level: ");
-                                        double shipCurrentFuel = kbd.nextDouble();
-                                        temporaryShip.setFuel(shipCurrentFuel);
-                                        break;
-
-                                    case 4:
-                                        System.out.println("Please enter the ship's crew capacity: ");
-                                        int shipCrewCapacity = kbd.nextInt();
-                                        temporaryShip.setSCap(shipCrewCapacity);
-                                        break;
-
-                                    default:
-                                        System.out.println("Please enter a number 1-4");
-                                        break;
-                                }
-                                
-                                // edit ship info
-                                // notify user
-                                // move ship to external container
-
+                                } while ((launchConfirmation.equalsIgnoreCase("yes")||launchConfirmation.equalsIgnoreCase("no")));
                                 break;
 
                             case 2:
@@ -620,8 +625,9 @@ public static void main(String[] args){
                                 System.out.println("Please enter a number 1-2.");
                                 break;
                         }
-                        break;
                     } while (choice2 != 2);
+                    break;
+                    
 
                 case 4:
                     System.out.println("Closing program now.");
