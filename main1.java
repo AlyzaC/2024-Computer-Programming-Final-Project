@@ -510,7 +510,7 @@ public static void main(String[] args){
                                 for (Astronaut a : astros) {
                                     if (a != null) {
                                         count++;
-                                        System.out.println(count + " " + a.getName() + "\n");
+                                        System.out.println(count + ". " + a.getName() + "\n");
                                     }
                                 }
                                 int astroChoice = kbd.nextInt();
@@ -637,82 +637,172 @@ public static void main(String[] args){
                                         }
                                     }
                                 } while (!change.equalsIgnoreCase("no"));
+                                for (int count = 0; count < ships[].length; count++) {
+                                    if (ships[count] == null) {
+                                        ships[count] = new Ship();
+                                        ships[count].setSName(shipName);
+                                        ships[count].setFCap(shipFuelCapacity);
+                                        ships[count].setFuel(shipCurrentFuel);
+                                        ships[count].setSCap(shipCrewCapacity);
+                                        break;
+                                    }
+                                }
                                 break;
 
                             case 2:
                                 // ask which ship the user wants to edit
                                 System.out.println("What ship would you like to edit?");
-
-                                // retrieve ship from external container
-
-                                // verify that its the correct ship
-
-                                // no: ask for the correct ship, retrieve, verify again
+                                int count = 0;
+                                for (Ship s : ships) {
+                                    if (s != null) {
+                                        count++;
+                                        System.out.println(count + ". " + s.getSName() + "\n");
+                                    }
+                                }
+                                int shipChoice = kbd.nextInt();
+                                String shipConfirmation = "";
+                                do {
+                                    System.out.println("Chosen ship: " + ships[shipChoice - 1].getName());
+                                    System.out.println("Is this the correct ship? (Yes/No)");
+                                    kbd.nextLine();
+                                    shipConfirmation = (kbd.nextLine()).trim();
+                                    if (shipConfirmation.equalsIgnoreCase("no")) {
+                                        count = 0;
+                                        for (Ship s : ships) {
+                                            if (s != null) {
+                                                count++;
+                                                System.out.println(count + ". " + s.getSName() + "\n");
+                                            }
+                                        }
+                                        kbd.nextLine();
+                                        shipChoice = kbd.nextInt();
+                                    }
+                                } while (!shipConfirmation.equalsIgnoreCase("yes"));
+                                Ship shipToEdit = ships[shipChoice - 1];
 
                                 // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                                    System.out.println("Fields\n" +
+                                System.out.println("This is the current information for " + shipToEdit.getSName() + ".\n" +
+                                                   "Ship Name: " + shipToEdit.getSName() + "\n" +
+                                                   "Fuel Capacity: " + shipToEdit.getFCap() + "\n" +
+                                                   "Fuel: " + shipToEdit.getFuel() + "\n" +
+                                                   "Ship Capacity: " + shipToEdit.getSCap());
+                                System.out.println("Fields\n" +
                                                     "1. Ship name\n" +
                                                     "2. Fuel Capacity\n" +
                                                     "3. Fuel\n" +
-                                                    "4. Ship Capacity");
-                                    field = kbd.nextInt();
-                                    switch (field) {
-                                        case 1:
+                                                    "4. Ship Capacity\n" +
+                                                    "5. Go Back");
+                                field = kbd.nextInt();
+                                switch (field) {
+                                    case 1:
                                         String theKey = "";
                                         boolean changeSuccessful = false;
                                         do {
                                             System.out.println("Please edit the ship's name: ");
+                                            kbd.nextLine();
                                             shipName = (kbd.nextLine()).trim();
-                                            String currentShipName = ""; //pull actual value from database
-                                            System.out.println("The ship's current name in the database is \'" + currentShipName + "\'.\n" +
+                                            System.out.println("The ship's current name in the database is \'" + shipToEdit.getSName() + "\'.\n" +
                                                             "You entered the name \'" + shipName + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
+                                            kbd.nextLine();
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                //Replace the ship's name with the new value (shipName)
-                                                //change the ship part
-                                                //ship.setName(shipName); 
+                                                ship.setSName(shipName); 
 
                                                 //Change the name inside the database
 
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
-                                            } else {
-                                                while (!(correct.equalsIgnoreCase("correct")) && !(correct.equalsIgnoreCase("go back"))) {
-                                                    System.out.println("Try Again");
-                                                    System.out.println("Type \"correct\" to edit.\n" +
-                                                                    "Type \"go back\" if you wish to go back");
-                                                    theKey = kbd.nextLine();
-                                                }
                                             }
                                         } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
-                                        
                                         break;
 
-                                        case 2:
-                                        System.out.println("Please edit the ship's fuel capacity in pounds: ");
-                                        shipFuelCapacity = kbd.nextDouble();
+                                    case 2:
+                                        String theKey = "";
+                                        boolean changeSuccessful = false;
+                                        do {
+                                            System.out.println("Please edit the ship's fuel capacity in pounds: ");
+                                            kbd.nextLine();
+                                            shipFuelCapacity = kbd.nextDouble();
+                                            System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFCap() + "\'.\n" +
+                                                            "You entered the name \'" + shipFuelCapacity + "\'.\n" +
+                                                            "If this is correct, enter \"correct\".\n" +
+                                                            "If you wish to go back, enter \"Go back\".");
+                                            kbd.nextLine();
+                                            String correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("correct")) {
+                                                ship.setFCap(shipFuelCapacity); 
+
+                                                //Change the fuel capacity inside the database
+
+                                                changeSuccessful = true;
+                                            } else if (correct.equalsIgnoreCase("go back")) {
+                                                break;
+                                            }
+                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
                                         break;
 
-                                        case 3:
-                                        System.out.println("Please edit the ship's current fuel level in pounds: ");
-                                        shipCurrentFuel = kbd.nextDouble();
+                                    case 3:
+                                        String theKey = "";
+                                        boolean changeSuccessful = false;
+                                        do {
+                                            System.out.println("Please edit the ship's current fuel in pounds: ");
+                                            kbd.nextLine();
+                                            shipCurrentFuel = kbd.nextDouble();
+                                            System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
+                                                            "You entered the name \'" + shipCurrentFuel + "\'.\n" +
+                                                            "If this is correct, enter \"correct\".\n" +
+                                                            "If you wish to go back, enter \"Go back\".");
+                                            kbd.nextLine();
+                                            String correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("correct")) {
+                                                ship.setFuel(shipCurrentFuel); 
+
+                                                //Change the fuel capacity inside the database
+
+                                                changeSuccessful = true;
+                                            } else if (correct.equalsIgnoreCase("go back")) {
+                                                break;
+                                            }
+                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
                                         break;
 
-                                        case 4:
-                                        System.out.println("Please edit the ship's crew capacity: ");
-                                        shipCrewCapacity = kbd.nextInt();
+                                    case 4:
+                                        String theKey = "";
+                                        boolean changeSuccessful = false;
+                                        do {
+                                            System.out.println("Please edit the ship's crew capacity: ");
+                                            kbd.nextLine();
+                                            shipCrewCapacity = kbd.nextInt();
+                                            System.out.println("The ship's current crew capacity in the database is \'" + shipToEdit.getSCap() + "\'.\n" +
+                                                            "You entered the name \'" + shipCrewCapacity + "\'.\n" +
+                                                            "If this is correct, enter \"correct\".\n" +
+                                                            "If you wish to go back, enter \"Go back\".");
+                                            kbd.nextLine();
+                                            String correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("correct")) {
+                                                ship.setSCap(shipCrewCapacity); 
+
+                                                //Change the crew capacity inside the database
+
+                                                changeSuccessful = true;
+                                            } else if (correct.equalsIgnoreCase("go back")) {
+                                                break;
+                                            }
+                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
                                         break;
 
-                                        default:
-                                        System.out.println("Please enter a number 1-4");
+                                    case 5: 
+                                        System.out.println("Going back to the previous menu.");
+                                        break;
+
+                                    default:
+                                        System.out.println("Please enter a number 1-5");
                                         break;
                                     }
-
-                                // send ship back to external container
-
+                                ships[shipChoice - 1] = shipToEdit;
                                 break;
 
                             case 3:
