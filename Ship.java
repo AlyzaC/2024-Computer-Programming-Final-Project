@@ -16,10 +16,12 @@ public class Ship
     double fuelBurnRate; //ship will accelerate 30 per second per pound of fuel burned
     double speed; // goes above 3000 in atmos = death
     double accel; //  burning fuel increases this. (no shit)
+    String YON;
     double deccel = 9.81; //gravity pulls at 9.81 meters a second
     double altitude = 0; //above 70k in space.
+  
 
-    int choice; 
+int choice; 
 
 //setters and getters
 public Astronaut[] getCrew()
@@ -92,17 +94,17 @@ public void ship(int speed,boolean inSpace )
  failure = true;
   }
 
- if (speed > 7 && altitude == 0 && returning == true)
+ if (speed > -7 && altitude == 0 && returning == true)
  {
   System.out.println("You crashed attempting to land");
   failure = true;
  }
- if (speed < 7 && altitude == 0 & returning ==true)
+ if (speed < -7 && altitude == 0 & returning ==true)
  {
   System.out.println ("The ship has landed sucessfully");
   doorIsOpen = true;
   //remove crew from ship and assume fuel is completely empty
-
+  fuel = 0;
  }
 
  
@@ -115,7 +117,7 @@ public void ship(int speed,boolean inSpace )
 
 public void shipMenu ()
 {
- System.out.println("test message");
+ System.out.println("test");
  choice = scanner.nextInt();
 }
 Scanner scanner = new Scanner(System.in);
@@ -131,8 +133,12 @@ Scanner scanner = new Scanner(System.in);
 public void addAstro(int choice)
 {
   
-if (choice == 1 && shipCapacity > crewNum )
+if (choice == 1)
 {
+  if (shipCapacity > crewNum)
+  {
+
+  
   
   //code will check that there is room
   //if not the code will tell the user that this is not possible and will send them back to the menu to make a new choice
@@ -141,20 +147,40 @@ if (choice == 1 && shipCapacity > crewNum )
  //check that astronaut is both real and alive
  //code will add person to crew, telling them this has happend
  System.out.println ("astronaut has been added to ship.");
+  
  if (shipCapacity > crewNum)
  {
-  System.out.println ("Would you like to add another");
+  System.out.println ("Would you like to add another? Y or N.");
+  YON = scanner.nextLine();
+ if (YON = Y)// why tf does it think this is a variable
+{
+choice = 1;
+}
+if (YON = N) //????
+{
+  System.out.println("test message");
+  choice = scanner.nextInt();
+}
+if (YON != Y && YON != N) // w h y
+{
+  System.out.println("hey buddy thats not a Y or N try again");
+ YON = scanner.nextLine();
+}
  }
  else
  {
   System.out.println("The ship is now full");
  }
+} else
+{
+  System.out.println("The ship is full.");
+}
+
  //code will ask if theres another astronaut to add if not full
  //code will bring back up the menu and ask for a new choice
-}
-else
-{
-  System.out.println ("The ship is already full");
+
+
+
 }
 }
 
@@ -162,7 +188,7 @@ else
  * Launches the ship after checking the current number of crew and fuel measure
  * @param choice ??
  */
-public void launch(int choice)
+public void launch()
 {
   
 if (choice == 2)
@@ -171,15 +197,18 @@ if (choice == 2)
  if (numOfCrew <= shipCapacity)
  {
    System.out.println ("There are not enough crew to start the ship.");
+   System.out.println("Would you like to add new astronauts to the ship? Y or N.");
    // code will bring back up menu and ask for a new choice
    
   
  } else if (fuel < fuelCapacity)
  {
 System.out.println("The Ship needs more fuel for a sucessful launch.");
+System.out.println("Would you like to refuel the ship? Y or N.");
+
  }
- //code will check if it has enough fuel
- //if not it will fail
+ 
+ 
  //set boolean
  else {
 
@@ -187,6 +216,16 @@ System.out.println("The Ship needs more fuel for a sucessful launch.");
   //
   
   System.out.println ("launching metal tube into orbit");
+
+/* accel and decell code here.
+altitude = altitude + speed;
+speed = speed + accel - deccel;
+tldr.  +speed is up -speed is down 
+thats why the parachute gives -7 deccel
+
+  
+ */
+
  }
 }
 }
@@ -201,6 +240,7 @@ public void deployParachutes()
   {
     //this will lower speed to no more than 7 meters per second by the time the ship lands
     System.out.println ("Deploying parachutes");
+    deccel = deccel - 7;
   }
 }
 /**
@@ -219,13 +259,13 @@ public void openDoors(int choice)
  * The ship explodes
  * @param choice
  */
-  public void explode(int choice)
+  public void Destruction()
   {
-    if (choice == 800177)
+    if (failure == true)
     {
    // set a boolean to true cus why not
-    System.out.println  ("kaboom?");
-    System.out.println ("Yes " + shipName + ", kaboom.");
+    System.out.println  ("All astronauts did not survive");
+    System.out.println (".");
   }
   }
 }
