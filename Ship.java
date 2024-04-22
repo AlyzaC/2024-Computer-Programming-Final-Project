@@ -8,15 +8,16 @@ public class Ship
     private double fuelCapacity;
     private int crewNum;
     private Astronaut[] crew; //dont forget to get crew names from 
-    boolean inSpace = false;
-    boolean parachutesDeployed = false;
+    boolean inSpace = false; // if true choose an astronaut for a spacewalk
+    boolean parachutesDeployed = false; // will decrease decell
     boolean doorIsOpen = false;
-    boolean failure = false;
-    boolean returning = false;
+    boolean failure = false; // if true all astronauts are removed and (maybe ship)
+    boolean returning = false; // if true ship can land,
     double fuelBurnRate; //ship will accelerate 30 per second per pound of fuel burned
+    boolean spaceWalkComplete = false;
     double speed; // goes above 3000 in atmos = death
     double accel; //  burning fuel increases this. (no shit)
-    String YON;
+    String YON; // yes or no
     double deccel = 9.81; //gravity pulls at 9.81 meters a second
     double altitude = 0; //above 70k in space.
   
@@ -77,11 +78,29 @@ public void Space()
   if (altitude > 70000)
   {
     inSpace = true;
+    //time stuff here
+  if (fuel == 0) 
+ {
+
+ 
+    System.out.println("Please choose an astronaut to go on a spacewalk.");
+    //astronaut stuff here
+    System.out.println("(person stuff here) Has been sent on a spacewalk");
+    //more time stuff here
+    System.out.println("(name stuff here) has returned into the ship in time");
+  spaceWalkComplete = true;
+ }
   }
   if (altitude < 70000 && inSpace == true)
   {
     inSpace = false;
     returning = true;
+  }
+  if (spaceWalkComplete = false && returning == true )
+  {
+   System.out.println ("The Spacewalking astronaut failed to get in the ship before reentry started.");
+   System.out.println("We can only hope his death was quick and painless");
+   //code here saying the astronaut died so that astro removal can take care of it
   }
 }
 
@@ -118,6 +137,14 @@ public void ship(int speed,boolean inSpace )
 public void shipMenu ()
 {
  System.out.println("test");
+ /*
+  1 is adding astronauts
+  2 is fueling
+  3 is launch
+  4 is doors(?)
+
+
+  */
  choice = scanner.nextInt();
 }
 Scanner scanner = new Scanner(System.in);
@@ -156,6 +183,7 @@ if (choice == 1)
 {
 choice = 1;
 }
+
 if (YON = N) //????
 {
   System.out.println("test message");
@@ -191,7 +219,7 @@ if (YON != Y && YON != N) // w h y
 public void launch()
 {
   
-if (choice == 2)
+if (choice == 3)
 {
   
  if (numOfCrew <= shipCapacity)
@@ -253,6 +281,7 @@ public void openDoors(int choice)
   {
     //code will set boolean to true
     System.out.println ("teaching astronauts how doorknobs work...");
+
   }
 }
 /**
@@ -265,7 +294,11 @@ public void openDoors(int choice)
     {
    // set a boolean to true cus why not
     System.out.println  ("All astronauts did not survive");
-    System.out.println (".");
+    System.out.println ("womp womp");
+    //code here saying all astros died to astroremoval can take care of it
+    //(maybe) code saying the ship has been destroyed so it can (maybe) get removed
+    //(maybe) make code bring back up main menu for sake of getting new ship 
+    // if not this than idk?
   }
   }
 }
