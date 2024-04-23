@@ -14,13 +14,18 @@ public static void main(String[] args){
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
-     
-
-    //Code for getting astros and ships from database
-    /*Getting the driver
-    Connection connect = DriverManager.getConnect(url, username, pass);
-    Statement statement = connect.createStatement();
-    ResultSet results;*/
+    
+    Connection connect = null; //Will be fixed later
+    try {
+        //Code for getting astros and ships from database
+        //Getting the driver
+        connect = DriverManager.getConnection(null, null, null);
+        /*Statement statement = connect.createStatement();
+        ResultSet results;*/
+    } catch (SQLException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
+    
 
     // Main menu
     // - Astronauts
@@ -524,7 +529,7 @@ public static void main(String[] args){
                                     //correct key: delete astronaut, notify user
                                     AstroRemoval removeAstro = new AstroRemoval(1);
                                     removeAstro.addAstro(astros[astroChoice - 1]);
-                                    //removeAstro.removeAstronauts(connect);
+                                    removeAstro.removeAstronauts(connect);
                                     break;
                                 } else if (theKey.equalsIgnoreCase("Go back")) {
                                     break;
@@ -814,8 +819,8 @@ public static void main(String[] args){
                                 do {
                                     if (theKey.equalsIgnoreCase("yes")) {
                                         // correct key: delete ship, notify user
-                                        //ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                        //removeShip.removeShip(connect);
+                                        ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
+                                        removeShip.removeShip(connect);
                                     } else if (theKey.equalsIgnoreCase("go back")) {
                                         break;
                                     }
