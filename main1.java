@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
+import java.net.URL;
 import java.sql.*;
 
 public class main1 {
@@ -891,7 +892,7 @@ public static void main(String[] args){
                                         astroChoice = kbd.nextInt();
                                     }
                                 } while (!astroConfirmation.equalsIgnoreCase("yes"));
-                                ships[shipChoice -1].addAstro((astroChoice - 1));
+                                //ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
                                 break;
 
                             case 5:
@@ -987,51 +988,26 @@ public static void main(String[] args){
 }
 
     public static boolean LoggingInPassword(Scanner scan) {
-
         boolean createPassword = true;
         boolean allowedEntry = false;
-
         File file = new File("ApplicationPassword.dat");
         int applicationPassword = -800;
         if (file.exists()) {
             try {
-                FileInputStream passFile = new FileInputStream(file);
-                applicationPassword = (int) passFile.read();
-                passFile.close();
+                FileInputStream passInput = new FileInputStream(file);
+                applicationPassword = (int) passInput.read();
+                passInput.close();
                 createPassword = false;
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred: " + e.getMessage());
             } catch (IOException e) {
                 System.out.println("An error occured: " + e.getMessage());
             }
-            
         }
 
-         createPassword = true;
         if (createPassword) {
 
             int passNum = -496108;
-
-            createPassword = false;
-            try {
-                //file.createNewFile();
-
-                FileOutputStream passFile = new FileOutputStream(file);
-                PrintWriter pw = new PrintWriter(passFile);
-                pw.write(passNum);
-                pw.close();
-                passFile.close();
-                createPassword = false;
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred: " + e.getMessage());
-            } catch (IOException e) {
-                System.out.println("An error occured: " + e.getMessage());
-            }
-            
-    
-            // Login
-            // * First time application is run
-
             // * - Create password and display for user to write down
             System.out.println("Creating Password...");
 
@@ -1041,6 +1017,23 @@ public static void main(String[] args){
                 passNum = r.nextInt(20000);
                 System.out.println("Please write down the following password: " + passNum);
             }
+
+            createPassword = false;
+            try {
+                //file.createNewFile();
+
+                FileOutputStream passOutput = new FileOutputStream(file);
+                PrintWriter pw = new PrintWriter(passOutput);
+                pw.write(passNum);
+                pw.close();
+                passOutput.close();
+                createPassword = false;
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("An error occured: " + e.getMessage());
+            }
+            
             // * - Notify user of account creation and move on
             System.out.println("*Account Created*");
 
