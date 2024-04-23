@@ -175,6 +175,7 @@ public static void main(String[] args){
                             for (int count = 0; count < astros.length; count++) {
                                 if (astros[count] == null) {
                                     astros[count] = new Astronaut(astroName, astroDateOfBirth, astroAddress, astroEmail, astroPhone, astroNextOfKin, astroStatus, astroPayRate, astroWeight);
+                                    break;
                                 }
                             }
                             //results = statement.executeQuery(add name);

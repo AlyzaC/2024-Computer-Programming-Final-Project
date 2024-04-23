@@ -21,8 +21,9 @@ public class AstroRemoval {
      */
         public void addAstro(Astronaut a) {
             for (Astronaut astro : astrosToBeRemoved) {
-                if (astro != null) {
+                if (astro == null) {
                     astro = a;
+                    break;
                 }
             }
         }
@@ -36,7 +37,9 @@ public class AstroRemoval {
             String astronautList = "";
             boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
-                astronautList += "- " + astro.getName() + "\n";
+                if (astro != null) {
+                    astronautList += "- " + astro.getName() + "\n";
+                }
             }
             System.out.println("The following astronauts have been chosen for removal:" +
                                astronautList +
