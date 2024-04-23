@@ -934,14 +934,10 @@ public static void main(String[] args){
         if (file.exists()) {
             try {
                 FileInputStream passFile = new FileInputStream(file);
-                PrintWriter pw = new ObjectInputStream(passFile);
-                applicationPassword = (int) pw.read();
-                pw.close();
+                applicationPassword = (int) passFile.read();
                 passFile.close();
                 createPassword = false;
             } catch (FileNotFoundException e) {
-                System.out.println("An error occurred: " + e.getMessage());
-            } catch (ClassNotFoundException e) {
                 System.out.println("An error occurred: " + e.getMessage());
             } catch (IOException e) {
                 System.out.println("An error occured: " + e.getMessage());
@@ -959,9 +955,9 @@ public static void main(String[] args){
                 //file.createNewFile();
 
                 FileOutputStream passFile = new FileOutputStream(file);
-                ObjectOutputStream oos = new ObjectOutputStream(passFile);
-                oos.writeObject(passNum);
-                oos.close();
+                PrintWriter pw = new PrintWriter(passFile);
+                pw.write(passNum);
+                pw.close();
                 passFile.close();
                 createPassword = false;
             } catch (FileNotFoundException e) {
