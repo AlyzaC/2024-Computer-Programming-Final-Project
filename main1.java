@@ -1043,87 +1043,101 @@ public static void main(String[] args){
         } else {
             // ask for password or to reset password with the administrator password
             System.out.println("1. Enter Password to Application\n" +
-                               "2. Enter Admin Password to Reset Application Password");
+                               "2. Enter Admin Password to Reset Application Password\n" +
+                               "3. Quit");
             int loginChoice = scan.nextInt();
-            switch (loginChoice) {
-                case 1:
-                    System.out.println("Please enter the password for the application: ");
-                    int enteredPassword = scan.nextInt();
-                    if (enteredPassword == applicationPassword) {
-                        allowedEntry = true;
-                    } else {
-                        String choice3;
-                        while (!(enteredPassword == applicationPassword)) {
-
-                            //* notify that the incorrect password has been entered
-                            // ask for password again and give option to go back
-                            System.out.println("You input the wrong password.");
-                            System.out.println("Reenter the password or type \"Go back\"");
-                            //use a scanner to edit
-                            choice3 = scan.nextLine();
-                            if (choice3.equalsIgnoreCase("Go back")) {
-                                break;
-                            } else {
-                                enteredPassword = Integer.parseInt(choice3);
+            do {
+                switch (loginChoice) {
+                    case 1:
+                        System.out.println("Please enter the password for the application: ");
+                        int enteredPassword = scan.nextInt();
+                        if (enteredPassword == applicationPassword) {
+                            allowedEntry = true;
+                        } else {
+                            String choice3;
+                            while (!(enteredPassword == applicationPassword)) {
+                                //* notify that the incorrect password has been entered
+                                // ask for password again and give option to go back
+                                System.out.println("You input the wrong password.");
+                                System.out.println("Reenter the password or type \"Go back\"");
+                                //use a scanner to edit
+                                scan.nextLine();
+                                choice3 = scan.nextLine();
+                                if (choice3.equalsIgnoreCase("Go back")) {
+                                    break;
+                                } else {
+                                    try {
+                                        enteredPassword = Integer.parseInt(choice3);
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    }
+                                    
+                                }
                             }
                         }
-                    }
-                    break;
-    
-                case 2:
-                    // ask for adminPass
-                    int trueAdminPass = -298756;
-                    int adminPass = scan.nextInt();
-                    File adminFile = new File("adminPassword.dat");
-                    try {
-                        FileInputStream adminPassFile = new FileInputStream(adminFile);
-                        trueAdminPass = adminPassFile.read();
-                        adminPassFile.close();
-                    } catch (FileNotFoundException e) {
-                        System.out.println("An error occurred: " + e.getMessage());
-                    } catch (IOException e) {
-                        System.out.println("An error occurred: " + e.getMessage());
-                    }
-                    
-                    if (adminPass == trueAdminPass) {
-                        // create a new password for application and show it to user to write down
-                        System.out.println("Creating Password...");
-
-                        Random r = new Random();
-                         int passNum = 0;
-                        for (int i = 0; i < 1; i++) {
-                            passNum = r.nextInt(20000);
-                            System.out.println("Please write down the following password: " + passNum);
+                        break;
+        
+                    case 2:
+                        // ask for adminPass
+                        int trueAdminPass = -298756;
+                        File adminFile = new File("adminPassword.dat");
+                        try {
+                            FileInputStream adminPassFile = new FileInputStream(adminFile);
+                            trueAdminPass = adminPassFile.read();
+                            adminPassFile.close();
+                        } catch (FileNotFoundException e) {
+                            System.out.println("An error occurred: " + e.getMessage());
+                        } catch (IOException e) {
+                            System.out.println("An error occurred: " + e.getMessage());
                         }
+                        
+                        System.out.println("Please enter the admin password: ");
+                        int adminPass = scan.nextInt();
+                        if (adminPass == trueAdminPass) {
+                            // create a new password for application and show it to user to write down
+                            System.out.println("Creating Password...");
 
-                        allowedEntry = true;
-                    } else {
-                        while (!(adminPass == trueAdminPass)) {
+                            Random r = new Random();
+                            int passNum = 0;
+                            for (int i = 0; i < 1; i++) {
+                                passNum = r.nextInt(20000);
+                                System.out.println("Please write down the following password: " + passNum);
+                            }
 
-                            // notify that incorrect pass has been entered
-                            // ask for pass again and give option to go back
-                            System.out.println("You input the wrong password.");
-                            System.out.println("Reenter the password or type \"Go back\"");
-                            //use the scanner to get input -- 
-                            String inputA = scan.nextLine();
+                            allowedEntry = true;
+                        } else {
+                            while (!(adminPass == trueAdminPass)) {
 
-                           if (inputA.equalsIgnoreCase("Go back")) {
-                                break;
-                            } else {
-                                adminPass = Integer.parseInt(inputA);
+                                // notify that incorrect pass has been entered
+                                // ask for pass again and give option to go back
+                                System.out.println("You input the wrong password.");
+                                System.out.println("Reenter the password or type \"Go back\"");
+                                //use the scanner to get input -- 
+                                String inputA = scan.nextLine();
+
+                            if (inputA.equalsIgnoreCase("Go back")) {
+                                    break;
+                                } else {
+                                    adminPass = Integer.parseInt(inputA);
+                                }
                             }
                         }
-                    }
-                    break;
-    
-                default:
-                    while ((loginChoice != 1) && (loginChoice != 2)) {
-                        System.out.println("Please enter the number 1 or 2.");
-                       // ask for password or to reset password with the administrator password
-                        loginChoice = scan.nextInt();
-                    }
-                    break;
-            }
+                        break;
+        
+                    case 3:
+                        System.out.println("Quitting the application");
+                        break;
+
+                    default:
+                        while ((loginChoice != 1) && (loginChoice != 2)) {
+                            System.out.println("Please enter the number 1 or 2.");
+                        // ask for password or to reset password with the administrator password
+                            loginChoice = scan.nextInt();
+                        }
+                        break;
+                }
+            } while (loginChoice != 3);
+            
         }
 
             // ***NEED TO FINISH THIS PART***
