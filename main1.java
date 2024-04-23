@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
+import java.sql.*;
 
 public class main1 {
 
@@ -301,7 +302,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the astronaut's address:");
                                     kbd.nextLine();
                                     astroAddress = (kbd.nextLine()).trim();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current address in the database is " + astroToEdit.address() + "\n" +
                                                     "You entered: " + astroAddress + "\n" +
@@ -326,7 +327,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the astronaut's email (name@example.com): ");
                                     kbd.nextLine();
                                     astroEmail = (kbd.nextLine()).trim();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current email in the database is " + astroToEdit.email() + "\n" +
                                                     "You entered: " + astroEmail + "\n" +
@@ -351,7 +352,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                     kbd.nextLine();
                                     astroPhone = (kbd.nextLine()).trim();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current phone number in the database is " + astroToEdit.phoneNumber() + "\n" +
                                                     "You entered: " + astroPhone + "\n" +
@@ -376,7 +377,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the full name of the astronaut's next of kin: ");
                                     kbd.nextLine();
                                     astroNextOfKin = (kbd.nextLine()).trim();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current next of kin in the database is " + astroToEdit.nextOfKin() + "\n" +
                                                         "You entered: " + astroNextOfKin + "\n" +
@@ -385,7 +386,7 @@ public static void main(String[] args){
                                         kbd.nextLine();
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.nextOfKin(astroNextOfKin);
+                                            astroToEdit.setNextOfKin(astroNextOfKin);
                                             //results = statement.executeQuery(add next of kin);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
@@ -401,7 +402,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
                                     kbd.nextLine();
                                     astroStatus = (kbd.nextLine()).trim();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current planetary status in the database is " + astroToEdit.status() + "\n" +
                                                         "You entered: " + astroStatus + "\n" +
@@ -426,7 +427,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
                                     kbd.nextLine();
                                     astroPayRate = kbd.nextDouble();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current pay rate in the database is " + astroToEdit.payRate() + "\n" +
                                                         "You entered: " + astroPayRate + "\n" +
@@ -442,7 +443,7 @@ public static void main(String[] args){
                                         } else {
                                             System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
                                             kbd.nextLine();
-                                            astroPayRate = (kbd.nextLine()).trim();
+                                            astroPayRate = kbd.nextDouble();
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
                                     break;
@@ -451,7 +452,7 @@ public static void main(String[] args){
                                     System.out.print("Please edit the astronaut's weight in pounds: ");
                                     kbd.nextLine();
                                     astroWeight = kbd.nextDouble();
-                                    String correct = "";
+                                    correct = "";
                                     do {
                                         System.out.println("The astronaut's current weight in the database is " + astroToEdit.weight() + "\n" +
                                                     "You entered: " + astroWeight + "\n" +
@@ -467,7 +468,7 @@ public static void main(String[] args){
                                         } else {
                                             System.out.print("Please edit the weight in pounds: ");
                                             kbd.nextLine();
-                                            astroWeight = (kbd.nextLine()).trim();
+                                            astroWeight = kbd.nextDouble();
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
                                     break;
@@ -487,7 +488,7 @@ public static void main(String[] args){
                         case 3:
                             String theKey;
                             do{
-                                ask for astronaut to delete
+                                //ask for astronaut to delete
                                 System.out.println("Which astronaut would you like to delete?");
                                 int count = 0;
                                 for (Astronaut a : astros) {
@@ -528,7 +529,7 @@ public static void main(String[] args){
                                 } else if (theKey.equalsIgnoreCase("Go back")) {
                                     break;
                                 }
-                            } while (!theKey.equalsIgnoreCase("Go back")||!theKey.equalsIgnoreCase("yes");
+                            } while (!theKey.equalsIgnoreCase("Go back")||!theKey.equalsIgnoreCase("yes"));
                             break;
 
                         case 4:
@@ -611,7 +612,7 @@ public static void main(String[] args){
                                         }
                                     }
                                 } while (!change.equalsIgnoreCase("no"));
-                                for (int count = 0; count < ships[].length; count++) {
+                                for (int count = 0; count < ships.length; count++) {
                                     if (ships[count] == null) {
                                         ships[count] = new Ship();
                                         ships[count].setSName(shipName);
@@ -686,7 +687,7 @@ public static void main(String[] args){
                                             kbd.nextLine();
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                ship.setSName(shipName); 
+                                                shipToEdit.setSName(shipName); 
                                                 //results = statement.executeQuery(add name);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
@@ -696,8 +697,8 @@ public static void main(String[] args){
                                         break;
 
                                     case 2:
-                                        String theKey = "";
-                                        boolean changeSuccessful = false;
+                                        theKey = "";
+                                        changeSuccessful = false;
                                         do {
                                             System.out.println("Please edit the ship's fuel capacity in pounds: ");
                                             kbd.nextLine();
@@ -709,7 +710,7 @@ public static void main(String[] args){
                                             kbd.nextLine();
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                ship.setFCap(shipFuelCapacity); 
+                                                shipToEdit.setFCap(shipFuelCapacity); 
                                                 //results = statement.executeQuery(add fCap);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
@@ -719,8 +720,8 @@ public static void main(String[] args){
                                         break;
 
                                     case 3:
-                                        String theKey = "";
-                                        boolean changeSuccessful = false;
+                                        theKey = "";
+                                        changeSuccessful = false;
                                         do {
                                             System.out.println("Please edit the ship's current fuel in pounds: ");
                                             kbd.nextLine();
@@ -732,7 +733,7 @@ public static void main(String[] args){
                                             kbd.nextLine();
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                ship.setFuel(shipCurrentFuel); 
+                                                shipToEdit.setFuel(shipCurrentFuel); 
                                                 //results = statement.executeQuery(add fuel);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
@@ -742,8 +743,8 @@ public static void main(String[] args){
                                         break;
 
                                     case 4:
-                                        String theKey = "";
-                                        boolean changeSuccessful = false;
+                                        theKey = "";
+                                        changeSuccessful = false;
                                         do {
                                             System.out.println("Please edit the ship's crew capacity: ");
                                             kbd.nextLine();
@@ -755,7 +756,7 @@ public static void main(String[] args){
                                             kbd.nextLine();
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                ship.setSCap(shipCrewCapacity); 
+                                                shipToEdit.setSCap(shipCrewCapacity); 
                                                 //results = statement.executeQuery(add sCap);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
@@ -778,15 +779,15 @@ public static void main(String[] args){
                             case 3:
                                 // ask for ship to delete
                                 System.out.println("What ship would you like to delete?");
-                                int count = 0;
+                                count = 0;
                                 for (Ship s : ships) {
                                     if (s != null) {
                                         count++;
                                         System.out.println(count + ". " + s.getSName() + "\n");
                                     }
                                 }
-                                int shipChoice = kbd.nextInt();
-                                String shipConfirmation = "";
+                                shipChoice = kbd.nextInt();
+                                shipConfirmation = "";
                                 do {
                                     System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
                                     System.out.println("Is this the correct ship? (Yes/No)");
@@ -813,9 +814,9 @@ public static void main(String[] args){
                                 do {
                                     if (theKey.equalsIgnoreCase("yes")) {
                                         // correct key: delete ship, notify user
-                                        ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
+                                        //ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
                                         //removeShip.removeShip(connect);
-                                    } else if (theKey.equalsIgnoreCase("go back") {
+                                    } else if (theKey.equalsIgnoreCase("go back")) {
                                         break;
                                     }
                                 } while (!theKey.equalsIgnoreCase("yes")||!theKey.equalsIgnoreCase("go back"));
@@ -1072,8 +1073,8 @@ public static void main(String[] args){
         }
 
         public static void databaseArrayRetrieval(Statement s, ResultSet r) {
-            try {
-                /*Check if the file/database exits
+            /*try {
+                Check if the file/database exits
                 Yes:
                     int count = 0;
                     r = s.executeQuery(getting names);
@@ -1177,9 +1178,9 @@ public static void main(String[] args){
                     create file
                     create table for astronauts with columns
                     create table for ships with columns
-            */
+            
             } catch (SQLException e) {
                 System.out.println("An error has occurred: " + e.getMessage());
-            }
+            }*/
         }
     }
