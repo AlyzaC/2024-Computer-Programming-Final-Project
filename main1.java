@@ -553,13 +553,15 @@ public static void main(String[] args){
                 //     * - Add
                 //     * - Edit info
                 //     * - Delete 
+                //     * - Add astro
                     do{
                         //**LINE AFTER THIS NEEDS TO BE EDITED**  
                         System.out.println("Ship Menu\n" +
                                            "1. Add Ship\n" +
                                            "2. Edit Ship\n" +
                                            "3. Delete Ship\n" +
-                                           "4. Go Back");
+                                           "4. Add Astronaut To Ship" +
+                                           "5. Go Back");
                         choice2 = kbd.nextInt();
                         int field;
                         switch (choice2) {
@@ -833,11 +835,71 @@ public static void main(String[] args){
                                 break;
 
                             case 4:
+                                // ask which ship the user wants to add an astro to
+                                System.out.println("What ship would you like to add an astronaut to?");
+                                count = 0;
+                                for (Ship s : ships) {
+                                    if (s != null) {
+                                        count++;
+                                        System.out.println(count + ". " + s.getSName() + "\n");
+                                    }
+                                }
+                                shipChoice = kbd.nextInt();
+                                shipConfirmation = "";
+                                do {
+                                    System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
+                                    System.out.println("Is this the correct ship? (Yes/No)");
+                                    kbd.nextLine();
+                                    shipConfirmation = (kbd.nextLine()).trim();
+                                    if (shipConfirmation.equalsIgnoreCase("no")) {
+                                        count = 0;
+                                        for (Ship s : ships) {
+                                            if (s != null) {
+                                                count++;
+                                                System.out.println(count + ". " + s.getSName() + "\n");
+                                            }
+                                        }
+                                        kbd.nextLine();
+                                        shipChoice = kbd.nextInt();
+                                    }
+                                } while (!shipConfirmation.equalsIgnoreCase("yes"));
+                                //Ask which astro the user wants to add
+                                System.out.println("Which astronaut would you like to add?");
+                                count = 0;
+                                for (Astronaut a : astros) {
+                                    if (a != null) {
+                                        count++;
+                                        System.out.println(count + ". " + a.getName() + "\n");
+                                    }
+                                }
+                                int astroChoice = kbd.nextInt();
+                                String astroConfirmation = "";
+                                do {
+                                    System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
+                                    System.out.println("Is this the correct astronaut? (Yes/No)");
+                                    kbd.nextLine();
+                                    astroConfirmation = (kbd.nextLine()).trim();
+                                    if (astroConfirmation.equalsIgnoreCase("no")) {
+                                        count = 0;
+                                        for (Astronaut a : astros) {
+                                            if (a != null) {
+                                                count++;
+                                                System.out.println(count + " " + a.getName() + "\n");
+                                            }
+                                        }
+                                        kbd.nextLine();
+                                        astroChoice = kbd.nextInt();
+                                    }
+                                } while (!astroConfirmation.equalsIgnoreCase("yes"));
+                                ships[shipChoice -1].addAstro((astroChoice - 1));
+                                break;
+
+                            case 5:
                                 System.out.println("Going back to main menu.");
                                 break;
 
                             default:
-                                System.out.println("Please enter a number 1-4.");
+                                System.out.println("Please enter a number 1-5.");
                                 break;
                         }
                     } while (choice != 4);
@@ -929,7 +991,7 @@ public static void main(String[] args){
         boolean createPassword = true;
         boolean allowedEntry = false;
 
-        File file = new File("ApplicationPassword.csv");
+        File file = new File("ApplicationPassword.dat");
         int applicationPassword = -800;
         if (file.exists()) {
             try {
