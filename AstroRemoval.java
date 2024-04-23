@@ -68,11 +68,12 @@ public class AstroRemoval {
             if (verifyRemoval()) {
                 for (Astronaut astro : astrosToBeRemoved) {
                     /*try {
-                        open sql connection?
-                        open database?
+                        Statement stmnt = c.getStatement();
+                        ResultSet rsltst = stmnt.executeQuery(); //Or do we use something else?
                         find astronaut in database
                         delete all info
-                        close connection?
+                        rsltst.close();
+                        stmnt.close();
                     } catch (SQLException e) {
                         System.out.println("Error occured: " + e.getMessage());
                     }
@@ -89,10 +90,10 @@ public class AstroRemoval {
                     astro.setStatus(emptyString);
                     astro.setPayRate(0);
                     astro.setWeight(0);
-                    //yield the null to code to ensure deleted astronauts are not able to be referenced??
                     astro = null;
+                    //yield astro; ??
                 }
-                System.out.println("Astronauts have been successfully removed.");
+                System.out.println("Astronaut(s) have been successfully removed.");
             }
         }
 }
