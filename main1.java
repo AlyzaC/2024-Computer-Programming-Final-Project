@@ -1,7 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
-import java.net.URL;
 import java.sql.*;
 
 public class main1 {
