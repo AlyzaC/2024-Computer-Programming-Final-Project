@@ -565,13 +565,18 @@ public static void main(String[] args){
                         switch (choice2) {
                             case 1:
                                 System.out.println("Please enter the ship's name: ");
+                                kbd.nextLine();
                                 String shipName = (kbd.nextLine()).trim();
                                 System.out.println("Please enter the ship's fuel capacity: ");
+                                kbd.nextLine();
                                 double shipFuelCapacity = kbd.nextDouble();
                                 System.out.println("Please enter the ship's current fuel level: ");
+                                kbd.nextLine();
                                 double shipCurrentFuel = kbd.nextDouble();
                                 System.out.println("Please enter the ship's crew capacity: ");
+                                kbd.nextLine();
                                 int shipCrewCapacity = kbd.nextInt();
+                                kbd.nextLine();
                                 String change = "";
                                 do {
                                     System.out.println("Please verify information before saving.\n" +
@@ -929,9 +934,9 @@ public static void main(String[] args){
         if (file.exists()) {
             try {
                 FileInputStream passFile = new FileInputStream(file);
-                ObjectInputStream ois = new ObjectInputStream(passFile);
-                applicationPassword = (int) ois.readObject();
-                ois.close();
+                PrintWriter pw = new ObjectInputStream(passFile);
+                applicationPassword = (int) pw.read();
+                pw.close();
                 passFile.close();
                 createPassword = false;
             } catch (FileNotFoundException e) {
@@ -951,7 +956,8 @@ public static void main(String[] args){
 
             createPassword = false;
             try {
-                file.createNewFile();
+                //file.createNewFile();
+
                 FileOutputStream passFile = new FileOutputStream(file);
                 ObjectOutputStream oos = new ObjectOutputStream(passFile);
                 oos.writeObject(passNum);
@@ -985,6 +991,8 @@ public static void main(String[] args){
             allowedEntry = true;
         } else {
             // ask for password or to reset password with the administrator password
+            System.out.println("1. Enter Password to Application\n" +
+                               "2. Enter Admin Password to Reset Application Password");
             int loginChoice = scan.nextInt();
             switch (loginChoice) {
                 case 1:
