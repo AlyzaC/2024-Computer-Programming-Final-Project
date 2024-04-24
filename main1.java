@@ -559,7 +559,7 @@ public static void main(String[] args){
                                            "1. Add Ship\n" +
                                            "2. Edit Ship\n" +
                                            "3. Delete Ship\n" +
-                                           "4. Add Astronaut To Ship" +
+                                           "4. Add Astronaut To Ship\n" +
                                            "5. Go Back");
                         choice2 = 0;
                         try {
@@ -575,7 +575,7 @@ public static void main(String[] args){
                                 String shipName = (kbd.nextLine()).trim();
                                 System.out.print("Please enter the ship's fuel capacity: ");
                                 kbd.nextLine();
-                                double shipFuelCapacity = kbd.nextDouble();
+                                double shipFuelCapacity = 0;
                                 try {
                                     shipFuelCapacity = kbd.nextDouble();
                                 } catch (NumberFormatException e) {
