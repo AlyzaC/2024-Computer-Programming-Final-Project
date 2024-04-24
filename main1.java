@@ -1244,7 +1244,7 @@ public static void main(String[] args){
                     try {
                         astroChoice = kbd.nextInt();
                     } catch (NumberFormatException e) {
-                        ystem.out.println("An error has occurred: " + e.getMessage());
+                        System.out.println("An error has occurred: " + e.getMessage());
                     }
                 } while (!(astroChoice >= 1 && astroChoice <= count));
             }
