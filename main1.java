@@ -1247,7 +1247,7 @@ public static void main(String[] args){
                 } while (!(astroChoice >= 1 && astroChoice <= count));
             }
         } while (!astroConfirmation.equalsIgnoreCase("yes"));
-        return astrochoice;
+        return astroChoice;
     }
 
     public int shipSelection(Scanner kbd, Ship[] ships) {
