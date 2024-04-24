@@ -258,7 +258,7 @@ public static void main(String[] args){
                                 try {
                                     field = kbd.nextInt();
                                 } catch (NumberFormatException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage();
+                                    System.out.println("An error has occurred: " + e.getMessage());
                                 }
                                 switch (field) {
                                     case 1:
@@ -443,7 +443,7 @@ public static void main(String[] args){
                                     try {
                                         astroPayRate = kbd.nextDouble();
                                     } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage();
+                                        System.out.println("An error has occurred: " + e.getMessage());
                                     }
                                     correct = "";
                                     do {
@@ -464,7 +464,7 @@ public static void main(String[] args){
                                             try {
                                                 astroPayRate = kbd.nextDouble();
                                             } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage();
+                                                System.out.println("An error has occurred: " + e.getMessage());
                                             }
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
@@ -477,7 +477,7 @@ public static void main(String[] args){
                                     try {
                                         astroWeight = kbd.nextDouble();
                                     } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage();
+                                        System.out.println("An error has occurred: " + e.getMessage());
                                     }
                                     correct = "";
                                     do {
@@ -498,7 +498,7 @@ public static void main(String[] args){
                                             try {
                                                 astroWeight = kbd.nextDouble();
                                             } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage();
+                                                System.out.println("An error has occurred: " + e.getMessage());
                                             }
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
