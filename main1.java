@@ -77,7 +77,17 @@ public static void main(String[] args){
                             System.out.print("Please enter the full name of the astronaut's next of kin: ");
                             String astroNextOfKin = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
-                            String astroStatus = (kbd.nextLine()).trim();
+                            String astroStatus;
+                            do {
+                                astroStatus = (kbd.nextLine()).trim();
+                                if (astroStatus.equalsIgnoreCase("on earth")) {
+                                    astroStatus = "On Earth";
+                                } else if (astroStatus.equalsIgnoreCase("in space")) {
+                                    astroStatus = "In Space";
+                                } else {
+                                    System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                }
+                            } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                             System.out.print("Please enter the astronaut's pay rate per hour (X,XXX.XX): ");
                             double astroPayRate = 0;
                             do {
@@ -185,7 +195,16 @@ public static void main(String[] args){
                                         case 7: 
                                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
                                             kbd.nextLine();
-                                            astroStatus = (kbd.nextLine()).trim();
+                                            do {
+                                                astroStatus = (kbd.nextLine()).trim();
+                                                if (astroStatus.equalsIgnoreCase("on earth")) {
+                                                    astroStatus = "On Earth";
+                                                } else if (astroStatus.equalsIgnoreCase("in space")) {
+                                                    astroStatus = "In Space";
+                                                } else {
+                                                    System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                                }
+                                            } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                                             break;
 
                                         case 8: 
@@ -454,7 +473,16 @@ public static void main(String[] args){
                                 case 7: 
                                     System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
                                     kbd.nextLine();
-                                    astroStatus = (kbd.nextLine()).trim();
+                                    do {
+                                        astroStatus = (kbd.nextLine()).trim();
+                                        if (astroStatus.equalsIgnoreCase("on earth")) {
+                                            astroStatus = "On Earth";
+                                        } else if (astroStatus.equalsIgnoreCase("in space")) {
+                                            astroStatus = "In Space";
+                                        } else {
+                                            System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                        }
+                                    } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                                     correct = "";
                                     do {
                                         System.out.println("The astronaut's current planetary status in the database is " + astroToEdit.status() + "\n" +
@@ -471,7 +499,16 @@ public static void main(String[] args){
                                         } else {
                                             System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
                                             kbd.nextLine();
-                                            astroStatus = (kbd.nextLine()).trim();
+                                            do {
+                                                astroStatus = (kbd.nextLine()).trim();
+                                                if (astroStatus.equalsIgnoreCase("on earth")) {
+                                                    astroStatus = "On Earth";
+                                                } else if (astroStatus.equalsIgnoreCase("in space")) {
+                                                    astroStatus = "In Space";
+                                                } else {
+                                                    System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                                }
+                                            } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
                                     break;
@@ -687,10 +724,10 @@ public static void main(String[] args){
                                     System.out.println("Is there anything you wish to change? (yes/no)");
                                     change = (kbd.nextLine()).trim();
                                     if (change.equalsIgnoreCase("yes")) {
-                                        System.out.println("Which field do you wish to change?");
-                                        System.out.println("1. Ship Name" +
-                                                           "2. Fuel Capacity" +
-                                                           "3. Current Fuel" +
+                                        System.out.println("Which field do you wish to change?\n");
+                                        System.out.println("1. Ship Name\n" +
+                                                           "2. Fuel Capacity\n" +
+                                                           "3. Current Fuel\n" +
                                                            "4. Crew Capacity");
                                         System.out.print("Please enter the corresponding number: ");
                                         try {
@@ -1339,7 +1376,7 @@ public static void main(String[] args){
 
     public static int astroSelection(Scanner kbd, Astronaut[] astros) {
         //Ask user to select am astronaut
-        System.out.println("Please select an astronaut:");
+        System.out.println("Please choose the corresponding integer to select an astronaut:");
         int count = 0;
         for (Astronaut a : astros) {
             if (a != null) {
@@ -1384,7 +1421,7 @@ public static void main(String[] args){
 
     public static int shipSelection(Scanner kbd, Ship[] ships) {
         // Ask the user to select a ship
-        System.out.println("Please select a ship: ");
+        System.out.println("Please choose the corresponding integer to select a ship:");
         int count = 0;
         for (Ship s : ships) {
             if (s != null) {
