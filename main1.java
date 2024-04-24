@@ -7,17 +7,16 @@ public class main1 {
 
 public static void main(String[] args){
     //Variables & Objects
-        Ship[] ships = new Ship[10]; //Temporary value?
-        Astronaut[] astros = new Astronaut[20]; //temporary value?
+        Ship[] ships = new Ship[10];
+        Astronaut[] astros = new Astronaut[30];
         int choice;
         int choice2;
 
     //Scanner
         Scanner kbd = new Scanner(System.in);
     
-    Connection connect = null; //Will be fixed later
+    Connection connect = null; //Will be fixed
     try {
-        //Code for getting astros and ships from database
         //Getting the driver
         //connect = DriverManager.getConnection(url, username, pass);
         /*Statement statement = connect.createStatement();
@@ -230,7 +229,6 @@ public static void main(String[] args){
                                 }
                                 kbd.nextLine();
                                 int astroChoice = astroSelection(kbd, astros);
-    
                                 astroToEdit = astros[astroChoice - 1];
                                 System.out.println("This is the current information for " + astroToEdit.getName());
                                 System.out.println("Name: " + astroToEdit.getName() + "\n" +
@@ -243,7 +241,6 @@ public static void main(String[] args){
                                                    "Status: " + astroToEdit.status() + "\n" +
                                                    "Pay Rate: " + astroToEdit.payRate() + "\n" +
                                                    "Weight: " + astroToEdit.weight());
-                                
                                 //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
                                 System.out.println("Field\n" +
                                                    "1. Name\n" +
@@ -256,7 +253,6 @@ public static void main(String[] args){
                                                    "8. Pay Rate\n" +
                                                    "9. Weight\n" +
                                                    "10. Go back");
-    
                                 System.out.println("Please select a field");
                                 field = 0;
                                 kbd.nextLine();
