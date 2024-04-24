@@ -229,38 +229,7 @@ public static void main(String[] args){
                                     }
                                 }
                                 kbd.nextLine();
-                                int astroChoice = 0;
-                                do {
-                                    try {
-                                        astroChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
-                                } while (!(astroChoice >= 1 && astroChoice <= count));
-                                String astroConfirmation = "";
-                                //verify that its the correct astronaut
-                                do {
-                                    System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
-                                    System.out.println("Is this the correct astronaut? (Yes/No)");
-                                    kbd.nextLine();
-                                    astroConfirmation = (kbd.nextLine()).trim();
-                                    if (astroConfirmation.equalsIgnoreCase("no")) {
-                                        count = 0;
-                                        for (Astronaut a : astros) {
-                                            if (a != null) {
-                                                count++;
-                                                System.out.println(count + " " + a.getName());
-                                            }
-                                        }
-                                        do {
-                                            try {
-                                                astroChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
-                                        } while (!(astroChoice >= 1 && astroChoice <= count));
-                                    }
-                                } while (!astroConfirmation.equalsIgnoreCase("yes"));
+                                int astroChoice = astroSelection(kbd, astros);
     
                                 astroToEdit = astros[astroChoice - 1];
                                 System.out.println("This is the current information for " + astroToEdit.getName());
@@ -555,47 +524,7 @@ public static void main(String[] args){
                         case 3:
                             String theKey;
                             do{
-                                //ask for astronaut to delete
-                                System.out.println("Which astronaut would you like to delete?");
-                                int count = 0;
-                                for (Astronaut a : astros) {
-                                    if (a != null) {
-                                        count++;
-                                        System.out.println(count + ". " + a.getName());
-                                    }
-                                }
-                                int astroChoice;
-                                do {
-                                    try {
-                                        astroChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
-                                } while (!(astroChoice >= 1 && astroChoice <= count));
-                                String astroConfirmation = "";
-                                do {
-                                    System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
-                                    System.out.println("Is this the correct astronaut? (Yes/No)");
-                                    kbd.nextLine();
-                                    astroConfirmation = (kbd.nextLine()).trim();
-                                    if (astroConfirmation.equalsIgnoreCase("no")) {
-                                        count = 0;
-                                        for (Astronaut a : astros) {
-                                            if (a != null) {
-                                                count++;
-                                                System.out.println(count + " " + a.getName());
-                                            }
-                                        }
-                                        kbd.nextLine();
-                                        do {
-                                            try {
-                                                astroChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
-                                        } while (!(astroChoice >= 1 && astroChoice <= count));
-                                    }
-                                } while (!astroConfirmation.equalsIgnoreCase("yes"));
+                                astroChoice = astroSelection(kbd, astros);
                             //     yes: ask for key to delete
                                 System.out.println("Type \"yes\" for deletion.\n" +
                                                     "If you wish to go back enter \"Go back\".");
@@ -761,47 +690,7 @@ public static void main(String[] args){
                                 break;
 
                             case 2:
-                                // ask which ship the user wants to edit
-                                System.out.println("What ship would you like to edit?");
-                                int count = 0;
-                                for (Ship s : ships) {
-                                    if (s != null) {
-                                        count++;
-                                        System.out.println(count + ". " + s.getSName());
-                                    }
-                                }
-                                int shipChoice = 0;
-                                do {
-                                    try {
-                                        shipChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
-                                } while (!(shipChoice >= 1 && shipChoice <= count));
-                                String shipConfirmation = "";
-                                do {
-                                    System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
-                                    System.out.println("Is this the correct ship? (Yes/No)");
-                                    kbd.nextLine();
-                                    shipConfirmation = (kbd.nextLine()).trim();
-                                    if (shipConfirmation.equalsIgnoreCase("no")) {
-                                        count = 0;
-                                        for (Ship s : ships) {
-                                            if (s != null) {
-                                                count++;
-                                                System.out.println(count + ". " + s.getSName());
-                                            }
-                                        }
-                                        kbd.nextLine();
-                                        do {
-                                            try {
-                                                shipChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
-                                        } while (!(shipChoice >= 1 && shipChoice <= count));
-                                    }
-                                } while (!shipConfirmation.equalsIgnoreCase("yes"));
+                                shipChoice = shipSelection(kbd, ships);
                                 Ship shipToEdit = ships[shipChoice - 1];
 
                                 // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
@@ -934,47 +823,7 @@ public static void main(String[] args){
                                 break;
 
                             case 3:
-                                // ask for ship to delete
-                                System.out.println("What ship would you like to delete?");
-                                count = 0;
-                                for (Ship s : ships) {
-                                    if (s != null) {
-                                        count++;
-                                        System.out.println(count + ". " + s.getSName());
-                                    }
-                                }
-                                shipChoice = 0;
-                                do {
-                                    try {
-                                        shipChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error occurred: " + e.getMessage());
-                                    }
-                                } while (!(shipChoice >= 1 && shipChoice <= count));
-                                shipConfirmation = "";
-                                do {
-                                    System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
-                                    System.out.println("Is this the correct ship? (Yes/No)");
-                                    kbd.nextLine();
-                                    shipConfirmation = (kbd.nextLine()).trim();
-                                    if (shipConfirmation.equalsIgnoreCase("no")) {
-                                        count = 0;
-                                        for (Ship s : ships) {
-                                            if (s != null) {
-                                                count++;
-                                                System.out.println(count + ". " + s.getSName());
-                                            }
-                                        }
-                                        kbd.nextLine();
-                                        do {
-                                            try {
-                                                shipChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error occurred: " + e.getMessage());
-                                            }
-                                        } while (!(shipChoice >= 1 && shipChoice <= count));
-                                    }
-                                } while (!shipConfirmation.equalsIgnoreCase("yes"));
+                                shipChoice = shipSelection(kbd, ships);
                                 // no: ask for correct ship, verify
                                 // yes: ask for key to delete
                                 System.out.println("Type \"yes\" for deletion.\n" +
@@ -992,88 +841,8 @@ public static void main(String[] args){
                                 break;
 
                             case 4:
-                                // ask which ship the user wants to add an astro to
-                                System.out.println("What ship would you like to add an astronaut to?");
-                                count = 0;
-                                for (Ship s : ships) {
-                                    if (s != null) {
-                                        count++;
-                                        System.out.println(count + ". " + s.getSName());
-                                    }
-                                }
-                                shipChoice = 0;
-                                do {
-                                    try {
-                                        shipChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error occurred: " + e.getMessage());
-                                    }
-                                } while (!(shipChoice >= 1 && shipChoice <= count));
-                                shipConfirmation = "";
-                                do {
-                                    System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
-                                    System.out.println("Is this the correct ship? (Yes/No)");
-                                    kbd.nextLine();
-                                    shipConfirmation = (kbd.nextLine()).trim();
-                                    if (shipConfirmation.equalsIgnoreCase("no")) {
-                                        count = 0;
-                                        for (Ship s : ships) {
-                                            if (s != null) {
-                                                count++;
-                                                System.out.println(count + ". " + s.getSName());
-                                            }
-                                        }
-                                        kbd.nextLine();
-                                        do {
-                                            try {
-                                                shipChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error occurred: " + e.getMessage());
-                                            }
-                                        } while (!(shipChoice >= 1 && shipChoice <= count));
-                                    }
-                                } while (!shipConfirmation.equalsIgnoreCase("yes"));
-                                //Ask which astro the user wants to add
-                                System.out.println("Which astronaut would you like to add?");
-                                count = 0;
-                                for (Astronaut a : astros) {
-                                    if (a != null) {
-                                        count++;
-                                        System.out.println(count + ". " + a.getName());
-                                    }
-                                }
-                                int astroChoice = 0;
-                                do {
-                                    try {
-                                        astroChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
-                                } while (!(astroChoice >= 1 && astroChoice <= count));
-                                String astroConfirmation = "";
-                                do {
-                                    System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
-                                    System.out.println("Is this the correct astronaut? (Yes/No)");
-                                    kbd.nextLine();
-                                    astroConfirmation = (kbd.nextLine()).trim();
-                                    if (astroConfirmation.equalsIgnoreCase("no")) {
-                                        count = 0;
-                                        for (Astronaut a : astros) {
-                                            if (a != null) {
-                                                count++;
-                                                System.out.println(count + " " + a.getName());
-                                            }
-                                        }
-                                        kbd.nextLine();
-                                        do {
-                                            try {
-                                                astroChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
-                                        } while (!(astroChoice >= 1 && astroChoice <= count));
-                                    }
-                                } while (!astroConfirmation.equalsIgnoreCase("yes"));
+                                astroChoice = astroSelection(kbd, astros);
+                                shipChoice = shipSelection(kbd, ships);
                                 //ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
                                 break;
 
@@ -1099,46 +868,7 @@ public static void main(String[] args){
                         int shipChoice;
                         switch (choice2) {
                             case 1:
-                                System.out.println("Please select a ship to launch.");
-                                int count = 0;
-                                for (Ship s : ships) {
-                                    if (s != null) {
-                                        count++;
-                                        System.out.println(count + ". " + s.getSName());
-                                    }
-                                }
-                                System.out.print("Please enter the corresponding number: ");
-                                shipChoice = 0;
-                                do {
-                                    try {
-                                        shipChoice = kbd.nextInt();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error occurred: " + e.getMessage());
-                                    }
-                                } while (!(shipChoice >= 1 && shipChoice <= count));
-                                String verify = "";
-                                do {
-                                    System.out.println("Ship selected: " + ships[shipChoice].getSName());
-                                    System.out.println("Is this the correct ship? (yes/no)");
-                                    if (verify.equalsIgnoreCase("no")) {
-                                        System.out.println("Please select a ship to launch:");
-                                        count = 0;
-                                        for (Ship s : ships) {
-                                            if (s != null) {
-                                                count++;
-                                                System.out.println(count + ". " + s.getSName());
-                                            }
-                                        }
-                                        System.out.print("Please enter the corresponding number: ");
-                                        do {
-                                            try {
-                                                shipChoice = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error occurred: " + e.getMessage());
-                                            }
-                                        } while (!(shipChoice >= 1 && shipChoice <= count));
-                                    }
-                                } while (!verify.equalsIgnoreCase("yes"));
+                                shipChoice = shipSelection(kbd, ships);
                                 String launchConfirmation = "";
                                 do {
                                     System.out.println("WARNING: Launching is irreversible and can result in death when gone wrong.\n" +
@@ -1477,5 +1207,95 @@ public static void main(String[] args){
         } catch (SQLException e) {
             System.out.println("An error has occurred: " + e.getMessage());
         }*/
+    }
+
+    public int astroSelection(Scanner kbd, Astronaut[] astros) {
+        //Ask user to select am astronaut
+        System.out.println("Please select an astronaut:");
+        count = 0;
+        for (Astronaut a : astros) {
+            if (a != null) {
+                count++;
+                System.out.println(count + ". " + a.getName());
+            }
+        }
+        int astroChoice = 0;
+        do {
+            try {
+                astroChoice = kbd.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
+            }
+        } while (!(astroChoice >= 1 && astroChoice <= count));
+        String astroConfirmation = "";
+        do {
+            System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
+            System.out.println("Is this the correct astronaut? (Yes/No)");
+            kbd.nextLine();
+            astroConfirmation = (kbd.nextLine()).trim();
+            if (astroConfirmation.equalsIgnoreCase("no")) {
+                count = 0;
+                for (Astronaut a : astros) {
+                    if (a != null) {
+                        count++;
+                        System.out.println(count + " " + a.getName());
+                    }
+                }
+                kbd.nextLine();
+                do {
+                    try {
+                        astroChoice = kbd.nextInt();
+                    } catch (NumberFormatException e) {
+                        ystem.out.println("An error has occurred: " + e.getMessage());
+                    }
+                } while (!(astroChoice >= 1 && astroChoice <= count));
+            }
+        } while (!astroConfirmation.equalsIgnoreCase("yes"));
+        return astrochoice;
+    }
+
+    public int shipSelection(Scanner kbd, Ship[] ships) {
+        // Ask the user to select a ship
+        System.out.println("Please select a ship: ");
+        count = 0;
+        for (Ship s : ships) {
+            if (s != null) {
+                count++;
+                System.out.println(count + ". " + s.getSName());
+            }
+        }
+        shipChoice = 0;
+        do {
+            try {
+                shipChoice = kbd.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            }
+        } while (!(shipChoice >= 1 && shipChoice <= count));
+        shipConfirmation = "";
+        do {
+            System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
+            System.out.println("Is this the correct ship? (Yes/No)");
+            kbd.nextLine();
+            shipConfirmation = (kbd.nextLine()).trim();
+            if (shipConfirmation.equalsIgnoreCase("no")) {
+                count = 0;
+                for (Ship s : ships) {
+                    if (s != null) {
+                        count++;
+                        System.out.println(count + ". " + s.getSName());
+                    }
+                }
+                kbd.nextLine();
+                do {
+                    try {
+                        shipChoice = kbd.nextInt();
+                    } catch (NumberFormatException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                    }
+                } while (!(shipChoice >= 1 && shipChoice <= count));
+            }
+        } while (!shipConfirmation.equalsIgnoreCase("yes"));
+        return shipChoice;
     }
 }
