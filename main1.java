@@ -1213,13 +1213,10 @@ public static void main(String[] args){
                 passNum = r.nextInt(20000);
                 System.out.println("Please write down the following password: " + passNum);
             }
-
-            createPassword = false;
             try {
                 //file.createNewFile();
-
-                FileOutputStream passOutput = new FileOutputStream(file);
-                PrintWriter pw = new PrintWriter(passOutput);
+                //FileOutputStream passOutput = new FileOutputStream(file);
+                PrintWriter pw = new PrintWriter(file);
                 pw.write(passNum);
                 pw.close();
                 passOutput.close();
@@ -1234,7 +1231,6 @@ public static void main(String[] args){
             System.out.println("*Account Created*");
 
             // * Any time after 1st
-            createPassword = false;
             allowedEntry = true;
         } else {
             // ask for password or to reset password with the administrator password
@@ -1299,11 +1295,22 @@ public static void main(String[] args){
                                 passNum = r.nextInt(20000);
                                 System.out.println("Please write down the following password: " + passNum);
                             }
-
+                            try {
+                                //file.createNewFile();
+                                //FileOutputStream passOutput = new FileOutputStream(file);
+                                PrintWriter pw = new PrintWriter(file);
+                                pw.write(passNum);
+                                pw.close();
+                                passOutput.close();
+                                createPassword = false;
+                            } catch (FileNotFoundException e) {
+                                System.out.println("An error occurred: " + e.getMessage());
+                            } catch (IOException e) {
+                                System.out.println("An error occured: " + e.getMessage());
+                            }
                             allowedEntry = true;
                         } else {
                             while (!(adminPass == trueAdminPass)) {
-
                                 // notify that incorrect pass has been entered
                                 // ask for pass again and give option to go back
                                 System.out.println("You input the wrong password.");
@@ -1315,6 +1322,32 @@ public static void main(String[] args){
                                     break;
                                 } else {
                                     adminPass = Integer.parseInt(inputA);
+                                    if (adminPass == trueAdminPass) {
+                                        // create a new password for application and show it to user to write down
+                                        System.out.println("Creating Password...");
+            
+                                        Random r = new Random();
+                                        int passNum = 0;
+                                        for (int i = 0; i < 1; i++) {
+                                            passNum = r.nextInt(20000);
+                                            System.out.println("Please write down the following password: " + passNum);
+                                        }
+                                        try {
+                                            //file.createNewFile();
+                                            //FileOutputStream passOutput = new FileOutputStream(file);
+                                            PrintWriter pw = new PrintWriter(file);
+                                            pw.write(passNum);
+                                            pw.close();
+                                            passOutput.close();
+                                            createPassword = false;
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("An error occurred: " + e.getMessage());
+                                        } catch (IOException e) {
+                                            System.out.println("An error occured: " + e.getMessage());
+                                        }
+                                        allowedEntry = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -1325,11 +1358,7 @@ public static void main(String[] args){
                         break;
 
                     default:
-                        while ((loginChoice != 1) && (loginChoice != 2)) {
-                            System.out.println("Please enter the number 1 or 2.");
-                        // ask for password or to reset password with the administrator password
-                            loginChoice = scan.nextInt();
-                        }
+                        System.out.println("Please enter the number 1 or 2.");
                         break;
                 }
             } while ((loginChoice != 3) && (allowedEntry == false));
