@@ -839,9 +839,9 @@ public static void main(String[] args){
                                 break;
 
                             case 4:
-                                int astroChoice = astroSelection(kbd, astros);
+                                //int astroChoice = astroSelection(kbd, astros);
                                 shipChoice = shipSelection(kbd, ships);
-                                ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
+                                //ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
                                 break;
 
                             case 5:
@@ -1004,13 +1004,13 @@ public static void main(String[] args){
                         try {
                             FileInputStream adminPassFile = new FileInputStream(adminFile);
                             trueAdminPass = adminPassFile.read();
+                            System.out.println(trueAdminPass);
                             adminPassFile.close();
                         } catch (FileNotFoundException e) {
                             System.out.println("An error occurred: " + e.getMessage());
                         } catch (IOException e) {
                             System.out.println("An error occurred: " + e.getMessage());
                         }
-                        
                         System.out.println("Please enter the admin password: ");
                         int adminPass = scan.nextInt();
                         if (adminPass == trueAdminPass) {
