@@ -16,11 +16,11 @@ public static void main(String[] args){
         Scanner kbd = new Scanner(System.in);
     
     Connection connect = null; //Will be fixed
+    /*Statement statement = connect.createStatement();
+    ResultSet results = null;*/
     try {
-        //Getting the driver
+        //Class.forName(); <-- getting the driver
         //connect = DriverManager.getConnection(url, username, pass);
-        /*Statement statement = connect.createStatement();
-        ResultSet results;*/
     } catch (SQLException e) {
         System.out.println("An error occurred: " + e.getMessage());
     }
@@ -199,16 +199,16 @@ public static void main(String[] args){
                             }
                             /*
                             try {
-                                //results = statement.executeQuery(add name);
-                                //results = statement.executeQuery(add serial number);
-                                //results = statement.executeQuery(add DOB);
-                                //results = statement.executeQuery(add address);
-                                //results = statement.executeQuery(add email);
-                                //results = statement.executeQuery(add phone number);
-                                //results = statement.executeQuery(add next of kin);
-                                //results = statement.executeQuery(add status);
-                                //results = statement.executeQuery(add pay rate);
-                                //results = statement.executeQuery(add weight);
+                                //results = statement.executeUpdate(add name);
+                                //results = statement.executeUpdate(add serial number);
+                                //results = statement.executeUpdate(add DOB);
+                                //results = statement.executeUpdate(add address);
+                                //results = statement.executeUpdate(add email);
+                                //results = statement.executeUpdate(add phone number);
+                                //results = statement.executeUpdate(add next of kin);
+                                //results = statement.executeUpdate(add status);
+                                //results = statement.executeUpdate(add pay rate);
+                                //results = statement.executeUpdate(add weight);
                             } catch (SQLException e) {
                                 System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
                             }
@@ -276,7 +276,7 @@ public static void main(String[] args){
                                             correctAstroName = kbd.nextLine();
                                             if (correctAstroName.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setName(astroName);
-                                                //results = statement.executeQuery(add name);
+                                                //results = statement.executeUpdate(add name);
                                             } else if (correctAstroName.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -301,7 +301,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setdateOfBirth(astroDateOfBirth);
-                                            //results = statement.executeQuery(add DOB);
+                                            //results = statement.executeUpdate(add DOB);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -326,7 +326,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setAddress(astroAddress);
-                                            //results = statement.executeQuery(add address);
+                                            //results = statement.executeUpdate(add address);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -351,7 +351,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setEmail(astroEmail);
-                                            //results = statement.executeQuery(add email);
+                                            //results = statement.executeUpdate(add email);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -376,7 +376,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setPhoneNumber(astroPhone);
-                                            //results = statement.executeQuery(add phone number);
+                                            //results = statement.executeUpdate(add phone number);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -401,7 +401,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setNextOfKin(astroNextOfKin);
-                                            //results = statement.executeQuery(add next of kin);
+                                            //results = statement.executeUpdate(add next of kin);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -426,7 +426,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setStatus(astroStatus);
-                                            //results = statement.executeQuery(add status);
+                                            //results = statement.executeUpdate(add status);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -456,7 +456,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setPayRate(astroPayRate);
-                                            //results = statement.executeQuery(add pay rate);
+                                            //results = statement.executeUpdate(add pay rate);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -490,7 +490,7 @@ public static void main(String[] args){
                                         correct = kbd.nextLine();
                                         if (correct.equalsIgnoreCase("Correct")) {
                                             astroToEdit.setWeight(astroWeight);
-                                            //results = statement.executeQuery(add weight);
+                                            //results = statement.executeUpdate(add weight);
                                         } else if (correct.equalsIgnoreCase("Go back")) {
                                             break;
                                         } else {
@@ -675,10 +675,10 @@ public static void main(String[] args){
                                 }
                                 /*
                                 try {
-                                    //results = statement.executeQuery(add ship name);
-                                    //results = statement.executeQuery(add fCap);
-                                    //results = statement.executeQuery(add fuel);
-                                    //results = statement.executeQuery(add sCap);
+                                    //results = statement.executeUpdate(add ship name);
+                                    //results = statement.executeUpdate(add fCap);
+                                    //results = statement.executeUpdate(add fuel);
+                                    //results = statement.executeUpdate(add sCap);
                                 } catch (SQLException e) {
                                     System.out.println("An error occurred while saving ship to database: " + e.getMessage());
                                 }
@@ -718,7 +718,7 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSName(shipName); 
-                                                //results = statement.executeQuery(add name);
+                                                //results = statement.executeUpdate(add name);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -745,7 +745,7 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFCap(shipFuelCapacity); 
-                                                //results = statement.executeQuery(add fCap);
+                                                //results = statement.executeUpdate(add fCap);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -772,7 +772,7 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFuel(shipCurrentFuel); 
-                                                //results = statement.executeQuery(add fuel);
+                                                //results = statement.executeUpdate(add fuel);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -799,7 +799,7 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSCap(shipCrewCapacity); 
-                                                //results = statement.executeQuery(add sCap);
+                                                //results = statement.executeUpdate(add sCap);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1196,10 +1196,13 @@ public static void main(String[] args){
                     count++;
                 }
             no:
-                create file
-                create table for astronauts with columns
-                create table for ships with columns
-            
+                create file?
+                create database?
+                create table for astronauts
+                create columns for fields
+                create table for ships
+                create columns for fields
+                backup database on file
         } catch (SQLException e) {
             System.out.println("An error has occurred: " + e.getMessage());
         }*/
