@@ -100,7 +100,6 @@ public static void main(String[] args){
                                             "Pay Rate: " + astroPayRate + "\n" +
                                             "Weight: " + astroWeight);
                                 System.out.println("Is there anything you wish to change? (yes/no)");
-                                kbd.nextLine();
                                 change = (kbd.nextLine()).trim();
                                 if (change.equalsIgnoreCase("yes")) {
                                     System.out.println("Which field do you wish to change?");
@@ -574,7 +573,6 @@ public static void main(String[] args){
                                 kbd.nextLine();
                                 String shipName = (kbd.nextLine()).trim();
                                 System.out.print("Please enter the ship's fuel capacity: ");
-                                kbd.nextLine();
                                 double shipFuelCapacity = 0;
                                 try {
                                     shipFuelCapacity = kbd.nextDouble();
@@ -582,7 +580,6 @@ public static void main(String[] args){
                                     System.out.println("An error has occurred: " + e.getMessage());
                                 }
                                 System.out.print("Please enter the ship's current fuel level: ");
-                                kbd.nextLine();
                                 double shipCurrentFuel = 0;
                                 try {
                                     shipCurrentFuel = kbd.nextDouble();
@@ -590,7 +587,6 @@ public static void main(String[] args){
                                     System.out.println("An error has occurred: " + e.getMessage());
                                 }
                                 System.out.print("Please enter the ship's crew capacity: ");
-                                kbd.nextLine();
                                 int shipCrewCapacity = 0;
                                 try {
                                     shipCrewCapacity = kbd.nextInt();
@@ -628,7 +624,6 @@ public static void main(String[] args){
 
                                             case 2:
                                             System.out.print("Please enter the ship's fuel capacity in pounds: ");
-                                            kbd.nextLine();
                                             try {
                                                 shipFuelCapacity = kbd.nextDouble();
                                             } catch (NumberFormatException e) {
@@ -638,7 +633,6 @@ public static void main(String[] args){
 
                                             case 3:
                                             System.out.print("Please enter the ship's current fuel level in pounds: ");
-                                            kbd.nextLine();
                                             try {
                                                 shipCurrentFuel = kbd.nextDouble();
                                             } catch (NumberFormatException e) {
@@ -648,7 +642,6 @@ public static void main(String[] args){
 
                                             case 4:
                                             System.out.print("Please enter the ship's crew capacity: ");
-                                            kbd.nextLine();
                                             try {
                                                 shipCrewCapacity = kbd.nextInt();
                                             } catch (NumberFormatException e) {
