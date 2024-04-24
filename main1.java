@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
@@ -42,6 +43,8 @@ public static void main(String[] args){
                 choice = kbd.nextInt();
             } catch (NumberFormatException e) {
                 System.out.println("An error has occurred: " + e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
             }
             switch(choice) {
                 case 1:
@@ -54,6 +57,8 @@ public static void main(String[] args){
                         try {
                             choice2 = kbd.nextInt();
                         } catch (NumberFormatException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
+                        } catch (InputMismatchException e) {
                             System.out.println("An error has occurred: " + e.getMessage());
                         }
                         int field = 0;
@@ -73,10 +78,32 @@ public static void main(String[] args){
                             String astroNextOfKin = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
                             String astroStatus = (kbd.nextLine()).trim();
-                            System.out.print("Please enter the astronaut's pay rate (X,XXX.XX): ");
-                            double astroPayRate = kbd.nextDouble();
+                            System.out.print("Please enter the astronaut's pay rate per hour (X,XXX.XX): ");
+                            double astroPayRate = 0;
+                            do {
+                                try {
+                                    astroPayRate = kbd.nextDouble();
+                                    if (astroPayRate <= 7.25) {
+                                        System.out.print("The federal minimum wage is $7.50. " +
+                                                         "Please enter a new pay rate per hour: ");
+                                    }
+                                } catch (NumberFormatException e ) {
+                                    System.out.println("An error occurred: " + e.getMessage());
+                                } catch (InputMismatchException e) {
+                                    System.out.println("An error occurred: " + e.getMessage());
+                                }
+                            } while (astroPayRate <= 7.25);
                             System.out.print("Please enter the astronaut's weight in pounds: ");
-                            double astroWeight = kbd.nextDouble();
+                            double astroWeight = 0;
+                            do {
+                                try {
+                                    astroWeight = kbd.nextDouble();
+                                } catch (NumberFormatException e ) {
+                                    System.out.println("An error occurred: " + e.getMessage());
+                                } catch (InputMismatchException e) {
+                                    System.out.println("An error occurred: " + e.getMessage());
+                                }
+                            } while (astroWeight <= 0);
                             System.out.println("Please verify information before saving:\n" +
                                             "Name: " + astroName + "\n" +
                                             "Date of Birth: " + astroDateOfBirth + "\n" +
@@ -164,21 +191,32 @@ public static void main(String[] args){
                                         case 8: 
                                             System.out.print("Please enter the astronaut's pay rate (X,XXX.XX): ");
                                             kbd.nextLine();
-                                            try {
-                                                astroPayRate = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    astroPayRate = kbd.nextDouble();
+                                                    if (astroPayRate <= 7.25) {
+                                                        System.out.print("The federal minimum wage is $7.50. " +
+                                                                         "Please enter a new pay rate per hour: ");
+                                                    }
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (astroPayRate <= 7.25);
                                             break;
 
                                         case 9: 
                                             System.out.print("Please enter the astronaut's weight in pounds: ");
-                                            kbd.nextLine();
-                                            try {
-                                                astroWeight = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    astroWeight = kbd.nextDouble();
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (astroWeight <= 0);
                                             break;
 
                                         default: 
@@ -217,6 +255,10 @@ public static void main(String[] args){
                             do {
                                 Astronaut astroToEdit;
                                 // ask which astronaut the user wants to edit
+                                if (!checkForAstronauts(astros)) {
+                                    System.out.println("There are no astronauts to edit.");
+                                    break;
+                                }
                                 System.out.println("Which astronaut would you like to edit?");
                                 int count = 0;
                                 for (Astronaut a : astros) {
@@ -225,7 +267,6 @@ public static void main(String[] args){
                                         System.out.println(count + " " + a.getName());
                                     }
                                 }
-                                kbd.nextLine();
                                 int astroChoice = astroSelection(kbd, astros);
                                 astroToEdit = astros[astroChoice - 1];
                                 System.out.println("This is the current information for " + astroToEdit.getName());
@@ -438,12 +479,19 @@ public static void main(String[] args){
                                 case 8: 
                                     System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
                                     astroPayRate = 0;
-                                    kbd.nextLine();
-                                    try {
-                                        astroPayRate = kbd.nextDouble();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
+                                    do {
+                                        try {
+                                            astroPayRate = kbd.nextDouble();
+                                            if (astroPayRate <= 7.25) {
+                                                System.out.print("The federal minimum wage is $7.50. " +
+                                                                 "Please enter a new pay rate per hour: ");
+                                            }
+                                        } catch (NumberFormatException e ) {
+                                            System.out.println("An error occurred: " + e.getMessage());
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("An error occurred: " + e.getMessage());
+                                        }
+                                    } while (astroPayRate <= 7.25);
                                     correct = "";
                                     do {
                                         System.out.println("The astronaut's current pay rate in the database is " + astroToEdit.payRate() + "\n" +
@@ -459,12 +507,19 @@ public static void main(String[] args){
                                             break;
                                         } else {
                                             System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
-                                            kbd.nextLine();
-                                            try {
-                                                astroPayRate = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    astroPayRate = kbd.nextDouble();
+                                                    if (astroPayRate <= 7.25) {
+                                                        System.out.print("The federal minimum wage is $7.50. " +
+                                                                         "Please enter a new pay rate per hour: ");
+                                                    }
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (astroPayRate <= 7.25);
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
                                     break;
@@ -472,12 +527,15 @@ public static void main(String[] args){
                                 case 9: 
                                     System.out.print("Please edit the astronaut's weight in pounds: ");
                                     astroWeight = 0;
-                                    kbd.nextLine();
-                                    try {
-                                        astroWeight = kbd.nextDouble();
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
+                                    do {
+                                        try {
+                                            astroWeight = kbd.nextDouble();
+                                        } catch (NumberFormatException e ) {
+                                            System.out.println("An error occurred: " + e.getMessage());
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("An error occurred: " + e.getMessage());
+                                        }
+                                    } while (astroWeight <= 0);
                                     correct = "";
                                     do {
                                         System.out.println("The astronaut's current weight in the database is " + astroToEdit.weight() + "\n" +
@@ -493,12 +551,15 @@ public static void main(String[] args){
                                             break;
                                         } else {
                                             System.out.print("Please edit the weight in pounds: ");
-                                            kbd.nextLine();
-                                            try {
-                                                astroWeight = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    astroWeight = kbd.nextDouble();
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (astroWeight <= 0);
                                         }
                                     } while (!correct.equalsIgnoreCase("correct"));
                                     break;
@@ -517,6 +578,10 @@ public static void main(String[] args){
                         
                         case 3:
                             String theKey;
+                            if (!checkForAstronauts(astros)) {
+                                System.out.println("There are no astronauts to delete.");
+                                break;
+                            }
                             do{
                                 int astroChoice = astroSelection(kbd, astros);
                             //     yes: ask for key to delete
@@ -565,6 +630,8 @@ public static void main(String[] args){
                             choice2 = kbd.nextInt();
                         } catch (NumberFormatException e) {
                             System.out.println("An error has occurred: " + e.getMessage());
+                        } catch (InputMismatchException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
                         }
                         int field = 0;
                         switch (choice2) {
@@ -574,26 +641,42 @@ public static void main(String[] args){
                                 String shipName = (kbd.nextLine()).trim();
                                 System.out.print("Please enter the ship's fuel capacity: ");
                                 double shipFuelCapacity = 0;
-                                try {
-                                    shipFuelCapacity = kbd.nextDouble();
-                                } catch (NumberFormatException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                }
+                                do {
+                                    try {
+                                        shipFuelCapacity = kbd.nextDouble();
+                                    } catch (NumberFormatException e ) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    }
+                                } while (shipFuelCapacity <= 0);
                                 System.out.print("Please enter the ship's current fuel level: ");
                                 double shipCurrentFuel = 0;
-                                try {
-                                    shipCurrentFuel = kbd.nextDouble();
-                                } catch (NumberFormatException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                }
+                                do {
+                                    try {
+                                        shipCurrentFuel = kbd.nextDouble();
+                                        if (shipCurrentFuel > shipFuelCapacity) {
+                                            System.out.println("The ship's fuel capacity cannot be " +
+                                                               "larger than its capacity (" + shipFuelCapacity +
+                                                               ").");
+                                        }
+                                    } catch (NumberFormatException e ) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    }
+                                } while (shipCurrentFuel > shipFuelCapacity);
                                 System.out.print("Please enter the ship's crew capacity: ");
                                 int shipCrewCapacity = 0;
-                                try {
-                                    shipCrewCapacity = kbd.nextInt();
-                                } catch (NumberFormatException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                }
-                                
+                                do {
+                                    try {
+                                        shipCrewCapacity = kbd.nextInt();
+                                    } catch (NumberFormatException e ) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("An error occurred: " + e.getMessage());
+                                    }
+                                } while (shipCrewCapacity <= 0);
                                 String change = "";
                                 do {
                                     System.out.println("Please verify information before saving.\n" +
@@ -624,29 +707,46 @@ public static void main(String[] args){
 
                                             case 2:
                                             System.out.print("Please enter the ship's fuel capacity in pounds: ");
-                                            try {
-                                                shipFuelCapacity = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    shipFuelCapacity = kbd.nextDouble();
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (shipFuelCapacity <= 0);
                                             break;
 
                                             case 3:
                                             System.out.print("Please enter the ship's current fuel level in pounds: ");
-                                            try {
-                                                shipCurrentFuel = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    shipCurrentFuel = kbd.nextDouble();
+                                                    if (shipCurrentFuel > shipFuelCapacity) {
+                                                        System.out.println("The ship's fuel capacity cannot be " +
+                                                                           "larger than its capacity (" + shipFuelCapacity +
+                                                                           ").");
+                                                    }
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (shipCurrentFuel > shipFuelCapacity);
                                             break;
 
                                             case 4:
                                             System.out.print("Please enter the ship's crew capacity: ");
-                                            try {
-                                                shipCrewCapacity = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error has occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    shipCrewCapacity = kbd.nextInt();
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (shipCrewCapacity <= 0);
                                             break;
 
                                             default:
@@ -678,9 +778,13 @@ public static void main(String[] args){
                                 break;
 
                             case 2:
+                                if (!checkForShips(ships)) {
+                                    System.out.println("There are no ships to edit.");
+                                    break;
+                                }
                                 int shipChoice = shipSelection(kbd, ships);
                                 Ship shipToEdit = ships[shipChoice - 1];
-
+                                
                                 // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
                                 System.out.println("This is the current information for " + shipToEdit.getSName() + ".\n" +
                                                    "Ship Name: " + shipToEdit.getSName() + "\n" +
@@ -725,11 +829,15 @@ public static void main(String[] args){
                                             System.out.println("Please edit the ship's fuel capacity in pounds: ");
                                             kbd.nextLine();
                                             shipFuelCapacity = 0;
-                                            try {
-                                                shipFuelCapacity = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    shipFuelCapacity = kbd.nextDouble();
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (shipFuelCapacity <= 0);
                                             System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFCap() + "\'.\n" +
                                                             "You entered the name \'" + shipFuelCapacity + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
@@ -753,11 +861,20 @@ public static void main(String[] args){
                                             System.out.println("Please edit the ship's current fuel in pounds: ");
                                             kbd.nextLine();
                                             shipCurrentFuel = 0;
-                                            try {
-                                                shipCurrentFuel = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    shipCurrentFuel = kbd.nextDouble();
+                                                    if (shipCurrentFuel > shipToEdit.getFCap()) {
+                                                        System.out.println("The ship's fuel capacity cannot be " +
+                                                                           "larger than its capacity (" + shipToEdit.getFCap() +
+                                                                           ").");
+                                                    }
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (shipCurrentFuel > shipToEdit.getFCap());
                                             System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
                                                             "You entered the name \'" + shipCurrentFuel + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
@@ -781,11 +898,15 @@ public static void main(String[] args){
                                             System.out.println("Please edit the ship's crew capacity: ");
                                             kbd.nextLine();
                                             shipCrewCapacity = 0;
-                                            try {
-                                                shipCrewCapacity = kbd.nextInt();
-                                            } catch (NumberFormatException e) {
-                                                System.out.println("An error occurred: " + e.getMessage());
-                                            }
+                                            do {
+                                                try {
+                                                    shipCrewCapacity = kbd.nextInt();
+                                                } catch (NumberFormatException e ) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("An error occurred: " + e.getMessage());
+                                                }
+                                            } while (shipCrewCapacity <= 0);
                                             System.out.println("The ship's current crew capacity in the database is \'" + shipToEdit.getSCap() + "\'.\n" +
                                                             "You entered the name \'" + shipCrewCapacity + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
@@ -814,13 +935,18 @@ public static void main(String[] args){
                                 break;
 
                             case 3:
-                                shipChoice = shipSelection(kbd, ships);
-                                // no: ask for correct ship, verify
-                                // yes: ask for key to delete
-                                System.out.println("Type \"yes\" for deletion.\n" +
-                                                   "If you wish to go back enter \"Go back\".");
-                                String theKey = kbd.nextLine();
+                                if (!checkForShips(ships)) {
+                                    System.out.println("There are no ships to edit.");
+                                    break;
+                                }
+                                String theKey;
                                 do {
+                                    shipChoice = shipSelection(kbd, ships);
+                                    // no: ask for correct ship, verify
+                                    // yes: ask for key to delete
+                                    System.out.println("Type \"yes\" for deletion.\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                    theKey = kbd.nextLine();
                                     if (theKey.equalsIgnoreCase("yes")) {
                                         // correct key: delete ship, notify user
                                         ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
@@ -845,7 +971,7 @@ public static void main(String[] args){
                                 System.out.println("Please enter a number 1-5.");
                                 break;
                         }
-                    } while (choice != 4);
+                    } while (choice2 != 4);
 
                     break;
 
@@ -855,7 +981,13 @@ public static void main(String[] args){
                     do {
                         System.out.println("1. Select a Ship\n" +
                                            "2. Back to main menu");
-                        choice2 = kbd.nextInt();
+                        try {
+                            choice2 = kbd.nextInt();
+                        } catch (NumberFormatException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
+                        } catch (InputMismatchException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
+                        }
                         int shipChoice;
                         switch (choice2) {
                             case 1:
@@ -982,7 +1114,9 @@ public static void main(String[] args){
                                     try {
                                         enteredPassword = Integer.parseInt(choice3);
                                     } catch (NumberFormatException e) {
-                                        System.out.println("An error occurred: " + e.getMessage());
+                                        System.out.println("An error has occurred: " + e.getMessage());
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("An error has occurred: " + e.getMessage());
                                     }
                                     
                                 }
@@ -1291,5 +1425,27 @@ public static void main(String[] args){
             }
         } while (!shipConfirmation.equalsIgnoreCase("yes"));
         return shipChoice;
+    }
+
+    public static boolean checkForAstronauts(Astronaut[] astroArrayToBeChecked) {
+        boolean astronautsExist = false;
+        for (Astronaut a : astroArrayToBeChecked) {
+            if (a != null) {
+                astronautsExist = true;
+                break;
+            }
+        }
+        return astronautsExist;
+    }
+
+    public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
+        boolean shipsExist = false;
+        for (Ship s : shipArrayToBeChecked) {
+            if (s != null) {
+                shipsExist = true;
+                break;
+            }
+        }
+        return shipsExist;
     }
 }
