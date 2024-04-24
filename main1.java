@@ -49,7 +49,7 @@ public static void main(String[] args){
             switch(choice) {
                 case 1:
                     do {
-                        System.out.println("Astronaut Menu\n" + 
+                        System.out.println("\nAstronaut Menu\n" + 
                                            "1. Add Astronaut\n" +
                                            "2. Edit Astronaut\n" +
                                            "3. Delete Astronaut\n" +
@@ -86,6 +86,7 @@ public static void main(String[] args){
                                     astroStatus = "In Space";
                                 } else {
                                     System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                    System.out.println("Please try again.");
                                 }
                             } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                             System.out.print("Please enter the astronaut's pay rate per hour (X,XXX.XX): ");
@@ -114,41 +115,31 @@ public static void main(String[] args){
                                     System.out.println("An error occurred: " + e.getMessage());
                                 }
                             } while (astroWeight <= 0);
-                            System.out.println("Please verify information before saving:\n" +
-                                            "Name: " + astroName + "\n" +
-                                            "Date of Birth: " + astroDateOfBirth + "\n" +
-                                            "Address: " + astroAddress + "\n" +
-                                            "Email: " + astroEmail + "\n" +
-                                            "Phone Number: " + astroPhone + "\n" +
-                                            "Next of Kin: " + astroNextOfKin + "\n" +
-                                            "Status: " + astroStatus + "\n" +
-                                            "Pay Rate: " + astroPayRate + "\n" +
-                                            "Weight: " + astroWeight);
                             String change;
                             do {
-                                System.out.println("Please verify information before saving.\n" +
-                                            "Name: " + astroName + "\n" +
-                                            "Date of Birth: " + astroDateOfBirth + "\n" +
-                                            "Address: " + astroAddress + "\n" +
-                                            "Email: " + astroEmail + "\n" +
-                                            "Phone Number: " + astroPhone + "\n" +
-                                            "Next of Kin: " + astroNextOfKin + "\n" +
-                                            "Status: " + astroStatus + "\n" +
-                                            "Pay Rate: " + astroPayRate + "\n" +
-                                            "Weight: " + astroWeight);
+                                System.out.println("\nPlease verify information before saving.\n" +
+                                                   "Name: " + astroName + "\n" +
+                                                   "Date of Birth: " + astroDateOfBirth + "\n" +
+                                                   "Address: " + astroAddress + "\n" +
+                                                   "Email: " + astroEmail + "\n" +
+                                                   "Phone Number: " + astroPhone + "\n" +
+                                                   "Next of Kin: " + astroNextOfKin + "\n" +
+                                                   "Status: " + astroStatus + "\n" +
+                                                   "Pay Rate: " + astroPayRate + "\n" +
+                                                   "Weight: " + astroWeight);
                                 System.out.println("Is there anything you wish to change? (yes/no)");
                                 change = (kbd.nextLine()).trim();
                                 if (change.equalsIgnoreCase("yes")) {
-                                    System.out.println("Which field do you wish to change?");
+                                    System.out.println("\nWhich field do you wish to change?");
                                     System.out.println("1. Name\n" +
-                                                    "2. Date of Birth\n" +
-                                                    "3. Address\n" +
-                                                    "4. Email\n" + 
-                                                    "5. Phone Number\n" +
-                                                    "6. Next of Kin\n" +
-                                                    "7. Status\n" +
-                                                    "8. Pay Rate\n" +
-                                                    "9. Weight\n" );
+                                                       "2. Date of Birth\n" +
+                                                       "3. Address\n" +
+                                                       "4. Email\n" + 
+                                                       "5. Phone Number\n" +
+                                                       "6. Next of Kin\n" +
+                                                       "7. Status\n" +
+                                                       "8. Pay Rate\n" +
+                                                       "9. Weight\n" );
                                     System.out.print("Please enter the corresponding option/integer: ");
                                     try {
                                         field = kbd.nextInt();
@@ -203,6 +194,7 @@ public static void main(String[] args){
                                                     astroStatus = "In Space";
                                                 } else {
                                                     System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                                    System.out.println("Please try again.");
                                                 }
                                             } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                                             break;
@@ -273,22 +265,13 @@ public static void main(String[] args){
                         case 2:
                             do {
                                 Astronaut astroToEdit;
-                                // ask which astronaut the user wants to edit
                                 if (!checkForAstronauts(astros)) {
-                                    System.out.println("There are no astronauts to edit.");
+                                    System.out.println("\nThere are no astronauts to edit.");
                                     break;
-                                }
-                                System.out.println("Which astronaut would you like to edit?");
-                                int count = 0;
-                                for (Astronaut a : astros) {
-                                    if (a != null) {
-                                        count++;
-                                        System.out.println(count + " " + a.getName());
-                                    }
                                 }
                                 int astroChoice = astroSelection(kbd, astros);
                                 astroToEdit = astros[astroChoice - 1];
-                                System.out.println("This is the current information for " + astroToEdit.getName());
+                                System.out.println("\nThis is the current information for " + astroToEdit.getName());
                                 System.out.println("Name: " + astroToEdit.getName() + "\n" +
                                                    "Serial Number: " + astroToEdit.getSerialNumber() + "\n" +
                                                    "Date of Birth: " + astroToEdit.dateOfBirth() + "\n" + 
@@ -300,7 +283,7 @@ public static void main(String[] args){
                                                    "Pay Rate: " + astroToEdit.payRate() + "\n" +
                                                    "Weight: " + astroToEdit.weight());
                                 //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                                System.out.println("Field\n" +
+                                System.out.println("\nFields\n" +
                                                    "1. Name\n" +
                                                    "2. Date of Birth\n" + 
                                                    "3. Address\n" +
@@ -481,6 +464,7 @@ public static void main(String[] args){
                                             astroStatus = "In Space";
                                         } else {
                                             System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                            System.out.println("Please try again.");
                                         }
                                     } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                                     correct = "";
@@ -507,6 +491,7 @@ public static void main(String[] args){
                                                     astroStatus = "In Space";
                                                 } else {
                                                     System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
+                                                    System.out.println("Please try again.");
                                                 }
                                             } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
                                         }
@@ -602,7 +587,7 @@ public static void main(String[] args){
                                     break;
 
                                 case 10:
-                                    System.out.println("Going back");
+                                    System.out.println("\nGoing back to previous menu\n");
                                     break;
 
                                 default: 
@@ -616,7 +601,7 @@ public static void main(String[] args){
                         case 3:
                             String theKey;
                             if (!checkForAstronauts(astros)) {
-                                System.out.println("There are no astronauts to delete.");
+                                System.out.println("\nThere are no astronauts to delete.");
                                 break;
                             }
                             do{
@@ -638,11 +623,11 @@ public static void main(String[] args){
                             break;
 
                         case 4:
-                            System.out.println("Going back to main menu.");
+                            System.out.println("\nGoing back to previous menu.\n");
                             break;
 
                         default:
-                            System.out.println("Please enter a number from 1-4");
+                            System.out.println("\nPlease enter a number from 1-4\n");
                             break;
                         }
                     } while (choice2 != 4);
@@ -656,7 +641,7 @@ public static void main(String[] args){
                 //     * - Add astro
                     do{
                         //**LINE AFTER THIS NEEDS TO BE EDITED**  
-                        System.out.println("Ship Menu\n" +
+                        System.out.println("\nShip Menu\n" +
                                            "1. Add Ship\n" +
                                            "2. Edit Ship\n" +
                                            "3. Delete Ship\n" +
@@ -716,7 +701,7 @@ public static void main(String[] args){
                                 } while (shipCrewCapacity <= 0);
                                 String change = "";
                                 do {
-                                    System.out.println("Please verify information before saving.\n" +
+                                    System.out.println("\nPlease verify information before saving.\n" +
                                                     "Name: " + shipName + "\n" +
                                                     "Fuel Capacity: " + shipFuelCapacity + "\n" +
                                                     "Current Fuel: " + shipCurrentFuel + "\n" +
@@ -724,7 +709,7 @@ public static void main(String[] args){
                                     System.out.println("Is there anything you wish to change? (yes/no)");
                                     change = (kbd.nextLine()).trim();
                                     if (change.equalsIgnoreCase("yes")) {
-                                        System.out.println("Which field do you wish to change?\n");
+                                        System.out.println("\nWhich field do you wish to change?\n");
                                         System.out.println("1. Ship Name\n" +
                                                            "2. Fuel Capacity\n" +
                                                            "3. Current Fuel\n" +
@@ -816,19 +801,19 @@ public static void main(String[] args){
 
                             case 2:
                                 if (!checkForShips(ships)) {
-                                    System.out.println("There are no ships to edit.");
+                                    System.out.println("\nThere are no ships to edit.");
                                     break;
                                 }
                                 int shipChoice = shipSelection(kbd, ships);
                                 Ship shipToEdit = ships[shipChoice - 1];
                                 
                                 // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
-                                System.out.println("This is the current information for " + shipToEdit.getSName() + ".\n" +
+                                System.out.println("\nThis is the current information for " + shipToEdit.getSName() + ".\n" +
                                                    "Ship Name: " + shipToEdit.getSName() + "\n" +
                                                    "Fuel Capacity: " + shipToEdit.getFCap() + "\n" +
                                                    "Fuel: " + shipToEdit.getFuel() + "\n" +
                                                    "Ship Capacity: " + shipToEdit.getSCap());
-                                System.out.println("Fields\n" +
+                                System.out.println("\nFields\n" +
                                                     "1. Ship name\n" +
                                                     "2. Fuel Capacity\n" +
                                                     "3. Fuel\n" +
@@ -961,7 +946,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 5: 
-                                        System.out.println("Going back to the previous menu.");
+                                        System.out.println("\nGoing back to the previous menu.\n");
                                         break;
 
                                     default:
@@ -973,7 +958,7 @@ public static void main(String[] args){
 
                             case 3:
                                 if (!checkForShips(ships)) {
-                                    System.out.println("There are no ships to edit.");
+                                    System.out.println("\nThere are no ships to edit.");
                                     break;
                                 }
                                 String theKey;
@@ -1001,7 +986,7 @@ public static void main(String[] args){
                                 break;
 
                             case 5:
-                                System.out.println("Going back to main menu.");
+                                System.out.println("\nGoing back to previous menu.\n");
                                 break;
 
                             default:
@@ -1016,7 +1001,7 @@ public static void main(String[] args){
                     // * - Select a ship
                     // * - Back
                     do {
-                        System.out.println("1. Select a Ship\n" +
+                        System.out.println("\n1. Select a Ship\n" +
                                            "2. Back to main menu");
                         try {
                             choice2 = kbd.nextInt();
@@ -1040,11 +1025,11 @@ public static void main(String[] args){
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");
                                     }
-                                } while ((launchConfirmation.equalsIgnoreCase("yes")||launchConfirmation.equalsIgnoreCase("no")));
+                                } while ((launchConfirmation.equalsIgnoreCase("yes")&&launchConfirmation.equalsIgnoreCase("no")));
                                 break;
 
                             case 2:
-                                System.out.println("Going back to main menu.");
+                                System.out.println("\nGoing back to previous menu.\n");
                                 break;
 
                             default:
@@ -1056,7 +1041,7 @@ public static void main(String[] args){
                     
 
                 case 4:
-                    System.out.println("Closing program now.");
+                    System.out.println("Closing program...");
                     break;
 
                 default:
@@ -1118,7 +1103,7 @@ public static void main(String[] args){
             }
             
             // * - Notify user of account creation and move on
-            System.out.println("*Account Created*");
+            System.out.println("This password will be required the next time the application is opened.");
 
             // * Any time after 1st
             allowedEntry = true;
