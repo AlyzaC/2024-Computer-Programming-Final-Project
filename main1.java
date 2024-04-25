@@ -73,7 +73,6 @@ public static void main(String[] args){
                             kbd.nextLine();
                             String astroName = kbd.nextLine().trim();
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
-                            kbd.nextLine();
                             String astroDateOfBirth = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's address: ");
                             String astroAddress = (kbd.nextLine()).trim();
