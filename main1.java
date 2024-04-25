@@ -70,8 +70,10 @@ public static void main(String[] args){
                         switch (choice2) {
                         case 1:
                             System.out.print("Please enter the astronaut's full name (First Last): ");
+                            kbd.nextLine();
                             String astroName = kbd.nextLine().trim();
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
+                            kbd.nextLine();
                             String astroDateOfBirth = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's address: ");
                             String astroAddress = (kbd.nextLine()).trim();
