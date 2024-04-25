@@ -699,7 +699,7 @@ public static void main(String[] args){
                                            "1. Add Ship\n" +
                                            "2. Edit Ship\n" +
                                            "3. Delete Ship\n" +
-                                           "4. Add Astronaut To Ship\n" +
+                                           "4. Assign Astronaut To Ship\n" +
                                            "5. Go Back");
                         choice2 = 0;
                         try {
@@ -1053,6 +1053,13 @@ public static void main(String[] args){
                                 break;
 
                             case 4:
+                                if (!checkForShips(ships)) {
+                                    System.out.println("There are no ships to assign astronauts to.");
+                                    break;
+                                } else if (!checkForAstronauts(astros)) {
+                                    System.out.println("There are no astronauts to assign.");
+                                    break;
+                                }
                                 //int astroChoice = astroSelection(kbd, astros);
                                 shipChoice = shipSelection(kbd, ships);
                                 //ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
