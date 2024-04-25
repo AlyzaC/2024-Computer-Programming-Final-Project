@@ -1317,7 +1317,6 @@ public static boolean checkForDatabase(Statement s) {
             if (databaseInFile) {
                 databaseExists = true;
             } else {
-                //create file?
                 s.executeUpdate("create database ApplicationDatabase;");
                 String updateString = "create table Astronauts (" +
                                       "Names tinytext," +
@@ -1400,7 +1399,7 @@ public static Ship[] databaseShipArrayRetrieval(Ship[] s, Statement stmnt) {
 }
 
 public static int astroSelection(Scanner kbd, Astronaut[] astros) {
-    // Ask user to select am astronaut
+    // Ask user to select an astronaut
     System.out.println("Please choose the corresponding integer to select an astronaut:");
     int count = 0;
     for (Astronaut a : astros) {
