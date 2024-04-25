@@ -652,27 +652,28 @@ public static void main(String[] args){
                             break;
                         
                         case 3:
-                            String theKey;
+                            //String theKey;
                             if (!checkForAstronauts(astros)) {
                                 System.out.println("\nThere are no astronauts to delete.");
                                 break;
                             }
+                            int astroChoice;
                             do{
-                                int astroChoice = astroSelection(kbd, astros);
+                                astroChoice = astroSelection(kbd, astros);
                             //     yes: ask for key to delete
-                                System.out.println("Type \"yes\" for deletion.\n" +
+                                /*System.out.println("Type \"yes\" for deletion.\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                theKey = kbd.nextLine();
-                                if (theKey.equalsIgnoreCase("yes")) {
+                                theKey = kbd.nextLine();*/
+                                //if (theKey.equalsIgnoreCase("yes")) {
                                     //correct key: delete astronaut, notify user
                                     AstroRemoval removeAstro = new AstroRemoval(1);
                                     removeAstro.addAstro(astros[astroChoice - 1]);
                                     removeAstro.removeAstronauts(connect);
                                     break;
-                                } else if (theKey.equalsIgnoreCase("Go back")) {
-                                    break;
-                                }
-                            } while (!theKey.equalsIgnoreCase("Go back")||!theKey.equalsIgnoreCase("yes"));
+                                //} else if (theKey.equalsIgnoreCase("Go back")) {
+                                    //break;
+                                //}!theKey.equalsIgnoreCase("Go back")||!theKey.equalsIgnoreCase("yes")
+                            } while (!(astroChoice <= 0));
                             break;
 
                         case 4:
@@ -711,7 +712,7 @@ public static void main(String[] args){
                         int field = 0;
                         switch (choice2) {
                             case 1:
-                                System.out.print("Please enter the ship's name: ");
+                                System.out.print("\nPlease enter the ship's name: ");
                                 kbd.nextLine();
                                 String shipName = (kbd.nextLine()).trim();
                                 System.out.print("Please enter the ship's fuel capacity: ");
@@ -927,7 +928,7 @@ public static void main(String[] args){
                                                 }
                                             } while (shipFuelCapacity <= 0);
                                             System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFCap() + "\'.\n" +
-                                                            "You entered the name \'" + shipFuelCapacity + "\'.\n" +
+                                                            "You entered the number \'" + shipFuelCapacity + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
@@ -941,7 +942,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                        } while (!(theKey.equalsIgnoreCase("go back")) && !(changeSuccessful));
                                         break;
 
                                     case 3:
@@ -965,8 +966,8 @@ public static void main(String[] args){
                                                     System.out.println("An error occurred: " + e.getMessage());
                                                 }
                                             } while (shipCurrentFuel > shipToEdit.getFCap());
-                                            System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
-                                                            "You entered the name \'" + shipCurrentFuel + "\'.\n" +
+                                            System.out.println("The ship's current fuel amount in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
+                                                            "You entered the number \'" + shipCurrentFuel + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
@@ -980,7 +981,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                        } while (!(theKey.equalsIgnoreCase("go back")) && !(changeSuccessful));
                                         break;
 
                                     case 4:
@@ -1000,7 +1001,7 @@ public static void main(String[] args){
                                                 }
                                             } while (shipCrewCapacity <= 0);
                                             System.out.println("The ship's current crew capacity in the database is \'" + shipToEdit.getSCap() + "\'.\n" +
-                                                            "You entered the name \'" + shipCrewCapacity + "\'.\n" +
+                                                            "You entered the number \'" + shipCrewCapacity + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
@@ -1033,22 +1034,22 @@ public static void main(String[] args){
                                     System.out.println("\nThere are no ships to edit.");
                                     break;
                                 }
-                                String theKey;
+                                //String theKey;
                                 do {
                                     shipChoice = shipSelection(kbd, ships);
                                     // no: ask for correct ship, verify
                                     // yes: ask for key to delete
-                                    System.out.println("Type \"yes\" for deletion.\n" +
+                                    /*System.out.println("Type \"yes\" for deletion.\n" +
                                                     "If you wish to go back enter \"Go back\".");
                                     theKey = kbd.nextLine();
-                                    if (theKey.equalsIgnoreCase("yes")) {
+                                    if (theKey.equalsIgnoreCase("yes")) {*/
                                         // correct key: delete ship, notify user
                                         ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
                                         removeShip.removeShip(connect);
-                                    } else if (theKey.equalsIgnoreCase("go back")) {
-                                        break;
-                                    }
-                                } while (!theKey.equalsIgnoreCase("yes")||!theKey.equalsIgnoreCase("go back"));
+                                    //} else if (theKey.equalsIgnoreCase("go back")) {
+                                        //break;
+                                    //}!theKey.equalsIgnoreCase("yes")&&!theKey.equalsIgnoreCase("go back")
+                                } while (shipChoice <= 0);
                                 break;
 
                             case 4:
@@ -1200,7 +1201,6 @@ public static boolean LoggingInPassword(Scanner scan) {
                             System.out.println("You input the wrong password.");
                             System.out.println("Reenter the password or type \"Go back\"");
                             // use a scanner to edit
-                            scan.nextLine();
                             choice3 = scan.nextLine();
                             if (choice3.equalsIgnoreCase("Go back")) {
                                 break;
