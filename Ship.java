@@ -129,11 +129,7 @@ public void ship(int speed,boolean inSpace )
   System.out.println ("The ship has landed sucessfully");
   doorIsOpen = true;
   //clear the String array "crew" and set fuel to zero
-  for (int i = 0; i < crew.length; i++)
-  {
-    crew[i] = null;
-  }
-
+  clearCrew();
   fuel = 0;
  }
 
@@ -182,10 +178,11 @@ System.out.println("The Ship needs more fuel for a sucessful launch.");
 // if fuel = fuelCapacity and crewNum = shipCapacity the launch will start
   System.out.println ("launching metal tube into orbit");
 /* accel and decell code here.
-altitude = altitude + speed;
-speed = speed + accel - deccel;
+altitude = altitude + speed; <-- needs to happen every second
+speed = speed + accel - deccel; <-- needs to happen every second
 tldr.  +speed is up -speed is down 
 thats why the parachute gives -7 deccel
+
  */
  }
 }
@@ -197,7 +194,20 @@ public void deployParachutes()
     //this will lower speed to no more than 7 meters per second by the time the ship lands
     parachutesDeployed = true;
     System.out.println ("Deploying parachutes");
-    deccel = deccel - 7;
+    if (speed > -7)
+    {
+      speed = -7;
+    }
+  }
+}
+private void clearCrew()
+{
+  if (crew != null)
+  {
+    for (int i = 0; i < crew.length; i++)
+    {
+      crew[i] = null;
+    }
   }
 }
   public void Destruction()
@@ -207,8 +217,19 @@ public void deployParachutes()
    // if failure is ever set to true
     System.out.println  ("All astronauts did not survive");
     System.out.println ("womp womp");
-    // clear String crew, Int crewNum, double fuelcapacity, String shipname , int shipcapacity, dobule fuel
-    //tell astroremoval to remove all astros that were part of crew
+    clearCrew();
+    crewNum = 0;
+    fuelCapacity = 0.0;
+    shipName = null;
+    shipCapacity = 0;
+    fuel = 0.0;
+failure = false;
+   // AstroRemoval.
+   //ShipRemoval.removeShip();
+
+   
+    // clear String crew, Int crewNum, double fuelcapacity, String shipname , int shipcapacity, double fuel
+    //tell astroremoval to remove all astronauts that were part of crew
     //tell shipremoval to remove the ship
     //set failure back to false once everything is done so that way the next test dosent automatically fail
   }
