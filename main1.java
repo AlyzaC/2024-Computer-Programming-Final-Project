@@ -941,7 +941,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                        } while (!(theKey.equalsIgnoreCase("go back")) && !(changeSuccessful));
                                         break;
 
                                     case 3:
