@@ -1059,9 +1059,9 @@ public static void main(String[] args){
                                     System.out.println("There are no astronauts to assign.");
                                     break;
                                 }
-                                //int astroChoice = astroSelection(kbd, astros);
+                                int astroChoice = astroSelection(kbd, astros);
                                 shipChoice = shipSelection(kbd, ships);
-                                //ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
+                                ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
                                 break;
 
                             case 5:
