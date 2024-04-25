@@ -16,15 +16,15 @@ public static void main(String[] args){
     //Scanner
         Scanner kbd = new Scanner(System.in);
     
-    Connection connect = null; //Will be fixed
-    /*Statement statement = connect.createStatement();
-    ResultSet results = null;
+    Connection connect = null;
+    Statement statement = null;
     try {
         //Class.forName(); <-- getting the driver
-        //connect = DriverManager.getConnection(url, username, pass);
+        connect = DriverManager.getConnection("jbdc:sqlite:ApplicationDatabase.db");
+        statement = connect.createStatement();
     } catch (SQLException e) {
         System.out.println("An error occurred: " + e.getMessage());
-    }*/
+    }
 
     // Main menu
     // - Astronauts
@@ -252,7 +252,7 @@ public static void main(String[] args){
                                     break;
                                 }
                             }
-                            /*
+                            
                             try {
                                 String addingAstronautUpdate = "insert into Astronauts values " + 
                                                                "(" + astros[count].getName() + ", " +
@@ -265,11 +265,10 @@ public static void main(String[] args){
                                                                astros[count].status() + ", " +
                                                                astros[count].payRate() + ", " +
                                                                astros[count].weight() + ");";
-                                //statement.executeUpdate(addingAstronautUpdate);
+                                statement.executeUpdate(addingAstronautUpdate);
                             } catch (SQLException e) {
                                 System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
                             }
-                            */
                             break;
 
                         case 2:
@@ -1106,6 +1105,10 @@ public static void main(String[] args){
                                     launchConfirmation = (kbd.nextLine()).trim();
                                     if (launchConfirmation.equalsIgnoreCase("yes")) {
                                         ships[shipChoice - 1].launch();
+                                        /*if (!(ships[shipChoice -1].getFailure()) {
+                                            ShipRemoval shipRemoval = new ShipRemoval(ships[shipChoice - 1]);
+                                            shipRemoval.removeShip(connect);
+                                        }*/
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");
                                     }
@@ -1276,7 +1279,7 @@ public static boolean LoggingInPassword(Scanner scan) {
                     break;
 
                 default:
-                    System.out.println("Please enter the number 1 or 2.");
+                    System.out.println("Please enter a number 1-3.");
                     break;
             }
         } while ((loginChoice != 3) && (allowedEntry == false));
@@ -1308,37 +1311,39 @@ public static void createApplicationPassword(File f) {
 
 public static boolean checkForDatabase(Statement s) {
     boolean databaseExists = false;
-    /*try {
-            Check if the file/database exits
-            Yes:
+    try {
+            boolean databaseInFile = false;
+            //execute queries to get value for databaseInFile
+            if (databaseInFile) {
                 databaseExists = true;
-            no:
-                create file?
-                create database? s.executeUpdate("create database ApplicationDatabase;");
-                s.executeUpdate("create table Astronauts (
-                    Names tinytext,
-                    SerialNumbers smallint,
-                    Birthdates tinytext,
-                    Addresses tinytext,
-                    Emails tinytext,
-                    PhoneNumbers tinytext,
-                    NextOfKin tinytext,
-                    Statuses tinytext,
-                    PayRates double(5, 2),
-                    Weights double(5, 2)
-                );");
-                s.executeUpdate("create table Ships (
-                    ShipNames tinytext,
-                    FuelCapacities double(6, 2),
-                    Fuel double(7, 2),
-                    ShipCapacities smallint
-                );");
+            } else {
+                //create file?
+                s.executeUpdate("create database ApplicationDatabase;");
+                String updateString = "create table Astronauts (" +
+                                      "Names tinytext," +
+                                      "SerialNumbers smallint," +
+                                      "Birthdates tinytext," +
+                                      "Addresses tinytext," +
+                                      "Emails tinytext," +
+                                      "PhoneNumbers tinytext," +
+                                      "NextOfKin tinytext," +
+                                      "Statuses tinytext," +
+                                      "PayRates double(5, 2)," +
+                                      "Weights double(5, 2));";
+                s.executeUpdate(updateString);
+                updateString = "create table Ships (" +
+                    "ShipNames tinytext," +
+                    "FuelCapacities double(6, 2)," +
+                    "Fuel double(7, 2)," +
+                    "ShipCapacities smallint);";
+                s.executeUpdate(updateString);
                 String databaseFile = "ApplicationDatabase.DB";
                 String backupStatement = String.format("backup database ApplicationDatabase to disk = %s;", databaseFile);
                 s.executeUpdate(backupStatement);
+            }
         } catch (SQLException e) {
             System.out.println("An error has occurred: " + e.getMessage());
-        }*/
+        }
     return databaseExists;
 }
 
@@ -1373,20 +1378,24 @@ public static Astronaut[] databaseAstronautArrayRetrieval(Astronaut[] a, Stateme
 }
 
 public static Ship[] databaseShipArrayRetrieval(Ship[] s, Statement stmnt) {
-    /*
-    int count = 0;
-    r = s.executeQuery(select * from Ships;);
-    while (r.next()) {
-        String name = r.getString("ShipNames");
-        s[count].setSName(name);
-        String fCap = r.getString("FuelCapacities");
-        s[count].setFCap(fCap);
-        String fuel = r.getString("Fuel");
-        s[count].setFuel(fuel);
-        String sCap = r.getString("ShipCapacities");
-        s[count].setSCap(sCap);
-        count++;
-    }*/
+    try {
+        int count = 0;
+        ResultSet r = stmnt.executeQuery("select * from Ships;");
+        while (r.next()) {
+            String name = r.getString("ShipNames");
+            s[count].setSName(name);
+            String fCap = r.getString("FuelCapacities");
+            s[count].setFCap(Double.parseDouble(fCap));
+            String fuel = r.getString("Fuel");
+            s[count].setFuel(Double.parseDouble(fuel));
+            String sCap = r.getString("ShipCapacities");
+            s[count].setSCap(Integer.parseInt(sCap));
+            count++;
+        }
+    } catch (SQLException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
+    
     return s;
 }
 
