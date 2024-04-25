@@ -927,7 +927,7 @@ public static void main(String[] args){
                                                 }
                                             } while (shipFuelCapacity <= 0);
                                             System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFCap() + "\'.\n" +
-                                                            "You entered the name \'" + shipFuelCapacity + "\'.\n" +
+                                                            "You entered the number \'" + shipFuelCapacity + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
@@ -965,8 +965,8 @@ public static void main(String[] args){
                                                     System.out.println("An error occurred: " + e.getMessage());
                                                 }
                                             } while (shipCurrentFuel > shipToEdit.getFCap());
-                                            System.out.println("The ship's current fuel capacity in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
-                                                            "You entered the name \'" + shipCurrentFuel + "\'.\n" +
+                                            System.out.println("The ship's current fuel amount in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
+                                                            "You entered the number \'" + shipCurrentFuel + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
@@ -1000,7 +1000,7 @@ public static void main(String[] args){
                                                 }
                                             } while (shipCrewCapacity <= 0);
                                             System.out.println("The ship's current crew capacity in the database is \'" + shipToEdit.getSCap() + "\'.\n" +
-                                                            "You entered the name \'" + shipCrewCapacity + "\'.\n" +
+                                                            "You entered the number \'" + shipCrewCapacity + "\'.\n" +
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
@@ -1200,7 +1200,6 @@ public static boolean LoggingInPassword(Scanner scan) {
                             System.out.println("You input the wrong password.");
                             System.out.println("Reenter the password or type \"Go back\"");
                             // use a scanner to edit
-                            scan.nextLine();
                             choice3 = scan.nextLine();
                             if (choice3.equalsIgnoreCase("Go back")) {
                                 break;

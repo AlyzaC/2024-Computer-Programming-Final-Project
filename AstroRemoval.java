@@ -4,6 +4,7 @@ import java.sql.*;
 public class AstroRemoval {
     //Fields
         private Astronaut[] astrosToBeRemoved;
+        int astroCount = 0;
 
     //Constructor
     /**
@@ -20,9 +21,9 @@ public class AstroRemoval {
      * @param a A user supplied astronaut that is to be removed
      */
         public void addAstro(Astronaut a) {
-            for (Astronaut astro : astrosToBeRemoved) {
-                if (astro == null) {
-                    astro = a;
+            for (int count = 0; count < astrosToBeRemoved.length; count++) {
+                if (astrosToBeRemoved[count] ==  null) {
+                    astrosToBeRemoved[count] = a;
                     break;
                 }
             }
@@ -34,14 +35,14 @@ public class AstroRemoval {
      */
         private boolean verifyRemoval() {
             Scanner keyboard = new Scanner(System.in);
-            String astronautList = "";
+            String astronautList = "\n";
             boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
                 if (astro != null) {
                     astronautList += "- " + astro.getName() + "\n";
                 }
             }
-            System.out.println("The following astronauts have been chosen for removal:" +
+            System.out.println("The following astronauts have been chosen for removal: " +
                                astronautList +
                                "Do you wish to proceed with removal?\n" +
                                "1. Yes\n" +
