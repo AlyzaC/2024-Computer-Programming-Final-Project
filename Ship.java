@@ -1,13 +1,14 @@
 import java.util.Scanner;
 public class Ship
 {
- int placeHolder;
+ int placeHolder; // THIS IS USELESS AND SHOULD BE REMOVED WHEN POSSIBLE
     private double fuel;
     private String shipName;
    private  int shipCapacity;
     private double fuelCapacity;
     private int crewNum = 0; //crewNum is the ammount of Strings in crew
     private Astronaut[] crew; 
+    private boolean failure2;
     boolean inSpace = false; 
     boolean parachutesDeployed = false; // will decrease decell
     boolean doorIsOpen = false;
@@ -21,13 +22,19 @@ public class Ship
     double deccel = 9.81; //gravity pulls at 9.81 meters a second
     double altitude = 0; //above 70k in space.
   Scanner scanner = new Scanner(System.in);
+  //make connection object, make setConnection(), connection will be put into AstroRemoval object
 
 int choice; 
+
 
 //setters and getters
 public Astronaut[] getCrew()
 {
   return crew;
+}
+public boolean getFailure()
+{
+  return failure2;
 }
 //public void setCrew()
 public int getCN()
@@ -84,13 +91,12 @@ public void Space()
 
  
     System.out.println("Please choose an astronaut to go on a spacewalk.");
-     //Scanner will show a menu of all of the Strings in crew[]
-    //scanner will check to make sure astronauts name/id is valid
+     //Scanner will show a menu of all of the Strings in crew[] 
    //if valid a 5 minute timer starts and boolean spacewalk is true
   //if notvalid Code will state that no astronaut name could be found and will ask them to try again
     System.out.println("(person stuff here) Has been sent on a spacewalk");
     spacewalk = true;
-    //after 5 minutes the astronaut will return to the ship
+    //after 30 seconds the astronaut will return to the ship
     System.out.println("(name stuff here) has returned into the ship in time");
   spaceWalkComplete = true;
  }
@@ -160,9 +166,9 @@ public void addAstro(Astronaut astronaut)
   System.out.println("The ship is full.");
  }
 } 
-public void launch()
-{
-if (placeHolder == 4) // when a perimeter is sent from main1 to launch...
+public void launch() //might need to be a private
+{ 
+if (placeHolder == 4)// might need to be removed
 {
   //The code will first make sure that crewNum is equal to shipCapacity
  if (crewNum == shipCapacity)
@@ -217,17 +223,20 @@ private void clearCrew()
    // if failure is ever set to true
     System.out.println  ("All astronauts did not survive");
     System.out.println ("womp womp");
-    clearCrew();
-    crewNum = 0;
+    
+    
     fuelCapacity = 0.0;
-    shipName = null;
+    
     shipCapacity = 0;
     fuel = 0.0;
 failure = false;
-   // AstroRemoval.
-   //ShipRemoval.removeShip();
 
-   
+  AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
+   AstroRemoval.removeAstronauts();
+   crewNum = 0;
+   shipName = null;
+   clearCrew();
+   failure2 = true;
     // clear String crew, Int crewNum, double fuelcapacity, String shipname , int shipcapacity, double fuel
     //tell astroremoval to remove all astronauts that were part of crew
     //tell shipremoval to remove the ship
