@@ -6,7 +6,7 @@ public class Ship
     private String shipName;
    private  int shipCapacity;
     private double fuelCapacity;
-    private int crewNum; //crewNum is the ammount of Strings in crew
+    private int crewNum = 0; //crewNum is the ammount of Strings in crew
     private Astronaut[] crew; 
     boolean inSpace = false; 
     boolean parachutesDeployed = false; // will decrease decell
@@ -149,8 +149,7 @@ public void ship(int speed,boolean inSpace )
 public void addAstro(Astronaut astronaut)
 {
   // if main1.java sends a perimeter to add an astronaut
-if (placeHolder == 3)
-{ if (shipCapacity > crewNum)
+ if (crewNum < shipCapacity)
   { if (crew == null)
     {
       crew = new Astronaut[shipCapacity];
@@ -163,7 +162,6 @@ if (placeHolder == 3)
 {
   // the astro is not added to the array
   System.out.println("The ship is full.");
-}
  }
 } 
 public void launch()
