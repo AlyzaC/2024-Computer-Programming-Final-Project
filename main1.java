@@ -152,6 +152,8 @@ public static void main(String[] args){
                                         field = kbd.nextInt();
                                     } catch (NumberFormatException e) {
                                         System.out.println("An error has occurred: " + e.getMessage());
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("An error has occurred: " + e.getMessage());
                                     }
                                     switch (field) {
                                         case 1:
@@ -309,6 +311,8 @@ public static void main(String[] args){
                                 try {
                                     field = kbd.nextInt();
                                 } catch (NumberFormatException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                } catch (InputMismatchException e) {
                                     System.out.println("An error has occurred: " + e.getMessage());
                                 }
                                 switch (field) {
@@ -769,6 +773,8 @@ public static void main(String[] args){
                                             field = kbd.nextInt();
                                         } catch (NumberFormatException e) {
                                             System.out.println("An error has occurred: " + e.getMessage());
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("An error has occurred: " + e.getMessage());
                                         }
                                         switch (field) {
                                             case 1:
@@ -872,7 +878,13 @@ public static void main(String[] args){
                                                     "3. Fuel\n" +
                                                     "4. Ship Capacity\n" +
                                                     "5. Go Back");
-                                field = kbd.nextInt();
+                                try {
+                                    field = kbd.nextInt();
+                                } catch (NumberFormatException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                } catch (InputMismatchException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                }
                                 switch (field) {
                                     case 1:
                                         String theKey = "";
@@ -1074,6 +1086,10 @@ public static void main(String[] args){
                         int shipChoice;
                         switch (choice2) {
                             case 1:
+                                if (!checkForShips(ships)) {
+                                    System.out.println("\nThere are no ships to launch.");
+                                    break;
+                                }
                                 shipChoice = shipSelection(kbd, ships);
                                 String launchConfirmation = "";
                                 do {
@@ -1143,17 +1159,31 @@ public static boolean LoggingInPassword(Scanner scan) {
         // * Any time after 1st
         allowedEntry = true;
     } else {
-        int loginChoice;
+        int loginChoice = 0;
         do {
             // ask for password or to reset password with the administrator password
             System.out.println("1. Enter Password to Application\n" +
                     "2. Enter Admin Password to Reset Application Password\n" +
                     "3. Quit");
-            loginChoice = scan.nextInt();
+            
+            try {
+                loginChoice = scan.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
+            }
             switch (loginChoice) {
                 case 1:
                     System.out.println("Please enter the password for the application: ");
-                    int enteredPassword = scan.nextInt();
+                    int enteredPassword = 0;
+                    try {
+                        enteredPassword = scan.nextInt();
+                    } catch (NumberFormatException e) {
+                        System.out.println("An error has occurred: " + e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("An error has occurred: " + e.getMessage());
+                    }
                     if (enteredPassword == applicationPassword) {
                         allowedEntry = true;
                     } else {
@@ -1194,7 +1224,14 @@ public static boolean LoggingInPassword(Scanner scan) {
                         System.out.println("An error occurred: " + e.getMessage());
                     }
                     System.out.println("Please enter the admin password: ");
-                    int adminPass = scan.nextInt();
+                    int adminPass = 0;
+                    try {
+                        adminPass = scan.nextInt();
+                    } catch (NumberFormatException e) {
+                        System.out.println("An error has occurred: " + e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("An error has occurred: " + e.getMessage());
+                    }
                     if (adminPass == trueAdminPass) {
                         createApplicationPassword(file);
                         allowedEntry = true;
@@ -1208,11 +1245,16 @@ public static boolean LoggingInPassword(Scanner scan) {
                             // use the scanner to get input --
                             scan.nextLine();
                             inputA = scan.nextLine();
-
                             if (inputA.equalsIgnoreCase("Go back")) {
                                 break;
                             } else {
-                                adminPass = Integer.parseInt(inputA);
+                                try {
+                                    adminPass = Integer.parseInt(inputA);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                } catch (InputMismatchException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                }
                                 if (adminPass == trueAdminPass) {
                                     createApplicationPassword(file);
                                     allowedEntry = true;
@@ -1358,6 +1400,8 @@ public static int astroSelection(Scanner kbd, Astronaut[] astros) {
             astroChoice = kbd.nextInt();
         } catch (NumberFormatException e) {
             System.out.println("An error has occurred: " + e.getMessage());
+        }  catch (InputMismatchException e) {
+            System.out.println("An error has occurred: " + e.getMessage());
         }
     } while (!(astroChoice >= 1 && astroChoice <= count));
     String astroConfirmation = "";
@@ -1379,6 +1423,8 @@ public static int astroSelection(Scanner kbd, Astronaut[] astros) {
                 try {
                     astroChoice = kbd.nextInt();
                 } catch (NumberFormatException e) {
+                    System.out.println("An error has occurred: " + e.getMessage());
+                }  catch (InputMismatchException e) {
                     System.out.println("An error has occurred: " + e.getMessage());
                 }
             } while (!(astroChoice >= 1 && astroChoice <= count));
@@ -1403,6 +1449,8 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
             shipChoice = kbd.nextInt();
         } catch (NumberFormatException e) {
             System.out.println("An error occurred: " + e.getMessage());
+        } catch (InputMismatchException e) {
+            System.out.println("An error has occurred: " + e.getMessage());
         }
     } while (!(shipChoice >= 1 && shipChoice <= count));
     String shipConfirmation = "";
@@ -1425,6 +1473,8 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
                     shipChoice = kbd.nextInt();
                 } catch (NumberFormatException e) {
                     System.out.println("An error occurred: " + e.getMessage());
+                } catch (InputMismatchException e) {
+                    System.out.println("An error has occurred: " + e.getMessage());
                 }
             } while (!(shipChoice >= 1 && shipChoice <= count));
         }
