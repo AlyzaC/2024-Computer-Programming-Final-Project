@@ -19,10 +19,12 @@ public static void main(String[] args){
     Connection connect = null;
     Statement statement = null;
     try {
-        //Class.forName(); <-- getting the driver
-        connect = DriverManager.getConnection("jbdc:sqlite:ApplicationDatabase.db");
+        Class.forName("org.sqlite.JDBC");
+        connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.db");
         statement = connect.createStatement();
     } catch (SQLException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    } catch (ClassNotFoundException e) {
         System.out.println("An error occurred: " + e.getMessage());
     }
 
@@ -245,7 +247,7 @@ public static void main(String[] args){
                                     
                                 }
                             }  while (!change.equalsIgnoreCase("no"));
-                            int count;
+                            int count = 0;
                             for (count = 0; count < astros.length; count++) {
                                 if (astros[count] == null) {
                                     astros[count] = new Astronaut(astroName, astroDateOfBirth, astroAddress, astroEmail, astroPhone, astroNextOfKin, astroStatus, astroPayRate, astroWeight);
@@ -267,6 +269,8 @@ public static void main(String[] args){
                                                                astros[count].weight() + ");";
                                 statement.executeUpdate(addingAstronautUpdate);
                             } catch (SQLException e) {
+                                System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
+                            } catch (NullPointerException e) {
                                 System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
                             }
                             break;
@@ -305,7 +309,6 @@ public static void main(String[] args){
                                                    "10. Go back");
                                 System.out.println("Please select a field");
                                 field = 0;
-                                kbd.nextLine();
                                 try {
                                     field = kbd.nextInt();
                                 } catch (NumberFormatException e) {
@@ -325,7 +328,6 @@ public static void main(String[] args){
                                                     "You entered: " + astroName + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                            kbd.nextLine();
                                             correctAstroName = kbd.nextLine();
                                             if (correctAstroName.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setName(astroName);
@@ -1185,40 +1187,25 @@ public static boolean LoggingInPassword(Scanner scan) {
             }
             switch (loginChoice) {
                 case 1:
-                    System.out.println("Please enter the password for the application: ");
-                    int enteredPassword = 0;
-                    try {
-                        enteredPassword = scan.nextInt();
-                    } catch (NumberFormatException e) {
-                        System.out.println("An error has occurred: " + e.getMessage());
-                    } catch (InputMismatchException e) {
-                        System.out.println("An error has occurred: " + e.getMessage());
-                    }
-                    if (enteredPassword == applicationPassword) {
-                        allowedEntry = true;
-                    } else {
-                        String choice3 = "";
-                        while (!(enteredPassword == applicationPassword)) {
-                            // * notify that the incorrect password has been entered
-                            // ask for password again and give option to go back
-                            System.out.println("You input the wrong password.");
-                            System.out.println("Reenter the password or type \"Go back\"");
-                            // use a scanner to edit
-                            choice3 = scan.nextLine();
-                            if (choice3.equalsIgnoreCase("Go back")) {
-                                break;
-                            } else {
-                                try {
-                                    enteredPassword = Integer.parseInt(choice3);
-                                } catch (NumberFormatException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                } catch (InputMismatchException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                }
-
-                            }
+                    String enteredPassword = "";
+                    scan.nextLine();
+                    do {
+                        System.out.println("Please enter the password for the application or \"Go Back\": ");
+                        try {
+                            enteredPassword = scan.nextLine();
+                        } catch (NumberFormatException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
+                        } catch (InputMismatchException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
                         }
-                    }
+                        if (enteredPassword.equalsIgnoreCase("Go back")) {
+                            break;
+                        }else if (enteredPassword.equalsIgnoreCase(String.valueOf(applicationPassword))) {
+                            allowedEntry = true;
+                        } else {
+                            System.out.println("You input the wrong password.");
+                        }
+                    } while (!allowedEntry && !enteredPassword.equalsIgnoreCase("go back"));
                     break;
 
                 case 2:
@@ -1232,46 +1219,27 @@ public static boolean LoggingInPassword(Scanner scan) {
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred: " + e.getMessage());
                     }
-                    System.out.println("Please enter the admin password: ");
-                    int adminPass = 0;
-                    try {
-                        adminPass = scan.nextInt();
-                    } catch (NumberFormatException e) {
-                        System.out.println("An error has occurred: " + e.getMessage());
-                    } catch (InputMismatchException e) {
-                        System.out.println("An error has occurred: " + e.getMessage());
-                    }
-                    if (adminPass == trueAdminPass) {
-                        createApplicationPassword(file);
-                        allowedEntry = true;
-                    } else {
-                        String inputA = "";
-                        while (!(adminPass == trueAdminPass)) {
-                            // notify that incorrect pass has been entered
-                            // ask for pass again and give option to go back
-                            System.out.println("You input the wrong password.");
-                            System.out.println("Reenter the password or type \"Go back\"");
-                            // use the scanner to get input --
-                            scan.nextLine();
-                            inputA = scan.nextLine();
-                            if (inputA.equalsIgnoreCase("Go back")) {
-                                break;
-                            } else {
-                                try {
-                                    adminPass = Integer.parseInt(inputA);
-                                } catch (NumberFormatException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                } catch (InputMismatchException e) {
-                                    System.out.println("An error has occurred: " + e.getMessage());
-                                }
-                                if (adminPass == trueAdminPass) {
-                                    createApplicationPassword(file);
-                                    allowedEntry = true;
-                                    break;
-                                }
-                            }
+                    String adminPass = "";
+                    scan.nextLine();
+                    do {
+                        System.out.println("Please enter the admin password or \"Go Back\": ");
+                        try {
+                            adminPass = scan.nextLine();
+                        } catch (NumberFormatException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
+                        } catch (InputMismatchException e) {
+                            System.out.println("An error has occurred: " + e.getMessage());
                         }
-                    }
+                        if (adminPass.equalsIgnoreCase(String.valueOf(trueAdminPass))) {
+                            createApplicationPassword(file);
+                            allowedEntry = true;
+                        } else if (adminPass.equalsIgnoreCase("Go back")) {
+                            break;
+                        } else {
+                            System.out.println("You input the wrong password.");
+                        }
+                    } while (!(adminPass.equalsIgnoreCase("Go back")) && !allowedEntry);
+                    
                     break;
 
                 case 3:
@@ -1347,32 +1315,35 @@ public static boolean checkForDatabase(Statement s) {
 }
 
 public static Astronaut[] databaseAstronautArrayRetrieval(Astronaut[] a, Statement stmnt) {
-    /*
     int count = 0;
-    ResultSet r = stmnt.executeQuery("select * from Astronauts;");
-    while (r.next()) {
-        String dbName = r.getString("Names");
-        a[count].setName(dbName);
-        String dbSerialNumber = r.getInt("SerialNumbers");
-        a[count].setSerialNumber(dbSerialNumber);
-        String dbBirthdate = r.getString("Birthdates");
-        a[count].setdateOfBirth(dbBirthdate);
-        String dbAddress = r.getString("Addresses");
-        a[count].setAddress(dbAddress);
-        String dbEmail = r.getString("Emails");
-        a[count].setEmail(dbEmail);
-        String dbPhoneNumber = r.getString("PhoneNumbers");
-        a[count].setPhoneNumber(dbPhoneNumber);
-        String dbNextOfKin = r.getString("NextOfKin");
-        a[count].setNextOfKin(nextOfKin);
-        String dbStatus = r.getString("Statuses");
-        a[count].setStatus(dbStatus);
-        String dbPayRate = r.getDouble("PayRates");
-        a[count].setPayRate(dbPayRate);
-        String dbWeight = r.getDouble("Weights");
-        a[count].setWeight(dbWeight);
-        count++;
-    }*/
+    try {
+        ResultSet r = stmnt.executeQuery("select * from Astronauts;");
+        while (r.next()) {
+            String dbName = r.getString("Names");
+            a[count].setName(dbName);
+            String dbSerialNumber = r.getString("SerialNumbers");
+            a[count].setSerialNumber(Integer.parseInt(dbSerialNumber));
+            String dbBirthdate = r.getString("Birthdates");
+            a[count].setdateOfBirth(dbBirthdate);
+            String dbAddress = r.getString("Addresses");
+            a[count].setAddress(dbAddress);
+            String dbEmail = r.getString("Emails");
+            a[count].setEmail(dbEmail);
+            String dbPhoneNumber = r.getString("PhoneNumbers");
+            a[count].setPhoneNumber(dbPhoneNumber);
+            String dbNextOfKin = r.getString("NextOfKin");
+            a[count].setNextOfKin(dbNextOfKin);
+            String dbStatus = r.getString("Statuses");
+            a[count].setStatus(dbStatus);
+            String dbPayRate = r.getString("PayRates");
+            a[count].setPayRate(Double.parseDouble(dbPayRate));
+            String dbWeight = r.getString("Weights");
+            a[count].setWeight(Double.parseDouble(dbWeight));
+            count++;
+        }
+    } catch (SQLException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
     return a;
 }
 
