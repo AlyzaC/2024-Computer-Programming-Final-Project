@@ -1058,150 +1058,146 @@ public static void main(String[] args){
     System.exit(0);
 }
 
-    public static boolean LoggingInPassword(Scanner scan) {
-        boolean createPassword = true;
-        boolean allowedEntry = false;
-        File file = new File("ApplicationPassword.dat");
-        int applicationPassword = -800305;
+public static boolean LoggingInPassword(Scanner scan) {
+    boolean createPassword = true;
+    boolean allowedEntry = false;
+    File file = new File("ApplicationPassword.dat");
+    int applicationPassword = -800305;
 
-        if (file.exists()) {
-            try {
-                Scanner fileReader = new Scanner(file);
-                applicationPassword = fileReader.nextInt();
-                fileReader.close();
-                createPassword = false;
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred: " + e.getMessage());
-            }
-        }
-        if (createPassword) {
-            createApplicationPassword(file);
-            createPassword = false;
-            // * - Notify user of account creation and move on
-            System.out.println("This password will be required the next time the application is opened.");
-            // * Any time after 1st
-            allowedEntry = true;
-        } else {
-            int loginChoice;
-            do {
-                // ask for password or to reset password with the administrator password
-                System.out.println("1. Enter Password to Application\n" +
-                                   "2. Enter Admin Password to Reset Application Password\n" +
-                                   "3. Quit");
-                loginChoice = scan.nextInt();
-                switch (loginChoice) {
-                    case 1:
-                        System.out.println("Please enter the password for the application: ");
-                        int enteredPassword = scan.nextInt();
-                        if (enteredPassword == applicationPassword) {
-                            allowedEntry = true;
-                        } else {
-                            String choice3 = "";
-                            while (!(enteredPassword == applicationPassword)) {
-                                //* notify that the incorrect password has been entered
-                                // ask for password again and give option to go back
-                                System.out.println("You input the wrong password.");
-                                System.out.println("Reenter the password or type \"Go back\"");
-                                //use a scanner to edit
-                                scan.nextLine();
-                                choice3 = scan.nextLine();
-                                if (choice3.equalsIgnoreCase("Go back")) {
-                                    break;
-                                } else {
-                                    try {
-                                        enteredPassword = Integer.parseInt(choice3);
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    } catch (InputMismatchException e) {
-                                        System.out.println("An error has occurred: " + e.getMessage());
-                                    }
-                                    
-                                }
-                            }
-                        }
-                        break;
-        
-                    case 2:
-                        // ask for adminPass
-                        int trueAdminPass = -298756;
-                        File adminFile = new File("adminPassword.dat");
-                        try {
-                            Scanner fileReader = new Scanner(adminFile);
-                            trueAdminPass = fileReader.nextInt();
-                            fileReader.close();
-                        } catch (FileNotFoundException e) {
-                            System.out.println("An error occurred: " + e.getMessage());
-                        }
-                        System.out.println("Please enter the admin password: ");
-                        int adminPass = scan.nextInt();
-                        if (adminPass == trueAdminPass) {
-                            createApplicationPassword(file);
-                            allowedEntry = true;
-                        } else {
-                            String inputA = "";
-                            while (!(adminPass == trueAdminPass)) {
-                                // notify that incorrect pass has been entered
-                                // ask for pass again and give option to go back
-                                System.out.println("You input the wrong password.");
-                                System.out.println("Reenter the password or type \"Go back\"");
-                                //use the scanner to get input -- 
-                                scan.nextLine();
-                                inputA = scan.nextLine();
-
-                                if (inputA.equalsIgnoreCase("Go back")) {
-                                    break;
-                                } else {
-                                    adminPass = Integer.parseInt(inputA);
-                                    if (adminPass == trueAdminPass) {
-                                        createApplicationPassword(file);
-                                        allowedEntry = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        break;
-        
-                    case 3:
-                        System.out.println("Quitting the application");
-                        break;
-
-                    default:
-                        System.out.println("Please enter the number 1 or 2.");
-                        break;
-                }
-            } while ((loginChoice != 3) && (allowedEntry == false));
-            
-        }
-            return allowedEntry;
-    }
-
-    public static void createApplicationPassword(File f) {
-        // create a new password for application and show it to user to write down
-        System.out.println("Creating Password...");
-        Random r = new Random();
-        int passNum = 0;
-        String pass, pass2 = "";
-        for (int i = 0; i < 9; i++) {
-            pass = Integer.toString(r.nextInt(10));
-            pass2 += pass;
-        }
-        passNum = Integer.parseInt(pass2);
-        System.out.println("Please write down the following password: " + passNum);
+    if (file.exists()) {
         try {
-            //FileOutputStream passOutput = new FileOutputStream(f);
-            PrintWriter pw = new PrintWriter(f);
-            pw.print(passNum);
-            pw.close();
-            //passOutput.close();
+            Scanner fileReader = new Scanner(file);
+            applicationPassword = fileReader.nextInt();
+            fileReader.close();
+            createPassword = false;
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred: " + e.getMessage());
-        } /*catch (IOException e) {
-            System.out.println("An error occured: " + e.getMessage());
-        }*/
+        }
     }
+    if (createPassword) {
+        createApplicationPassword(file);
+        createPassword = false;
+        // * - Notify user of account creation and move on
+        System.out.println("This password will be required the next time the application is opened.");
+        // * Any time after 1st
+        allowedEntry = true;
+    } else {
+        int loginChoice;
+        do {
+            // ask for password or to reset password with the administrator password
+            System.out.println("1. Enter Password to Application\n" +
+                    "2. Enter Admin Password to Reset Application Password\n" +
+                    "3. Quit");
+            loginChoice = scan.nextInt();
+            switch (loginChoice) {
+                case 1:
+                    System.out.println("Please enter the password for the application: ");
+                    int enteredPassword = scan.nextInt();
+                    if (enteredPassword == applicationPassword) {
+                        allowedEntry = true;
+                    } else {
+                        String choice3 = "";
+                        while (!(enteredPassword == applicationPassword)) {
+                            // * notify that the incorrect password has been entered
+                            // ask for password again and give option to go back
+                            System.out.println("You input the wrong password.");
+                            System.out.println("Reenter the password or type \"Go back\"");
+                            // use a scanner to edit
+                            scan.nextLine();
+                            choice3 = scan.nextLine();
+                            if (choice3.equalsIgnoreCase("Go back")) {
+                                break;
+                            } else {
+                                try {
+                                    enteredPassword = Integer.parseInt(choice3);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                } catch (InputMismatchException e) {
+                                    System.out.println("An error has occurred: " + e.getMessage());
+                                }
 
-    public static void databaseArrayRetrieval(Statement s, ResultSet r) {
+                            }
+                        }
+                    }
+                    break;
+
+                case 2:
+                    // ask for adminPass
+                    int trueAdminPass = -298756;
+                    File adminFile = new File("adminPassword.dat");
+                    try {
+                        Scanner fileReader = new Scanner(adminFile);
+                        trueAdminPass = fileReader.nextInt();
+                        fileReader.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred: " + e.getMessage());
+                    }
+                    System.out.println("Please enter the admin password: ");
+                    int adminPass = scan.nextInt();
+                    if (adminPass == trueAdminPass) {
+                        createApplicationPassword(file);
+                        allowedEntry = true;
+                    } else {
+                        String inputA = "";
+                        while (!(adminPass == trueAdminPass)) {
+                            // notify that incorrect pass has been entered
+                            // ask for pass again and give option to go back
+                            System.out.println("You input the wrong password.");
+                            System.out.println("Reenter the password or type \"Go back\"");
+                            // use the scanner to get input --
+                            scan.nextLine();
+                            inputA = scan.nextLine();
+
+                            if (inputA.equalsIgnoreCase("Go back")) {
+                                break;
+                            } else {
+                                adminPass = Integer.parseInt(inputA);
+                                if (adminPass == trueAdminPass) {
+                                    createApplicationPassword(file);
+                                    allowedEntry = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Quitting the application");
+                    break;
+
+                default:
+                    System.out.println("Please enter the number 1 or 2.");
+                    break;
+            }
+        } while ((loginChoice != 3) && (allowedEntry == false));
+
+    }
+    return allowedEntry;
+}
+
+public static void createApplicationPassword(File f) {
+    // create a new password for application and show it to user to write down
+    System.out.println("Creating Password...");
+    Random r = new Random();
+    int passNum = 0;
+    String pass, pass2 = "";
+    for (int i = 0; i < 9; i++) {
+        pass = Integer.toString(r.nextInt(10));
+        pass2 += pass;
+    }
+    passNum = Integer.parseInt(pass2);
+    System.out.println("Please write down the following password: " + passNum);
+    try {
+        PrintWriter pw = new PrintWriter(f);
+        pw.print(passNum);
+        pw.close();
+    } catch (FileNotFoundException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
+}
+
+public static void databaseArrayRetrieval(Statement s, ResultSet r) {
         /*try {
             Check if the file/database exits
             Yes:
@@ -1314,117 +1310,117 @@ public static void main(String[] args){
         } catch (SQLException e) {
             System.out.println("An error has occurred: " + e.getMessage());
         }*/
-    }
+}
 
-    public static int astroSelection(Scanner kbd, Astronaut[] astros) {
-        //Ask user to select am astronaut
-        System.out.println("Please choose the corresponding integer to select an astronaut:");
-        int count = 0;
-        for (Astronaut a : astros) {
-            if (a != null) {
-                count++;
-                System.out.println(count + ". " + a.getName());
-            }
+public static int astroSelection(Scanner kbd, Astronaut[] astros) {
+    // Ask user to select am astronaut
+    System.out.println("Please choose the corresponding integer to select an astronaut:");
+    int count = 0;
+    for (Astronaut a : astros) {
+        if (a != null) {
+            count++;
+            System.out.println(count + ". " + a.getName());
         }
-        int astroChoice = 0;
-        do {
-            try {
-                astroChoice = kbd.nextInt();
-            } catch (NumberFormatException e) {
-                System.out.println("An error has occurred: " + e.getMessage());
-            }
-        } while (!(astroChoice >= 1 && astroChoice <= count));
-        String astroConfirmation = "";
-        do {
-            System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
-            System.out.println("Is this the correct astronaut? (Yes/No)");
-            kbd.nextLine();
-            astroConfirmation = (kbd.nextLine()).trim();
-            if (astroConfirmation.equalsIgnoreCase("no")) {
-                count = 0;
-                for (Astronaut a : astros) {
-                    if (a != null) {
-                        count++;
-                        System.out.println(count + " " + a.getName());
-                    }
+    }
+    int astroChoice = 0;
+    do {
+        try {
+            astroChoice = kbd.nextInt();
+        } catch (NumberFormatException e) {
+            System.out.println("An error has occurred: " + e.getMessage());
+        }
+    } while (!(astroChoice >= 1 && astroChoice <= count));
+    String astroConfirmation = "";
+    do {
+        System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
+        System.out.println("Is this the correct astronaut? (Yes/No)");
+        kbd.nextLine();
+        astroConfirmation = (kbd.nextLine()).trim();
+        if (astroConfirmation.equalsIgnoreCase("no")) {
+            count = 0;
+            for (Astronaut a : astros) {
+                if (a != null) {
+                    count++;
+                    System.out.println(count + " " + a.getName());
                 }
-                kbd.nextLine();
-                do {
-                    try {
-                        astroChoice = kbd.nextInt();
-                    } catch (NumberFormatException e) {
-                        System.out.println("An error has occurred: " + e.getMessage());
-                    }
-                } while (!(astroChoice >= 1 && astroChoice <= count));
             }
-        } while (!astroConfirmation.equalsIgnoreCase("yes"));
-        return astroChoice;
-    }
-
-    public static int shipSelection(Scanner kbd, Ship[] ships) {
-        // Ask the user to select a ship
-        System.out.println("Please choose the corresponding integer to select a ship:");
-        int count = 0;
-        for (Ship s : ships) {
-            if (s != null) {
-                count++;
-                System.out.println(count + ". " + s.getSName());
-            }
-        }
-        int shipChoice = 0;
-        do {
-            try {
-                shipChoice = kbd.nextInt();
-            } catch (NumberFormatException e) {
-                System.out.println("An error occurred: " + e.getMessage());
-            }
-        } while (!(shipChoice >= 1 && shipChoice <= count));
-        String shipConfirmation = "";
-        do {
-            System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
-            System.out.println("Is this the correct ship? (Yes/No)");
             kbd.nextLine();
-            shipConfirmation = (kbd.nextLine()).trim();
-            if (shipConfirmation.equalsIgnoreCase("no")) {
-                count = 0;
-                for (Ship s : ships) {
-                    if (s != null) {
-                        count++;
-                        System.out.println(count + ". " + s.getSName());
-                    }
+            do {
+                try {
+                    astroChoice = kbd.nextInt();
+                } catch (NumberFormatException e) {
+                    System.out.println("An error has occurred: " + e.getMessage());
                 }
-                kbd.nextLine();
-                do {
-                    try {
-                        shipChoice = kbd.nextInt();
-                    } catch (NumberFormatException e) {
-                        System.out.println("An error occurred: " + e.getMessage());
-                    }
-                } while (!(shipChoice >= 1 && shipChoice <= count));
-            }
-        } while (!shipConfirmation.equalsIgnoreCase("yes"));
-        return shipChoice;
-    }
-
-    public static boolean checkForAstronauts(Astronaut[] astroArrayToBeChecked) {
-        boolean astronautsExist = false;
-        for (Astronaut a : astroArrayToBeChecked) {
-            if (a != null) {
-                astronautsExist = true;
-                break;
-            }
+            } while (!(astroChoice >= 1 && astroChoice <= count));
         }
-        return astronautsExist;
-    }
+    } while (!astroConfirmation.equalsIgnoreCase("yes"));
+    return astroChoice;
+}
 
-    public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
-        boolean shipsExist = false;
-        for (Ship s : shipArrayToBeChecked) {
-            if (s != null) {
-                shipsExist = true;
-                break;
-            }
+public static int shipSelection(Scanner kbd, Ship[] ships) {
+    // Ask the user to select a ship
+    System.out.println("Please choose the corresponding integer to select a ship:");
+    int count = 0;
+    for (Ship s : ships) {
+        if (s != null) {
+            count++;
+            System.out.println(count + ". " + s.getSName());
         }
-        return shipsExist;
     }
+    int shipChoice = 0;
+    do {
+        try {
+            shipChoice = kbd.nextInt();
+        } catch (NumberFormatException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    } while (!(shipChoice >= 1 && shipChoice <= count));
+    String shipConfirmation = "";
+    do {
+        System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
+        System.out.println("Is this the correct ship? (Yes/No)");
+        kbd.nextLine();
+        shipConfirmation = (kbd.nextLine()).trim();
+        if (shipConfirmation.equalsIgnoreCase("no")) {
+            count = 0;
+            for (Ship s : ships) {
+                if (s != null) {
+                    count++;
+                    System.out.println(count + ". " + s.getSName());
+                }
+            }
+            kbd.nextLine();
+            do {
+                try {
+                    shipChoice = kbd.nextInt();
+                } catch (NumberFormatException e) {
+                    System.out.println("An error occurred: " + e.getMessage());
+                }
+            } while (!(shipChoice >= 1 && shipChoice <= count));
+        }
+    } while (!shipConfirmation.equalsIgnoreCase("yes"));
+    return shipChoice;
+}
+
+public static boolean checkForAstronauts(Astronaut[] astroArrayToBeChecked) {
+    boolean astronautsExist = false;
+    for (Astronaut a : astroArrayToBeChecked) {
+        if (a != null) {
+            astronautsExist = true;
+            break;
+        }
+    }
+    return astronautsExist;
+}
+
+public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
+    boolean shipsExist = false;
+    for (Ship s : shipArrayToBeChecked) {
+        if (s != null) {
+            shipsExist = true;
+            break;
+        }
+    }
+    return shipsExist;
+}
 }
