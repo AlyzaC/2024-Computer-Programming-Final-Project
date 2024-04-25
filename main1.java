@@ -1062,58 +1062,33 @@ public static void main(String[] args){
         boolean createPassword = true;
         boolean allowedEntry = false;
         File file = new File("ApplicationPassword.dat");
-        int applicationPassword = -800;
+        int applicationPassword = -800305;
+
         if (file.exists()) {
             try {
-                FileInputStream passInput = new FileInputStream(file);
-                applicationPassword = (int) passInput.read();
-                passInput.close();
+                Scanner fileReader = new Scanner(file);
+                applicationPassword = fileReader.nextInt();
+                fileReader.close();
                 createPassword = false;
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred: " + e.getMessage());
-            } catch (IOException e) {
-                System.out.println("An error occured: " + e.getMessage());
             }
         }
-
         if (createPassword) {
-
-            int passNum = -496108;
-            // * - Create password and display for user to write down
-            System.out.println("Creating Password...");
-
-            Random r = new Random();
-             passNum = 0;
-            for (int i = 0; i < 1; i++) {
-                passNum = r.nextInt(20000);
-                System.out.println("Please write down the following password: " + passNum);
-            }
-            try {
-                //file.createNewFile();
-                FileOutputStream passOutput = new FileOutputStream(file);
-                PrintWriter pw = new PrintWriter(file);
-                pw.write(passNum);
-                pw.close();
-                passOutput.close();
-                createPassword = false;
-            } catch (FileNotFoundException e) {
-                System.out.println("An error occurred: " + e.getMessage());
-            } catch (IOException e) {
-                System.out.println("An error occured: " + e.getMessage());
-            }
-            
+            createApplicationPassword(file);
+            createPassword = false;
             // * - Notify user of account creation and move on
             System.out.println("This password will be required the next time the application is opened.");
-
             // * Any time after 1st
             allowedEntry = true;
         } else {
-            // ask for password or to reset password with the administrator password
-            System.out.println("1. Enter Password to Application\n" +
-                               "2. Enter Admin Password to Reset Application Password\n" +
-                               "3. Quit");
-            int loginChoice = scan.nextInt();
+            int loginChoice;
             do {
+                // ask for password or to reset password with the administrator password
+                System.out.println("1. Enter Password to Application\n" +
+                                   "2. Enter Admin Password to Reset Application Password\n" +
+                                   "3. Quit");
+                loginChoice = scan.nextInt();
                 switch (loginChoice) {
                     case 1:
                         System.out.println("Please enter the password for the application: ");
@@ -1121,7 +1096,7 @@ public static void main(String[] args){
                         if (enteredPassword == applicationPassword) {
                             allowedEntry = true;
                         } else {
-                            String choice3;
+                            String choice3 = "";
                             while (!(enteredPassword == applicationPassword)) {
                                 //* notify that the incorrect password has been entered
                                 // ask for password again and give option to go back
@@ -1151,77 +1126,34 @@ public static void main(String[] args){
                         int trueAdminPass = -298756;
                         File adminFile = new File("adminPassword.dat");
                         try {
-                            FileInputStream adminPassFile = new FileInputStream(adminFile);
-                            trueAdminPass = adminPassFile.read();
-                            System.out.println(trueAdminPass);
-                            adminPassFile.close();
+                            Scanner fileReader = new Scanner(adminFile);
+                            trueAdminPass = fileReader.nextInt();
+                            fileReader.close();
                         } catch (FileNotFoundException e) {
-                            System.out.println("An error occurred: " + e.getMessage());
-                        } catch (IOException e) {
                             System.out.println("An error occurred: " + e.getMessage());
                         }
                         System.out.println("Please enter the admin password: ");
                         int adminPass = scan.nextInt();
                         if (adminPass == trueAdminPass) {
-                            // create a new password for application and show it to user to write down
-                            System.out.println("Creating Password...");
-
-                            Random r = new Random();
-                            int passNum = 0;
-                            for (int i = 0; i < 1; i++) {
-                                passNum = r.nextInt(20000);
-                                System.out.println("Please write down the following password: " + passNum);
-                            }
-                            try {
-                                //file.createNewFile();
-                                FileOutputStream passOutput = new FileOutputStream(file);
-                                PrintWriter pw = new PrintWriter(file);
-                                pw.write(passNum);
-                                pw.close();
-                                passOutput.close();
-                                createPassword = false;
-                            } catch (FileNotFoundException e) {
-                                System.out.println("An error occurred: " + e.getMessage());
-                            } catch (IOException e) {
-                                System.out.println("An error occured: " + e.getMessage());
-                            }
+                            createApplicationPassword(file);
                             allowedEntry = true;
                         } else {
+                            String inputA = "";
                             while (!(adminPass == trueAdminPass)) {
                                 // notify that incorrect pass has been entered
                                 // ask for pass again and give option to go back
                                 System.out.println("You input the wrong password.");
                                 System.out.println("Reenter the password or type \"Go back\"");
                                 //use the scanner to get input -- 
-                                String inputA = scan.nextLine();
+                                scan.nextLine();
+                                inputA = scan.nextLine();
 
                                 if (inputA.equalsIgnoreCase("Go back")) {
                                     break;
                                 } else {
                                     adminPass = Integer.parseInt(inputA);
                                     if (adminPass == trueAdminPass) {
-                                        // create a new password for application and show it to user to write down
-                                        System.out.println("Creating Password...");
-            
-                                        Random r = new Random();
-                                        int passNum = 0;
-                                        for (int i = 0; i < 1; i++) {
-                                            passNum = r.nextInt(20000);
-                                            System.out.println("Please write down the following password: " + passNum);
-                                        }
-                                        try {
-                                            //file.createNewFile();
-                                            FileOutputStream passOutput = new FileOutputStream(file);
-                                            PrintWriter pw = new PrintWriter(file);
-                                            pw.write(passNum);
-                                            pw.close();
-                                            passOutput.close();
-                                            createPassword = false;
-                                        } catch (FileNotFoundException e) {
-                                            System.out.println("An error occurred: " + e.getMessage());
-                                        } catch (IOException e) {
-                                            System.out.println("An error occured: " + e.getMessage());
-                                        }
+                                        createApplicationPassword(file);
                                         allowedEntry = true;
                                         break;
                                     }
@@ -1242,6 +1174,31 @@ public static void main(String[] args){
             
         }
             return allowedEntry;
+    }
+
+    public static void createApplicationPassword(File f) {
+        // create a new password for application and show it to user to write down
+        System.out.println("Creating Password...");
+        Random r = new Random();
+        int passNum = 0;
+        String pass, pass2 = "";
+        for (int i = 0; i < 9; i++) {
+            pass = Integer.toString(r.nextInt(10));
+            pass2 += pass;
+        }
+        passNum = Integer.parseInt(pass2);
+        System.out.println("Please write down the following password: " + passNum);
+        try {
+            //FileOutputStream passOutput = new FileOutputStream(f);
+            PrintWriter pw = new PrintWriter(f);
+            pw.print(passNum);
+            pw.close();
+            //passOutput.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        } /*catch (IOException e) {
+            System.out.println("An error occured: " + e.getMessage());
+        }*/
     }
 
     public static void databaseArrayRetrieval(Statement s, ResultSet r) {
