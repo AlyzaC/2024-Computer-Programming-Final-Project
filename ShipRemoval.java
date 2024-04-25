@@ -46,15 +46,13 @@ public class ShipRemoval {
         public void removeShip(Connection c) {
             if (verifyRemoval()) {
                 /*try {
-                    open sql connection?
-                    open database?
-                    find ship in database
-                    delete all info
-                    close connection?
+                    Statement stmnt = c.getStatement();
+                    String updateForRemoval = "delete from Ships " + 
+                                              "where ShipNames = " + shipToRemove.getSName();
+                    adjust database?
                 } catch (SQLException e) {
-                        System.out.println("Error occured: " + e.getMessage());
-                    }
-                */
+                    System.out.println("Error occured: " + e.getMessage());
+                }*/
 
                 String emptyString = null;
                 shipToRemove.setSName(emptyString);

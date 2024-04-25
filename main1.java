@@ -31,7 +31,12 @@ public static void main(String[] args){
     // - Rocket/Ship Inventory
     // - Launch
     // - Quit
-    //databaseArrayRetrieval(statement, results);
+    /*
+    if (checkForDatabase()) {
+        astros = databaseAstronautArrayRetrieval(astros, statement);
+        ships = databaseShipArrayRetrieval(ships, statement);
+    }
+    */
     if (LoggingInPassword(kbd)) {
         do {
             System.out.println("Main Menu\n" +
@@ -237,8 +242,8 @@ public static void main(String[] args){
                                     
                                 }
                             }  while (!change.equalsIgnoreCase("no"));
-                            
-                            for (int count = 0; count < astros.length; count++) {
+                            int count;
+                            for (count = 0; count < astros.length; count++) {
                                 if (astros[count] == null) {
                                     astros[count] = new Astronaut(astroName, astroDateOfBirth, astroAddress, astroEmail, astroPhone, astroNextOfKin, astroStatus, astroPayRate, astroWeight);
                                     break;
@@ -246,16 +251,18 @@ public static void main(String[] args){
                             }
                             /*
                             try {
-                                //statement.executeUpdate(add name);
-                                //statement.executeUpdate(add serial number);
-                                //statement.executeUpdate(add DOB);
-                                //statement.executeUpdate(add address);
-                                //statement.executeUpdate(add email);
-                                //statement.executeUpdate(add phone number);
-                                //statement.executeUpdate(add next of kin);
-                                //statement.executeUpdate(add status);
-                                //statement.executeUpdate(add pay rate);
-                                //statement.executeUpdate(add weight);
+                                String addingAstronautUpdate = "insert into Astronauts values " + 
+                                                               "(" + astros[count].getName() + ", " +
+                                                               astros[count].getSerialNumber() + ", " +
+                                                               astros[count].dateOfBirth() + ", " +
+                                                               astros[count].address() + ", " +
+                                                               astros[count].email() + ", " +
+                                                               astros[count].phoneNumber() + ", " +
+                                                               astros[count].nextOfKin() + ", " +
+                                                               astros[count].status() + ", " +
+                                                               astros[count].payRate() + ", " +
+                                                               astros[count].weight() + ");";
+                                //statement.executeUpdate(addingAstronautUpdate);
                             } catch (SQLException e) {
                                 System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
                             }
@@ -309,292 +316,333 @@ public static void main(String[] args){
                                         astroName = (kbd.nextLine()).trim();
                                         String correctAstroName = "";
                                         do {
-                                            System.out.println("The astronaut's current name in the database is " + astroToEdit.getName() + "\n" +
-                                                        "You entered: " + astroName + "\n" +
-                                                        "If this correct, please enter \"Correct\".\n" +
-                                                        "If you wish to go back enter \"Go back\".");
+                                            System.out.println("The astronaut's current name in the database is "
+                                                    + astroToEdit.getName() + "\n" +
+                                                    "You entered: " + astroName + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
                                             kbd.nextLine();
                                             correctAstroName = kbd.nextLine();
                                             if (correctAstroName.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setName(astroName);
-                                                //statement.executeUpdate(add name);
+                                                // string updateString = "update Astronauts set Names = " + astroName +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
                                             } else if (correctAstroName.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
-                                                System.out.print("Please edit the astronaut's full name (First Last): ");
+                                                System.out
+                                                        .print("Please edit the astronaut's full name (First Last): ");
                                                 kbd.nextLine();
                                                 astroName = (kbd.nextLine()).trim();
                                             }
                                         } while (!correctAstroName.equalsIgnoreCase("correct"));
                                         break;
-                                        
-                                case 2:
-                                    System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
-                                    kbd.nextLine();
-                                    astroDateOfBirth = (kbd.nextLine()).trim();
-                                    String correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current date of birth in the database is " + astroToEdit.dateOfBirth() + "\n" +
-                                                    "You entered: " + astroDateOfBirth + "\n" +
-                                                    "If this correct, please enter \"Correct\".\n" +
-                                                    "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setdateOfBirth(astroDateOfBirth);
-                                            //statement.executeUpdate(add DOB);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
-                                            kbd.nextLine();
-                                            astroDateOfBirth = (kbd.nextLine()).trim();
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
 
-                                case 3:
-                                    System.out.print("Please edit the astronaut's address:");
-                                    kbd.nextLine();
-                                    astroAddress = (kbd.nextLine()).trim();
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current address in the database is " + astroToEdit.address() + "\n" +
+                                    case 2:
+                                        System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
+                                        kbd.nextLine();
+                                        astroDateOfBirth = (kbd.nextLine()).trim();
+                                        String correct = "";
+                                        do {
+                                            System.out
+                                                    .println("The astronaut's current date of birth in the database is "
+                                                            + astroToEdit.dateOfBirth() + "\n" +
+                                                            "You entered: " + astroDateOfBirth + "\n" +
+                                                            "If this correct, please enter \"Correct\".\n" +
+                                                            "If you wish to go back enter \"Go back\".");
+                                            kbd.nextLine();
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setdateOfBirth(astroDateOfBirth);
+                                                // string updateString = "update Astronauts set BirthDates = " + astroDateOfBirth +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print(
+                                                        "Please edit the astronaut's date of birth (DD/MM/YYYY): ");
+                                                kbd.nextLine();
+                                                astroDateOfBirth = (kbd.nextLine()).trim();
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
+
+                                    case 3:
+                                        System.out.print("Please edit the astronaut's address:");
+                                        kbd.nextLine();
+                                        astroAddress = (kbd.nextLine()).trim();
+                                        correct = "";
+                                        do {
+                                            System.out.println("The astronaut's current address in the database is "
+                                                    + astroToEdit.address() + "\n" +
                                                     "You entered: " + astroAddress + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setAddress(astroAddress);
-                                            //statement.executeUpdate(add address);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the astronaut's address: ");
                                             kbd.nextLine();
-                                            astroAddress = (kbd.nextLine()).trim();
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setAddress(astroAddress);
+                                                // string updateString = "update Astronauts set Addresses = " + astroAddress +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print("Please edit the astronaut's address: ");
+                                                kbd.nextLine();
+                                                astroAddress = (kbd.nextLine()).trim();
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
 
-                                case 4: 
-                                    System.out.print("Please edit the astronaut's email (name@example.com): ");
-                                    kbd.nextLine();
-                                    astroEmail = (kbd.nextLine()).trim();
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current email in the database is " + astroToEdit.email() + "\n" +
+                                    case 4:
+                                        System.out.print("Please edit the astronaut's email (name@example.com): ");
+                                        kbd.nextLine();
+                                        astroEmail = (kbd.nextLine()).trim();
+                                        correct = "";
+                                        do {
+                                            System.out.println("The astronaut's current email in the database is "
+                                                    + astroToEdit.email() + "\n" +
                                                     "You entered: " + astroEmail + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setEmail(astroEmail);
-                                            //statement.executeUpdate(add email);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the astronaut's email (name@example.com): ");
                                             kbd.nextLine();
-                                            astroEmail = (kbd.nextLine()).trim();
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setEmail(astroEmail);
+                                                // string updateString = "update Astronauts set BirthDates = " + astroDateOfBirth +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print(
+                                                        "Please edit the astronaut's email (name@example.com): ");
+                                                kbd.nextLine();
+                                                astroEmail = (kbd.nextLine()).trim();
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
 
-                                case 5: 
-                                    System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
-                                    kbd.nextLine();
-                                    astroPhone = (kbd.nextLine()).trim();
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current phone number in the database is " + astroToEdit.phoneNumber() + "\n" +
-                                                    "You entered: " + astroPhone + "\n" +
+                                    case 5:
+                                        System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                        kbd.nextLine();
+                                        astroPhone = (kbd.nextLine()).trim();
+                                        correct = "";
+                                        do {
+                                            System.out
+                                                    .println("The astronaut's current phone number in the database is "
+                                                            + astroToEdit.phoneNumber() + "\n" +
+                                                            "You entered: " + astroPhone + "\n" +
+                                                            "If this correct, please enter \"Correct\".\n" +
+                                                            "If you wish to go back enter \"Go back\".");
+                                            kbd.nextLine();
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setPhoneNumber(astroPhone);
+                                                // string updateString = "update Astronauts set PhoneNumbers = " + astroPhone +
+                                                //                       "where serialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print(
+                                                        "Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                                kbd.nextLine();
+                                                astroPhone = (kbd.nextLine()).trim();
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
+
+                                    case 6:
+                                        System.out.print("Please edit the full name of the astronaut's next of kin: ");
+                                        kbd.nextLine();
+                                        astroNextOfKin = (kbd.nextLine()).trim();
+                                        correct = "";
+                                        do {
+                                            System.out.println("The astronaut's current next of kin in the database is "
+                                                    + astroToEdit.nextOfKin() + "\n" +
+                                                    "You entered: " + astroNextOfKin + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setPhoneNumber(astroPhone);
-                                            //statement.executeUpdate(add phone number);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                             kbd.nextLine();
-                                            astroPhone = (kbd.nextLine()).trim();
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
-
-                                case 6: 
-                                    System.out.print("Please edit the full name of the astronaut's next of kin: ");
-                                    kbd.nextLine();
-                                    astroNextOfKin = (kbd.nextLine()).trim();
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current next of kin in the database is " + astroToEdit.nextOfKin() + "\n" +
-                                                        "You entered: " + astroNextOfKin + "\n" +
-                                                        "If this correct, please enter \"Correct\".\n" +
-                                                        "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setNextOfKin(astroNextOfKin);
-                                            //statement.executeUpdate(add next of kin);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the full name of the astronaut's next of kin: ");
-                                            kbd.nextLine();
-                                            astroDateOfBirth = (kbd.nextLine()).trim();
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
-
-                                case 7: 
-                                    System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
-                                    kbd.nextLine();
-                                    do {
-                                        astroStatus = (kbd.nextLine()).trim();
-                                        if (astroStatus.equalsIgnoreCase("on earth")) {
-                                            astroStatus = "On Earth";
-                                        } else if (astroStatus.equalsIgnoreCase("in space")) {
-                                            astroStatus = "In Space";
-                                        } else {
-                                            System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
-                                            System.out.println("Please try again.");
-                                        }
-                                    } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current planetary status in the database is " + astroToEdit.status() + "\n" +
-                                                        "You entered: " + astroStatus + "\n" +
-                                                        "If this correct, please enter \"Correct\".\n" +
-                                                        "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setStatus(astroStatus);
-                                            //statement.executeUpdate(add status);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
-                                            kbd.nextLine();
-                                            do {
-                                                astroStatus = (kbd.nextLine()).trim();
-                                                if (astroStatus.equalsIgnoreCase("on earth")) {
-                                                    astroStatus = "On Earth";
-                                                } else if (astroStatus.equalsIgnoreCase("in space")) {
-                                                    astroStatus = "In Space";
-                                                } else {
-                                                    System.out.println("Astronaut status must be \"On Earth\" or \"In Space\".");
-                                                    System.out.println("Please try again.");
-                                                }
-                                            } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
-
-                                case 8: 
-                                    System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
-                                    astroPayRate = 0;
-                                    do {
-                                        try {
-                                            astroPayRate = kbd.nextDouble();
-                                            if (astroPayRate <= 7.25) {
-                                                System.out.print("The federal minimum wage is $7.50. " +
-                                                                 "Please enter a new pay rate per hour: ");
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setNextOfKin(astroNextOfKin);
+                                                // string updateString = "update Astronauts set NextOfKin = " + astroNextOfKin +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print(
+                                                        "Please edit the full name of the astronaut's next of kin: ");
+                                                kbd.nextLine();
+                                                astroDateOfBirth = (kbd.nextLine()).trim();
                                             }
-                                        } catch (NumberFormatException e ) {
-                                            System.out.println("An error occurred: " + e.getMessage());
-                                        } catch (InputMismatchException e) {
-                                            System.out.println("An error occurred: " + e.getMessage());
-                                        }
-                                    } while (astroPayRate <= 7.25);
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current pay rate in the database is " + astroToEdit.payRate() + "\n" +
-                                                        "You entered: " + astroPayRate + "\n" +
-                                                        "If this correct, please enter \"Correct\".\n" +
-                                                        "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setPayRate(astroPayRate);
-                                            //statement.executeUpdate(add pay rate);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
-                                            do {
-                                                try {
-                                                    astroPayRate = kbd.nextDouble();
-                                                    if (astroPayRate <= 7.25) {
-                                                        System.out.print("The federal minimum wage is $7.50. " +
-                                                                         "Please enter a new pay rate per hour: ");
-                                                    }
-                                                } catch (NumberFormatException e ) {
-                                                    System.out.println("An error occurred: " + e.getMessage());
-                                                } catch (InputMismatchException e) {
-                                                    System.out.println("An error occurred: " + e.getMessage());
-                                                }
-                                            } while (astroPayRate <= 7.25);
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
 
-                                case 9: 
-                                    System.out.print("Please edit the astronaut's weight in pounds: ");
-                                    astroWeight = 0;
-                                    do {
-                                        try {
-                                            astroWeight = kbd.nextDouble();
-                                        } catch (NumberFormatException e ) {
-                                            System.out.println("An error occurred: " + e.getMessage());
-                                        } catch (InputMismatchException e) {
-                                            System.out.println("An error occurred: " + e.getMessage());
-                                        }
-                                    } while (astroWeight <= 0);
-                                    correct = "";
-                                    do {
-                                        System.out.println("The astronaut's current weight in the database is " + astroToEdit.weight() + "\n" +
+                                    case 7:
+                                        System.out.print(
+                                                "Please edit the astronaut's planetary status (On Earth/In Space): ");
+                                        kbd.nextLine();
+                                        do {
+                                            astroStatus = (kbd.nextLine()).trim();
+                                            if (astroStatus.equalsIgnoreCase("on earth")) {
+                                                astroStatus = "On Earth";
+                                            } else if (astroStatus.equalsIgnoreCase("in space")) {
+                                                astroStatus = "In Space";
+                                            } else {
+                                                System.out.println(
+                                                        "Astronaut status must be \"On Earth\" or \"In Space\".");
+                                                System.out.println("Please try again.");
+                                            }
+                                        } while (!astroStatus.equalsIgnoreCase("on earth")
+                                                && !astroStatus.equalsIgnoreCase("in space"));
+                                        correct = "";
+                                        do {
+                                            System.out.println(
+                                                    "The astronaut's current planetary status in the database is "
+                                                            + astroToEdit.status() + "\n" +
+                                                            "You entered: " + astroStatus + "\n" +
+                                                            "If this correct, please enter \"Correct\".\n" +
+                                                            "If you wish to go back enter \"Go back\".");
+                                            kbd.nextLine();
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setStatus(astroStatus);
+                                                // string updateString = "update Astronauts set Statuses = " + astroStatus +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print(
+                                                        "Please edit the astronaut's planetary status (On Earth/In Space): ");
+                                                kbd.nextLine();
+                                                do {
+                                                    astroStatus = (kbd.nextLine()).trim();
+                                                    if (astroStatus.equalsIgnoreCase("on earth")) {
+                                                        astroStatus = "On Earth";
+                                                    } else if (astroStatus.equalsIgnoreCase("in space")) {
+                                                        astroStatus = "In Space";
+                                                    } else {
+                                                        System.out.println(
+                                                                "Astronaut status must be \"On Earth\" or \"In Space\".");
+                                                        System.out.println("Please try again.");
+                                                    }
+                                                } while (!astroStatus.equalsIgnoreCase("on earth")
+                                                        && !astroStatus.equalsIgnoreCase("in space"));
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
+
+                                    case 8:
+                                        System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
+                                        astroPayRate = 0;
+                                        do {
+                                            try {
+                                                astroPayRate = kbd.nextDouble();
+                                                if (astroPayRate <= 7.25) {
+                                                    System.out.print("The federal minimum wage is $7.50. " +
+                                                            "Please enter a new pay rate per hour: ");
+                                                }
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("An error occurred: " + e.getMessage());
+                                            } catch (InputMismatchException e) {
+                                                System.out.println("An error occurred: " + e.getMessage());
+                                            }
+                                        } while (astroPayRate <= 7.25);
+                                        correct = "";
+                                        do {
+                                            System.out.println("The astronaut's current pay rate in the database is "
+                                                    + astroToEdit.payRate() + "\n" +
+                                                    "You entered: " + astroPayRate + "\n" +
+                                                    "If this correct, please enter \"Correct\".\n" +
+                                                    "If you wish to go back enter \"Go back\".");
+                                            kbd.nextLine();
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setPayRate(astroPayRate);
+                                                // string updateString = "update Astronauts set PayRates = " + astroPayRate +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
+                                                do {
+                                                    try {
+                                                        astroPayRate = kbd.nextDouble();
+                                                        if (astroPayRate <= 7.25) {
+                                                            System.out.print("The federal minimum wage is $7.50. " +
+                                                                    "Please enter a new pay rate per hour: ");
+                                                        }
+                                                    } catch (NumberFormatException e) {
+                                                        System.out.println("An error occurred: " + e.getMessage());
+                                                    } catch (InputMismatchException e) {
+                                                        System.out.println("An error occurred: " + e.getMessage());
+                                                    }
+                                                } while (astroPayRate <= 7.25);
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
+
+                                    case 9:
+                                        System.out.print("Please edit the astronaut's weight in pounds: ");
+                                        astroWeight = 0;
+                                        do {
+                                            try {
+                                                astroWeight = kbd.nextDouble();
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("An error occurred: " + e.getMessage());
+                                            } catch (InputMismatchException e) {
+                                                System.out.println("An error occurred: " + e.getMessage());
+                                            }
+                                        } while (astroWeight <= 0);
+                                        correct = "";
+                                        do {
+                                            System.out.println("The astronaut's current weight in the database is "
+                                                    + astroToEdit.weight() + "\n" +
                                                     "You entered: " + astroWeight + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                        kbd.nextLine();
-                                        correct = kbd.nextLine();
-                                        if (correct.equalsIgnoreCase("Correct")) {
-                                            astroToEdit.setWeight(astroWeight);
-                                            //statement.executeUpdate(add weight);
-                                        } else if (correct.equalsIgnoreCase("Go back")) {
-                                            break;
-                                        } else {
-                                            System.out.print("Please edit the weight in pounds: ");
-                                            do {
-                                                try {
-                                                    astroWeight = kbd.nextDouble();
-                                                } catch (NumberFormatException e ) {
-                                                    System.out.println("An error occurred: " + e.getMessage());
-                                                } catch (InputMismatchException e) {
-                                                    System.out.println("An error occurred: " + e.getMessage());
-                                                }
-                                            } while (astroWeight <= 0);
-                                        }
-                                    } while (!correct.equalsIgnoreCase("correct"));
-                                    break;
+                                            kbd.nextLine();
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
+                                                astroToEdit.setWeight(astroWeight);
+                                                // string updateString = "update Astronauts set Weights = " + astroWeight +
+                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                // statement.executeUpdate(updateString);
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
+                                                break;
+                                            } else {
+                                                System.out.print("Please edit the weight in pounds: ");
+                                                do {
+                                                    try {
+                                                        astroWeight = kbd.nextDouble();
+                                                    } catch (NumberFormatException e) {
+                                                        System.out.println("An error occurred: " + e.getMessage());
+                                                    } catch (InputMismatchException e) {
+                                                        System.out.println("An error occurred: " + e.getMessage());
+                                                    }
+                                                } while (astroWeight <= 0);
+                                            }
+                                        } while (!correct.equalsIgnoreCase("correct"));
+                                        break;
 
-                                case 10:
-                                    System.out.println("\nGoing back to previous menu\n");
-                                    break;
+                                    case 10:
+                                        System.out.println("\nGoing back to previous menu\n");
+                                        break;
 
-                                default: 
-                                    System.out.println("Please enter a number 1-10.");
-                                    break;
-                            }
-                            astros[astroChoice - 1] = astroToEdit;
+                                    default:
+                                        System.out.println("Please enter a number 1-10.");
+                                        break;
+                                }
+                                astros[astroChoice - 1] = astroToEdit;
                             } while (field != 10);
                             break;
                         
@@ -777,7 +825,8 @@ public static void main(String[] args){
                                         }
                                     }
                                 } while (!change.equalsIgnoreCase("no"));
-                                for (int count = 0; count < ships.length; count++) {
+                                int count = 0;
+                                for (count = 0; count < ships.length; count++) {
                                     if (ships[count] == null) {
                                         ships[count] = new Ship();
                                         ships[count].setSName(shipName);
@@ -789,10 +838,12 @@ public static void main(String[] args){
                                 }
                                 /*
                                 try {
-                                    //statement.executeUpdate(add ship name);
-                                    //statement.executeUpdate(add fCap);
-                                    //statement.executeUpdate(add fuel);
-                                    //statement.executeUpdate(add sCap);
+                                    String addShipUpdate = "insert into Ships values (" +
+                                                           ships[count].getSName() + ", " +
+                                                           ships[count].getFCap() + ", " +
+                                                           ships[count].getFuel() + ", " +
+                                                           ships[count].getSCap() + ");";
+                                    //statement.executeUpdate(addShipUpdate);
                                 } catch (SQLException e) {
                                     System.out.println("An error occurred while saving ship to database: " + e.getMessage());
                                 }
@@ -836,7 +887,9 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSName(shipName); 
-                                                //statement.executeUpdate(add name);
+                                                // string updateString = "update Ships set ShipNames = " + shipName +
+                                                //                       "where ShipNames = " + shipToEdit.getSName();
+                                                // statement.executeUpdate(updateString);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -868,7 +921,9 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFCap(shipFuelCapacity); 
-                                                //statement.executeUpdate(add fCap);
+                                                // string updateString = "update Ships set FuelCapacities = " + shipFuelCapacity +
+                                                //                       "where ShipNames = " + shipToEdit.getSName();
+                                                // statement.executeUpdate(updateString);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -905,7 +960,9 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFuel(shipCurrentFuel); 
-                                                //statement.executeUpdate(add fuel);
+                                                // string updateString = "update Ships set Fuel = " + shipCurrentFuel +
+                                                //                       "where ShipNames = " + shipToEdit.getSName();
+                                                // statement.executeUpdate(updateString);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -937,7 +994,9 @@ public static void main(String[] args){
                                             String correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSCap(shipCrewCapacity); 
-                                                //statement.executeUpdate(add sCap);
+                                                // string updateString = "update Ships set ShipCapacities = " + shipCrewCapacity +
+                                                //                       "where ShipNames = " + shipToEdit.getSName();
+                                                // statement.executeUpdate(updateString);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1197,119 +1256,88 @@ public static void createApplicationPassword(File f) {
     }
 }
 
-public static void databaseArrayRetrieval(Statement s, ResultSet r) {
-        /*try {
+public static boolean checkForDatabase(Statement s) {
+    boolean databaseExists = false;
+    /*try {
             Check if the file/database exits
             Yes:
-                int count = 0;
-                r = s.executeQuery(getting names);
-                while (r.next()) {
-                    String dbName = r.getString("Names");
-                    astros[count].setName(dbName);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting serials);
-                while (r.next()) {
-                    String dbSerialNumber = r.getInt("SerialNumbers");
-                    astros[count].setSerialNumber(dbSerialNumber);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting DOB's);
-                while (r.next()) {
-                    String dbBirthdate = r.getString("Birthdates");
-                    astros[count].setdateOfBirth(dbBirthdate);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting addresses);
-                while (r.next()) {
-                    String dbAddress = s.getString("Addresses");
-                    astros[count].setAddress(dbAddress);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting emails);
-                while (r.next()) {
-                    String dbEmail = r.getString("Emails");
-                    astros[count].setEmail(dbEmail);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting phone numbers);
-                while (r.next()) {
-                    String dbPhoneNumber = r.getString("PhoneNumbers");
-                    astros[count].setPhoneNumber(dbPhoneNumber);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting next of kin);
-                while (r.next()) {
-                    String dbNextOfKin = r.getString("NextOfKin");
-                    astros[count].setNextOfKin(nextOfKin);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting statuses);
-                while (r.next()) {
-                    String dbStatus = r.getString("Statuses");
-                    astros[count].setStatus(dbStatus);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting pay rates);
-                while (r.next()) {
-                    String dbPayRate = r.getDouble("PayRates");
-                    astros[count].setPayRate(dbPayRate);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting weights);
-                while (r.next()) {
-                    String dbWeight = r.getDouble("");
-                    astros[count].setWeight(dbWeight);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting ship names);
-                while (r.next()) {
-                    String name = r.getString("ShipNames");
-                    astros[count].setSName(name);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting fuel capacities);
-                while (r.next()) {
-                    String fCap = r.getString("FuelCapacities");
-                    astros[count].setFCap(fCap);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting fuels);
-                while (r.next()) {
-                    String fuel = r.getString("Fuel");
-                    astros[count].setFuel(fuel);
-                    count++;
-                }
-                count = 0;
-                r = s.executeQuery(getting crew capacities);
-                while (r.next()) {
-                    String sCap = r.getString("ShipCapacities");
-                    astros[count].setSCap(sCap);
-                    count++;
-                }
+                databaseExists = true;
             no:
                 create file?
-                create database?
-                s.executeUpdate(create table for astronauts);
-                s.executeUpdate(create columns for astronaut fields);
-                s.executeUpdate(create table for ships);
-                s.executeUpdate(create columns for ship fields);
-                backup database on file
+                create database? s.executeUpdate("create database ApplicationDatabase;");
+                s.executeUpdate("create table Astronauts (
+                    Names tinytext,
+                    SerialNumbers smallint,
+                    Birthdates tinytext,
+                    Addresses tinytext,
+                    Emails tinytext,
+                    PhoneNumbers tinytext,
+                    NextOfKin tinytext,
+                    Statuses tinytext,
+                    PayRates double(5, 2),
+                    Weights double(5, 2)
+                );");
+                s.executeUpdate("create table Ships (
+                    ShipNames tinytext,
+                    FuelCapacities double(6, 2),
+                    Fuel double(7, 2),
+                    ShipCapacities smallint
+                );");
+                String databaseFile = "ApplicationDatabase.DB";
+                String backupStatement = String.format("backup database ApplicationDatabase to disk = %s;", databaseFile);
+                s.executeUpdate(backupStatement);
         } catch (SQLException e) {
             System.out.println("An error has occurred: " + e.getMessage());
         }*/
+    return databaseExists;
+}
+
+public static Astronaut[] databaseAstronautArrayRetrieval(Astronaut[] a, Statement stmnt) {
+    /*
+    int count = 0;
+    ResultSet r = stmnt.executeQuery("select * from Astronauts;");
+    while (r.next()) {
+        String dbName = r.getString("Names");
+        a[count].setName(dbName);
+        String dbSerialNumber = r.getInt("SerialNumbers");
+        a[count].setSerialNumber(dbSerialNumber);
+        String dbBirthdate = r.getString("Birthdates");
+        a[count].setdateOfBirth(dbBirthdate);
+        String dbAddress = r.getString("Addresses");
+        a[count].setAddress(dbAddress);
+        String dbEmail = r.getString("Emails");
+        a[count].setEmail(dbEmail);
+        String dbPhoneNumber = r.getString("PhoneNumbers");
+        a[count].setPhoneNumber(dbPhoneNumber);
+        String dbNextOfKin = r.getString("NextOfKin");
+        a[count].setNextOfKin(nextOfKin);
+        String dbStatus = r.getString("Statuses");
+        a[count].setStatus(dbStatus);
+        String dbPayRate = r.getDouble("PayRates");
+        a[count].setPayRate(dbPayRate);
+        String dbWeight = r.getDouble("Weights");
+        a[count].setWeight(dbWeight);
+        count++;
+    }*/
+    return a;
+}
+
+public static Ship[] databaseShipArrayRetrieval(Ship[] s, Statement stmnt) {
+    /*
+    int count = 0;
+    r = s.executeQuery(select * from Ships;);
+    while (r.next()) {
+        String name = r.getString("ShipNames");
+        s[count].setSName(name);
+        String fCap = r.getString("FuelCapacities");
+        s[count].setFCap(fCap);
+        String fuel = r.getString("Fuel");
+        s[count].setFuel(fuel);
+        String sCap = r.getString("ShipCapacities");
+        s[count].setSCap(sCap);
+        count++;
+    }*/
+    return s;
 }
 
 public static int astroSelection(Scanner kbd, Astronaut[] astros) {

@@ -73,11 +73,9 @@ public class AstroRemoval {
                     if (astro != null) {
                         /*try {
                             Statement stmnt = c.getStatement();
-                            ResultSet rsltst = stmnt.executeQuery(); //Or do we use something else?
-                            find astronaut in database
-                            delete all info
-                            rsltst.close();
-                            stmnt.close();
+                            String updateForRemoval = "delete from Astronauts " + 
+                                                      "where SerialNumbers = " + astro.getSerialNumber();
+                            adjust database?
                         } catch (SQLException e) {
                             System.out.println("Error occured: " + e.getMessage());
                         }
