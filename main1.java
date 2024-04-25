@@ -46,6 +46,7 @@ public static void main(String[] args){
                                "2. Ships\n" + 
                                "3. Launch\n" +
                                "4. Quit");
+            choice = 0;
             try {
                 choice = kbd.nextInt();
             } catch (NumberFormatException e) {
@@ -61,6 +62,7 @@ public static void main(String[] args){
                                            "2. Edit Astronaut\n" +
                                            "3. Delete Astronaut\n" +
                                            "4. Go Back");
+                        choice2 = 0;
                         try {
                             choice2 = kbd.nextInt();
                         } catch (NumberFormatException e) {
@@ -241,7 +243,8 @@ public static void main(String[] args){
                                             break;
 
                                         default: 
-                                            System.out.println("Please enter a number 1-9.");
+                                            System.out.println("\nPlease enter a number 1-9.");
+                                            kbd.nextLine();
                                             break;
                                     }
                                     
@@ -645,7 +648,8 @@ public static void main(String[] args){
                                         break;
 
                                     default:
-                                        System.out.println("Please enter a number 1-10.");
+                                        System.out.println("\nPlease enter a number 1-10.");
+                                        kbd.nextLine();
                                         break;
                                 }
                                 astros[astroChoice - 1] = astroToEdit;
@@ -682,7 +686,8 @@ public static void main(String[] args){
                             break;
 
                         default:
-                            System.out.println("\nPlease enter a number from 1-4\n");
+                            System.out.println("\nPlease enter a number from 1-4");
+                            kbd.nextLine();
                             break;
                         }
                     } while (choice2 != 4);
@@ -829,7 +834,8 @@ public static void main(String[] args){
                                             break;
 
                                             default:
-                                            System.out.println("Please enter a number 1-4");
+                                            System.out.println("\nPlease enter a number 1-4");
+                                            kbd.nextLine();
                                             break;
                                         }
                                     }
@@ -1024,7 +1030,8 @@ public static void main(String[] args){
                                         break;
 
                                     default:
-                                        System.out.println("Please enter a number 1-5");
+                                        System.out.println("\nPlease enter a number 1-5");
+                                        kbd.nextLine();
                                         break;
                                     }
                                 ships[shipChoice - 1] = shipToEdit;
@@ -1071,7 +1078,8 @@ public static void main(String[] args){
                                 break;
 
                             default:
-                                System.out.println("Please enter a number 1-5.");
+                                System.out.println("\nPlease enter a number 1-5.");
+                                kbd.nextLine();
                                 break;
                         }
                     } while (choice2 != 4);
@@ -1122,7 +1130,8 @@ public static void main(String[] args){
                                 break;
 
                             default:
-                                System.out.println("Please enter a number 1-2.");
+                                System.out.println("\nPlease enter a number 1-2.");
+                                kbd.nextLine();
                                 break;
                         }
                     } while (choice2 != 2);
@@ -1134,7 +1143,8 @@ public static void main(String[] args){
                     break;
 
                 default:
-                    System.out.println("Please select a number 1-4");
+                    System.out.println("\nPlease select a number 1-4");
+                    kbd.nextLine();
                     break;
             }
         } while (choice != 4);
@@ -1175,8 +1185,8 @@ public static boolean LoggingInPassword(Scanner scan) {
         do {
             // ask for password or to reset password with the administrator password
             System.out.println("1. Enter Password to Application\n" +
-                    "2. Enter Admin Password to Reset Application Password\n" +
-                    "3. Quit");
+                               "2. Enter Admin Password to Reset Application Password\n" +
+                               "3. Quit");
             
             try {
                 loginChoice = scan.nextInt();
@@ -1247,7 +1257,8 @@ public static boolean LoggingInPassword(Scanner scan) {
                     break;
 
                 default:
-                    System.out.println("Please enter a number 1-3.");
+                    System.out.println("\nPlease enter a number 1-3.");
+                    scan.nextLine();
                     break;
             }
         } while ((loginChoice != 3) && (allowedEntry == false));
@@ -1371,80 +1382,47 @@ public static Ship[] databaseShipArrayRetrieval(Ship[] s, Statement stmnt) {
 
 public static int astroSelection(Scanner kbd, Astronaut[] astros) {
     // Ask user to select an astronaut
-    System.out.println("Please choose the corresponding integer to select an astronaut:");
     int count = 0;
-    for (Astronaut a : astros) {
-        if (a != null) {
-            count++;
-            System.out.println(count + ". " + a.getName());
-        }
-    }
     int astroChoice = 0;
-    do {
-        try {
-            astroChoice = kbd.nextInt();
-        } catch (NumberFormatException e) {
-            System.out.println("An error has occurred: " + e.getMessage());
-        }  catch (InputMismatchException e) {
-            System.out.println("An error has occurred: " + e.getMessage());
-        }
-    } while (!(astroChoice >= 1 && astroChoice <= count));
     String astroConfirmation = "";
     do {
-        System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
-        System.out.println("Is this the correct astronaut? (Yes/No)");
-        kbd.nextLine();
-        astroConfirmation = (kbd.nextLine()).trim();
-        if (astroConfirmation.equalsIgnoreCase("no")) {
+        do {
+            System.out.println("Please choose the corresponding integer to select an astronaut:");
+            astroChoice = 0;
             count = 0;
             for (Astronaut a : astros) {
                 if (a != null) {
                     count++;
-                    System.out.println(count + " " + a.getName());
+                    System.out.println(count + ". " + a.getName());
                 }
             }
-            kbd.nextLine();
-            do {
-                try {
-                    astroChoice = kbd.nextInt();
-                } catch (NumberFormatException e) {
-                    System.out.println("An error has occurred: " + e.getMessage());
-                }  catch (InputMismatchException e) {
-                    System.out.println("An error has occurred: " + e.getMessage());
-                }
-            } while (!(astroChoice >= 1 && astroChoice <= count));
-        }
+            try {
+                astroChoice = kbd.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
+            }  catch (InputMismatchException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
+                kbd.nextLine();
+            }
+        } while (!(astroChoice >= 1 && astroChoice <= count));
+        astroConfirmation = "";
+        System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
+        System.out.println("Is this the correct astronaut? (Yes/No)");
+        kbd.nextLine();
+        astroConfirmation = (kbd.nextLine()).trim();
     } while (!astroConfirmation.equalsIgnoreCase("yes"));
     return astroChoice;
 }
 
 public static int shipSelection(Scanner kbd, Ship[] ships) {
     // Ask the user to select a ship
-    System.out.println("Please choose the corresponding integer to select a ship:");
     int count = 0;
-    for (Ship s : ships) {
-        if (s != null) {
-            count++;
-            System.out.println(count + ". " + s.getSName());
-        }
-    }
     int shipChoice = 0;
-    do {
-        try {
-            shipChoice = kbd.nextInt();
-        } catch (NumberFormatException e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        } catch (InputMismatchException e) {
-            System.out.println("An error has occurred: " + e.getMessage());
-        }
-    } while (!(shipChoice >= 1 && shipChoice <= count));
     String shipConfirmation = "";
     do {
-        System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
-        System.out.println("Is this the correct ship? (Yes/No)");
-        kbd.nextLine();
-        shipConfirmation = (kbd.nextLine()).trim();
-        if (shipConfirmation.equalsIgnoreCase("no")) {
+        do {
+            System.out.println("Please choose the corresponding integer to select a ship:");
+            shipChoice = 0;
             count = 0;
             for (Ship s : ships) {
                 if (s != null) {
@@ -1452,17 +1430,20 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
                     System.out.println(count + ". " + s.getSName());
                 }
             }
-            kbd.nextLine();
-            do {
-                try {
-                    shipChoice = kbd.nextInt();
-                } catch (NumberFormatException e) {
-                    System.out.println("An error occurred: " + e.getMessage());
-                } catch (InputMismatchException e) {
-                    System.out.println("An error has occurred: " + e.getMessage());
-                }
-            } while (!(shipChoice >= 1 && shipChoice <= count));
-        }
+            try {
+                shipChoice = kbd.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            } catch (InputMismatchException e) {
+                System.out.println("An error has occurred: " + e.getMessage());
+                kbd.nextLine();
+            }
+        } while (!(shipChoice >= 1 && shipChoice <= count));
+        shipConfirmation = "";
+        System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
+        System.out.println("Is this the correct ship? (Yes/No)");
+        kbd.nextLine();
+        shipConfirmation = (kbd.nextLine()).trim();
     } while (!shipConfirmation.equalsIgnoreCase("yes"));
     return shipChoice;
 }
