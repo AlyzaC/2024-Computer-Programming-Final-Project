@@ -21,8 +21,9 @@ public class AstroRemoval {
      */
         public void addAstro(Astronaut a) {
             for (Astronaut astro : astrosToBeRemoved) {
-                if (astro != null) {
+                if (astro == null) {
                     astro = a;
+                    break;
                 }
             }
         }
@@ -36,7 +37,9 @@ public class AstroRemoval {
             String astronautList = "";
             boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
-                astronautList += "- " + astro.getName() + "\n";
+                if (astro != null) {
+                    astronautList += "- " + astro.getName() + "\n";
+                }
             }
             System.out.println("The following astronauts have been chosen for removal:" +
                                astronautList +
@@ -67,31 +70,32 @@ public class AstroRemoval {
         public void removeAstronauts(Connection c) {
             if (verifyRemoval()) {
                 for (Astronaut astro : astrosToBeRemoved) {
-                    /*try {
-                        Statement stmnt = c.getStatement();
-                        ResultSet rsltst = stmnt.executeQuery(); //Or do we use something else?
-                        find astronaut in database
-                        delete all info
-                        rsltst.close();
-                        stmnt.close();
-                    } catch (SQLException e) {
-                        System.out.println("Error occured: " + e.getMessage());
-                    }
-                    */
+                    if (astro != null) {
+                        /*try {
+                            Statement stmnt = c.getStatement();
+                            String updateForRemoval = "delete from Astronauts " + 
+                                                      "where SerialNumbers = " + astro.getSerialNumber();
+                            adjust database?
+                        } catch (SQLException e) {
+                            System.out.println("Error occured: " + e.getMessage());
+                        }
+                        */
 
-                    String emptyString = null;
-                    astro.setName(emptyString);
-                    astro.setdateOfBirth(emptyString);
-                    astro.setSerialNumber(0);
-                    astro.setAddress(emptyString);
-                    astro.setEmail(emptyString);
-                    astro.setPhoneNumber(emptyString);
-                    astro.setNextOfKin(emptyString);
-                    astro.setStatus(emptyString);
-                    astro.setPayRate(0);
-                    astro.setWeight(0);
-                    astro = null;
-                    //yield astro; ??
+                        String emptyString = null;
+                        astro.setName(emptyString);
+                        astro.setdateOfBirth(emptyString);
+                        astro.setSerialNumber(0);
+                        astro.setAddress(emptyString);
+                        astro.setEmail(emptyString);
+                        astro.setPhoneNumber(emptyString);
+                        astro.setNextOfKin(emptyString);
+                        astro.setStatus(emptyString);
+                        astro.setPayRate(0);
+                        astro.setWeight(0);
+                        astro = null;
+                        //yield astro; ??
+                    }
+                    
                 }
                 System.out.println("Astronaut(s) have been successfully removed.");
             }
