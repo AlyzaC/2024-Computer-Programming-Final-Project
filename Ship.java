@@ -18,7 +18,7 @@ public class Ship
     boolean doorIsOpen = false;
     boolean failure = false; // if true all astronauts are removed and (maybe ship)
     boolean returning = false; // if true ship can land,
-    double fuelBurnRate; //ship will accelerate 30 per second per pound of fuel burned
+    double fuelBurnRate = 8.33333;
     boolean spaceWalkComplete = false;
     boolean spacewalk = false;
     double speed; // goes above 3000 in atmos = death
@@ -199,8 +199,7 @@ public void addAstro(Astronaut astronaut)
 } 
 public void launch() //might need to be a private
 { 
-if (placeHolder == 4)// might need to be removed
-{
+
   //The code will first make sure that crewNum is equal to shipCapacity
  if (crewNum == shipCapacity)
  { 
@@ -236,7 +235,7 @@ thats why the parachute gives -7 deccel
  }
 }
 }
-}
+
 public void deployParachutes()
 { // if altitude goes lower than 10000 while returning is true parachutes will be deployed
   if (altitude < 10000 && returning == true)
