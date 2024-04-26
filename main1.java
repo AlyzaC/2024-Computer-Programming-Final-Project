@@ -777,6 +777,7 @@ public static void main(String[] args){
                                                            "4. Crew Capacity\n" +
                                                            "5. Go Back");
                                         System.out.print("Please enter the corresponding number: ");
+                                        //Int for ship editing switch loop
                                         try {
                                             field = kbd.nextInt();
                                         } catch (NumberFormatException e) {
@@ -784,6 +785,7 @@ public static void main(String[] args){
                                         } catch (InputMismatchException e) {
                                             System.out.println("An error has occurred: " + e.getMessage());
                                         }
+                                        //Ship editing switch loop
                                         switch (field) {
                                             case 1:
                                             System.out.print("Please enter the ship's name: ");
@@ -853,18 +855,17 @@ public static void main(String[] args){
                                         break;
                                     }
                                 }
-                                /*
+                                //Tries to save ship info to database
                                 try {
                                     String addShipUpdate = "insert into Ships values (" +
                                                            ships[count].getSName() + ", " +
                                                            ships[count].getFCap() + ", " +
                                                            ships[count].getFuel() + ", " +
                                                            ships[count].getSCap() + ");";
-                                    //statement.executeUpdate(addShipUpdate);
+                                    statement.executeUpdate(addShipUpdate);
                                 } catch (SQLException e) {
                                     System.out.println("An error occurred while saving ship to database: " + e.getMessage());
                                 }
-                                */
                                 break;
 
                             case 2:
@@ -875,7 +876,7 @@ public static void main(String[] args){
                                 int shipChoice = shipSelection(kbd, ships);
                                 Ship shipToEdit = ships[shipChoice - 1];
                                 
-                                // yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+                                //Gives current information for the chosen ship
                                 System.out.println("\nThis is the current information for " + shipToEdit.getSName() + ".\n" +
                                                    "Ship Name: " + shipToEdit.getSName() + "\n" +
                                                    "Fuel Capacity: " + shipToEdit.getFCap() + "\n" +
@@ -887,6 +888,8 @@ public static void main(String[] args){
                                                     "3. Fuel\n" +
                                                     "4. Ship Capacity\n" +
                                                     "5. Go Back");
+                                System.out.println("Please select a field: ");
+                                //Int for ship editing switch loop
                                 try {
                                     field = kbd.nextInt();
                                 } catch (NumberFormatException e) {
@@ -894,6 +897,7 @@ public static void main(String[] args){
                                 } catch (InputMismatchException e) {
                                     System.out.println("An error has occurred: " + e.getMessage());
                                 }
+                                //Ship editing switch loop
                                 switch (field) {
                                     case 1:
                                         String theKey = "";
@@ -1044,7 +1048,7 @@ public static void main(String[] args){
                                     System.out.println("\nThere are no ships to edit.");
                                     break;
                                 }
-                                //String theKey;
+                                //Removes ship after asking for ship to delete and verifying
                                 do {
                                     shipChoice = shipSelection(kbd, ships);
                                     ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
@@ -1060,6 +1064,7 @@ public static void main(String[] args){
                                     System.out.println("There are no astronauts to assign.");
                                     break;
                                 }
+                                //Asks for astronaut to assign and ship to assign to, then adds astronaut to ship
                                 int astroChoice = astroSelection(kbd, astros);
                                 shipChoice = shipSelection(kbd, ships);
                                 ships[shipChoice -1].addAstro(astros[astroChoice - 1]);
@@ -1078,11 +1083,11 @@ public static void main(String[] args){
                     break;
 
                 case 3:
-                    // * - Select a ship
-                    // * - Back
                     do {
+                        //Launch menu
                         System.out.println("\n1. Select a Ship\n" +
                                            "2. Back to main menu");
+                        //Int for ship menu switch loop
                         try {
                             choice2 = kbd.nextInt();
                         } catch (NumberFormatException e) {
@@ -1091,6 +1096,7 @@ public static void main(String[] args){
                             System.out.println("An error has occurred: " + e.getMessage());
                         }
                         int shipChoice;
+                        //Ship menu switch loop
                         switch (choice2) {
                             case 1:
                                 if (!checkForShips(ships)) {
@@ -1113,7 +1119,7 @@ public static void main(String[] args){
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");
                                     }
-                                } while ((launchConfirmation.equalsIgnoreCase("yes")&&launchConfirmation.equalsIgnoreCase("no")));
+                                } while (!(launchConfirmation.equalsIgnoreCase("yes") && !launchConfirmation.equalsIgnoreCase("no")));
                                 break;
 
                             case 2:
@@ -1148,14 +1154,22 @@ public static void main(String[] args){
     System.exit(0);
 }
 
+/**
+ * Has the user attempt to login to the application
+ * @param scan The scanner used to gather input from the user
+ * @return Whether the user is allowed to enter the application
+ */
 public static boolean LoggingInPassword(Scanner scan) {
+    //Method Variables
     boolean createPassword = true;
     boolean allowedEntry = false;
     File file = new File("ApplicationPassword.dat");
     int applicationPassword = -800305;
 
+    //Checks for the existence of a password file
     if (file.exists()) {
         try {
+            //Reads value from file and assigns it to a variable
             Scanner fileReader = new Scanner(file);
             applicationPassword = fileReader.nextInt();
             fileReader.close();
@@ -1165,20 +1179,20 @@ public static boolean LoggingInPassword(Scanner scan) {
         }
     }
     if (createPassword) {
+        //First time application is run
         createApplicationPassword(file);
         createPassword = false;
-        // * - Notify user of account creation and move on
         System.out.println("This password will be required the next time the application is opened.");
-        // * Any time after 1st
         allowedEntry = true;
     } else {
+        //After first time application is run
         int loginChoice = 0;
         do {
-            // ask for password or to reset password with the administrator password
+            //Login Menu
             System.out.println("1. Enter Password to Application\n" +
                                "2. Enter Admin Password to Reset Application Password\n" +
                                "3. Quit");
-            
+            //Int for login menu switch loop
             try {
                 loginChoice = scan.nextInt();
             } catch (NumberFormatException e) {
@@ -1186,11 +1200,13 @@ public static boolean LoggingInPassword(Scanner scan) {
             } catch (InputMismatchException e) {
                 System.out.println("An error has occurred: " + e.getMessage());
             }
+            //Login menu switch loop
             switch (loginChoice) {
                 case 1:
                     String enteredPassword = "";
                     scan.nextLine();
                     do {
+                        //Asks for application password and allows entry if correct
                         System.out.println("Please enter the password for the application or \"Go Back\": ");
                         try {
                             enteredPassword = scan.nextLine();
@@ -1210,7 +1226,7 @@ public static boolean LoggingInPassword(Scanner scan) {
                     break;
 
                 case 2:
-                    // ask for adminPass
+                    //Asks for admin password. Resets application password and allows entry if correct
                     int trueAdminPass = -298756;
                     File adminFile = new File("adminPassword.dat");
                     try {
@@ -1258,8 +1274,11 @@ public static boolean LoggingInPassword(Scanner scan) {
     return allowedEntry;
 }
 
+/**
+ * Creates a new password for the application and updates the file for it
+ * @param f The file object for the password that is updated
+ */
 public static void createApplicationPassword(File f) {
-    // create a new password for application and show it to user to write down
     System.out.println("Creating Password...");
     Random r = new Random();
     int passNum = 0;
@@ -1279,6 +1298,11 @@ public static void createApplicationPassword(File f) {
     }
 }
 
+/**
+ * Checks a SQL file for the ApplicationDatabase
+ * @param s A Java SQL statement object used to perform queries and updates
+ * @return Whether the database exists in the file
+ */
 public static boolean checkForDatabase(Statement s) {
     boolean databaseExists = false;
     try {
@@ -1316,6 +1340,12 @@ public static boolean checkForDatabase(Statement s) {
     return databaseExists;
 }
 
+/**
+ * Retrieves data from the Astronauts table in ApplicationDatabase
+ * @param a The Astronaut array the data is added to
+ * @param stmnt A Java SQL Statement used for queries
+ * @return The Astronaut array with information from the database
+ */
 public static Astronaut[] databaseAstronautArrayRetrieval(Astronaut[] a, Statement stmnt) {
     int count = 0;
     try {
@@ -1349,6 +1379,12 @@ public static Astronaut[] databaseAstronautArrayRetrieval(Astronaut[] a, Stateme
     return a;
 }
 
+/**
+ * Retrieves data from the Ships table in ApplicationDatabase
+ * @param s The Ship array the data is added to
+ * @param stmnt A Java SQL Statement used for queries
+ * @return The Ship array with information from the database
+ */
 public static Ship[] databaseShipArrayRetrieval(Ship[] s, Statement stmnt) {
     try {
         int count = 0;
@@ -1371,6 +1407,12 @@ public static Ship[] databaseShipArrayRetrieval(Ship[] s, Statement stmnt) {
     return s;
 }
 
+/**
+ * Has the user select an Astronaut object
+ * @param kbd The scanner used to gather user input
+ * @param astros The Astronaut array from which the object is chosen
+ * @return An integer to represent the chosen object, 1 more than the index of the object in the array
+ */
 public static int astroSelection(Scanner kbd, Astronaut[] astros) {
     // Ask user to select an astronaut
     int count = 0;
@@ -1378,6 +1420,7 @@ public static int astroSelection(Scanner kbd, Astronaut[] astros) {
     String astroConfirmation = "";
     do {
         do {
+            //Shows existing astronauts in array and asks user to chose one
             System.out.println("Please choose the corresponding integer to select an astronaut:");
             astroChoice = 0;
             count = 0;
@@ -1387,6 +1430,7 @@ public static int astroSelection(Scanner kbd, Astronaut[] astros) {
                     System.out.println(count + ". " + a.getName());
                 }
             }
+            //User selects Astronaut object
             try {
                 astroChoice = kbd.nextInt();
             } catch (NumberFormatException e) {
@@ -1396,6 +1440,7 @@ public static int astroSelection(Scanner kbd, Astronaut[] astros) {
                 kbd.nextLine();
             }
         } while (!(astroChoice >= 1 && astroChoice <= count));
+        //User confirms whether it is the correct astronaut
         astroConfirmation = "";
         System.out.println("Chosen astronaut: " + astros[astroChoice - 1].getName());
         System.out.println("Is this the correct astronaut? (Yes/No)");
@@ -1405,6 +1450,12 @@ public static int astroSelection(Scanner kbd, Astronaut[] astros) {
     return astroChoice;
 }
 
+/**
+ * Has the user select a Ship object
+ * @param kbd The scanner used to gather input from the user
+ * @param ships The Ship array from which the object is chosen
+ * @return An integer to represent the chosen object, 1 more than the index of the object in the array
+ */
 public static int shipSelection(Scanner kbd, Ship[] ships) {
     // Ask the user to select a ship
     int count = 0;
@@ -1412,6 +1463,7 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
     String shipConfirmation = "";
     do {
         do {
+            //Shows existing ships in array and asks user to choose one
             System.out.println("Please choose the corresponding integer to select a ship:");
             shipChoice = 0;
             count = 0;
@@ -1421,6 +1473,7 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
                     System.out.println(count + ". " + s.getSName());
                 }
             }
+            //User selects a Ship object
             try {
                 shipChoice = kbd.nextInt();
             } catch (NumberFormatException e) {
@@ -1430,6 +1483,7 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
                 kbd.nextLine();
             }
         } while (!(shipChoice >= 1 && shipChoice <= count));
+        //User confirms whether it is the correct Ship object
         shipConfirmation = "";
         System.out.println("Chosen ship: " + ships[shipChoice - 1].getSName());
         System.out.println("Is this the correct ship? (Yes/No)");
@@ -1439,6 +1493,11 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
     return shipChoice;
 }
 
+/**
+ * Checks for the existence of at least one Astronaut object in an Astronaut array
+ * @param astroArrayToBeChecked The Astronaut array to be checked for objects
+ * @return Whether there is at least one object in the array
+ */
 public static boolean checkForAstronauts(Astronaut[] astroArrayToBeChecked) {
     boolean astronautsExist = false;
     for (Astronaut a : astroArrayToBeChecked) {
@@ -1450,6 +1509,12 @@ public static boolean checkForAstronauts(Astronaut[] astroArrayToBeChecked) {
     return astronautsExist;
 }
 
+
+/**
+ * Checks for the existence of at least one Ship object in an Ship array
+ * @param shipArrayToBeChecked The Ship array to be checked for objects
+ * @return Whether there is at least one object in the array
+ */
 public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
     boolean shipsExist = false;
     for (Ship s : shipArrayToBeChecked) {
