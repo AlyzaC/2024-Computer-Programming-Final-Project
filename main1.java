@@ -1053,7 +1053,7 @@ public static void main(String[] args){
                                     if (theKey.equalsIgnoreCase("yes")) {*/
                                         // correct key: delete ship, notify user
                                         ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                        removeShip.removeShip(connect, kbd);
+                                        ships[shipChoice - 1] = removeShip.removeShip(connect, kbd);
                                     //} else if (theKey.equalsIgnoreCase("go back")) {
                                         //break;
                                     //}!theKey.equalsIgnoreCase("yes")&&!theKey.equalsIgnoreCase("go back")

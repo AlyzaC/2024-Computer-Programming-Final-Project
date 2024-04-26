@@ -38,7 +38,7 @@ public class ShipRemoval {
      * Removes astronauts added to list, after verification from the user.
      * @param c A SQL connection provided by the user
      */
-        public void removeShip(Connection c, Scanner keyboard) {
+        public Ship removeShip(Connection c, Scanner keyboard) {
             if (verifyRemoval(keyboard)) {
                 /*try {
                     Statement stmnt = c.getStatement();
@@ -48,14 +48,13 @@ public class ShipRemoval {
                 } catch (SQLException e) {
                     System.out.println("Error occured: " + e.getMessage());
                 }*/
-
-                String emptyString = null;
-                shipToRemove.setSName(emptyString);
+                shipToRemove.setSName(null);
                 shipToRemove.setSCap(0);
                 shipToRemove.setFCap(0);
                 shipToRemove.setFuel(0.0);
                 shipToRemove = null;
                 System.out.println("\nShip has been successfully removed.");
             }
+            return shipToRemove;
         }
 }
