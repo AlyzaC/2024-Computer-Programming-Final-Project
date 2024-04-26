@@ -1605,4 +1605,30 @@ public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
     }
     return shipsExist;
 }
+
+public static boolean checkPhoneNumberString(String phoneNumber) {
+    char[] stringCharacters = new char[phoneNumber.length()];
+    phoneNumber.getChars(0, (phoneNumber.length() - 1), stringCharacters, 0);
+    int position = 0;
+    boolean phoneNumberIsValid = true;
+
+    for (char c : stringCharacters) {
+        if ((position == 0) && (c != '(')) {
+            phoneNumberIsValid = false;
+        } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
+            phoneNumberIsValid = false;
+        } else if ((position == 4) && !(c == ')')) {
+            phoneNumberIsValid = false;
+        }
+        else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
+            phoneNumberIsValid = false;
+        } else if ((position == 8) && (c != '-')) {
+            phoneNumberIsValid = false;
+        } else if ((position >= 9) && !(Character.isDigit(c))) {
+            phoneNumberIsValid = false;
+        }
+    }
+
+    return phoneNumberIsValid;
+}
 }
