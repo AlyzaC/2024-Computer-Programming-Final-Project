@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.io.*;
 import java.sql.*;
 
@@ -11,6 +13,8 @@ public static void main(String[] args){
     int choice = 0;
     int choice2 = 0;
     String correct = "";
+    Pattern emailDomain1 = Pattern.compile(".com");
+    Pattern emailDomain2 = Pattern.compile("@");
 
     //Scanner
     Scanner kbd = new Scanner(System.in);
@@ -86,6 +90,14 @@ public static void main(String[] args){
                             String astroAddress = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's email (name@example.com): ");
                             String astroEmail = (kbd.nextLine()).trim();
+                            Matcher matcher1 = emailDomain1.matcher(astroEmail);
+                            Matcher matcher2 = emailDomain2.matcher(astroEmail);
+                            while (!(matcher1.find() && matcher2.find())) {
+                                System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                astroEmail = kbd.nextLine();
+                                matcher1 = emailDomain1.matcher(astroEmail);
+                                matcher2 = emailDomain2.matcher(astroEmail);
+                            }
                             System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                             String astroPhone = (kbd.nextLine()).trim();
                             System.out.print("Please enter the full name of the astronaut's next of kin: ");
@@ -193,6 +205,14 @@ public static void main(String[] args){
                                             System.out.print("Please enter the astronaut's email (name@example.com): ");
                                             kbd.nextLine();
                                             astroEmail = (kbd.nextLine()).trim();
+                                            matcher1 = emailDomain1.matcher(astroEmail);
+                                            matcher2 = emailDomain2.matcher(astroEmail);
+                                            while (!(matcher1.find() && matcher2.find())) {
+                                                System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                                astroEmail = kbd.nextLine();
+                                                matcher1 = emailDomain1.matcher(astroEmail);
+                                                matcher2 = emailDomain2.matcher(astroEmail);
+                                            }
                                             break;
 
                                         case 5: 
@@ -425,6 +445,14 @@ public static void main(String[] args){
                                         System.out.print("Please edit the astronaut's email (name@example.com): ");
                                         kbd.nextLine();
                                         astroEmail = (kbd.nextLine()).trim();
+                                        matcher1 = emailDomain1.matcher(astroEmail);
+                                        matcher2 = emailDomain2.matcher(astroEmail);
+                                        while (!(matcher1.find() && matcher2.find())) {
+                                            System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                            astroEmail = kbd.nextLine();
+                                            matcher1 = emailDomain1.matcher(astroEmail);
+                                            matcher2 = emailDomain2.matcher(astroEmail);
+                                        }
                                         correct = "";
                                         do {
                                             System.out.println("The astronaut's current email in the database is "
@@ -444,6 +472,14 @@ public static void main(String[] args){
                                                 System.out.print("Please edit the astronaut's email (name@example.com): ");
                                                 kbd.nextLine();
                                                 astroEmail = (kbd.nextLine()).trim();
+                                                matcher1 = emailDomain1.matcher(astroEmail);
+                                                matcher2 = emailDomain2.matcher(astroEmail);
+                                                while (!(matcher1.find() && matcher2.find())) {
+                                                    System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                                    astroEmail = kbd.nextLine();
+                                                    matcher1 = emailDomain1.matcher(astroEmail);
+                                                    matcher2 = emailDomain2.matcher(astroEmail);
+                                                }
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
