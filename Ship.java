@@ -27,6 +27,7 @@ public class Ship
     double altitude = 0; //above 70k in space.
   Scanner scanner = new Scanner(System.in);
   int seconds;
+  Connection connection;
   //make connection object, make setConnection(), connection will be put into AstroRemoval object
 
 int choice; 
@@ -102,11 +103,24 @@ public void Space()
     int choice = scanner.nextInt();
     if (choice >= 1 && choice <= crew.length) 
     {
-      String selectedAstronaut = crew[choice - 1]; // Get the selected astronaut
+      Astronaut selectedAstronaut = crew[choice - 1]; // Get the selected astronaut
       System.out.println(selectedAstronaut + " has been sent on a spacewalk");
       spacewalk = true;
 
       Timer timer = new Timer();
+
+      timer.schedule(new TimerTask()
+      {
+        public void run()
+        {
+          System.out.println(selectedAstronaut + " has returned to the ship in time");
+          spaceWalkComplete = true;
+          timer.cancel();
+        }
+      }, 30 * 1000);
+    } else {
+      System.out.println ("your choice is invalid. please choose correctly next time smh.");
+    }
      //Scanner will show a menu of all of the Strings in crew[] 
    //if valid a 5 minute timer starts and boolean spacewalk is true
   //if notvalid Code will state that no astronaut name could be found and will ask them to try again
@@ -124,7 +138,7 @@ public void Space()
     returning = true;
   }
   // if spaceWalkComplete is false and returning is true whichever astronaut went on the spacewalk has to be removed as AstroRemoval.java
-  if (spaceWalkComplete == false && returning ==true)
+  if (!spaceWalkComplete && returning == true)
   {
    System.out.println ("The Spacewalking astronaut failed to get in the ship before reentry started.");
    System.out.println("We can only hope his death was quick and painless");
@@ -261,9 +275,13 @@ private void clearCrew()
     fuel = 0.0;
 failure = false;
 crewNum = 0;
-  AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
-   AstroRemoval.removeAstronauts(connection);
-   
+  
+  public static void removeAstronauts(Connection connection Scanner scanner) {
+    AstroRemoval.removeAstronauts(connection, scanner);
+}
+
+AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
+
    shipName = null;
    clearCrew();
    failure2 = true;
