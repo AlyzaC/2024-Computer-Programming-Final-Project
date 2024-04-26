@@ -673,7 +673,7 @@ public static void main(String[] args){
                                     //correct key: delete astronaut, notify user
                                     AstroRemoval removeAstro = new AstroRemoval(1);
                                     removeAstro.addAstro(astros[astroChoice - 1]);
-                                    removeAstro.removeAstronauts(connect);
+                                    removeAstro.removeAstronauts(connect, kbd);
                                     break;
                                 //} else if (theKey.equalsIgnoreCase("Go back")) {
                                     //break;
@@ -1053,7 +1053,7 @@ public static void main(String[] args){
                                     if (theKey.equalsIgnoreCase("yes")) {*/
                                         // correct key: delete ship, notify user
                                         ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                        removeShip.removeShip(connect);
+                                        removeShip.removeShip(connect, kbd);
                                     //} else if (theKey.equalsIgnoreCase("go back")) {
                                         //break;
                                     //}!theKey.equalsIgnoreCase("yes")&&!theKey.equalsIgnoreCase("go back")
@@ -1082,8 +1082,7 @@ public static void main(String[] args){
                                 kbd.nextLine();
                                 break;
                         }
-                    } while (choice2 != 4);
-
+                    } while (choice2 != 5);
                     break;
 
                 case 3:
