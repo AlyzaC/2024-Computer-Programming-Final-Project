@@ -8,14 +8,15 @@ public class main1 {
 
 public static void main(String[] args){
     //Variables & Objects
-        Ship[] ships = new Ship[10];
-        Astronaut[] astros = new Astronaut[30];
-        int choice = 0;
-        int choice2 = 0;
+    Ship[] ships = new Ship[10];
+    Astronaut[] astros = new Astronaut[30];
+    int choice = 0;
+    int choice2 = 0;
 
     //Scanner
-        Scanner kbd = new Scanner(System.in);
+    Scanner kbd = new Scanner(System.in);
     
+    //SQL Connection and Statement Creation
     Connection connect = null;
     Statement statement = null;
     try {
@@ -28,11 +29,6 @@ public static void main(String[] args){
         System.out.println("An error occurred: " + e.getMessage());
     }
 
-    // Main menu
-    // - Astronauts
-    // - Rocket/Ship Inventory
-    // - Launch
-    // - Quit
     /*
     if (checkForDatabase()) {
         astros = databaseAstronautArrayRetrieval(astros, statement);
@@ -41,11 +37,13 @@ public static void main(String[] args){
     */
     if (LoggingInPassword(kbd)) {
         do {
-            System.out.println("Main Menu\n" +
+            //Main menu for the program
+            System.out.println("Mission Control\n" +
                                "1. Astronauts\n" +
                                "2. Ships\n" + 
                                "3. Launch\n" +
                                "4. Quit");
+            //Variable for main menu switch loop
             choice = 0;
             try {
                 choice = kbd.nextInt();
@@ -54,6 +52,7 @@ public static void main(String[] args){
             } catch (InputMismatchException e) {
                 System.out.println("An error has occurred: " + e.getMessage());
             }
+            //Main menu switch statement
             switch(choice) {
                 case 1:
                     do {
@@ -62,6 +61,7 @@ public static void main(String[] args){
                                            "2. Edit Astronaut\n" +
                                            "3. Delete Astronaut\n" +
                                            "4. Go Back");
+                        //Int for astronaut menu switch loop
                         choice2 = 0;
                         try {
                             choice2 = kbd.nextInt();
@@ -71,8 +71,10 @@ public static void main(String[] args){
                             System.out.println("An error has occurred: " + e.getMessage());
                         }
                         int field = 0;
+                        //Astronaut menu switch loop
                         switch (choice2) {
                         case 1:
+                            //Asks user for value for the astronaut object's fields
                             System.out.print("Please enter the astronaut's full name (First Last): ");
                             kbd.nextLine();
                             String astroName = kbd.nextLine().trim();
@@ -127,6 +129,7 @@ public static void main(String[] args){
                             } while (astroWeight <= 0);
                             String change;
                             do {
+                                //Displays the information entered by the user for verification
                                 System.out.println("\nPlease verify information before saving.\n" +
                                                    "Name: " + astroName + "\n" +
                                                    "Date of Birth: " + astroDateOfBirth + "\n" +
@@ -140,6 +143,7 @@ public static void main(String[] args){
                                 System.out.println("Is there anything you wish to change? (yes/no)");
                                 change = (kbd.nextLine()).trim();
                                 if (change.equalsIgnoreCase("yes")) {
+                                    //Gives fields to edit
                                     System.out.println("\nWhich field do you wish to change?");
                                     System.out.println("1. Name\n" +
                                                        "2. Date of Birth\n" +
@@ -150,6 +154,7 @@ public static void main(String[] args){
                                                        "7. Status\n" +
                                                        "8. Pay Rate\n" +
                                                        "9. Weight\n" );
+                                    //Int for editing switch loop
                                     System.out.print("Please enter the corresponding option/integer: ");
                                     try {
                                         field = kbd.nextInt();
@@ -158,6 +163,7 @@ public static void main(String[] args){
                                     } catch (InputMismatchException e) {
                                         System.out.println("An error has occurred: " + e.getMessage());
                                     }
+                                    //Editing switch loop
                                     switch (field) {
                                         case 1:
                                             System.out.print("Please enter the astronaut's full name (First Last): ");
@@ -250,6 +256,7 @@ public static void main(String[] args){
                                     
                                 }
                             }  while (!change.equalsIgnoreCase("no"));
+                            //Checks for empty Astronaut object in array and creates new object
                             int count = 0;
                             for (count = 0; count < astros.length; count++) {
                                 if (astros[count] == null) {
@@ -257,7 +264,7 @@ public static void main(String[] args){
                                     break;
                                 }
                             }
-                            
+                            //Tries to add Astronaut information to database
                             try {
                                 String addingAstronautUpdate = "insert into Astronauts values " + 
                                                                "(" + astros[count].getName() + ", " +
@@ -287,6 +294,7 @@ public static void main(String[] args){
                                 }
                                 int astroChoice = astroSelection(kbd, astros);
                                 astroToEdit = astros[astroChoice - 1];
+                                //Displays current information for astronaut
                                 System.out.println("\nThis is the current information for " + astroToEdit.getName());
                                 System.out.println("Name: " + astroToEdit.getName() + "\n" +
                                                    "Serial Number: " + astroToEdit.getSerialNumber() + "\n" +
@@ -298,7 +306,7 @@ public static void main(String[] args){
                                                    "Status: " + astroToEdit.status() + "\n" +
                                                    "Pay Rate: " + astroToEdit.payRate() + "\n" +
                                                    "Weight: " + astroToEdit.weight());
-                                //yes: ask what field to edit, verify, ask for new value, verify, edit info, notify
+                                //Displays editable fields and asks user to choose one
                                 System.out.println("\nFields\n" +
                                                    "1. Name\n" +
                                                    "2. Date of Birth\n" + 
@@ -311,6 +319,7 @@ public static void main(String[] args){
                                                    "9. Weight\n" +
                                                    "10. Go back");
                                 System.out.println("Please select a field");
+                                //Int for astronaut editing switch loop
                                 field = 0;
                                 try {
                                     field = kbd.nextInt();
@@ -319,25 +328,26 @@ public static void main(String[] args){
                                 } catch (InputMismatchException e) {
                                     System.out.println("An error has occurred: " + e.getMessage());
                                 }
+                                //Astronaut editing switch loop
                                 switch (field) {
                                     case 1:
                                         System.out.print("Please edit the astronaut's full name (First Last): ");
                                         kbd.nextLine();
                                         astroName = (kbd.nextLine()).trim();
-                                        String correctAstroName = "";
+                                        String correct = "";
                                         do {
                                             System.out.println("The astronaut's current name in the database is "
                                                     + astroToEdit.getName() + "\n" +
                                                     "You entered: " + astroName + "\n" +
                                                     "If this correct, please enter \"Correct\".\n" +
                                                     "If you wish to go back enter \"Go back\".");
-                                            correctAstroName = kbd.nextLine();
-                                            if (correctAstroName.equalsIgnoreCase("Correct")) {
+                                            correct = kbd.nextLine();
+                                            if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setName(astroName);
                                                 // string updateString = "update Astronauts set Names = " + astroName +
                                                 //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
                                                 // statement.executeUpdate(updateString);
-                                            } else if (correctAstroName.equalsIgnoreCase("Go back")) {
+                                            } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
                                                 System.out
@@ -345,14 +355,14 @@ public static void main(String[] args){
                                                 kbd.nextLine();
                                                 astroName = (kbd.nextLine()).trim();
                                             }
-                                        } while (!correctAstroName.equalsIgnoreCase("correct"));
+                                        } while (!correct.equalsIgnoreCase("correct"));
                                         break;
 
                                     case 2:
                                         System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
                                         kbd.nextLine();
                                         astroDateOfBirth = (kbd.nextLine()).trim();
-                                        String correct = "";
+                                        correct = "";
                                         do {
                                             System.out
                                                     .println("The astronaut's current date of birth in the database is "
@@ -657,12 +667,12 @@ public static void main(String[] args){
                             break;
                         
                         case 3:
-                            //String theKey;
                             if (!checkForAstronauts(astros)) {
                                 System.out.println("\nThere are no astronauts to delete.");
                                 break;
                             }
                             int astroChoice;
+                            //Has user select and delete an astronaut
                             do{
                                 astroChoice = astroSelection(kbd, astros);
                                 AstroRemoval removeAstro = new AstroRemoval(1);
@@ -685,19 +695,15 @@ public static void main(String[] args){
                     break;
 
                 case 2:
-                //     * Rocket/Ship menu
-                //     * - Add
-                //     * - Edit info
-                //     * - Delete 
-                //     * - Add astro
                     do{
-                        //**LINE AFTER THIS NEEDS TO BE EDITED**  
+                        //Ship menu
                         System.out.println("\nShip Menu\n" +
                                            "1. Add Ship\n" +
                                            "2. Edit Ship\n" +
                                            "3. Delete Ship\n" +
                                            "4. Assign Astronaut To Ship\n" +
                                            "5. Go Back");
+                        //Int for ship menu switch loop
                         choice2 = 0;
                         try {
                             choice2 = kbd.nextInt();
@@ -707,8 +713,10 @@ public static void main(String[] args){
                             System.out.println("An error has occurred: " + e.getMessage());
                         }
                         int field = 0;
+                        //Ship menu loop
                         switch (choice2) {
                             case 1:
+                                //Asks user to provide values for ship fields
                                 System.out.print("\nPlease enter the ship's name: ");
                                 kbd.nextLine();
                                 String shipName = (kbd.nextLine()).trim();
@@ -751,6 +759,7 @@ public static void main(String[] args){
                                     }
                                 } while (shipCrewCapacity <= 0);
                                 String change = "";
+                                //Displays entered informaton for verification
                                 do {
                                     System.out.println("\nPlease verify information before saving.\n" +
                                                     "Name: " + shipName + "\n" +
@@ -759,12 +768,14 @@ public static void main(String[] args){
                                                     "Crew Capacity: " + shipCrewCapacity);
                                     System.out.println("Is there anything you wish to change? (yes/no)");
                                     change = (kbd.nextLine()).trim();
+                                    //Displays fields to edit
                                     if (change.equalsIgnoreCase("yes")) {
                                         System.out.println("\nWhich field do you wish to change?\n");
                                         System.out.println("1. Ship Name\n" +
                                                            "2. Fuel Capacity\n" +
                                                            "3. Current Fuel\n" +
-                                                           "4. Crew Capacity");
+                                                           "4. Crew Capacity\n" +
+                                                           "5. Go Back");
                                         System.out.print("Please enter the corresponding number: ");
                                         try {
                                             field = kbd.nextInt();
