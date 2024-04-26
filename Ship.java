@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.util.Scanner;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
+import java.util.TimerTask;
 public class Ship
 {
  int placeHolder; // THIS IS USELESS AND SHOULD BE REMOVED WHEN POSSIBLE
@@ -91,9 +93,20 @@ public void Space()
     //the ship will keep burning fuel until it runs out
   if (fuel == 0) 
  {
-
+  Scanner scanner = new Scanner(System.in);
+  for (int i = 0; i < crew.length; i++) 
+  {
+    System.out.println((i + 1) + ". " + crew[i]);
  
     System.out.println("Please choose an astronaut to go on a spacewalk.");
+    int choice = scanner.nextInt();
+    if (choice >= 1 && choice <= crew.length) 
+    {
+      String selectedAstronaut = crew[choice - 1]; // Get the selected astronaut
+      System.out.println(selectedAstronaut + " has been sent on a spacewalk");
+      spacewalk = true;
+
+      Timer timer = new Timer();
      //Scanner will show a menu of all of the Strings in crew[] 
    //if valid a 5 minute timer starts and boolean spacewalk is true
   //if notvalid Code will state that no astronaut name could be found and will ask them to try again
@@ -116,6 +129,7 @@ public void Space()
    System.out.println ("The Spacewalking astronaut failed to get in the ship before reentry started.");
    System.out.println("We can only hope his death was quick and painless");
    //Tell AstroRemoval.java to remove the astronaut
+  }
   }
 }
 
