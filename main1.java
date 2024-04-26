@@ -99,7 +99,7 @@ public static void main(String[] args){
                                     System.out.println("Please try again.");
                                 }
                             } while (!astroStatus.equalsIgnoreCase("on earth") && !astroStatus.equalsIgnoreCase("in space"));
-                            System.out.print("Please enter the astronaut's pay rate per hour (X,XXX.XX): ");
+                            System.out.print("Please enter the astronaut's pay rate per hour: ");
                             double astroPayRate = 0;
                             do {
                                 try {
@@ -212,7 +212,7 @@ public static void main(String[] args){
                                             break;
 
                                         case 8: 
-                                            System.out.print("Please enter the astronaut's pay rate (X,XXX.XX): ");
+                                            System.out.print("Please enter the astronaut's pay rate: ");
                                             kbd.nextLine();
                                             do {
                                                 try {
@@ -550,7 +550,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 8:
-                                        System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
+                                        System.out.print("Please edit the astronaut's pay rate: ");
                                         astroPayRate = 0;
                                         do {
                                             try {
@@ -582,7 +582,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
-                                                System.out.print("Please edit the astronaut's pay rate (X,XXX.XX): ");
+                                                System.out.print("Please edit the astronaut's pay rate: ");
                                                 do {
                                                     try {
                                                         astroPayRate = kbd.nextDouble();
