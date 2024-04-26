@@ -90,9 +90,8 @@ public class AstroRemoval {
                     astrosToBeRemoved[astroCount].setWeight(0);
                     astrosToBeRemoved[astroCount] = null;
                     System.out.println("\n" + astroRemoved + " has been successfully removed.");
-                    astroCount++;
                 }
             }
-            return astrosToBeRemoved[astroCount];
+            return astrosToBeRemoved[astroCount++];
         }
 }
