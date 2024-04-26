@@ -279,7 +279,7 @@ crewNum = 0;
   public static void removeAstronauts(Connection connection Scanner scanner) {
     AstroRemoval.removeAstronauts(connection, scanner);
 }
-
+//WHY WONT YOU SAVE
 AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
 
    shipName = null;
