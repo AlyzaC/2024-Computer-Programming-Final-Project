@@ -36,12 +36,10 @@ public static void main(String[] args){
 
     
     if (LoggingInPassword(kbd)) {
-        /*
-        if (checkForDatabase()) {
+        if (checkForDatabase(statement)) {
             astros = databaseAstronautArrayRetrieval(astros, statement);
             ships = databaseShipArrayRetrieval(ships, statement);
         }
-        */
         do {
             //Main menu for the program
             System.out.println("Mission Control\n" +
@@ -1623,22 +1621,28 @@ public static boolean checkPhoneNumberString(String phoneNumber) {
     boolean phoneNumberIsValid = true;
 
     //Checks the characters at each position of the string
-    for (char c : stringCharacters) {
-        if ((position == 0) && (c != '(')) {
-            phoneNumberIsValid = false;
-        } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
-            phoneNumberIsValid = false;
-        } else if ((position == 4) && !(c == ')')) {
-            phoneNumberIsValid = false;
-        } else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
-            phoneNumberIsValid = false;
-        } else if ((position == 8) && (c != '-')) {
-            phoneNumberIsValid = false;
-        } else if ((position >= 10) && !(Character.isDigit(c))) {
-            phoneNumberIsValid = false;
+    if (!(phoneNumber.length() == 12)) {
+        phoneNumberIsValid = false;
+    } else {
+        for (char c : stringCharacters) {
+            if ((position == 0) && ((String.valueOf(c)).equals("("))) {
+                phoneNumberIsValid = false;
+            } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
+                phoneNumberIsValid = false;
+            } else if ((position == 4) && !((String.valueOf(c)).equals(")"))) {
+                phoneNumberIsValid = false;
+            } else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
+                phoneNumberIsValid = false;
+            } else if ((position == 8) && !((String.valueOf(c)).equals("-"))) {
+                phoneNumberIsValid = false;
+            } else if ((position >= 9) && !(Character.isDigit(c))) {
+                phoneNumberIsValid = false;
+            }
+            position++;
         }
-        position++;
     }
+
+    
 
     return phoneNumberIsValid;
 }
