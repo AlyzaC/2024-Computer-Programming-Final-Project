@@ -665,19 +665,10 @@ public static void main(String[] args){
                             int astroChoice;
                             do{
                                 astroChoice = astroSelection(kbd, astros);
-                            //     yes: ask for key to delete
-                                /*System.out.println("Type \"yes\" for deletion.\n" +
-                                                    "If you wish to go back enter \"Go back\".");
-                                theKey = kbd.nextLine();*/
-                                //if (theKey.equalsIgnoreCase("yes")) {
-                                    //correct key: delete astronaut, notify user
-                                    AstroRemoval removeAstro = new AstroRemoval(1);
-                                    removeAstro.addAstro(astros[astroChoice - 1]);
-                                    removeAstro.removeAstronauts(connect, kbd);
-                                    break;
-                                //} else if (theKey.equalsIgnoreCase("Go back")) {
-                                    //break;
-                                //}!theKey.equalsIgnoreCase("Go back")||!theKey.equalsIgnoreCase("yes")
+                                AstroRemoval removeAstro = new AstroRemoval(1);
+                                removeAstro.addAstro(astros[astroChoice - 1]);
+                                astros[astroChoice - 1] = removeAstro.removeAstronauts(connect, kbd);
+                                break;
                             } while (!(astroChoice <= 0));
                             break;
 
@@ -1045,18 +1036,8 @@ public static void main(String[] args){
                                 //String theKey;
                                 do {
                                     shipChoice = shipSelection(kbd, ships);
-                                    // no: ask for correct ship, verify
-                                    // yes: ask for key to delete
-                                    /*System.out.println("Type \"yes\" for deletion.\n" +
-                                                    "If you wish to go back enter \"Go back\".");
-                                    theKey = kbd.nextLine();
-                                    if (theKey.equalsIgnoreCase("yes")) {*/
-                                        // correct key: delete ship, notify user
-                                        ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                        ships[shipChoice - 1] = removeShip.removeShip(connect, kbd);
-                                    //} else if (theKey.equalsIgnoreCase("go back")) {
-                                        //break;
-                                    //}!theKey.equalsIgnoreCase("yes")&&!theKey.equalsIgnoreCase("go back")
+                                    ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
+                                    ships[shipChoice - 1] = removeShip.removeShip(connect, kbd);
                                 } while (shipChoice <= 0);
                                 break;
 

@@ -4,6 +4,7 @@ import java.sql.*;
 public class AstroRemoval {
     //Fields
         private Astronaut[] astrosToBeRemoved;
+        private boolean verified = false;
         int astroCount = 0;
 
     //Constructor
@@ -33,9 +34,8 @@ public class AstroRemoval {
      * Verifies whether to remove the astronaut information.
      * @return A boolean for whether the removal has been approved by the user
      */
-        private boolean verifyRemoval(Scanner keyboard) {
+        private void verifyRemoval(Scanner keyboard) {
             String astronautList = "\n";
-            boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
                 if (astro != null) {
                     astronautList += "- " + astro.getName() + "\n";
@@ -55,44 +55,44 @@ public class AstroRemoval {
             } else {
                 verified = false;
             }
-            return verified;
         }
 
     /**
      * Removes astronauts added to list, after verification from the user.
      * @param c A SQL connection provided by the user
      */
-        public void removeAstronauts(Connection c, Scanner keyboard) {
-            if (verifyRemoval(keyboard)) {
-                for (Astronaut astro : astrosToBeRemoved) {
-                    if (astro != null) {
-                        /*try {
-                            Statement stmnt = c.getStatement();
-                            String updateForRemoval = "delete from Astronauts " + 
-                                                      "where SerialNumbers = " + astro.getSerialNumber();
-                            adjust database?
-                        } catch (SQLException e) {
-                            System.out.println("Error occured: " + e.getMessage());
-                        }
-                        */
-
-                        String emptyString = null;
-                        astro.setName(emptyString);
-                        astro.setdateOfBirth(emptyString);
-                        astro.setSerialNumber(0);
-                        astro.setAddress(emptyString);
-                        astro.setEmail(emptyString);
-                        astro.setPhoneNumber(emptyString);
-                        astro.setNextOfKin(emptyString);
-                        astro.setStatus(emptyString);
-                        astro.setPayRate(0);
-                        astro.setWeight(0);
-                        astro = null;
-                        //yield astro; ??
-                    }
-                    
-                }
-                System.out.println("\nAstronaut(s) have been successfully removed.");
+        public Astronaut removeAstronauts(Connection c, Scanner keyboard) {
+            if (!verified) {
+                verifyRemoval(keyboard);
             }
+            if (verified && astroCount < astrosToBeRemoved.length) {
+                if (astrosToBeRemoved[astroCount] != null) {
+                    /*try {
+                        Statement stmnt = c.getStatement();
+                        String updateForRemoval = "delete from Astronauts " + 
+                                                  "where SerialNumbers = " + astro.getSerialNumber();
+                        adjust database?
+                    } catch (SQLException e) {
+                        System.out.println("Error occured: " + e.getMessage());
+                    }
+                    */
+                    String emptyString = null;
+                    String astroRemoved = astrosToBeRemoved[astroCount].getName();
+                    astrosToBeRemoved[astroCount].setName(emptyString);
+                    astrosToBeRemoved[astroCount].setdateOfBirth(emptyString);
+                    astrosToBeRemoved[astroCount].setSerialNumber(0);
+                    astrosToBeRemoved[astroCount].setAddress(emptyString);
+                    astrosToBeRemoved[astroCount].setEmail(emptyString);
+                    astrosToBeRemoved[astroCount].setPhoneNumber(emptyString);
+                    astrosToBeRemoved[astroCount].setNextOfKin(emptyString);
+                    astrosToBeRemoved[astroCount].setStatus(emptyString);
+                    astrosToBeRemoved[astroCount].setPayRate(0);
+                    astrosToBeRemoved[astroCount].setWeight(0);
+                    astrosToBeRemoved[astroCount] = null;
+                    System.out.println("\n" + astroRemoved + " has been successfully removed.");
+                    astroCount++;
+                }
+            }
+            return astrosToBeRemoved[astroCount];
         }
 }
