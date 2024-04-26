@@ -1,4 +1,6 @@
+import java.sql.Connection;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 public class Ship
 {
  int placeHolder; // THIS IS USELESS AND SHOULD BE REMOVED WHEN POSSIBLE
@@ -22,6 +24,7 @@ public class Ship
     double deccel = 9.81; //gravity pulls at 9.81 meters a second
     double altitude = 0; //above 70k in space.
   Scanner scanner = new Scanner(System.in);
+  int seconds;
   //make connection object, make setConnection(), connection will be put into AstroRemoval object
 
 int choice; 
@@ -183,6 +186,18 @@ System.out.println("The Ship needs more fuel for a sucessful launch.");
  else {
 // if fuel = fuelCapacity and crewNum = shipCapacity the launch will start
   System.out.println ("launching metal tube into orbit");
+  
+   while (fuel > 0) {
+                    // Update altitude and speed every second until desired conditions are met
+                    try {
+                        TimeUnit.SECONDS.sleep(1); // Wait for 1 second
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    seconds++;
+                    altitude += speed;
+                    speed += accel - deccel;
+                    fuel -= fuelBurnRate;
 /* accel and decell code here.
 altitude = altitude + speed; <-- needs to happen every second
 speed = speed + accel - deccel; <-- needs to happen every second
@@ -191,6 +206,7 @@ thats why the parachute gives -7 deccel
 
  */
  }
+}
 }
 }
 public void deployParachutes()
@@ -216,7 +232,7 @@ private void clearCrew()
     }
   }
 }
-  public void Destruction()
+  public void Destruction(Connection connection)
   {
     if (failure == true)
     {
@@ -230,10 +246,10 @@ private void clearCrew()
     shipCapacity = 0;
     fuel = 0.0;
 failure = false;
-
+crewNum = 0;
   AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
-   AstroRemoval.removeAstronauts();
-   crewNum = 0;
+   AstroRemoval.removeAstronauts(connection);
+   
    shipName = null;
    clearCrew();
    failure2 = true;
