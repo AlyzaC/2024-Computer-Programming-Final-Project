@@ -23,7 +23,7 @@ public static void main(String[] args){
     Connection connect = null;
     Statement statement = null;
     
-    //Try opening terminal and entering "javac -cp .:sqlite-jdbc-3.45.3.0.jar:slf4j-api-1.7.36.jar main1.java"
+    //Try opening terminal and entering "javac -cp .;sqlite-jdbc-3.45.3.0.jar;slf4j-api-1.7.36.jar main1.java"
     try {
         Class.forName("org.sqlite.JDBC");
         connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.db");
@@ -36,12 +36,10 @@ public static void main(String[] args){
 
     
     if (LoggingInPassword(kbd)) {
-        /*
-        if (checkForDatabase()) {
+        if (checkForDatabase(statement)) {
             astros = databaseAstronautArrayRetrieval(astros, statement);
             ships = databaseShipArrayRetrieval(ships, statement);
         }
-        */
         do {
             //Main menu for the program
             System.out.println("Mission Control\n" +
@@ -93,13 +91,17 @@ public static void main(String[] args){
                             Matcher matcher1 = emailDomain1.matcher(astroEmail);
                             Matcher matcher2 = emailDomain2.matcher(astroEmail);
                             while (!(matcher1.find() && matcher2.find())) {
-                                System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                System.out.println("Please reenter the astronaut's email (name@example.com)");
                                 astroEmail = kbd.nextLine();
                                 matcher1 = emailDomain1.matcher(astroEmail);
                                 matcher2 = emailDomain2.matcher(astroEmail);
                             }
                             System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                             String astroPhone = (kbd.nextLine()).trim();
+                            while (!checkPhoneNumberString(astroPhone)) {
+                                System.out.print("Please reenter the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                astroPhone = (kbd.nextLine()).trim();
+                            }
                             System.out.print("Please enter the full name of the astronaut's next of kin: ");
                             String astroNextOfKin = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
@@ -1606,28 +1608,41 @@ public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
     return shipsExist;
 }
 
+/**
+ * Checks a phone number string to ensure it follows the proper format
+ * @param phoneNumber The phone number string collected from the user and checked
+ * @return Whether the phone number is in a valid format
+ */
 public static boolean checkPhoneNumberString(String phoneNumber) {
+    //Method variables
     char[] stringCharacters = new char[phoneNumber.length()];
-    phoneNumber.getChars(0, (phoneNumber.length() - 1), stringCharacters, 0);
+    phoneNumber.getChars(0, phoneNumber.length(), stringCharacters, 0);
     int position = 0;
     boolean phoneNumberIsValid = true;
 
-    for (char c : stringCharacters) {
-        if ((position == 0) && (c != '(')) {
-            phoneNumberIsValid = false;
-        } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
-            phoneNumberIsValid = false;
-        } else if ((position == 4) && !(c == ')')) {
-            phoneNumberIsValid = false;
-        }
-        else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
-            phoneNumberIsValid = false;
-        } else if ((position == 8) && (c != '-')) {
-            phoneNumberIsValid = false;
-        } else if ((position >= 9) && !(Character.isDigit(c))) {
-            phoneNumberIsValid = false;
+    //Checks the characters at each position of the string
+    if (!(phoneNumber.length() == 12)) {
+        phoneNumberIsValid = false;
+    } else {
+        for (char c : stringCharacters) {
+            if ((position == 0) && ((String.valueOf(c)).equals("("))) {
+                phoneNumberIsValid = false;
+            } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
+                phoneNumberIsValid = false;
+            } else if ((position == 4) && !((String.valueOf(c)).equals(")"))) {
+                phoneNumberIsValid = false;
+            } else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
+                phoneNumberIsValid = false;
+            } else if ((position == 8) && !((String.valueOf(c)).equals("-"))) {
+                phoneNumberIsValid = false;
+            } else if ((position >= 9) && !(Character.isDigit(c))) {
+                phoneNumberIsValid = false;
+            }
+            position++;
         }
     }
+
+    
 
     return phoneNumberIsValid;
 }
