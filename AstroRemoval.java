@@ -33,8 +33,7 @@ public class AstroRemoval {
      * Verifies whether to remove the astronaut information.
      * @return A boolean for whether the removal has been approved by the user
      */
-        private boolean verifyRemoval() {
-            Scanner keyboard = new Scanner(System.in);
+        private boolean verifyRemoval(Scanner keyboard) {
             String astronautList = "\n";
             boolean verified;
             for (Astronaut astro : astrosToBeRemoved) {
@@ -44,23 +43,18 @@ public class AstroRemoval {
             }
             System.out.println("The following astronauts have been chosen for removal: " +
                                astronautList +
-                               "Do you wish to proceed with removal?\n" +
-                               "1. Yes\n" +
-                               "2. No");
-            int choice = keyboard.nextInt();
-            while (choice != 1 && choice != 2) {
-                System.out.println("Please enter a number 1-2.\n" +
-                                   "Do you wish to proceed with removal?\n" +
-                                   "1. Yes\n" +
-                                   "2. No");
-                choice = keyboard.nextInt();
+                               "Do you wish to proceed with removal? (Yes/No)");
+            String choice = keyboard.nextLine();
+            while (!choice.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("no")) {
+                System.out.println("Please enter \"yes\" or \"no\".\n" +
+                                   "Do you wish to proceed with removal? (Yes/No)");
+                choice = keyboard.nextLine();
             }
-            if (choice == 1) {
+            if (choice.equalsIgnoreCase("yes")) {
                 verified = true;
             } else {
                 verified = false;
             }
-            keyboard.close();
             return verified;
         }
 
@@ -68,8 +62,8 @@ public class AstroRemoval {
      * Removes astronauts added to list, after verification from the user.
      * @param c A SQL connection provided by the user
      */
-        public void removeAstronauts(Connection c) {
-            if (verifyRemoval()) {
+        public void removeAstronauts(Connection c, Scanner keyboard) {
+            if (verifyRemoval(keyboard)) {
                 for (Astronaut astro : astrosToBeRemoved) {
                     if (astro != null) {
                         /*try {
@@ -98,7 +92,7 @@ public class AstroRemoval {
                     }
                     
                 }
-                System.out.println("Astronaut(s) have been successfully removed.");
+                System.out.println("\nAstronaut(s) have been successfully removed.");
             }
         }
 }

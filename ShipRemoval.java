@@ -8,6 +8,7 @@ public class ShipRemoval {
     //Constructor
         public ShipRemoval(Ship s) {
             shipToRemove = s;
+            System.out.println(shipToRemove.getSName());
         }
 
     //Methods
@@ -15,27 +16,21 @@ public class ShipRemoval {
      * Verifies whether to remove the ship information.
      * @return A boolean for whether the removal has been approved by the user
      */
-        private boolean verifyRemoval() {
-            Scanner keyboard = new Scanner(System.in);
+        private boolean verifyRemoval(Scanner keyboard) {
             boolean verified;
             System.out.println("The following ship has been chosen for removal: " + shipToRemove.getSName() + "\n" +
-                               "Do you wish to proceed with removal?\n" +
-                               "1. Yes\n" +
-                               "2. No");
-            int choice = keyboard.nextInt();
-            while (choice != 1 && choice != 2) {
-                System.out.println("Please enter a number 1-2.\n" +
-                                   "Do you wish to proceed with removal?\n" +
-                                   "1. Yes\n" +
-                                   "2. No");
-                choice = keyboard.nextInt();
+                               "Do you wish to proceed with removal? (Yes/No)");
+            String choice = keyboard.nextLine();
+            while (!choice.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("no")) {
+                System.out.println("Please enter \"yes\" or \"no\".\n" +
+                        "Do you wish to proceed with removal? (Yes/No)");
+                choice = keyboard.nextLine();
             }
-            if (choice == 1) {
+            if (choice.equalsIgnoreCase("yes")) {
                 verified = true;
             } else {
                 verified = false;
             }
-            keyboard.close();
             return verified;
         }
 
@@ -43,8 +38,8 @@ public class ShipRemoval {
      * Removes astronauts added to list, after verification from the user.
      * @param c A SQL connection provided by the user
      */
-        public void removeShip(Connection c) {
-            if (verifyRemoval()) {
+        public void removeShip(Connection c, Scanner keyboard) {
+            if (verifyRemoval(keyboard)) {
                 /*try {
                     Statement stmnt = c.getStatement();
                     String updateForRemoval = "delete from Ships " + 
@@ -60,7 +55,7 @@ public class ShipRemoval {
                 shipToRemove.setFCap(0);
                 shipToRemove.setFuel(0.0);
                 shipToRemove = null;
-                System.out.println("Ship has been successfully removed.");
+                System.out.println("\nShip has been successfully removed.");
             }
         }
 }
