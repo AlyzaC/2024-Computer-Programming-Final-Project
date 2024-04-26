@@ -8,7 +8,7 @@ public class Ship
  int placeHolder; // THIS IS USELESS AND SHOULD BE REMOVED WHEN POSSIBLE
     private double fuel;
     private String shipName;
-   private  int shipCapacity;
+    private  int shipCapacity;
     private double fuelCapacity;
     private int crewNum = 0; //crewNum is the ammount of Strings in crew
     private Astronaut[] crew; 
@@ -18,7 +18,7 @@ public class Ship
     boolean doorIsOpen = false;
     boolean failure = false; // if true all astronauts are removed and (maybe ship)
     boolean returning = false; // if true ship can land,
-    double fuelBurnRate = 8.33333;
+    double fuelBurnRate = .833333;
     boolean spaceWalkComplete = false;
     boolean spacewalk = false;
     double speed; // goes above 3000 in atmos = death
@@ -197,11 +197,17 @@ public void addAstro(Astronaut astronaut)
   System.out.println("The ship is full.");
  }
 } 
+
+
+
+
+
+
 public void launch() //might need to be a private
 { 
 
   //The code will first make sure that crewNum is equal to shipCapacity
- if (crewNum == shipCapacity)
+ if (crewNum < shipCapacity)
  { 
   //if not the code will not launch.
    System.out.println ("There are not enough crew to start the ship.");
@@ -232,6 +238,10 @@ tldr.  +speed is up -speed is down
 thats why the parachute gives -7 deccel
 
  */
+if ((fuel <= 0) && (inSpace == false) && (returning == false))
+System.out.println("Metal pipe sfx");
+
+failure = true;
  }
 }
 }
@@ -264,7 +274,7 @@ private void clearCrew()
     if (failure == true)
     {
    // if failure is ever set to true
-    System.out.println  ("All astronauts did not survive");
+    System.out.println  ("All astronauts did not survive. Timmy must've put dynamite in the fuel tank again....");
     System.out.println ("womp womp");
     
     
@@ -274,10 +284,32 @@ private void clearCrew()
     fuel = 0.0;
 failure = false;
 crewNum = 0;
+    }
+    }
   
-  public static void removeAstronauts(Connection connection Scanner scanner) {
-    AstroRemoval.removeAstronauts(connection, scanner);
-}
+  public void removeAstronauts(Connection connection, Scanner scanner) 
+ {
+  AstroRemoval astroRem = new AstroRemoval(crewNum);
+   for (Astronaut a : crew) {
+    if (a != null) {
+      astroRem.addAstro(a);
+      a = astroRem.removeAstronauts(connection, scanner);
+    }
+   }
+  
+
+
+//public void shipgoboom (Connection connection, Scanner scanner)
+//{
+
+//
+//ShipRemoval.shipgoboom();
+//}
+
+
+
+
+
 //WHY WONT YOU SAVE
 AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
 
@@ -288,6 +320,6 @@ AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
     //tell astroremoval to remove all astronauts that were part of crew
     //tell shipremoval to remove the ship
     //set failure back to false once everything is done so that way the next test dosent automatically fail
-  }
+    
   }
 }
