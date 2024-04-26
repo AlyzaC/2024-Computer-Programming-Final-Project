@@ -1621,19 +1621,20 @@ public static boolean checkPhoneNumberString(String phoneNumber) {
     boolean phoneNumberIsValid = true;
 
     //Checks the characters at each position of the string
-    if (!(phoneNumber.length() == 12)) {
+    if (!(phoneNumber.length() == 13)) {
         phoneNumberIsValid = false;
     } else {
         for (char c : stringCharacters) {
-            if ((position == 0) && ((String.valueOf(c)).equals("("))) {
+            System.out.println(c);
+            if ((position == 0) && (c != '(')) {
                 phoneNumberIsValid = false;
             } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
                 phoneNumberIsValid = false;
-            } else if ((position == 4) && !((String.valueOf(c)).equals(")"))) {
+            } else if ((position == 4) && !((c != ')'))) {
                 phoneNumberIsValid = false;
             } else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
                 phoneNumberIsValid = false;
-            } else if ((position == 8) && !((String.valueOf(c)).equals("-"))) {
+            } else if ((position == 8) && ((c != '-'))) {
                 phoneNumberIsValid = false;
             } else if ((position >= 9) && !(Character.isDigit(c))) {
                 phoneNumberIsValid = false;
@@ -1641,8 +1642,6 @@ public static boolean checkPhoneNumberString(String phoneNumber) {
             position++;
         }
     }
-
-    
 
     return phoneNumberIsValid;
 }
