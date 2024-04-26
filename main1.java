@@ -19,6 +19,7 @@ public static void main(String[] args){
     //SQL Connection and Statement Creation
     Connection connect = null;
     Statement statement = null;
+    
     try {
         Class.forName("org.sqlite.JDBC");
         connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.db");
@@ -29,13 +30,14 @@ public static void main(String[] args){
         System.out.println("An error occurred: " + e.getMessage());
     }
 
-    /*
-    if (checkForDatabase()) {
-        astros = databaseAstronautArrayRetrieval(astros, statement);
-        ships = databaseShipArrayRetrieval(ships, statement);
-    }
-    */
+    
     if (LoggingInPassword(kbd)) {
+        /*
+        if (checkForDatabase()) {
+            astros = databaseAstronautArrayRetrieval(astros, statement);
+            ships = databaseShipArrayRetrieval(ships, statement);
+        }
+        */
         do {
             //Main menu for the program
             System.out.println("Mission Control\n" +
