@@ -688,6 +688,16 @@ public static void main(String[] args){
                                 System.out.println("\nThere are no astronauts to delete.");
                                 break;
                             }
+                            System.out.println("WARNING: Deleting an astronaut is permanent.\n" +
+                                               "Are you sure you wish to proceed? (Yes/No)");
+                            String deletionConfirmation = kbd.nextLine();
+                            while (!deletionConfirmation.equalsIgnoreCase("no") && !deletionConfirmation.equalsIgnoreCase("yes")) {
+                                System.out.println("Please enter \"yes\" or \"no\".");
+                                deletionConfirmation = kbd.nextLine();
+                            }
+                            if (deletionConfirmation.equalsIgnoreCase("no")) {
+                                break;
+                            }
                             int astroChoice;
                             //Has user select and delete an astronaut
                             do{
@@ -895,6 +905,8 @@ public static void main(String[] args){
                                     statement.executeUpdate(addShipUpdate);
                                 } catch (SQLException e) {
                                     System.out.println("An error occurred while saving ship to database: " + e.getMessage());
+                                } catch (NullPointerException e) {
+                                    System.out.println("An error occurred while saving ship to database: " + e.getMessage());
                                 }
                                 break;
 
@@ -1078,6 +1090,16 @@ public static void main(String[] args){
                             case 3:
                                 if (!checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to edit.");
+                                    break;
+                                }
+                                System.out.println("WARNING: Deleting an astronaut is permanent.\n" +
+                                                   "Are you sure you wish to proceed? (Yes/No)");
+                                String deletionConfirmation = kbd.nextLine();
+                                while (!deletionConfirmation.equalsIgnoreCase("no") && !deletionConfirmation.equalsIgnoreCase("yes")) {
+                                    System.out.println("Please enter \"yes\" or \"no\".");
+                                    deletionConfirmation = kbd.nextLine();
+                                }
+                                if (deletionConfirmation.equalsIgnoreCase("no")) {
                                     break;
                                 }
                                 //Removes ship after asking for ship to delete and verifying
