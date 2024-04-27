@@ -86,9 +86,12 @@ public static void main(String[] args){
                         switch (choice2) {
                         case 1:
                             //Asks user for value for the astronaut object's fields
-                            System.out.print("Please enter the astronaut's full name (First Last): ");
-                            kbd.nextLine();
-                            String astroName = kbd.nextLine().trim();
+                            System.out.print("Please enter the astronaut's first name: ");
+                            kbd.nextLine().trim();
+                            String firstName = kbd.nextLine().trim();
+                            System.out.println("Please enter the astronaut's last name: ");
+                            String lastName = kbd.nextLine().trim();
+                            String astroName = firstName + " " + lastName;
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                             String astroDateOfBirth = (kbd.nextLine()).trim();
                             while (!checkBirthdateString(astroDateOfBirth)) {
@@ -113,8 +116,11 @@ public static void main(String[] args){
                                 System.out.print("Please reenter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                 astroPhone = (kbd.nextLine()).trim();
                             }
-                            System.out.print("Please enter the full name of the astronaut's next of kin: ");
-                            String astroNextOfKin = (kbd.nextLine()).trim();
+                            System.out.print("Please enter the first name of the astronaut's next of kin: ");
+                            String nextOfKinFirst = (kbd.nextLine()).trim();
+                            System.out.print("Please enter the last name of the astronaut's next of kin: ");
+                            String nextOfKinLast = (kbd.nextLine()).trim();
+                            String astroNextOfKin = nextOfKinFirst + " " + nextOfKinLast;
                             System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
                             String astroStatus;
                             do {
@@ -199,9 +205,12 @@ public static void main(String[] args){
                                     //Editing switch loop
                                     switch (field) {
                                         case 1:
-                                            System.out.print("Please enter the astronaut's full name (First Last): ");
-                                            kbd.nextLine();
-                                            astroName = (kbd.nextLine()).trim();
+                                            System.out.print("Please enter the astronaut's first name: ");
+                                            kbd.nextLine().trim();
+                                            firstName = kbd.nextLine().trim();
+                                            System.out.println("Please enter the Astronaut's last name: ");
+                                            lastName = kbd.nextLine().trim();
+                                            astroName = firstName + " " + lastName;
                                             break;
                                         
                                         case 2:
@@ -245,9 +254,12 @@ public static void main(String[] args){
                                             break;
 
                                         case 6: 
-                                            System.out.print("Please enter the full name of the astronaut's next of kin: ");
+                                            System.out.print("Please enter the first name of the astronaut's next of kin: ");
                                             kbd.nextLine();
-                                            astroNextOfKin = (kbd.nextLine()).trim();
+                                            nextOfKinFirst = (kbd.nextLine()).trim();
+                                            System.out.print("Please enter the last name of the astronaut's next of kin: ");
+                                            nextOfKinLast = (kbd.nextLine()).trim();
+                                            astroNextOfKin = nextOfKinFirst + " " + nextOfKinLast;
                                             break;
 
                                         case 7: 
@@ -390,9 +402,12 @@ public static void main(String[] args){
                                 //Astronaut editing switch loop
                                 switch (field) {
                                     case 1:
-                                        System.out.print("Please edit the astronaut's full name (First Last): ");
-                                        kbd.nextLine();
-                                        astroName = (kbd.nextLine()).trim();
+                                        System.out.print("Please enter/edit the astronaut's first name: ");
+                                        kbd.nextLine().trim();
+                                        firstName = kbd.nextLine().trim();
+                                        System.out.println("Please enter/edit the Astronaut's last name: ");
+                                        lastName = kbd.nextLine().trim();
+                                        astroName = firstName + " " + lastName;
                                         correct = "";
                                         do {
                                             System.out.println("The astronaut's current name in the database is "
@@ -590,9 +605,12 @@ public static void main(String[] args){
                                         break;
 
                                     case 6:
-                                        System.out.print("Please edit the full name of the astronaut's next of kin: ");
+                                        System.out.print("Please enter/edit the first name of the astronaut's next of kin: ");
                                         kbd.nextLine();
-                                        astroNextOfKin = (kbd.nextLine()).trim();
+                                        nextOfKinFirst = (kbd.nextLine()).trim();
+                                        System.out.print("Please enter/edit the last name of the astronaut's next of kin: ");
+                                        nextOfKinLast = (kbd.nextLine()).trim();
+                                        astroNextOfKin = nextOfKinFirst + " " + nextOfKinLast;
                                         correct = "";
                                         do {
                                             System.out.println("The astronaut's current next of kin in the database is "
@@ -615,13 +633,12 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
-                                                System.out.print("Please edit the full name of the astronaut's next of kin: ");
+                                                System.out.print("Please enter the first name of the astronaut's next of kin: ");
                                                 kbd.nextLine();
-                                                astroDateOfBirth = (kbd.nextLine()).trim();
-                                                while (!checkBirthdateString(astroDateOfBirth)) {
-                                                    System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
-                                                    astroDateOfBirth = (kbd.nextLine()).trim();
-                                                }
+                                                nextOfKinFirst = (kbd.nextLine()).trim();
+                                                System.out.print("Please enter the last name of the astronaut's next of kin: ");
+                                                nextOfKinLast = (kbd.nextLine()).trim();
+                                                astroNextOfKin = nextOfKinFirst + " " + nextOfKinLast;
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
