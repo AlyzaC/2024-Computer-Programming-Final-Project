@@ -127,8 +127,7 @@ public static void main(String[] args){
                                 try {
                                     astroPayRate = kbd.nextDouble();
                                     if (astroPayRate <= 7.25) {
-                                        System.out.print("The federal minimum wage is $7.50. " +
-                                                         "Please enter a new pay rate per hour: ");
+                                        System.out.print("The federal minimum wage is $7.50");
                                     }
                                 } catch (NumberFormatException e ) {
                                     System.out.println("An error occurred: " + e.getMessage());
@@ -143,6 +142,9 @@ public static void main(String[] args){
                                 System.out.print("Please enter the astronaut's weight in pounds: ");
                                 try {
                                     astroWeight = kbd.nextDouble();
+                                    if (!(astroWeight >= 110 && astroWeight <= 209)) {
+                                        System.out.println("Astronaut must be between 110 and 209 pounds");
+                                    }
                                 } catch (NumberFormatException e ) {
                                     System.out.println("An error occurred: " + e.getMessage());
                                     kbd.nextLine();
@@ -150,7 +152,7 @@ public static void main(String[] args){
                                     System.out.println("An error occurred: " + e.getMessage());
                                     kbd.nextLine();
                                 }
-                            } while (astroWeight <= 0);
+                            } while (!(astroWeight >= 110 && astroWeight <= 209));
                             String change;
                             do {
                                 //Displays the information entered by the user for verification
@@ -277,18 +279,21 @@ public static void main(String[] args){
                                             break;
 
                                         case 9: 
-                                            do {
-                                                System.out.print("Please enter the astronaut's weight in pounds: ");
-                                                try {
-                                                    astroWeight = kbd.nextDouble();
-                                                } catch (NumberFormatException e ) {
-                                                    System.out.println("An error occurred: " + e.getMessage());
-                                                    kbd.nextLine();
-                                                } catch (InputMismatchException e) {
-                                                    System.out.println("An error occurred: " + e.getMessage());
-                                                    kbd.nextLine();
+                                        do {
+                                            System.out.print("Please enter the astronaut's weight in pounds: ");
+                                            try {
+                                                astroWeight = kbd.nextDouble();
+                                                if (!(astroWeight >= 110 && astroWeight <= 209)) {
+                                                    System.out.println("Astronaut must be between 110 and 209 pounds");
                                                 }
-                                            } while (astroWeight <= 0);
+                                            } catch (NumberFormatException e ) {
+                                                System.out.println("An error occurred: " + e.getMessage());
+                                                kbd.nextLine();
+                                            } catch (InputMismatchException e) {
+                                                System.out.println("An error occurred: " + e.getMessage());
+                                                kbd.nextLine();
+                                            }
+                                        } while (!(astroWeight >= 110 && astroWeight <= 209));
                                             break;
 
                                         default: 
@@ -685,17 +690,20 @@ public static void main(String[] args){
                                     case 9:
                                         astroWeight = 0;
                                         do {
-                                            System.out.print("Please edit the astronaut's weight in pounds: ");
+                                            System.out.print("Please enter the astronaut's weight in pounds: ");
                                             try {
                                                 astroWeight = kbd.nextDouble();
-                                            } catch (NumberFormatException e) {
+                                                if (!(astroWeight >= 110 && astroWeight <= 209)) {
+                                                    System.out.println("Astronaut must be between 110 and 209 pounds");
+                                                }
+                                            } catch (NumberFormatException e ) {
                                                 System.out.println("An error occurred: " + e.getMessage());
                                                 kbd.nextLine();
                                             } catch (InputMismatchException e) {
                                                 System.out.println("An error occurred: " + e.getMessage());
                                                 kbd.nextLine();
                                             }
-                                        } while (astroWeight <= 0);
+                                        } while (!(astroWeight >= 110 && astroWeight <= 209));
                                         correct = "";
                                         do {
                                             System.out.println("The astronaut's current weight in the database is "
@@ -714,17 +722,20 @@ public static void main(String[] args){
                                                 break;
                                             } else {
                                                 do {
-                                                    System.out.print("Please edit the weight in pounds: ");
+                                                    System.out.print("Please enter the astronaut's weight in pounds: ");
                                                     try {
                                                         astroWeight = kbd.nextDouble();
-                                                    } catch (NumberFormatException e) {
+                                                        if (!(astroWeight >= 110 && astroWeight <= 209)) {
+                                                            System.out.println("Astronaut must be between 110 and 209 pounds");
+                                                        }
+                                                    } catch (NumberFormatException e ) {
                                                         System.out.println("An error occurred: " + e.getMessage());
                                                         kbd.nextLine();
                                                     } catch (InputMismatchException e) {
                                                         System.out.println("An error occurred: " + e.getMessage());
                                                         kbd.nextLine();
                                                     }
-                                                } while (astroWeight <= 0);
+                                                } while (!(astroWeight >= 110 && astroWeight <= 209));
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
