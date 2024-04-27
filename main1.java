@@ -1112,13 +1112,11 @@ public static void main(String[] args){
                                         break;
 
                                     case 4:
-                                        theKey = "";
                                         changeSuccessful = false;
                                         do {
-                                            System.out.println("Please edit the ship's crew capacity: ");
-                                            kbd.nextLine();
                                             shipCrewCapacity = 0;
                                             do {
+                                                System.out.println("Please edit the ship's crew capacity: ");
                                                 try {
                                                     shipCrewCapacity = kbd.nextInt();
                                                 } catch (NumberFormatException e ) {
@@ -1142,7 +1140,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                        } while (!(correct.equalsIgnoreCase("go back")) || !(changeSuccessful));
                                         break;
 
                                     case 5: 
@@ -1666,7 +1664,6 @@ public static boolean checkBirthdateString(String birthString) {
         secondNumStr = birthString.substring(3, 5);
         thirdNumStr = birthString.substring(6, 10);
     } catch (StringIndexOutOfBoundsException e) {
-        System.out.println("An error occurred: " + e.getMessage());
         stringIsValid = false;
     }
     try {
@@ -1674,10 +1671,8 @@ public static boolean checkBirthdateString(String birthString) {
         secondNum = Integer.parseInt(secondNumStr);
         thirdNum = Integer.parseInt(thirdNumStr);
     } catch (NumberFormatException e) {
-        System.out.println("An error occurred: " + e.getMessage());
         stringIsValid = false;
     } catch (InputMismatchException e) {
-        System.out.println("An error occurred: " + e.getMessage());
         stringIsValid = false;
     }
 
@@ -1685,21 +1680,23 @@ public static boolean checkBirthdateString(String birthString) {
         if (!birthString.matches("\\d{2}\\/\\d{2}\\/\\d{4}")) {
             stringIsValid = false;
             System.out.println("String does not follow pattern/format");
-        } if (!(firstNum >= 1 && firstNum <= daysInMonths[secondNum - 1])) {
-            stringIsValid = false;
-            System.out.println("The day exceeds the number of days for that month");
-        } else if (!(secondNum >= 1 && secondNum <= 12)) {
-            stringIsValid = false;
-            System.out.println("Number for months must be between 1 and 12");
-        } else if (!(thirdNum >= 1944)) {
-            System.out.println("How about we don't send someone over 80 onto a spacecraft, yeah?");
-            stringIsValid = false;
-        } else if (!(thirdNum <= 2005)) {
-            stringIsValid = false;
-            System.out.println("Astronaut must be older than eighteen (18) years of age");
+        } else {
+            if (!(firstNum >= 1 && firstNum <= daysInMonths[secondNum - 1])) {
+                stringIsValid = false;
+                System.out.println("The day exceeds the number of days for that month");
+            } else if (!(secondNum >= 1 && secondNum <= 12)) {
+                stringIsValid = false;
+                
+            } else if (!(thirdNum >= 1944)) {
+                System.out.println("How about we don't send someone over 80 onto a spacecraft, yeah?");
+                stringIsValid = false;
+            } else if (!(thirdNum <= 2005)) {
+                stringIsValid = false;
+                System.out.println("Astronaut must be older than eighteen (18) years of age");
+            }
         }
     } catch (ArrayIndexOutOfBoundsException e) {
-        System.out.println("An error occurred: " + e.getMessage());
+        System.out.println("Number for months must be between 1 and 12");
         stringIsValid = false;
     }
 
