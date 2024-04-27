@@ -399,9 +399,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setName(astroName);
-                                                // string updateString = "update Astronauts set Names = " + astroName +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set Names = " + astroName + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -431,9 +435,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setdateOfBirth(astroDateOfBirth);
-                                                // string updateString = "update Astronauts set BirthDates = " + astroDateOfBirth +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set BirthDates = " + astroDateOfBirth + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -462,9 +470,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setAddress(astroAddress);
-                                                // string updateString = "update Astronauts set Addresses = " + astroAddress +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set Addresses = " + astroAddress + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -497,9 +509,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setEmail(astroEmail);
-                                                // string updateString = "update Astronauts set BirthDates = " + astroDateOfBirth +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set Emails = " + astroEmail + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -537,9 +553,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setPhoneNumber(astroPhone);
-                                                // string updateString = "update Astronauts set PhoneNumbers = " + astroPhone +
-                                                //                       "where serialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set PhoneNumbers = " + astroPhone + " " +
+                                                                      "where serialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -569,9 +589,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setNextOfKin(astroNextOfKin);
-                                                // string updateString = "update Astronauts set NextOfKin = " + astroNextOfKin +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set NextOfKin = " + astroNextOfKin + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -613,9 +637,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setStatus(astroStatus);
-                                                // string updateString = "update Astronauts set Statuses = " + astroStatus +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set Statuses = " + astroStatus + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -668,9 +696,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setPayRate(astroPayRate);
-                                                // string updateString = "update Astronauts set PayRates = " + astroPayRate +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set PayRates = " + astroPayRate + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -722,9 +754,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setWeight(astroWeight);
-                                                // string updateString = "update Astronauts set Weights = " + astroWeight +
-                                                //                       "where SerialNumbers = " + astroToEdit.getSerialNumber();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Astronauts set Weights = " + astroWeight + " " +
+                                                                      "where SerialNumbers = " + astroToEdit.getSerialNumber();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -782,6 +818,7 @@ public static void main(String[] args){
                                 AstroRemoval removeAstro = new AstroRemoval(1);
                                 removeAstro.addAstro(astros[astroChoice - 1]);
                                 astros[astroChoice - 1] = removeAstro.removeAstronauts(connect, kbd);
+                                astros = databaseAstronautArrayRetrieval(astros, statement);
                                 break;
                             } while (!(astroChoice <= 0));
                             break;
@@ -1033,9 +1070,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSName(shipName); 
-                                                // string updateString = "update Ships set ShipNames = " + shipName +
-                                                //                       "where ShipNames = " + shipToEdit.getSName();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Ships set ShipNames = " + shipName + " " +
+                                                                      "where ShipNames = " + shipToEdit.getSName();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1068,9 +1109,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFCap(shipFuelCapacity); 
-                                                // string updateString = "update Ships set FuelCapacities = " + shipFuelCapacity +
-                                                //                       "where ShipNames = " + shipToEdit.getSName();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Ships set FuelCapacities = " + shipFuelCapacity + " " +
+                                                                      "where ShipNames = " + shipToEdit.getSName();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1108,9 +1153,13 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFuel(shipCurrentFuel); 
-                                                // string updateString = "update Ships set Fuel = " + shipCurrentFuel +
-                                                //                       "where ShipNames = " + shipToEdit.getSName();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Ships set Fuel = " + shipCurrentFuel + " " +
+                                                                      "where ShipNames = " + shipToEdit.getSName();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1140,9 +1189,13 @@ public static void main(String[] args){
                                             correct = (kbd.nextLine()).trim();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSCap(shipCrewCapacity); 
-                                                // string updateString = "update Ships set ShipCapacities = " + shipCrewCapacity +
-                                                //                       "where ShipNames = " + shipToEdit.getSName();
-                                                // statement.executeUpdate(updateString);
+                                                String updateString = "update Ships set ShipCapacities = " + shipCrewCapacity + " " +
+                                                                      "where ShipNames = " + shipToEdit.getSName();
+                                                try {
+                                                    statement.executeUpdate(updateString);
+                                                } catch (SQLException e) {
+                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                }
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1182,6 +1235,7 @@ public static void main(String[] args){
                                     shipChoice = shipSelection(kbd, ships);
                                     ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
                                     ships[shipChoice - 1] = removeShip.removeShip(connect, kbd);
+                                    ships = databaseShipArrayRetrieval(ships, statement);
                                 } while (shipChoice <= 0);
                                 break;
 
@@ -1240,10 +1294,10 @@ public static void main(String[] args){
                                     launchConfirmation = (kbd.nextLine()).trim();
                                     if (launchConfirmation.equalsIgnoreCase("yes")) {
                                         ships[shipChoice - 1].launch();
-                                        /*if (!(ships[shipChoice -1].getFailure()) {
+                                        if (ships[shipChoice -1].getFailure()) {
                                             ShipRemoval shipRemoval = new ShipRemoval(ships[shipChoice - 1]);
-                                            shipRemoval.removeShip(connect);
-                                        }*/
+                                            shipRemoval.removeShip(connect, kbd);
+                                        }
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");
                                         break;
@@ -1276,9 +1330,12 @@ public static void main(String[] args){
         } while (choice != 4);
     }
     
-    //results.close();
-    //statement.close();
-    //connect.close();
+    try {
+        statement.close();
+        connect.close();
+    } catch (SQLException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
     kbd.close();
     System.exit(0);
 }
@@ -1428,32 +1485,31 @@ public static void createApplicationPassword(File f) {
 }
 
 /**
- * Checks a SQL file for the ApplicationDatabase
- * @param s A Java SQL statement object used to perform queries and updates
- * @return Whether the database exists in the file
+ * Adds Astronaut and Ship tables to the database
+ * @param s A Java SQL statement object used to perform updates
  */
 public static void createTables(Statement s) {
     try {
         // s.executeUpdate("create database ApplicationDatabase;");
         String updateString = "create table Astronauts (" +
-                "Names tinytext," +
-                "SerialNumbers smallint," +
-                "Birthdates tinytext," +
-                "Addresses tinytext," +
-                "Emails tinytext," +
-                "PhoneNumbers tinytext," +
-                "NextOfKin tinytext," +
-                "Statuses tinytext," +
-                "PayRates double(5, 2)," +
-                "Weights double(5, 2)" +
-                ");";
+                              "Names tinytext," +
+                              "SerialNumbers smallint," +
+                              "Birthdates tinytext," +
+                              "Addresses tinytext," +
+                              "Emails tinytext," +
+                              "PhoneNumbers tinytext," +
+                              "NextOfKin tinytext," +
+                              "Statuses tinytext," +
+                              "PayRates double(5, 2)," +
+                              "Weights double(5, 2)" +
+                              ");";
         s.executeUpdate(updateString);
         updateString = "create table Ships (" +
-                "ShipNames tinytext," +
-                "FuelCapacities double(6, 2)," +
-                "Fuel double(7, 2)," +
-                "ShipCapacities smallint" +
-                ");";
+                       "ShipNames tinytext," +
+                       "FuelCapacities double(6, 2)," +
+                       "Fuel double(7, 2)," +
+                       "ShipCapacities smallint" +
+                       ");";
         s.executeUpdate(updateString);
     } catch (SQLException e) {
         System.out.println("An error has occurred: " + e.getMessage());
