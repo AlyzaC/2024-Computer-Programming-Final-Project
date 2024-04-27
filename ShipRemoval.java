@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.sql.*;
 
 public class ShipRemoval {
@@ -11,56 +10,9 @@ public class ShipRemoval {
             System.out.println(shipToRemove.getSName());
         }
 
-    //Methods
-        /**
-     * Verifies whether to remove the ship information.
-     * @return A boolean for whether the removal has been approved by the user
-     */
-        private boolean verifyRemoval(Scanner keyboard) {
-            boolean verified;
-            System.out.println("The following ship has been chosen for removal: " + shipToRemove.getSName() + "\n" +
-                               "Do you wish to proceed with removal? (Yes/No)");
-            String choice = keyboard.nextLine();
-            while (!choice.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("no")) {
-                System.out.println("Please enter \"yes\" or \"no\".\n" +
-                        "Do you wish to proceed with removal? (Yes/No)");
-                choice = keyboard.nextLine();
-            }
-            if (choice.equalsIgnoreCase("yes")) {
-                verified = true;
-            } else {
-                verified = false;
-            }
-            return verified;
-        }
-
+    //Method  
     /**
-     * Removes ship, after verification from the user.
-     * @param c A SQL connection provided by the user
-     */
-        public Ship removeShip(Connection c, Scanner keyboard) {
-            if (verifyRemoval(keyboard)) {
-                try {
-                    String updateForRemoval = "delete from Ships where ShipNames = ?";
-                    PreparedStatement ps = c.prepareStatement(updateForRemoval);
-                    ps.setString(1, shipToRemove.getSName());
-                    ps.executeUpdate();
-                    ps.close();
-                } catch (SQLException e) {
-                    System.out.println("Error occured: " + e.getMessage());
-                }
-                shipToRemove.setSName(null);
-                shipToRemove.setSCap(0);
-                shipToRemove.setFCap(0);
-                shipToRemove.setFuel(0.0);
-                shipToRemove = null;
-                System.out.println("\nShip has been successfully removed.");
-            }
-            return shipToRemove;
-        }
-
-        /**
-     * Removes ship, after verification from the user.
+     * Removes ship
      * @param c A SQL connection provided by the user
      */
         public Ship removeShip(Connection c) {

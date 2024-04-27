@@ -839,7 +839,7 @@ public static void main(String[] args){
                                 astroChoice = astroSelection(kbd, astros);
                                 AstroRemoval removeAstro = new AstroRemoval(1);
                                 removeAstro.addAstro(astros[astroChoice - 1]);
-                                astros[astroChoice - 1] = removeAstro.removeAstronauts(connect, kbd);
+                                astros[astroChoice - 1] = removeAstro.removeAstronauts(connect);
                                 astros = databaseAstronautArrayRetrieval(statement);
                                 break;
                             } while (!(astroChoice <= 0));
@@ -1265,7 +1265,7 @@ public static void main(String[] args){
                                 do {
                                     shipChoice = shipSelection(kbd, ships);
                                     ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                    ships[shipChoice - 1] = removeShip.removeShip(connect, kbd);
+                                    ships[shipChoice - 1] = removeShip.removeShip(connect);
                                     ships = databaseShipArrayRetrieval(statement);
                                 } while (shipChoice <= 0);
                                 break;
