@@ -1033,7 +1033,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(theKey.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                        } while (!(theKey.equalsIgnoreCase("go back")) && !(changeSuccessful));
                                         break;
 
                                     case 2:
@@ -1130,7 +1130,7 @@ public static void main(String[] args){
                                                             "If this is correct, enter \"correct\".\n" +
                                                             "If you wish to go back, enter \"Go back\".");
                                             kbd.nextLine();
-                                            correct = kbd.nextLine();
+                                            correct = (kbd.nextLine()).trim();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSCap(shipCrewCapacity); 
                                                 // string updateString = "update Ships set ShipCapacities = " + shipCrewCapacity +
@@ -1140,7 +1140,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(correct.equalsIgnoreCase("go back")) || !(changeSuccessful));
+                                        } while (!(correct.equalsIgnoreCase("go back")) && !(changeSuccessful));
                                         break;
 
                                     case 5: 
@@ -1240,6 +1240,7 @@ public static void main(String[] args){
                                         }*/
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");
+                                        break;
                                     }
                                 } while (!(launchConfirmation.equalsIgnoreCase("yes") && !launchConfirmation.equalsIgnoreCase("no")));
                                 break;
