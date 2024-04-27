@@ -35,19 +35,20 @@ public class ShipRemoval {
         }
 
     /**
-     * Removes astronauts added to list, after verification from the user.
+     * Removes ship, after verification from the user.
      * @param c A SQL connection provided by the user
      */
         public Ship removeShip(Connection c, Scanner keyboard) {
             if (verifyRemoval(keyboard)) {
-                /*try {
-                    Statement stmnt = c.getStatement();
+                try {
+                    Statement stmnt = c.createStatement();
                     String updateForRemoval = "delete from Ships " + 
                                               "where ShipNames = " + shipToRemove.getSName();
-                    adjust database?
+                    stmnt.executeUpdate(updateForRemoval);
+                    stmnt.close();
                 } catch (SQLException e) {
                     System.out.println("Error occured: " + e.getMessage());
-                }*/
+                }
                 shipToRemove.setSName(null);
                 shipToRemove.setSCap(0);
                 shipToRemove.setFCap(0);
@@ -55,6 +56,29 @@ public class ShipRemoval {
                 shipToRemove = null;
                 System.out.println("\nShip has been successfully removed.");
             }
+            return shipToRemove;
+        }
+
+        /**
+     * Removes ship, after verification from the user.
+     * @param c A SQL connection provided by the user
+     */
+        public Ship removeShip(Connection c) {
+            try {
+                Statement stmnt = c.createStatement();
+                String updateForRemoval = "delete from Ships " +
+                        "where ShipNames = " + shipToRemove.getSName();
+                stmnt.executeUpdate(updateForRemoval);
+                stmnt.close();
+            } catch (SQLException e) {
+                System.out.println("Error occured: " + e.getMessage());
+            }
+            shipToRemove.setSName(null);
+            shipToRemove.setSCap(0);
+            shipToRemove.setFCap(0);
+            shipToRemove.setFuel(0.0);
+            shipToRemove = null;
+            System.out.println("\nShip has been successfully removed.");
             return shipToRemove;
         }
 }
