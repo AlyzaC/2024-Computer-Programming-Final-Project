@@ -84,6 +84,10 @@ public static void main(String[] args){
                             String astroName = kbd.nextLine().trim();
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                             String astroDateOfBirth = (kbd.nextLine()).trim();
+                            while (!checkBirthdateString(astroDateOfBirth)) {
+                                System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
+                                astroDateOfBirth = (kbd.nextLine()).trim();
+                            }
                             System.out.print("Please enter the astronaut's address: ");
                             String astroAddress = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's email (name@example.com): ");
@@ -98,7 +102,7 @@ public static void main(String[] args){
                             }
                             System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                             String astroPhone = (kbd.nextLine()).trim();
-                            while (!checkPhoneNumberString(astroPhone)) {
+                            while (!astroPhone.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
                                 System.out.print("Please reenter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                 astroPhone = (kbd.nextLine()).trim();
                             }
@@ -195,6 +199,10 @@ public static void main(String[] args){
                                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                                             kbd.nextLine();
                                             astroDateOfBirth = (kbd.nextLine()).trim();
+                                            while (!checkBirthdateString(astroDateOfBirth)) {
+                                                System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
+                                                astroDateOfBirth = (kbd.nextLine()).trim();
+                                            }
                                             break;
 
                                         case 3:
@@ -221,6 +229,10 @@ public static void main(String[] args){
                                             System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                             kbd.nextLine();
                                             astroPhone = (kbd.nextLine()).trim();
+                                            while (!astroPhone.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
+                                                System.out.print("Please reenter the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                                astroPhone = (kbd.nextLine()).trim();
+                                            }
                                             break;
 
                                         case 6: 
@@ -393,6 +405,10 @@ public static void main(String[] args){
                                         System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
                                         kbd.nextLine();
                                         astroDateOfBirth = (kbd.nextLine()).trim();
+                                        while (!checkBirthdateString(astroDateOfBirth)) {
+                                            System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
+                                            astroDateOfBirth = (kbd.nextLine()).trim();
+                                        }
                                         correct = "";
                                         do {
                                             System.out.println("The astronaut's current date of birth in the database is "
@@ -412,6 +428,10 @@ public static void main(String[] args){
                                                 System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
                                                 kbd.nextLine();
                                                 astroDateOfBirth = (kbd.nextLine()).trim();
+                                                while (!checkBirthdateString(astroDateOfBirth)) {
+                                                    System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
+                                                    astroDateOfBirth = (kbd.nextLine()).trim();
+                                                }
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
@@ -490,6 +510,10 @@ public static void main(String[] args){
                                         System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                         kbd.nextLine();
                                         astroPhone = (kbd.nextLine()).trim();
+                                        while (!astroPhone.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
+                                            System.out.print("Please reenter the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                            astroPhone = (kbd.nextLine()).trim();
+                                        }
                                         correct = "";
                                         do {
                                             System.out
@@ -511,6 +535,10 @@ public static void main(String[] args){
                                                         "Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                                 kbd.nextLine();
                                                 astroPhone = (kbd.nextLine()).trim();
+                                                while (!astroPhone.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
+                                                    System.out.print("Please reenter the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                                    astroPhone = (kbd.nextLine()).trim();
+                                                }
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
@@ -539,6 +567,10 @@ public static void main(String[] args){
                                                         "Please edit the full name of the astronaut's next of kin: ");
                                                 kbd.nextLine();
                                                 astroDateOfBirth = (kbd.nextLine()).trim();
+                                                while (!checkBirthdateString(astroDateOfBirth)) {
+                                                    System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
+                                                    astroDateOfBirth = (kbd.nextLine()).trim();
+                                                }
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
@@ -1609,40 +1641,55 @@ public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
 }
 
 /**
- * Checks a phone number string to ensure it follows the proper format
- * @param phoneNumber The phone number string collected from the user and checked
- * @return Whether the phone number is in a valid format
+ * Checks the validity of a birthdate input string
+ * @param birthString The birthdate string to be checked for validity
+ * @return Whether the birthdate string is valid
  */
-public static boolean checkPhoneNumberString(String phoneNumber) {
+public static boolean checkBirthdateString(String birthString) {
     //Method variables
-    char[] stringCharacters = new char[phoneNumber.length()];
-    phoneNumber.getChars(0, phoneNumber.length(), stringCharacters, 0);
-    int position = 0;
-    boolean phoneNumberIsValid = true;
-
-    //Checks the characters at each position of the string
-    if (!(phoneNumber.length() == 13)) {
-        phoneNumberIsValid = false;
-    } else {
-        for (char c : stringCharacters) {
-            System.out.println(c);
-            if ((position == 0) && (c != '(')) {
-                phoneNumberIsValid = false;
-            } else if ((position >= 1 && position <= 3) && !(Character.isDigit(c))) {
-                phoneNumberIsValid = false;
-            } else if ((position == 4) && !((c != ')'))) {
-                phoneNumberIsValid = false;
-            } else if ((position >= 5 && position <= 7) && !(Character.isDigit(c))) {
-                phoneNumberIsValid = false;
-            } else if ((position == 8) && ((c != '-'))) {
-                phoneNumberIsValid = false;
-            } else if ((position >= 9) && !(Character.isDigit(c))) {
-                phoneNumberIsValid = false;
-            }
-            position++;
-        }
+    boolean stringIsValid = true;
+    int[] daysInMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    String firstNumStr = "", secondNumStr = "", thirdNumStr = "";
+    int firstNum = 0, secondNum = 0, thirdNum = 0;
+    try {
+        firstNumStr = birthString.substring(0, 2);
+        secondNumStr = birthString.substring(3, 5);
+        thirdNumStr = birthString.substring(6, 10);
+    } catch (StringIndexOutOfBoundsException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+        stringIsValid = false;
+    }
+    try {
+        firstNum = Integer.parseInt(firstNumStr);
+        secondNum = Integer.parseInt(secondNumStr);
+        thirdNum = Integer.parseInt(thirdNumStr);
+    } catch (NumberFormatException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+        stringIsValid = false;
+    } catch (InputMismatchException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+        stringIsValid = false;
     }
 
-    return phoneNumberIsValid;
+    try {
+        if (!birthString.matches("\\d{2}\\/\\d{2}\\/\\d{4}")) {
+            stringIsValid = false;
+        } if (!(firstNum >= 1 && firstNum <= daysInMonths[secondNum - 1])) {
+            stringIsValid = false;
+        } else if (!(secondNum >= 1 && secondNum <= 12)) {
+            stringIsValid = false;
+        } else if (!(thirdNum >= 1924)) {
+            stringIsValid = false;
+        } else if (!(thirdNum <= 2005)) {
+            stringIsValid = false;
+            System.out.println("Astronaut must be older than eighteen (18) years of age");
+        }
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+        stringIsValid = false;
+    }
+
+    return stringIsValid;
 }
+
 }
