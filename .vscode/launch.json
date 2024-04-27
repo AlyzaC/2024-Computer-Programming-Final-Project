@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "main1",
+            "request": "launch",
+            "mainClass": "main1",
+            "projectName": "2024-Computer-Programming-Final-Project_ed025f27"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
