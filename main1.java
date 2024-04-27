@@ -1673,11 +1673,15 @@ public static boolean checkBirthdateString(String birthString) {
     try {
         if (!birthString.matches("\\d{2}\\/\\d{2}\\/\\d{4}")) {
             stringIsValid = false;
+            System.out.println("String does not follow pattern/format");
         } if (!(firstNum >= 1 && firstNum <= daysInMonths[secondNum - 1])) {
             stringIsValid = false;
+            System.out.println("The day exceeds the number of days for that month");
         } else if (!(secondNum >= 1 && secondNum <= 12)) {
             stringIsValid = false;
-        } else if (!(thirdNum >= 1924)) {
+            System.out.println("Number for months must be between 1 and 12");
+        } else if (!(thirdNum >= 1944)) {
+            System.out.println("How about we don't send someone over 80 onto a spacecraft, yeah?");
             stringIsValid = false;
         } else if (!(thirdNum <= 2005)) {
             stringIsValid = false;
