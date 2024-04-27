@@ -67,15 +67,15 @@ public class AstroRemoval {
             }
             if (verified && astroCount < astrosToBeRemoved.length) {
                 if (astrosToBeRemoved[astroCount] != null) {
-                    /*try {
-                        Statement stmnt = c.getStatement();
+                    try {
+                        Statement stmnt = c.createStatement();
                         String updateForRemoval = "delete from Astronauts " + 
-                                                  "where SerialNumbers = " + astro.getSerialNumber();
-                        adjust database?
+                                                  "where SerialNumbers = " + astrosToBeRemoved[astroCount].getSerialNumber();
+                        stmnt.executeUpdate(updateForRemoval);
+                        stmnt.close();
                     } catch (SQLException e) {
                         System.out.println("Error occured: " + e.getMessage());
                     }
-                    */
                     String emptyString = null;
                     String astroRemoved = astrosToBeRemoved[astroCount].getName();
                     astrosToBeRemoved[astroCount].setName(emptyString);
@@ -102,15 +102,15 @@ public class AstroRemoval {
         public Astronaut removeAstronauts(Connection c) {
             if (astroCount < astrosToBeRemoved.length) {
                 if (astrosToBeRemoved[astroCount] != null) {
-                    /*try {
-                        Statement stmnt = c.getStatement();
+                    try {
+                        Statement stmnt = c.createStatement();
                         String updateForRemoval = "delete from Astronauts " + 
-                                                "where SerialNumbers = " + astro.getSerialNumber();
-                        adjust database?
+                                                  "where SerialNumbers = " + astrosToBeRemoved[astroCount].getSerialNumber();
+                        stmnt.executeUpdate(updateForRemoval);
+                        stmnt.close();
                     } catch (SQLException e) {
                         System.out.println("Error occured: " + e.getMessage());
                     }
-                    */
                     String emptyString = null;
                     String astroRemoved = astrosToBeRemoved[astroCount].getName();
                     astrosToBeRemoved[astroCount].setName(emptyString);
