@@ -8,13 +8,14 @@ public class main1 {
 
 public static void main(String[] args){
     //Variables & Objects
-    Ship[] ships = new Ship[10];
-    Astronaut[] astros = new Astronaut[30];
     int choice = 0;
     int choice2 = 0;
+    Ship[] ships = new Ship[10];
+    Astronaut[] astros = new Astronaut[30];
     String correct = "";
     Pattern emailDomain1 = Pattern.compile(".com");
     Pattern emailDomain2 = Pattern.compile("@");
+    File database = new File("ApplicationDatabase.sqlite");
 
     //Scanner
     Scanner kbd = new Scanner(System.in);
@@ -23,22 +24,28 @@ public static void main(String[] args){
     Connection connect = null;
     Statement statement = null;
     
-    //Try opening terminal and entering "javac -cp .;sqlite-jdbc-3.45.3.0.jar;slf4j-api-1.7.36.jar main1.java"
-    try {
-        Class.forName("org.sqlite.JDBC");
-        connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.db");
-        statement = connect.createStatement();
-    } catch (SQLException e) {
-        System.out.println("An error occurred: " + e.getMessage());
-    } catch (ClassNotFoundException e) {
-        System.out.println("An error occurred: " + e.getMessage());
-    }
-
-    
     if (LoggingInPassword(kbd)) {
-        if (checkForDatabase(statement)) {
-            astros = databaseAstronautArrayRetrieval(astros, statement);
-            ships = databaseShipArrayRetrieval(ships, statement);
+        try {
+            if (database.exists()) {
+                Class.forName("org.sqlite.JDBC");
+                connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.sqlite");
+                statement = connect.createStatement();
+                astros = databaseAstronautArrayRetrieval(astros, statement);
+                ships = databaseShipArrayRetrieval(ships, statement);
+            } else if (database.createNewFile()) {
+                Class.forName("org.sqlite.JDBC");
+                connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.sqlite");
+                statement = connect.createStatement();
+                createTables(statement);
+                astros = databaseAstronautArrayRetrieval(astros, statement);
+                ships = databaseShipArrayRetrieval(ships, statement);
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("An error occurred: " + e.getMessage());
         }
         do {
             //Main menu for the program
@@ -1425,41 +1432,32 @@ public static void createApplicationPassword(File f) {
  * @param s A Java SQL statement object used to perform queries and updates
  * @return Whether the database exists in the file
  */
-public static boolean checkForDatabase(Statement s) {
-    boolean databaseExists = false;
+public static void createTables(Statement s) {
     try {
-            boolean databaseInFile = false;
-            //execute queries to get value for databaseInFile
-            if (databaseInFile) {
-                databaseExists = true;
-            } else {
-                s.executeUpdate("create database ApplicationDatabase;");
-                String updateString = "create table Astronauts (" +
-                                      "Names tinytext," +
-                                      "SerialNumbers smallint," +
-                                      "Birthdates tinytext," +
-                                      "Addresses tinytext," +
-                                      "Emails tinytext," +
-                                      "PhoneNumbers tinytext," +
-                                      "NextOfKin tinytext," +
-                                      "Statuses tinytext," +
-                                      "PayRates double(5, 2)," +
-                                      "Weights double(5, 2));";
-                s.executeUpdate(updateString);
-                updateString = "create table Ships (" +
-                    "ShipNames tinytext," +
-                    "FuelCapacities double(6, 2)," +
-                    "Fuel double(7, 2)," +
-                    "ShipCapacities smallint);";
-                s.executeUpdate(updateString);
-                String databaseFile = "ApplicationDatabase.DB";
-                String backupStatement = String.format("backup database ApplicationDatabase to disk = %s;", databaseFile);
-                s.executeUpdate(backupStatement);
-            }
-        } catch (SQLException e) {
-            System.out.println("An error has occurred: " + e.getMessage());
-        }
-    return databaseExists;
+        // s.executeUpdate("create database ApplicationDatabase;");
+        String updateString = "create table Astronauts (" +
+                "Names tinytext," +
+                "SerialNumbers smallint," +
+                "Birthdates tinytext," +
+                "Addresses tinytext," +
+                "Emails tinytext," +
+                "PhoneNumbers tinytext," +
+                "NextOfKin tinytext," +
+                "Statuses tinytext," +
+                "PayRates double(5, 2)," +
+                "Weights double(5, 2)" +
+                ");";
+        s.executeUpdate(updateString);
+        updateString = "create table Ships (" +
+                "ShipNames tinytext," +
+                "FuelCapacities double(6, 2)," +
+                "Fuel double(7, 2)," +
+                "ShipCapacities smallint" +
+                ");";
+        s.executeUpdate(updateString);
+    } catch (SQLException e) {
+        System.out.println("An error has occurred: " + e.getMessage());
+    }
 }
 
 /**
