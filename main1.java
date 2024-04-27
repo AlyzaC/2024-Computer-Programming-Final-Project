@@ -1234,7 +1234,7 @@ public static void main(String[] args){
                                 do {
                                     shipChoice = shipSelection(kbd, ships);
                                     ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                    ships[shipChoice - 1] = removeShip.removeShip(connect, kbd);
+                                    ships[shipChoice - 1] = removeShip.removeShip(connect);
                                     ships = databaseShipArrayRetrieval(ships, statement);
                                 } while (shipChoice <= 0);
                                 break;
