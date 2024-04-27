@@ -41,11 +41,11 @@ public class ShipRemoval {
         public Ship removeShip(Connection c, Scanner keyboard) {
             if (verifyRemoval(keyboard)) {
                 try {
-                    Statement stmnt = c.createStatement();
-                    String updateForRemoval = "delete from Ships " + 
-                                              "where ShipNames = " + shipToRemove.getSName();
-                    stmnt.executeUpdate(updateForRemoval);
-                    stmnt.close();
+                    String updateForRemoval = "delete from Ships where ShipNames = ?";
+                    PreparedStatement ps = c.prepareStatement(updateForRemoval);
+                    ps.setString(1, shipToRemove.getSName());
+                    ps.executeUpdate();
+                    ps.close();
                 } catch (SQLException e) {
                     System.out.println("Error occured: " + e.getMessage());
                 }
@@ -65,11 +65,11 @@ public class ShipRemoval {
      */
         public Ship removeShip(Connection c) {
             try {
-                Statement stmnt = c.createStatement();
-                String updateForRemoval = "delete from Ships " +
-                        "where ShipNames = " + shipToRemove.getSName();
-                stmnt.executeUpdate(updateForRemoval);
-                stmnt.close();
+                String updateForRemoval = "delete from Ships where ShipNames = ?";
+                PreparedStatement ps = c.prepareStatement(updateForRemoval);
+                ps.setString(1, shipToRemove.getSName());
+                ps.executeUpdate();
+                ps.close();
             } catch (SQLException e) {
                 System.out.println("Error occured: " + e.getMessage());
             }

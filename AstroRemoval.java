@@ -68,11 +68,11 @@ public class AstroRemoval {
             if (verified && astroCount < astrosToBeRemoved.length) {
                 if (astrosToBeRemoved[astroCount] != null) {
                     try {
-                        Statement stmnt = c.createStatement();
-                        String updateForRemoval = "delete from Astronauts " + 
-                                                  "where SerialNumbers = " + astrosToBeRemoved[astroCount].getSerialNumber();
-                        stmnt.executeUpdate(updateForRemoval);
-                        stmnt.close();
+                        String updateForRemoval = "delete from Astronauts where SerialNumbers = ?";
+                        PreparedStatement ps = c.prepareStatement(updateForRemoval);
+                        ps.setInt(1, astrosToBeRemoved[astroCount].getSerialNumber());
+                        ps.executeUpdate();
+                        ps.close();
                     } catch (SQLException e) {
                         System.out.println("Error occured: " + e.getMessage());
                     }
@@ -103,11 +103,11 @@ public class AstroRemoval {
             if (astroCount < astrosToBeRemoved.length) {
                 if (astrosToBeRemoved[astroCount] != null) {
                     try {
-                        Statement stmnt = c.createStatement();
-                        String updateForRemoval = "delete from Astronauts " + 
-                                                  "where SerialNumbers = " + astrosToBeRemoved[astroCount].getSerialNumber();
-                        stmnt.executeUpdate(updateForRemoval);
-                        stmnt.close();
+                        String updateForRemoval = "delete from Astronauts where SerialNumbers = ?";
+                        PreparedStatement ps = c.prepareStatement(updateForRemoval);
+                        ps.setInt(1, astrosToBeRemoved[astroCount].getSerialNumber());
+                        ps.executeUpdate();
+                        ps.close();
                     } catch (SQLException e) {
                         System.out.println("Error occured: " + e.getMessage());
                     }
