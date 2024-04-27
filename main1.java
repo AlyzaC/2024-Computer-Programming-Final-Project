@@ -1230,7 +1230,6 @@ public static void main(String[] args){
                                 do {
                                     System.out.println("WARNING: Launching is irreversible and can result in death when gone wrong.\n" +
                                                        "Are you sure you wish to proceed? (Yes/No)");
-                                    kbd.nextLine();
                                     launchConfirmation = (kbd.nextLine()).trim();
                                     if (launchConfirmation.equalsIgnoreCase("yes")) {
                                         ships[shipChoice - 1].launch();
