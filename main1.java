@@ -563,8 +563,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
-                                                System.out.print(
-                                                        "Please edit the full name of the astronaut's next of kin: ");
+                                                System.out.print("Please edit the full name of the astronaut's next of kin: ");
                                                 kbd.nextLine();
                                                 astroDateOfBirth = (kbd.nextLine()).trim();
                                                 while (!checkBirthdateString(astroDateOfBirth)) {
