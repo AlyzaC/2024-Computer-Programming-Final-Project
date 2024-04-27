@@ -49,7 +49,7 @@ public static void main(String[] args){
         }
         do {
             //Main menu for the program
-            System.out.println("Mission Control\n" +
+            System.out.println("\nMission Control\n" +
                                "1. Astronauts\n" +
                                "2. Ships\n" + 
                                "3. Launch\n" +
@@ -86,10 +86,10 @@ public static void main(String[] args){
                         switch (choice2) {
                         case 1:
                             //Asks user for value for the astronaut object's fields
-                            System.out.print("Please enter the astronaut's first name: ");
+                            System.out.print("\nPlease enter the astronaut's first name: ");
                             kbd.nextLine().trim();
                             String firstName = kbd.nextLine().trim();
-                            System.out.println("Please enter the astronaut's last name: ");
+                            System.out.print("Please enter the astronaut's last name: ");
                             String lastName = kbd.nextLine().trim();
                             String astroName = firstName + " " + lastName;
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
@@ -194,7 +194,7 @@ public static void main(String[] args){
                                                        "8. Pay Rate\n" +
                                                        "9. Weight\n" );
                                     //Int for editing switch loop
-                                    System.out.print("Please enter the corresponding option/integer: ");
+                                    System.out.print("Please enter the corresponding number: ");
                                     try {
                                         field = kbd.nextInt();
                                     } catch (NumberFormatException e) {
@@ -205,16 +205,16 @@ public static void main(String[] args){
                                     //Editing switch loop
                                     switch (field) {
                                         case 1:
-                                            System.out.print("Please enter the astronaut's first name: ");
+                                            System.out.print("\nPlease enter the astronaut's first name: ");
                                             kbd.nextLine().trim();
                                             firstName = kbd.nextLine().trim();
-                                            System.out.println("Please enter the Astronaut's last name: ");
+                                            System.out.print("Please enter the Astronaut's last name: ");
                                             lastName = kbd.nextLine().trim();
                                             astroName = firstName + " " + lastName;
                                             break;
                                         
                                         case 2:
-                                            System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
+                                            System.out.print("\nPlease enter the astronaut's date of birth (DD/MM/YYYY): ");
                                             kbd.nextLine();
                                             astroDateOfBirth = (kbd.nextLine()).trim();
                                             while (!checkBirthdateString(astroDateOfBirth)) {
@@ -224,13 +224,13 @@ public static void main(String[] args){
                                             break;
 
                                         case 3:
-                                            System.out.print("Please enter the astronaut's address: ");
+                                            System.out.print("\nPlease enter the astronaut's address: ");
                                             kbd.nextLine();
                                             astroAddress = (kbd.nextLine()).trim();
                                             break;
 
                                         case 4: 
-                                            System.out.print("Please enter the astronaut's email (name@example.com): ");
+                                            System.out.print("\nPlease enter the astronaut's email (name@example.com): ");
                                             kbd.nextLine();
                                             astroEmail = (kbd.nextLine()).trim();
                                             matcher1 = emailDomain1.matcher(astroEmail);
@@ -244,7 +244,7 @@ public static void main(String[] args){
                                             break;
 
                                         case 5: 
-                                            System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                            System.out.print("\nPlease enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                             kbd.nextLine();
                                             astroPhone = (kbd.nextLine()).trim();
                                             while (!astroPhone.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
@@ -254,7 +254,7 @@ public static void main(String[] args){
                                             break;
 
                                         case 6: 
-                                            System.out.print("Please enter the first name of the astronaut's next of kin: ");
+                                            System.out.print("\nPlease enter the first name of the astronaut's next of kin: ");
                                             kbd.nextLine();
                                             nextOfKinFirst = (kbd.nextLine()).trim();
                                             System.out.print("Please enter the last name of the astronaut's next of kin: ");
@@ -263,7 +263,7 @@ public static void main(String[] args){
                                             break;
 
                                         case 7: 
-                                            System.out.print("Please enter the astronaut's planetary status (On Earth/In Space): ");
+                                            System.out.print("\nPlease enter the astronaut's planetary status (On Earth/In Space): ");
                                             kbd.nextLine();
                                             do {
                                                 astroStatus = (kbd.nextLine()).trim();
@@ -280,7 +280,7 @@ public static void main(String[] args){
 
                                         case 8: 
                                             do {
-                                                System.out.print("Please enter the astronaut's pay rate: ");
+                                                System.out.print("\nPlease enter the astronaut's pay rate: ");
                                                 try {
                                                     astroPayRate = kbd.nextDouble();
                                                     if (astroPayRate <= 7.25) {
@@ -299,7 +299,7 @@ public static void main(String[] args){
 
                                         case 9: 
                                         do {
-                                            System.out.print("Please enter the astronaut's weight in pounds: ");
+                                            System.out.print("\nPlease enter the astronaut's weight in pounds: ");
                                             try {
                                                 astroWeight = kbd.nextDouble();
                                                 if (!(astroWeight >= 110 && astroWeight <= 209)) {
@@ -389,7 +389,7 @@ public static void main(String[] args){
                                                    "8. Pay Rate\n" +
                                                    "9. Weight\n" +
                                                    "10. Go back");
-                                System.out.println("Please select a field");
+                                System.out.print("Please enter the corresponding number: ");
                                 //Int for astronaut editing switch loop
                                 field = 0;
                                 try {
@@ -402,10 +402,10 @@ public static void main(String[] args){
                                 //Astronaut editing switch loop
                                 switch (field) {
                                     case 1:
-                                        System.out.print("Please enter/edit the astronaut's first name: ");
+                                        System.out.print("\nPlease enter/edit the astronaut's first name: ");
                                         kbd.nextLine().trim();
                                         firstName = kbd.nextLine().trim();
-                                        System.out.println("Please enter/edit the Astronaut's last name: ");
+                                        System.out.print("Please enter/edit the Astronaut's last name: ");
                                         lastName = kbd.nextLine().trim();
                                         astroName = firstName + " " + lastName;
                                         correct = "";
@@ -430,16 +430,19 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
-                                                System.out
-                                                        .print("Please edit the astronaut's full name (First Last): ");
-                                                kbd.nextLine();
+                                                System.out.print("Please enter/edit the astronaut's first name: ");
+                                                kbd.nextLine().trim();
+                                                firstName = kbd.nextLine().trim();
+                                                System.out.print("Please enter/edit the Astronaut's last name: ");
+                                                lastName = kbd.nextLine().trim();
+                                                astroName = firstName + " " + lastName;
                                                 astroName = (kbd.nextLine()).trim();
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
                                         break;
 
                                     case 2:
-                                        System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
+                                        System.out.print("\nPlease edit the astronaut's date of birth (DD/MM/YYYY): ");
                                         kbd.nextLine();
                                         astroDateOfBirth = (kbd.nextLine()).trim();
                                         while (!checkBirthdateString(astroDateOfBirth)) {
@@ -480,7 +483,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 3:
-                                        System.out.print("Please edit the astronaut's address:");
+                                        System.out.print("\nPlease edit the astronaut's address:");
                                         kbd.nextLine();
                                         astroAddress = (kbd.nextLine()).trim();
                                         correct = "";
@@ -513,7 +516,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 4:
-                                        System.out.print("Please edit the astronaut's email (name@example.com): ");
+                                        System.out.print("\nPlease edit the astronaut's email (name@example.com): ");
                                         kbd.nextLine();
                                         astroEmail = (kbd.nextLine()).trim();
                                         matcher1 = emailDomain1.matcher(astroEmail);
@@ -562,7 +565,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 5:
-                                        System.out.print("Please edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
+                                        System.out.print("\nPlease edit the astronaut's phone number [(XXX)XXX-XXXX]: ");
                                         kbd.nextLine();
                                         astroPhone = (kbd.nextLine()).trim();
                                         while (!astroPhone.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) {
@@ -605,7 +608,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 6:
-                                        System.out.print("Please enter/edit the first name of the astronaut's next of kin: ");
+                                        System.out.print("\nPlease enter/edit the first name of the astronaut's next of kin: ");
                                         kbd.nextLine();
                                         nextOfKinFirst = (kbd.nextLine()).trim();
                                         System.out.print("Please enter/edit the last name of the astronaut's next of kin: ");
@@ -645,7 +648,7 @@ public static void main(String[] args){
 
                                     case 7:
                                         do {
-                                            System.out.print("Please edit the astronaut's planetary status (On Earth/In Space): ");
+                                            System.out.print("\nPlease edit the astronaut's planetary status (On Earth/In Space): ");
                                             kbd.nextLine();
                                             astroStatus = (kbd.nextLine()).trim();
                                             if (astroStatus.equalsIgnoreCase("on earth")) {
@@ -705,7 +708,7 @@ public static void main(String[] args){
                                     case 8:
                                         astroPayRate = 0;
                                         do {
-                                            System.out.print("Please edit the astronaut's pay rate: ");
+                                            System.out.print("\nPlease edit the astronaut's pay rate: ");
                                             try {
                                                 astroPayRate = kbd.nextDouble();
                                                 if (astroPayRate <= 7.25) {
@@ -766,7 +769,7 @@ public static void main(String[] args){
                                     case 9:
                                         astroWeight = 0;
                                         do {
-                                            System.out.print("Please enter the astronaut's weight in pounds: ");
+                                            System.out.print("\nPlease enter the astronaut's weight in pounds: ");
                                             try {
                                                 astroWeight = kbd.nextDouble();
                                                 if (!(astroWeight >= 110 && astroWeight <= 209)) {
@@ -823,7 +826,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 10:
-                                        System.out.println("\nGoing back to previous menu\n");
+                                        System.out.println("\nGoing back to previous menu");
                                         break;
 
                                     default:
@@ -840,7 +843,7 @@ public static void main(String[] args){
                                 System.out.println("\nThere are no astronauts to delete.");
                                 break;
                             }
-                            System.out.println("WARNING: Deleting an astronaut is permanent.\n" +
+                            System.out.println("\nWARNING: Deleting an astronaut is permanent.\n" +
                                                "Are you sure you wish to proceed? (Yes/No)");
                             String deletionConfirmation = kbd.nextLine();
                             while (!deletionConfirmation.equalsIgnoreCase("no") && !deletionConfirmation.equalsIgnoreCase("yes")) {
@@ -863,7 +866,7 @@ public static void main(String[] args){
                             break;
 
                         case 4:
-                            System.out.println("\nGoing back to previous menu.\n");
+                            System.out.println("\nGoing back to previous menu.");
                             break;
 
                         default:
@@ -975,14 +978,14 @@ public static void main(String[] args){
                                         //Ship editing switch loop
                                         switch (field) {
                                             case 1:
-                                            System.out.print("Please enter the ship's name: ");
+                                            System.out.print("\nPlease enter the ship's name: ");
                                             kbd.nextLine();
                                             shipName = (kbd.nextLine()).trim();
                                             break;
 
                                             case 2:
                                             do {
-                                                System.out.print("Please enter the ship's fuel capacity in pounds: ");
+                                                System.out.print("\nPlease enter the ship's fuel capacity in pounds: ");
                                                 try {
                                                     shipFuelCapacity = kbd.nextDouble();
                                                 } catch (NumberFormatException e ) {
@@ -997,7 +1000,7 @@ public static void main(String[] args){
 
                                             case 3:
                                             do {
-                                                System.out.print("Please enter the ship's current fuel level in pounds: ");
+                                                System.out.print("\nPlease enter the ship's current fuel level in pounds: ");
                                                 try {
                                                     shipCurrentFuel = kbd.nextDouble();
                                                     if (shipCurrentFuel > shipFuelCapacity) {
@@ -1017,7 +1020,7 @@ public static void main(String[] args){
 
                                             case 4:
                                             do {
-                                                System.out.print("Please enter the ship's crew capacity: ");
+                                                System.out.print("\nPlease enter the ship's crew capacity: ");
                                                 try {
                                                     shipCrewCapacity = kbd.nextInt();
                                                 } catch (NumberFormatException e ) {
@@ -1030,8 +1033,11 @@ public static void main(String[] args){
                                             } while (shipCrewCapacity <= 0);
                                             break;
 
+                                            case 5:
+                                                System.out.println("\nGoing back to previous menu");
+
                                             default:
-                                            System.out.println("\nPlease enter a number 1-4");
+                                            System.out.println("\nPlease enter a number 1-5");
                                             kbd.nextLine();
                                             break;
                                         }
@@ -1100,7 +1106,7 @@ public static void main(String[] args){
                                         String theKey = "";
                                         boolean changeSuccessful = false;
                                         do {
-                                            System.out.println("Please edit the ship's name: ");
+                                            System.out.println("\nPlease edit the ship's name: ");
                                             kbd.nextLine();
                                             shipName = (kbd.nextLine()).trim();
                                             System.out.println("The ship's current name in the database is \'" + shipToEdit.getSName() + "\'.\n" +
@@ -1132,7 +1138,7 @@ public static void main(String[] args){
                                         do {
                                             shipFuelCapacity = 0;
                                             do {
-                                                System.out.println("Please edit the ship's fuel capacity in pounds: ");
+                                                System.out.println("\nPlease edit the ship's fuel capacity in pounds: ");
                                                 try {
                                                     shipFuelCapacity = kbd.nextDouble();
                                                 } catch (NumberFormatException e ) {
@@ -1173,7 +1179,7 @@ public static void main(String[] args){
                                         do {
                                             shipCurrentFuel = 0;
                                             do {
-                                                System.out.println("Please edit the ship's current fuel in pounds: ");
+                                                System.out.println("\nPlease edit the ship's current fuel in pounds: ");
                                                 try {
                                                     shipCurrentFuel = kbd.nextDouble();
                                                     if (shipCurrentFuel > shipToEdit.getFCap()) {
@@ -1218,7 +1224,7 @@ public static void main(String[] args){
                                         do {
                                             shipCrewCapacity = 0;
                                             do {
-                                                System.out.println("Please edit the ship's crew capacity: ");
+                                                System.out.println("\nPlease edit the ship's crew capacity: ");
                                                 try {
                                                     shipCrewCapacity = kbd.nextInt();
                                                 } catch (NumberFormatException e ) {
@@ -1252,7 +1258,7 @@ public static void main(String[] args){
                                         break;
 
                                     case 5: 
-                                        System.out.println("\nGoing back to the previous menu.\n");
+                                        System.out.println("\nGoing back to the previous menu.");
                                         break;
 
                                     default:
@@ -1268,7 +1274,7 @@ public static void main(String[] args){
                                     System.out.println("\nThere are no ships to delete.");
                                     break;
                                 }
-                                System.out.println("WARNING: Deleting an ship is permanent.\n" +
+                                System.out.println("\nWARNING: Deleting an ship is permanent.\n" +
                                                    "Are you sure you wish to proceed? (Yes/No)");
                                 String deletionConfirmation = kbd.nextLine();
                                 while (!deletionConfirmation.equalsIgnoreCase("no") && !deletionConfirmation.equalsIgnoreCase("yes")) {
@@ -1289,10 +1295,10 @@ public static void main(String[] args){
 
                             case 4:
                                 if (!checkForShips(ships)) {
-                                    System.out.println("There are no ships to assign astronauts to.");
+                                    System.out.println("\nThere are no ships to assign astronauts to.");
                                     break;
                                 } else if (!checkForAstronauts(astros)) {
-                                    System.out.println("There are no astronauts to assign.");
+                                    System.out.println("\nThere are no astronauts to assign.");
                                     break;
                                 }
                                 //Asks for astronaut to assign and ship to assign to, then adds astronaut to ship
@@ -1302,7 +1308,7 @@ public static void main(String[] args){
                                 break;
 
                             case 5:
-                                System.out.println("\nGoing back to previous menu.\n");
+                                System.out.println("\nGoing back to previous menu.");
                                 break;
 
                             default:
@@ -1337,7 +1343,7 @@ public static void main(String[] args){
                                 shipChoice = shipSelection(kbd, ships);
                                 String launchConfirmation = "";
                                 do {
-                                    System.out.println("WARNING: Launching is irreversible and can result in death when gone wrong.\n" +
+                                    System.out.println("\nWARNING: Launching is irreversible and can result in death when gone wrong.\n" +
                                                        "Are you sure you wish to proceed? (Yes/No)");
                                     launchConfirmation = (kbd.nextLine()).trim();
                                     if (launchConfirmation.equalsIgnoreCase("yes")) {
@@ -1355,7 +1361,7 @@ public static void main(String[] args){
                                 break;
 
                             case 2:
-                                System.out.println("\nGoing back to previous menu.\n");
+                                System.out.println("\nGoing back to previous menu.");
                                 break;
 
                             default:
@@ -1368,7 +1374,7 @@ public static void main(String[] args){
                     
 
                 case 4:
-                    System.out.println("Closing program...");
+                    System.out.println("\nClosing program...");
                     break;
 
                 default:
@@ -1424,7 +1430,7 @@ public static boolean LoggingInPassword(Scanner scan) {
         int loginChoice = 0;
         do {
             //Login Menu
-            System.out.println("1. Enter Password to Application\n" +
+            System.out.println("\n1. Enter Password to Application\n" +
                                "2. Enter Admin Password to Reset Application Password\n" +
                                "3. Quit");
             //Int for login menu switch loop
