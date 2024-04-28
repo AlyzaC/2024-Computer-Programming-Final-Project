@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.io.*;
 import java.sql.*;
 
@@ -14,6 +12,7 @@ public static void main(String[] args){
     Astronaut[] astros = new Astronaut[30];
     String correct = "";
     File database = new File("ApplicationDatabase.sqlite");
+    InputAndArrayChecker checker = new InputAndArrayChecker();
 
     //Scanner
     Scanner kbd = new Scanner(System.in);
@@ -93,7 +92,7 @@ public static void main(String[] args){
                             String astroName = firstName + " " + lastName;
                             System.out.print("Please enter the astronaut's date of birth (DD/MM/YYYY): ");
                             String astroDateOfBirth = (kbd.nextLine()).trim();
-                            while (!checkBirthdateString(astroDateOfBirth)) {
+                            while (!checker.checkBirthdateString(astroDateOfBirth)) {
                                 System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
                                 astroDateOfBirth = (kbd.nextLine()).trim();
                             }
@@ -101,7 +100,7 @@ public static void main(String[] args){
                             String astroAddress = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's email (name@example.com): ");
                             String astroEmail = (kbd.nextLine()).trim();
-                            while (!checkEmail(astroEmail)) {
+                            while (!checker.checkEmail(astroEmail)) {
                                 System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                 astroEmail = kbd.nextLine();
                             }
@@ -213,7 +212,7 @@ public static void main(String[] args){
                                             System.out.print("\nPlease enter the astronaut's date of birth (DD/MM/YYYY): ");
                                             kbd.nextLine();
                                             astroDateOfBirth = (kbd.nextLine()).trim();
-                                            while (!checkBirthdateString(astroDateOfBirth)) {
+                                            while (!checker.checkBirthdateString(astroDateOfBirth)) {
                                                 System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
                                                 astroDateOfBirth = (kbd.nextLine()).trim();
                                             }
@@ -229,7 +228,7 @@ public static void main(String[] args){
                                             System.out.print("\nPlease enter the astronaut's email (name@example.com): ");
                                             kbd.nextLine();
                                             astroEmail = (kbd.nextLine()).trim();
-                                            while (!checkEmail(astroEmail)) {
+                                            while (!checker.checkEmail(astroEmail)) {
                                                 System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                                 astroEmail = kbd.nextLine();
                                             }
@@ -352,7 +351,7 @@ public static void main(String[] args){
                             //Editing an astronaut object
                             do {
                                 Astronaut astroToEdit;
-                                if (!checkForAstronauts(astros)) {
+                                if (!checker.checkForAstronauts(astros)) {
                                     System.out.println("\nThere are no astronauts to edit.");
                                     break;
                                 }
@@ -416,7 +415,7 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, astroName);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -438,7 +437,7 @@ public static void main(String[] args){
                                         System.out.print("\nPlease edit the astronaut's date of birth (DD/MM/YYYY): ");
                                         kbd.nextLine();
                                         astroDateOfBirth = (kbd.nextLine()).trim();
-                                        while (!checkBirthdateString(astroDateOfBirth)) {
+                                        while (!checker.checkBirthdateString(astroDateOfBirth)) {
                                             System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
                                             astroDateOfBirth = (kbd.nextLine()).trim();
                                         }
@@ -458,6 +457,7 @@ public static void main(String[] args){
                                                     ps.setString(1, astroDateOfBirth);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
                                                     statement.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -467,7 +467,7 @@ public static void main(String[] args){
                                                 System.out.print("Please edit the astronaut's date of birth (DD/MM/YYYY): ");
                                                 kbd.nextLine();
                                                 astroDateOfBirth = (kbd.nextLine()).trim();
-                                                while (!checkBirthdateString(astroDateOfBirth)) {
+                                                while (!checker.checkBirthdateString(astroDateOfBirth)) {
                                                     System.out.print("Please reenter the astronaut's date of birth (DD/MM/YYYY): ");
                                                     astroDateOfBirth = (kbd.nextLine()).trim();
                                                 }
@@ -494,7 +494,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, astroAddress);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -512,7 +513,7 @@ public static void main(String[] args){
                                         System.out.print("\nPlease edit the astronaut's email (name@example.com): ");
                                         kbd.nextLine();
                                         astroEmail = (kbd.nextLine()).trim();
-                                        while (!checkEmail(astroEmail)) {
+                                        while (!checker.checkEmail(astroEmail)) {
                                             System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                             astroEmail = kbd.nextLine();
                                         }
@@ -531,7 +532,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, astroEmail);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -541,7 +543,7 @@ public static void main(String[] args){
                                                 System.out.print("Please edit the astronaut's email (name@example.com): ");
                                                 kbd.nextLine();
                                                 astroEmail = (kbd.nextLine()).trim();
-                                                while (!checkEmail(astroEmail)) {
+                                                while (!checker.checkEmail(astroEmail)) {
                                                     System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                                     astroEmail = kbd.nextLine();
                                                 }
@@ -573,7 +575,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, astroPhone);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -614,7 +617,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, astroNextOfKin);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -663,7 +667,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, astroStatus);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -724,7 +729,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setDouble(1, astroPayRate);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -784,7 +790,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setDouble(1, astroWeight);
                                                     ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -825,7 +832,7 @@ public static void main(String[] args){
                         
                         case 3:
                             //Deleting astronauts
-                            if (!checkForAstronauts(astros)) {
+                            if (!checker.checkForAstronauts(astros)) {
                                 System.out.println("\nThere are no astronauts to delete.");
                                 break;
                             }
@@ -1064,7 +1071,7 @@ public static void main(String[] args){
 
                             case 2:
                                 //Editing ships
-                                if (!checkForShips(ships)) {
+                                if (!checker.checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to edit.");
                                     break;
                                 }
@@ -1112,7 +1119,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setString(1, shipName);
                                                     ps.setString(2, shipToEdit.getSName());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -1168,7 +1176,8 @@ public static void main(String[] args){
                                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                                     ps.setDouble(1, shipCurrentFuel);
                                                                     ps.setString(2, shipToEdit.getSName());
-                                                                    statement.executeUpdate(updateString);
+                                                                    ps.executeUpdate(updateString);
+                                                                    ps.close();
                                                                 } catch (SQLException e) {
                                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                                 }
@@ -1189,7 +1198,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setDouble(1, shipFuelCapacity);
                                                     ps.setString(2, shipToEdit.getSName());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -1235,7 +1245,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setDouble(1, shipCurrentFuel);
                                                     ps.setString(2, shipToEdit.getSName());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -1273,7 +1284,8 @@ public static void main(String[] args){
                                                     PreparedStatement ps = connect.prepareStatement(updateString);
                                                     ps.setInt(1, shipCrewCapacity);
                                                     ps.setString(2, shipToEdit.getSName());
-                                                    statement.executeUpdate(updateString);
+                                                    ps.executeUpdate(updateString);
+                                                    ps.close();
                                                 } catch (SQLException e) {
                                                     System.err.println("Something went wrong while updating database: " + e.getMessage());
                                                 }
@@ -1298,7 +1310,7 @@ public static void main(String[] args){
 
                             case 3:
                                 //Deleting ships
-                                if (!checkForShips(ships)) {
+                                if (!checker.checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to delete.");
                                     break;
                                 }
@@ -1323,10 +1335,10 @@ public static void main(String[] args){
 
                             case 4:
                                 //Assigning astronauts to ships
-                                if (!checkForShips(ships)) {
+                                if (!checker.checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to assign astronauts to.");
                                     break;
-                                } else if (!checkForAstronauts(astros)) {
+                                } else if (!checker.checkForAstronauts(astros)) {
                                     System.out.println("\nThere are no astronauts to assign.");
                                     break;
                                 }
@@ -1365,7 +1377,7 @@ public static void main(String[] args){
                         //Ship menu switch loop
                         switch (choice2) {
                             case 1:
-                                if (!checkForShips(ships)) {
+                                if (!checker.checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to launch.");
                                     break;
                                 }
@@ -1761,144 +1773,4 @@ public static int shipSelection(Scanner kbd, Ship[] ships) {
     } while (!shipConfirmation.equalsIgnoreCase("yes"));
     return shipChoice;
 }
-
-/**
- * Checks for the existence of at least one Astronaut object in an Astronaut array
- * @param astroArrayToBeChecked The Astronaut array to be checked for objects
- * @return Whether there is at least one object in the array
- */
-public static boolean checkForAstronauts(Astronaut[] astroArrayToBeChecked) {
-    boolean astronautsExist = false;
-    for (Astronaut a : astroArrayToBeChecked) {
-        if (a != null) {
-            astronautsExist = true;
-            break;
-        }
-    }
-    return astronautsExist;
-}
-
-
-/**
- * Checks for the existence of at least one Ship object in an Ship array
- * @param shipArrayToBeChecked The Ship array to be checked for objects
- * @return Whether there is at least one object in the array
- */
-public static boolean checkForShips(Ship[] shipArrayToBeChecked) {
-    boolean shipsExist = false;
-    for (Ship s : shipArrayToBeChecked) {
-        if (s != null) {
-            shipsExist = true;
-            break;
-        }
-    }
-    return shipsExist;
-}
-
-/**
- * Checks the validity of a birthdate input string
- * @param birthString The birthdate string to be checked for validity
- * @return Whether the birthdate string is valid
- */
-public static boolean checkBirthdateString(String birthString) {
-    //Method variables
-    boolean stringIsValid = true;
-    int[] daysInMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    String firstNumStr = "", secondNumStr = "", thirdNumStr = "";
-    int firstNum = 0, secondNum = 0, thirdNum = 0;
-    try {
-        firstNumStr = birthString.substring(0, 2);
-        secondNumStr = birthString.substring(3, 5);
-        thirdNumStr = birthString.substring(6, 10);
-    } catch (StringIndexOutOfBoundsException e) {
-        stringIsValid = false;
-    }
-    try {
-        firstNum = Integer.parseInt(firstNumStr);
-        secondNum = Integer.parseInt(secondNumStr);
-        thirdNum = Integer.parseInt(thirdNumStr);
-    } catch (NumberFormatException e) {
-        stringIsValid = false;
-    } catch (InputMismatchException e) {
-        stringIsValid = false;
-    }
-
-    try {
-        if (!birthString.matches("\\d{2}\\/\\d{2}\\/\\d{4}")) {
-            stringIsValid = false;
-            System.out.println("String does not follow pattern/format");
-        } else {
-            if (!(firstNum >= 1 && firstNum <= daysInMonths[secondNum - 1])) {
-                stringIsValid = false;
-                System.out.println("The day exceeds the number of days for that month");
-            } else if (!(secondNum >= 1 && secondNum <= 12)) {
-                stringIsValid = false;
-                
-            } else if (!(thirdNum >= 1944)) {
-                System.out.println("How about we don't send someone over 80 onto a spacecraft, yeah?");
-                stringIsValid = false;
-            } else if (!(thirdNum <= 2005)) {
-                stringIsValid = false;
-                System.out.println("Astronaut must be older than eighteen (18) years of age");
-            }
-        }
-    } catch (ArrayIndexOutOfBoundsException e) {
-        System.out.println("Number for months must be between 1 and 12");
-        stringIsValid = false;
-    }
-
-    return stringIsValid;
-}
-
-public static boolean checkEmail(String email) {
-    //Method Variables
-    boolean emailIsValid = true;
-    int symbolIndex = email.indexOf("@");
-    int symbolCount = 0;
-    char[] stringCharacters = new char[email.length()];
-    email.getChars(0, email.length(), stringCharacters, 0);
-    Pattern emailDomain1 = Pattern.compile(".com");
-    Pattern emailDomain2 = Pattern.compile("@");
-    Matcher matcher1 = emailDomain1.matcher(email);
-    Matcher matcher2 = emailDomain2.matcher(email);
-
-    for (char c : stringCharacters) {
-        if (c == '@') {
-            symbolCount++;
-        }
-    }
-    for (char c: stringCharacters) {
-        if (Character.isWhitespace(c)) {
-            emailIsValid = false;
-        } else if (!Character.isLetterOrDigit(c) && !(c == '@') && !(c == '.')) {
-            emailIsValid = false;
-        }
-    }
-
-    try {
-        if (matcher1.find() && matcher2.find()) {
-            if (symbolCount != 1) {
-                System.out.println("Email cannot have more than one (1) \'@\' symbol.");
-                emailIsValid = false;
-            } else if (email.lastIndexOf(".") < email.indexOf("@")) {
-                System.out.println("Email extension must included at the end of the email");
-                emailIsValid = false;
-            } else if (!(Character.isLetter(stringCharacters[symbolIndex + 1]) && Character.isLetter(stringCharacters[symbolIndex + 2]))) {
-                System.out.println("Domain name must be at included in email");
-                emailIsValid = false;
-            } else if (!Character.isLetterOrDigit(stringCharacters[0])) {
-                System.out.println("Email must include a username/local-part at beginning of email");
-                emailIsValid = false;
-            }
-        } else {
-            emailIsValid = false;
-        }
-    } catch (NullPointerException e) {
-        System.out.println("Email must include a domain and extension at the end");
-    }
-    
-    
-    return emailIsValid;
-}
-
 }
