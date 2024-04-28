@@ -13,8 +13,6 @@ public static void main(String[] args){
     Ship[] ships = new Ship[10];
     Astronaut[] astros = new Astronaut[30];
     String correct = "";
-    Pattern emailDomain1 = Pattern.compile(".com");
-    Pattern emailDomain2 = Pattern.compile("@");
     File database = new File("ApplicationDatabase.sqlite");
 
     //Scanner
@@ -102,13 +100,9 @@ public static void main(String[] args){
                             String astroAddress = (kbd.nextLine()).trim();
                             System.out.print("Please enter the astronaut's email (name@example.com): ");
                             String astroEmail = (kbd.nextLine()).trim();
-                            Matcher matcher1 = emailDomain1.matcher(astroEmail);
-                            Matcher matcher2 = emailDomain2.matcher(astroEmail);
-                            while (!(matcher1.find() && matcher2.find())) {
-                                System.out.println("Please reenter the astronaut's email (name@example.com)");
+                            while (!checkEmail(astroEmail)) {
+                                System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                 astroEmail = kbd.nextLine();
-                                matcher1 = emailDomain1.matcher(astroEmail);
-                                matcher2 = emailDomain2.matcher(astroEmail);
                             }
                             System.out.print("Please enter the astronaut's phone number [(XXX)XXX-XXXX]: ");
                             String astroPhone = (kbd.nextLine()).trim();
@@ -233,13 +227,9 @@ public static void main(String[] args){
                                             System.out.print("\nPlease enter the astronaut's email (name@example.com): ");
                                             kbd.nextLine();
                                             astroEmail = (kbd.nextLine()).trim();
-                                            matcher1 = emailDomain1.matcher(astroEmail);
-                                            matcher2 = emailDomain2.matcher(astroEmail);
-                                            while (!(matcher1.find() && matcher2.find())) {
-                                                System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                            while (!checkEmail(astroEmail)) {
+                                                System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                                 astroEmail = kbd.nextLine();
-                                                matcher1 = emailDomain1.matcher(astroEmail);
-                                                matcher2 = emailDomain2.matcher(astroEmail);
                                             }
                                             break;
 
@@ -519,13 +509,9 @@ public static void main(String[] args){
                                         System.out.print("\nPlease edit the astronaut's email (name@example.com): ");
                                         kbd.nextLine();
                                         astroEmail = (kbd.nextLine()).trim();
-                                        matcher1 = emailDomain1.matcher(astroEmail);
-                                        matcher2 = emailDomain2.matcher(astroEmail);
-                                        while (!(matcher1.find() && matcher2.find())) {
-                                            System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                        while (!checkEmail(astroEmail)) {
+                                            System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                             astroEmail = kbd.nextLine();
-                                            matcher1 = emailDomain1.matcher(astroEmail);
-                                            matcher2 = emailDomain2.matcher(astroEmail);
                                         }
                                         correct = "";
                                         do {
@@ -552,13 +538,9 @@ public static void main(String[] args){
                                                 System.out.print("Please edit the astronaut's email (name@example.com): ");
                                                 kbd.nextLine();
                                                 astroEmail = (kbd.nextLine()).trim();
-                                                matcher1 = emailDomain1.matcher(astroEmail);
-                                                matcher2 = emailDomain2.matcher(astroEmail);
-                                                while (!(matcher1.find() && matcher2.find())) {
-                                                    System.out.println("Please reenter an email for the astronaut (name@example.com)");
+                                                while (!checkEmail(astroEmail)) {
+                                                    System.out.print("Please reenter the astronaut's email (name@example.com): ");
                                                     astroEmail = kbd.nextLine();
-                                                    matcher1 = emailDomain1.matcher(astroEmail);
-                                                    matcher2 = emailDomain2.matcher(astroEmail);
                                                 }
                                             }
                                         } while (!correct.equalsIgnoreCase("correct"));
@@ -1816,6 +1798,52 @@ public static boolean checkBirthdateString(String birthString) {
     }
 
     return stringIsValid;
+}
+
+public static boolean checkEmail(String email) {
+    //Method Variables
+    boolean emailIsValid = true;
+    int symbolIndex = email.indexOf("@");
+    int symbolCount = 0;
+    char[] stringCharacters = new char[email.length()];
+    email.getChars(0, email.length(), stringCharacters, 0);
+    Pattern emailDomain1 = Pattern.compile(".com");
+    Pattern emailDomain2 = Pattern.compile("@");
+    Matcher matcher1 = emailDomain1.matcher(email);
+    Matcher matcher2 = emailDomain2.matcher(email);
+
+    for (char c : stringCharacters) {
+        if (c == '@') {
+            symbolCount++;
+        }
+    }
+    for (char c: stringCharacters) {
+        if (Character.isWhitespace(c)) {
+            emailIsValid = false;
+        } else if (!Character.isLetterOrDigit(c) && !(c == '@') && !(c == '.')) {
+            emailIsValid = false;
+        }
+    }
+
+    if (matcher1.find() && matcher2.find()) {
+        if (symbolCount != 1) {
+            System.out.println("Email cannot have more than one (1) \'@\' symbol.");
+            emailIsValid = false;
+        } else if (email.lastIndexOf(".") < email.indexOf("@")) {
+            System.out.println("Email extension must included at the end of the email");
+            emailIsValid = false;
+        } else if (!(Character.isLetter(stringCharacters[symbolIndex + 1]) && Character.isLetter(stringCharacters[symbolIndex + 2]))) {
+            System.out.println("Domain name must be at included in email");
+            emailIsValid = false;
+        } else if (!Character.isLetterOrDigit(stringCharacters[0])) {
+            System.out.println("Email must include a username/local-part at beginning of email");
+            emailIsValid = false;
+        }
+    } else {
+        emailIsValid = false;
+    }
+    
+    return emailIsValid;
 }
 
 }
