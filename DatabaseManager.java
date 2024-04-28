@@ -10,6 +10,11 @@ public class DatabaseManager {
     private Ship[] shipsFromDatabase = new Ship[10];
 
     //Constructor 
+    /**
+     * The constructor for the DatabaseManager class. Creates Connection and Statement 
+     * objects for a sqlite database. If the database does not already exist, a new one 
+     * will be created with tables for astronauts and ships.
+     */
     public DatabaseManager() {
         try {
             if (database.exists()) {
@@ -32,6 +37,9 @@ public class DatabaseManager {
     }
 
     //Methods
+    /**
+     * Closes the class's Connection and Statement objects
+     */
     public void cutConnection() {
         try {
             stmnt.close();
@@ -145,6 +153,10 @@ public class DatabaseManager {
     }
 
     //Adding Astronaut and Ship
+    /**
+     * Adds an astronaut to the database
+     * @param a The astronaut added to the database
+     */
     public void addAstroToDatabase(Astronaut a) {
         try {
             String addingAstronautUpdate = "insert into Astronauts(Names, SerialNumbers, Birthdates, Addresses, " +
@@ -170,6 +182,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Adds a ship to the database
+     * @param s The ship added to the database
+     */
     public void addShipToDatabase(Ship s) {
         try {
             String addShipUpdate = "insert into Ships(ShipNames, FuelCapacities, Fuel, ShipCapacities) values (?, ?, ?, ?);";
@@ -188,6 +204,11 @@ public class DatabaseManager {
     }
 
     //Setting Methods
+    /**
+     * Changes an astronaut's name in the database
+     * @param name The new name for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setAstroName(String name, int serialNumber) {
         String updateString = "update Astronauts set Names = ? where serialNumbers = ?;";
         try {
@@ -201,6 +222,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's birthdate in the database
+     * @param birthdate The new birthdate for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setAstroBirthDate(String birthdate, int serialNumber) {
         String updateString = "update Astronauts set Birthdates = ? where serialNumbers = ?;";
         try {
@@ -214,6 +240,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's address in the database
+     * @param address The new address for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setAstroAddress(String address, int serialNumber) {
         String updateString = "update Astronauts set Addresses = ? where serialNumbers = ?;";
         try {
@@ -227,6 +258,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's email in the database
+     * @param email The new email for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setAstroEmail(String email, int serialNumber) {
         String updateString = "update Astronauts set Emails = ? where serialNumbers = ?;";
         try {
@@ -240,6 +276,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's phone number in the database
+     * @param phone The new phone number for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setAstroPhoneNumber(String phone, int serialNumber) {
         String updateString = "update Astronauts set PhoneNumbers = ? where serialNumbers = ?;";
         try {
@@ -253,6 +294,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's next of kin in the database
+     * @param kin The new next of kin for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setAstroNextOfKin(String kin, int serialNumber) {
         String updateString = "update Astronauts set NextOfKin = ? where serialNumbers = ?;";
         try {
@@ -266,6 +312,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's status in the database
+     * @param status The new status for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setStatus(String status, int serialNumber) {
         String updateString = "update Astronauts set Statuses = ? where serialNumbers = ?;";
         try {
@@ -279,6 +330,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's pay rate in the database
+     * @param payRate The new pay rate for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setPayRate(double payRate, int serialNumber) {
         String updateString = "update Astronauts set PayRates = ? where serialNumbers = ?;";
         try {
@@ -292,6 +348,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes an astronaut's weight in the database
+     * @param weight The new weight for the astronaut
+     * @param serialNumber The serial number of the astronaut, used to identify which astronaut to edit
+     */
     public void setWeight(double weight, int serialNumber) {
         String updateString = "update Astronauts set Weights = ? where serialNumbers = ?;";
         try {
@@ -305,6 +366,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes a ship's name in the database
+     * @param name The ship's name, used to identify which ship to edit
+     * @param newName The new name for the ship
+     */
     public void setShipName(String name, String newName) {
         String updateString = "update Ships set ShipNames = ? where ShipNames = ?;";
         try {
@@ -318,6 +384,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes a ship's fuel capacity in the database
+     * @param name The ship's name, used to identify which ship to edit
+     * @param fuelCapacity The new fuel capacity for the ship
+     */
     public void setShipFuelCapacity(String name, double fuelCapacity) {
         String updateString = "update Ships set FuelCapacities = ? where ShipNames = ?;";
         try {
@@ -331,6 +402,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes a ship's current fuel level in the database
+     * @param name The ship's name, used to identify which ship to edit
+     * @param currentFuel The new fuel level for the ship
+     */
     public void setShipFuel(String name, double currentFuel) {
         String updateString = "update Ships set Fuel = ? where ShipNames = ?;";
         try {
@@ -344,6 +420,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Changes a ship's crew capacity in the database
+     * @param name The ship's name, used to identify which ship to edit
+     * @param shipCapacity The new crew capacity for the ship
+     */
     public void setShipCapacity(String name, int shipCapacity) {
         String updateString = "update Ships set ShipCapacities = ? where ShipNames = ?;";
         try {
@@ -358,6 +439,10 @@ public class DatabaseManager {
     }
 
     //Removing Astronaut and Ship
+    /**
+     * Removes an astronaut from the database
+     * @param serialNumber The serial number of the astronaut to remove
+     */
     public void removeAstroFromDatabase(int serialNumber) {
         try {
             String updateForRemoval = "delete from Astronauts where SerialNumbers = ?";
@@ -370,6 +455,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Removes a ship from the database
+     * @param shipName The name of the astronaut to remove
+     */
     public void removeShipFromDatabase(String shipName) {
         try {
             String updateForRemoval = "delete from Ships where ShipNames = ?";
