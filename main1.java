@@ -160,7 +160,8 @@ public static void main(String[] args){
                                     kbd.nextLine();
                                 }
                             } while (!(astroWeight >= 110 && astroWeight <= 209));
-                            String change;
+                            String change = "";
+                            kbd.nextLine();
                             do {
                                 //Displays the information entered by the user for verification
                                 System.out.println("\nPlease verify information before saving.\n" +
@@ -931,6 +932,7 @@ public static void main(String[] args){
                                     }
                                 } while (shipCrewCapacity <= 0);
                                 String change = "";
+                                kbd.nextLine();
                                 //Displays entered informaton for verification
                                 do {
                                     System.out.println("\nPlease verify information before saving.\n" +
