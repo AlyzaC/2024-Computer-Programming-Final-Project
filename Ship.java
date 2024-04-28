@@ -256,6 +256,7 @@ System.out.println("The Ship needs more fuel for a sucessful launch.");
                     altitude += speed;
                     speed += accel - deccel;
                     fuel -= fuelBurnRate;
+                    accel = fuelBurnRate * 30;
 /* accel and decell code here.
 altitude = altitude + speed; <-- needs to happen every second
 speed = speed + accel - deccel; <-- needs to happen every second
