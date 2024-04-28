@@ -194,7 +194,8 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, name);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
+            ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
         }
@@ -206,7 +207,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, birthdate);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -219,7 +220,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, address);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -232,7 +233,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, email);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -245,7 +246,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, phone);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -258,7 +259,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, kin);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -271,7 +272,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, status);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -284,7 +285,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setDouble(1, payRate);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -297,7 +298,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setDouble(1, weight);
             ps.setInt(2, serialNumber);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -310,7 +311,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setString(1, newName);
             ps.setString(2, name);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -323,7 +324,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setDouble(1, fuelCapacity);
             ps.setString(2, name);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -336,7 +337,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setDouble(1, currentFuel);
             ps.setString(2, name);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
@@ -349,7 +350,7 @@ public class DatabaseManager {
             PreparedStatement ps = appConnect.prepareStatement(updateString);
             ps.setInt(1, shipCapacity);
             ps.setString(2, name);
-            stmnt.executeUpdate(updateString);
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             System.err.println("Something went wrong while updating database: " + e.getMessage());
