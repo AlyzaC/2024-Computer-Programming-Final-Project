@@ -1825,23 +1825,28 @@ public static boolean checkEmail(String email) {
         }
     }
 
-    if (matcher1.find() && matcher2.find()) {
-        if (symbolCount != 1) {
-            System.out.println("Email cannot have more than one (1) \'@\' symbol.");
-            emailIsValid = false;
-        } else if (email.lastIndexOf(".") < email.indexOf("@")) {
-            System.out.println("Email extension must included at the end of the email");
-            emailIsValid = false;
-        } else if (!(Character.isLetter(stringCharacters[symbolIndex + 1]) && Character.isLetter(stringCharacters[symbolIndex + 2]))) {
-            System.out.println("Domain name must be at included in email");
-            emailIsValid = false;
-        } else if (!Character.isLetterOrDigit(stringCharacters[0])) {
-            System.out.println("Email must include a username/local-part at beginning of email");
+    try {
+        if (matcher1.find() && matcher2.find()) {
+            if (symbolCount != 1) {
+                System.out.println("Email cannot have more than one (1) \'@\' symbol.");
+                emailIsValid = false;
+            } else if (email.lastIndexOf(".") < email.indexOf("@")) {
+                System.out.println("Email extension must included at the end of the email");
+                emailIsValid = false;
+            } else if (!(Character.isLetter(stringCharacters[symbolIndex + 1]) && Character.isLetter(stringCharacters[symbolIndex + 2]))) {
+                System.out.println("Domain name must be at included in email");
+                emailIsValid = false;
+            } else if (!Character.isLetterOrDigit(stringCharacters[0])) {
+                System.out.println("Email must include a username/local-part at beginning of email");
+                emailIsValid = false;
+            }
+        } else {
             emailIsValid = false;
         }
-    } else {
-        emailIsValid = false;
+    } catch (NullPointerException e) {
+        System.out.println("Email must include a domain and extension at the end");
     }
+    
     
     return emailIsValid;
 }
