@@ -214,7 +214,7 @@ public void launch() //might need to be a private
 
  } else if (fuel < fuelCapacity)
  { //the ship will not launch
-System.out.println("The Ship needs more fuel for a sucessful launch. The fuel needs to match the fuel capacity EXACTLY.");
+System.out.println("To ensure a successful launch, the ship requires the fuel to precisely match its fuel capacity.");
  }
  else {
 // if fuel = fuelCapacity and crewNum = shipCapacity the launch will start
