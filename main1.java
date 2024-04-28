@@ -23,6 +23,7 @@ public static void main(String[] args){
     Statement statement = null;
     
     if (LoggingInPassword(kbd)) {
+        //Sets up database, connection,and statement
         try {
             if (database.exists()) {
                 Class.forName("org.sqlite.JDBC");
@@ -83,7 +84,7 @@ public static void main(String[] args){
                         //Astronaut menu switch loop
                         switch (choice2) {
                         case 1:
-                            //Asks user for value for the astronaut object's fields
+                            //Asks user for value for new astronaut object's fields
                             System.out.print("\nPlease enter the astronaut's first name: ");
                             kbd.nextLine().trim();
                             String firstName = kbd.nextLine().trim();
@@ -348,6 +349,7 @@ public static void main(String[] args){
                             break;
 
                         case 2:
+                            //Editing an astronaut object
                             do {
                                 Astronaut astroToEdit;
                                 if (!checkForAstronauts(astros)) {
@@ -822,6 +824,7 @@ public static void main(String[] args){
                             break;
                         
                         case 3:
+                            //Deleting astronauts
                             if (!checkForAstronauts(astros)) {
                                 System.out.println("\nThere are no astronauts to delete.");
                                 break;
@@ -882,7 +885,7 @@ public static void main(String[] args){
                         //Ship menu loop
                         switch (choice2) {
                             case 1:
-                                //Asks user to provide values for ship fields
+                                //Asks user to provide values for new ship object's fields
                                 System.out.print("\nPlease enter the ship's name: ");
                                 kbd.nextLine();
                                 String shipName = (kbd.nextLine()).trim();
@@ -899,7 +902,6 @@ public static void main(String[] args){
                                         kbd.nextLine();
                                     }
                                 } while (shipFuelCapacity <= 0);
-                                
                                 double shipCurrentFuel = 0;
                                 do {
                                     System.out.print("Please enter the ship's current fuel level: ");
@@ -1056,6 +1058,7 @@ public static void main(String[] args){
                                 break;
 
                             case 2:
+                                //Editing ships
                                 if (!checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to edit.");
                                     break;
@@ -1254,6 +1257,7 @@ public static void main(String[] args){
                                 break;
 
                             case 3:
+                                //Deleting ships
                                 if (!checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to delete.");
                                     break;
@@ -1278,6 +1282,7 @@ public static void main(String[] args){
                                 break;
 
                             case 4:
+                                //Assigning astronauts to ships
                                 if (!checkForShips(ships)) {
                                     System.out.println("\nThere are no ships to assign astronauts to.");
                                     break;
@@ -1407,7 +1412,6 @@ public static boolean LoggingInPassword(Scanner scan) {
         //First time application is run
         createApplicationPassword(file);
         createPassword = false;
-        System.out.println("This password will be required the next time the application is opened.");
         allowedEntry = true;
     } else {
         //After first time application is run
@@ -1504,6 +1508,7 @@ public static boolean LoggingInPassword(Scanner scan) {
  * @param f The file object for the password that is updated
  */
 public static void createApplicationPassword(File f) {
+    //Creates password
     System.out.println("Creating Password...");
     Random r = new Random();
     int passNum = 0;
@@ -1512,8 +1517,11 @@ public static void createApplicationPassword(File f) {
         pass = Integer.toString(r.nextInt(10));
         pass2 += pass;
     }
+    //Displays password
     passNum = Integer.parseInt(pass2);
     System.out.println("Please write down the following password: " + passNum);
+    System.out.println("This password will be required the next time the application is opened.");
+    //Saves password to file
     try {
         PrintWriter pw = new PrintWriter(f);
         pw.print(passNum);
@@ -1529,7 +1537,7 @@ public static void createApplicationPassword(File f) {
  */
 public static void createTables(Statement s) {
     try {
-        // s.executeUpdate("create database ApplicationDatabase;");
+        //Creates tables for astronauts
         String updateString = "create table Astronauts (" +
                               "Names tinytext," +
                               "SerialNumbers smallint," +
@@ -1542,8 +1550,8 @@ public static void createTables(Statement s) {
                               "PayRates double(5, 2)," +
                               "Weights double(5, 2)" +
                               ");";
-        
         s.execute(updateString);
+        //Creates table for ships
         updateString = "create table Ships (" +
                        "ShipNames tinytext," +
                        "FuelCapacities double(6, 2)," +
