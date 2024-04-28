@@ -975,7 +975,7 @@ public static void main(String[] args){
                                                 try {
                                                     shipFuelCapacity = kbd.nextDouble();
                                                     while (shipCurrentFuel > shipFuelCapacity) {
-                                                        System.out.println("The current fuel level is now higher than the capacity.");
+                                                        System.out.println("The current fuel level is higher than the capacity.");
                                                         System.out.print("Please enter the ship's current fuel level in pounds: ");
                                                         shipCurrentFuel = kbd.nextDouble();
                                                     }
