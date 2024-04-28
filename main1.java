@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-import java.sql.*;
 
 public class main1 {
 
@@ -11,40 +10,17 @@ public static void main(String[] args){
     Ship[] ships = new Ship[10];
     Astronaut[] astros = new Astronaut[30];
     String correct = "";
-    File database = new File("ApplicationDatabase.sqlite");
     InputAndArrayChecker checker = new InputAndArrayChecker();
+    DatabaseManager dbManager = null;
 
     //Scanner
     Scanner kbd = new Scanner(System.in);
     
-    //SQL Connection and Statement Creation
-    Connection connect = null;
-    Statement statement = null;
-    
     if (LoggingInPassword(kbd)) {
         //Sets up database, connection,and statement
-        try {
-            if (database.exists()) {
-                Class.forName("org.sqlite.JDBC");
-                connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.sqlite");
-                statement = connect.createStatement();
-                astros = databaseAstronautArrayRetrieval(statement);
-                ships = databaseShipArrayRetrieval(statement);
-            } else if (database.createNewFile()) {
-                Class.forName("org.sqlite.JDBC");
-                connect = DriverManager.getConnection("jdbc:sqlite:ApplicationDatabase.sqlite");
-                statement = connect.createStatement();
-                createTables(statement);
-                astros = databaseAstronautArrayRetrieval(statement);
-                ships = databaseShipArrayRetrieval(statement);
-            }
-        } catch (SQLException e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        } catch (IOException e) {
-            System.err.println("An error occurred: " + e.getMessage());
-        }
+        dbManager = new DatabaseManager();
+        astros = dbManager.databaseAstronautArrayRetrieval();
+        ships = dbManager.databaseShipArrayRetrieval();
         do {
             //Main menu for the program
             System.out.println("\nMission Control\n" +
@@ -323,28 +299,7 @@ public static void main(String[] args){
                                 }
                             }
                             //Tries to add Astronaut information to database
-                            try {
-                                String addingAstronautUpdate = "insert into Astronauts(Names, SerialNumbers, Birthdates, Addresses, " +
-                                                               "Emails, PhoneNumbers, NextOfKin, Statuses, PayRates, Weights) " +
-                                                               "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-                                PreparedStatement ps = connect.prepareStatement(addingAstronautUpdate);
-                                ps.setString(1, astros[count].getName());
-                                ps.setInt(2, astros[count].getSerialNumber());
-                                ps.setString(3, astros[count].dateOfBirth());
-                                ps.setString(4, astros[count].address());
-                                ps.setString(5, astros[count].email());
-                                ps.setString(6, astros[count].phoneNumber());
-                                ps.setString(7, astros[count].nextOfKin());
-                                ps.setString(8, astros[count].status());
-                                ps.setDouble(9, astros[count].payRate());
-                                ps.setDouble(10, astros[count].weight());
-                                ps.executeUpdate();
-                                ps.close();
-                            } catch (SQLException e) {
-                                System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
-                            } catch (NullPointerException e) {
-                                System.out.println("An error has occured while saving astronaut to database: " + e.getMessage());
-                            }
+                            dbManager.addAstroToDatabase(astros[count]);
                             break;
 
                         case 2:
@@ -410,15 +365,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setName(astroName);
-                                                String updateString = "update Astronauts set Names = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroName);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setAstroName(astroName, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -451,16 +398,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setdateOfBirth(astroDateOfBirth);
-                                                String updateString = "update Astronauts set Birthdates = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroDateOfBirth);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    statement.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setAstroBirthDate(astroDateOfBirth, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -489,16 +427,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setAddress(astroAddress);
-                                                String updateString = "update Astronauts set Addresses = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroAddress);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setAstroAddress(astroAddress, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -527,16 +456,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setEmail(astroEmail);
-                                                String updateString = "update Astronauts set Emails = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroEmail);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setAstroEmail(astroEmail, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -570,16 +490,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setPhoneNumber(astroPhone);
-                                                String updateString = "update Astronauts set PhoneNumbers = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroPhone);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setAstroPhoneNumber(astroPhone, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -612,16 +523,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setNextOfKin(astroNextOfKin);
-                                                String updateString = "update Astronauts set NextOfKin = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroNextOfKin);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setAstroNextOfKin(astroNextOfKin, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -662,16 +564,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setStatus(astroStatus);
-                                                String updateString = "update Astronauts set Statuses = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, astroStatus);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setStatus(astroStatus, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -724,16 +617,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setPayRate(astroPayRate);
-                                                String updateString = "update Astronauts set PayRates = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setDouble(1, astroPayRate);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setPayRate(astroPayRate, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -785,16 +669,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("Correct")) {
                                                 astroToEdit.setWeight(astroWeight);
-                                                String updateString = "update Astronauts set Weights = ? where serialNumbers = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setDouble(1, astroWeight);
-                                                    ps.setInt(2, astroToEdit.getSerialNumber());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setWeight(astroWeight, astroToEdit.getSerialNumber());
                                             } else if (correct.equalsIgnoreCase("Go back")) {
                                                 break;
                                             } else {
@@ -852,8 +727,8 @@ public static void main(String[] args){
                                 astroChoice = astroSelection(kbd, astros);
                                 AstroRemoval removeAstro = new AstroRemoval(1);
                                 removeAstro.addAstro(astros[astroChoice - 1]);
-                                astros[astroChoice - 1] = removeAstro.removeAstronauts(connect);
-                                astros = databaseAstronautArrayRetrieval(statement);
+                                astros[astroChoice - 1] = removeAstro.removeAstronauts(dbManager);
+                                astros = dbManager.databaseAstronautArrayRetrieval();
                                 break;
                             } while (!(astroChoice <= 0));
                             break;
@@ -1053,20 +928,7 @@ public static void main(String[] args){
                                     }
                                 }
                                 //Tries to save ship info to database
-                                try {
-                                    String addShipUpdate = "insert into Ships(ShipNames, FuelCapacities, Fuel, ShipCapacities) values (?, ?, ?, ?);";
-                                    PreparedStatement ps = connect.prepareStatement(addShipUpdate);
-                                    ps.setString(1, ships[count].getSName());
-                                    ps.setDouble(2, ships[count].getFCap());
-                                    ps.setDouble(3, ships[count].getFuel());
-                                    ps.setInt(4, ships[count].getSCap());
-                                    ps.executeUpdate();
-                                    ps.close();
-                                } catch (SQLException e) {
-                                    System.out.println("An error occurred while saving ship to database: " + e.getMessage());
-                                } catch (NullPointerException e) {
-                                    System.out.println("An error occurred while saving ship to database: " + e.getMessage());
-                                }
+                                dbManager.addShipToDatabase(ships[count]);
                                 break;
 
                             case 2:
@@ -1114,16 +976,7 @@ public static void main(String[] args){
                                                                "If you wish to go back, enter \"Go back\".");
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
-                                                String updateString = "update Ships set ShipNames = ? where ShipNames = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setString(1, shipName);
-                                                    ps.setString(2, shipToEdit.getSName());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setShipName(shipToEdit.getSName(), shipName);
                                                 shipToEdit.setSName(shipName); 
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
@@ -1171,16 +1024,7 @@ public static void main(String[] args){
                                                             correct = kbd.nextLine();
                                                             if (correct.equalsIgnoreCase("correct") && shipCurrentFuel <= shipFuelCapacity) {
                                                                 shipToEdit.setFuel(shipCurrentFuel); 
-                                                                String updateString = "update Ships set Fuel = ? where ShipNames = ?;";
-                                                                try {
-                                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                                    ps.setDouble(1, shipCurrentFuel);
-                                                                    ps.setString(2, shipToEdit.getSName());
-                                                                    ps.executeUpdate(updateString);
-                                                                    ps.close();
-                                                                } catch (SQLException e) {
-                                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                                }
+                                                                dbManager.setShipFuel(shipToEdit.getSName(), shipCurrentFuel);
                                                                 changeSuccessful = true;
                                                             }
                                                         }
@@ -1193,16 +1037,7 @@ public static void main(String[] args){
                                                     }
                                                 } while (!changeSuccessful);
                                                 shipToEdit.setFCap(shipFuelCapacity); 
-                                                String updateString = "update Ships set FuelCapacities = ? where ShipNames = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setDouble(1, shipFuelCapacity);
-                                                    ps.setString(2, shipToEdit.getSName());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setShipFuelCapacity(shipToEdit.getSName(), shipFuelCapacity);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1240,16 +1075,7 @@ public static void main(String[] args){
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setFuel(shipCurrentFuel); 
-                                                String updateString = "update Ships set Fuel = ? where ShipNames = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setDouble(1, shipCurrentFuel);
-                                                    ps.setString(2, shipToEdit.getSName());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setShipFuel(shipToEdit.getSName(), shipCurrentFuel);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1279,16 +1105,7 @@ public static void main(String[] args){
                                             correct = (kbd.nextLine()).trim();
                                             if (correct.equalsIgnoreCase("correct")) {
                                                 shipToEdit.setSCap(shipCrewCapacity); 
-                                                String updateString = "update Ships set ShipCapacities = ? where ShipNames = ?;";
-                                                try {
-                                                    PreparedStatement ps = connect.prepareStatement(updateString);
-                                                    ps.setInt(1, shipCrewCapacity);
-                                                    ps.setString(2, shipToEdit.getSName());
-                                                    ps.executeUpdate(updateString);
-                                                    ps.close();
-                                                } catch (SQLException e) {
-                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
-                                                }
+                                                dbManager.setShipCapacity(shipToEdit.getSName(), shipCrewCapacity);
                                                 changeSuccessful = true;
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
@@ -1328,8 +1145,8 @@ public static void main(String[] args){
                                 do {
                                     shipChoice = shipSelection(kbd, ships);
                                     ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
-                                    ships[shipChoice - 1] = removeShip.removeShip(connect);
-                                    ships = databaseShipArrayRetrieval(statement);
+                                    ships[shipChoice - 1] = removeShip.removeShip(dbManager);
+                                    ships = dbManager.databaseShipArrayRetrieval();
                                 } while (shipChoice <= 0);
                                 break;
 
@@ -1391,8 +1208,8 @@ public static void main(String[] args){
                                         ships[shipChoice - 1].launch();
                                         if (ships[shipChoice -1].getFailure()) {
                                             ShipRemoval shipRemoval = new ShipRemoval(ships[shipChoice - 1]);
-                                            shipRemoval.removeShip(connect);
-                                            ships = databaseShipArrayRetrieval(statement);
+                                            shipRemoval.removeShip(dbManager);
+                                            ships = dbManager.databaseShipArrayRetrieval();
                                         }
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");
@@ -1426,12 +1243,7 @@ public static void main(String[] args){
         } while (choice != 4);
     }
     
-    try {
-        statement.close();
-        connect.close();
-    } catch (SQLException e) {
-        System.out.println("An error occurred: " + e.getMessage());
-    }
+    dbManager.cutConnection();
     kbd.close();
     System.exit(0);
 }
@@ -1581,111 +1393,6 @@ public static void createApplicationPassword(File f) {
     } catch (FileNotFoundException e) {
         System.out.println("An error occurred: " + e.getMessage());
     }
-}
-
-/**
- * Adds Astronaut and Ship tables to the database
- * @param s A Java SQL statement object used to perform updates
- */
-public static void createTables(Statement s) {
-    try {
-        //Creates tables for astronauts
-        String updateString = "create table Astronauts (" +
-                              "Names tinytext," +
-                              "SerialNumbers smallint," +
-                              "Birthdates tinytext," +
-                              "Addresses tinytext," +
-                              "Emails tinytext," +
-                              "PhoneNumbers tinytext," +
-                              "NextOfKin tinytext," +
-                              "Statuses tinytext," +
-                              "PayRates double(5, 2)," +
-                              "Weights double(5, 2)" +
-                              ");";
-        s.execute(updateString);
-        //Creates table for ships
-        updateString = "create table Ships (" +
-                       "ShipNames tinytext," +
-                       "FuelCapacities double(6, 2)," +
-                       "Fuel double(7, 2)," +
-                       "ShipCapacities smallint" +
-                       ");";
-        s.execute(updateString);
-    } catch (SQLException e) {
-        System.out.println("An error has occurred: " + e.getMessage());
-    }
-}
-
-/**
- * Retrieves data from the Astronauts table in ApplicationDatabase
- * @param a The Astronaut array the data is added to
- * @param stmnt A Java SQL Statement used for queries
- * @return The Astronaut array with information from the database
- */
-public static Astronaut[] databaseAstronautArrayRetrieval(Statement stmnt) {
-    Astronaut[] a = new Astronaut[20];
-    int count = 0;
-    try {
-        ResultSet r = stmnt.executeQuery("select * from Astronauts;");
-        while (r.next()) {
-            String dbName = r.getString("Names");
-            int dbSerialNumber = r.getInt("SerialNumbers");
-            String dbBirthdate = r.getString("Birthdates");
-            String dbAddress = r.getString("Addresses");
-            String dbEmail = r.getString("Emails");
-            String dbPhoneNumber = r.getString("PhoneNumbers");
-            String dbNextOfKin = r.getString("NextOfKin");
-            String dbStatus = r.getString("Statuses");
-            double dbPayRate = r.getDouble("PayRates");
-            double dbWeight = r.getDouble("Weights");
-            if (dbName != null) {
-                a[count] = new Astronaut(dbName, dbBirthdate, dbAddress, dbEmail, dbPhoneNumber, dbNextOfKin, dbStatus, dbPayRate, dbWeight);
-                a[count].setSerialNumber(dbSerialNumber);
-            }
-            count++;
-        }
-        r.close();
-    } catch (SQLException e) {
-        System.out.println("An error occurred: " + e.getMessage());
-    } catch (NullPointerException e) {
-        System.out.println("An error occured: " + e.getMessage());
-    }
-    return a;
-}
-
-/**
- * Retrieves data from the Ships table in ApplicationDatabase
- * @param s The Ship array the data is added to
- * @param stmnt A Java SQL Statement used for queries
- * @return The Ship array with information from the database
- */
-public static Ship[] databaseShipArrayRetrieval(Statement stmnt) {
-    Ship[] s = new Ship[10];
-    int count = 0;
-    try {
-        ResultSet r = stmnt.executeQuery("select * from Ships;");
-        while (r.next()) {
-            String name = r.getString("ShipNames");
-            double fCap = r.getDouble("FuelCapacities");
-            double fuel = r.getDouble("Fuel");
-            int sCap = r.getInt("ShipCapacities");
-            if (name != null) {
-                s[count] = new Ship();
-                s[count].setSName(name);
-                s[count].setFCap(fCap);
-                s[count].setFuel(fuel);
-                s[count].setSCap(sCap);
-            }
-            count++;
-        }
-        r.close();
-    } catch (SQLException e) {
-        System.out.println("An error occurred: " + e.getMessage());
-    } catch (NullPointerException e) {
-        System.out.println("An error occurred: " + e.getMessage());
-    }
-    
-    return s;
 }
 
 /**

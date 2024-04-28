@@ -1,5 +1,3 @@
-import java.sql.*;
-
 public class AstroRemoval {
     //Fields
         private Astronaut[] astrosToBeRemoved;
@@ -32,18 +30,10 @@ public class AstroRemoval {
      * Removes astronauts added to list, without verification from the user.
      * @param c A SQL connection provided by the user
      */
-        public Astronaut removeAstronauts(Connection c) {
+        public Astronaut removeAstronauts(DatabaseManager d) {
             if (astroCount < astrosToBeRemoved.length) {
                 if (astrosToBeRemoved[astroCount] != null) {
-                    try {
-                        String updateForRemoval = "delete from Astronauts where SerialNumbers = ?";
-                        PreparedStatement ps = c.prepareStatement(updateForRemoval);
-                        ps.setInt(1, astrosToBeRemoved[astroCount].getSerialNumber());
-                        ps.executeUpdate();
-                        ps.close();
-                    } catch (SQLException e) {
-                        System.out.println("Error occured: " + e.getMessage());
-                    }
+                    d.removeAstroFromDatabase(astrosToBeRemoved[astroCount].getSerialNumber());
                     String emptyString = null;
                     String astroRemoved = astrosToBeRemoved[astroCount].getName();
                     astrosToBeRemoved[astroCount].setName(emptyString);

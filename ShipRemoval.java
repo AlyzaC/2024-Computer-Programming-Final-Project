@@ -1,5 +1,3 @@
-import java.sql.*;
-
 public class ShipRemoval {
     //Fields
         private Ship shipToRemove;
@@ -15,16 +13,8 @@ public class ShipRemoval {
      * Removes ship
      * @param c A SQL connection provided by the user
      */
-        public Ship removeShip(Connection c) {
-            try {
-                String updateForRemoval = "delete from Ships where ShipNames = ?";
-                PreparedStatement ps = c.prepareStatement(updateForRemoval);
-                ps.setString(1, shipToRemove.getSName());
-                ps.executeUpdate();
-                ps.close();
-            } catch (SQLException e) {
-                System.out.println("Error occured: " + e.getMessage());
-            }
+        public Ship removeShip(DatabaseManager d) {
+            d.removeShipFromDatabase(shipToRemove.getSName());
             shipToRemove.setSName(null);
             shipToRemove.setSCap(0);
             shipToRemove.setFCap(0);
