@@ -974,6 +974,11 @@ public static void main(String[] args){
                                                 System.out.print("\nPlease enter the ship's fuel capacity in pounds: ");
                                                 try {
                                                     shipFuelCapacity = kbd.nextDouble();
+                                                    while (shipCurrentFuel > shipFuelCapacity) {
+                                                        System.out.println("The current fuel level is now higher than the capacity.");
+                                                        System.out.print("Please enter the ship's current fuel level in pounds: ");
+                                                        shipCurrentFuel = kbd.nextDouble();
+                                                    }
                                                 } catch (NumberFormatException e ) {
                                                     System.out.println("An error occurred: " + e.getMessage());
                                                     kbd.nextLine();
@@ -1143,6 +1148,41 @@ public static void main(String[] args){
                                             kbd.nextLine();
                                             correct = kbd.nextLine();
                                             if (correct.equalsIgnoreCase("correct")) {
+                                                shipCurrentFuel = shipToEdit.getFuel();
+                                                do {
+                                                    try {
+                                                        
+                                                        while (shipCurrentFuel > shipFuelCapacity || !(changeSuccessful)) {
+                                                            System.out.println("The current fuel level is higher than the capacity.");
+                                                            System.out.print("Please enter the ship's current fuel level in pounds: ");
+                                                            shipCurrentFuel = kbd.nextDouble();
+                                                            System.out.println("The ship's current fuel amount in the database is \'" + shipToEdit.getFuel() + "\'.\n" +
+                                                                            "You entered the number \'" + shipCurrentFuel + "\'.\n" +
+                                                                            "If this is correct, enter \"correct\".");
+                                                            kbd.nextLine();
+                                                            correct = kbd.nextLine();
+                                                            if (correct.equalsIgnoreCase("correct") && shipCurrentFuel <= shipFuelCapacity) {
+                                                                shipToEdit.setFuel(shipCurrentFuel); 
+                                                                String updateString = "update Ships set Fuel = ? where ShipNames = ?;";
+                                                                try {
+                                                                    PreparedStatement ps = connect.prepareStatement(updateString);
+                                                                    ps.setDouble(1, shipCurrentFuel);
+                                                                    ps.setString(2, shipToEdit.getSName());
+                                                                    statement.executeUpdate(updateString);
+                                                                } catch (SQLException e) {
+                                                                    System.err.println("Something went wrong while updating database: " + e.getMessage());
+                                                                }
+                                                                changeSuccessful = true;
+                                                            }
+                                                        }
+                                                    } catch (NumberFormatException e ) {
+                                                        System.out.println("An error occurred: " + e.getMessage());
+                                                        kbd.nextLine();
+                                                    } catch (InputMismatchException e) {
+                                                        System.out.println("An error occurred: " + e.getMessage());
+                                                        kbd.nextLine();
+                                                    }
+                                                } while (!changeSuccessful);
                                                 shipToEdit.setFCap(shipFuelCapacity); 
                                                 String updateString = "update Ships set FuelCapacities = ? where ShipNames = ?;";
                                                 try {
@@ -1157,7 +1197,7 @@ public static void main(String[] args){
                                             } else if (correct.equalsIgnoreCase("go back")) {
                                                 break;
                                             }
-                                        } while (!(theKey.equalsIgnoreCase("go back")) && !(changeSuccessful));
+                                        } while (!(correct.equalsIgnoreCase("go back")) && !(changeSuccessful));
                                         break;
 
                                     case 3:
