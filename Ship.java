@@ -34,6 +34,10 @@ int choice;
 
 
 //setters and getters
+public  void setData(DatabaseManager newdata)
+{
+ this.data = newdata;
+}
 public Astronaut[] getCrew()
 {
   return crew;
