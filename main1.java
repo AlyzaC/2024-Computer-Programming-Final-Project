@@ -20,8 +20,7 @@ public static void main(String[] args){
         //Sets up database, connection,and statement
         dbManager = new DatabaseManager();
         astros = dbManager.databaseAstronautArrayRetrieval();
-        ships = dbManager.databaseShipArrayRetrieval();
-        dbManager.setDBManager(dbManager);
+        ships = dbManager.databaseShipArrayRetrieval(dbManager);
         do {
             //Main menu for the program
             System.out.println("\nMission Control\n" +
@@ -1148,7 +1147,7 @@ public static void main(String[] args){
                                     shipChoice = shipSelection(kbd, ships);
                                     ShipRemoval removeShip = new ShipRemoval(ships[shipChoice - 1]);
                                     ships[shipChoice - 1] = removeShip.removeShip(dbManager);
-                                    ships = dbManager.databaseShipArrayRetrieval();
+                                    ships = dbManager.databaseShipArrayRetrieval(dbManager);
                                 } while (shipChoice <= 0);
                                 break;
 
@@ -1211,7 +1210,7 @@ public static void main(String[] args){
                                         if (ships[shipChoice -1].getFailure()) {
                                             ShipRemoval shipRemoval = new ShipRemoval(ships[shipChoice - 1]);
                                             shipRemoval.removeShip(dbManager);
-                                            ships = dbManager.databaseShipArrayRetrieval();
+                                            ships = dbManager.databaseShipArrayRetrieval(dbManager);
                                         }
                                     } else if (launchConfirmation.equalsIgnoreCase("no")) {
                                         System.out.println("The ship will not be launched.");

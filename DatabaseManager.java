@@ -8,7 +8,6 @@ public class DatabaseManager {
     private File database = new File("ApplicationDatabase.sqlite");
     private Astronaut[] astrosFromDatabase = new Astronaut[20];
     private Ship[] shipsFromDatabase = new Ship[10];
-    private DatabaseManager db = null;
 
     //Constructor 
     /**
@@ -124,7 +123,7 @@ public class DatabaseManager {
      * @param stmnt A Java SQL Statement used for queries
      * @return The Ship array with information from the database
      */
-    public Ship[] databaseShipArrayRetrieval() {
+    public Ship[] databaseShipArrayRetrieval(DatabaseManager db) {
         shipsFromDatabase = new Ship[10];
         int count = 0;
         try {
@@ -471,10 +470,6 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println("Error occured: " + e.getMessage());
         }
-    }
-
-    public void setDBManager( DatabaseManager manager) {
-        db = manager;
     }
 
 }
