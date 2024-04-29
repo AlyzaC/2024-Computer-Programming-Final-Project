@@ -924,6 +924,7 @@ public static void main(String[] args){
                                         ships[count].setFCap(shipFuelCapacity);
                                         ships[count].setFuel(shipCurrentFuel);
                                         ships[count].setSCap(shipCrewCapacity);
+                                        ships[count].setData(dbManager);
                                         break;
                                     }
                                 }
