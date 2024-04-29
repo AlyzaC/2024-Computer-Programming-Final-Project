@@ -8,6 +8,7 @@ public class DatabaseManager {
     private File database = new File("ApplicationDatabase.sqlite");
     private Astronaut[] astrosFromDatabase = new Astronaut[20];
     private Ship[] shipsFromDatabase = new Ship[10];
+    private DatabaseManager db = null;
 
     //Constructor 
     /**
@@ -139,6 +140,7 @@ public class DatabaseManager {
                     shipsFromDatabase[count].setFCap(fCap);
                     shipsFromDatabase[count].setFuel(fuel);
                     shipsFromDatabase[count].setSCap(sCap);
+                    shipsFromDatabase[count].setData(db);
                 }
                 count++;
             }
@@ -469,6 +471,10 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println("Error occured: " + e.getMessage());
         }
+    }
+
+    public void setDBManager( DatabaseManager manager) {
+        db = manager;
     }
 
 }

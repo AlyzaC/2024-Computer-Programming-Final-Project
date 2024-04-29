@@ -21,6 +21,7 @@ public static void main(String[] args){
         dbManager = new DatabaseManager();
         astros = dbManager.databaseAstronautArrayRetrieval();
         ships = dbManager.databaseShipArrayRetrieval();
+        dbManager.setDBManager(dbManager);
         do {
             //Main menu for the program
             System.out.println("\nMission Control\n" +
