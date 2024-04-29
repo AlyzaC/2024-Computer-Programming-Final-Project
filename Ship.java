@@ -155,12 +155,14 @@ public void ship(int speed,boolean inSpace )
   {
  System.out.println ("the ship burned in the atmosphere");
  failure = true;
+ Destruction();
   }
 //etc
  if (speed > -7 && altitude == 0 && returning == true)
  {
   System.out.println("You crashed attempting to land");
   failure = true;
+  Destruction();
  } //etc
  if (speed < -7 && altitude == 0 & returning ==true)
  {
@@ -269,6 +271,7 @@ if ((fuel <= 0) && (inSpace == false) && (returning == false))
 System.out.println("Metal pipe sfx");
 
 failure = true;
+Destruction();
  }
 }
 }
