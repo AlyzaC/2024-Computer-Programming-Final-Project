@@ -1,4 +1,4 @@
-import java.sql.Connection;
+
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +27,7 @@ public class Ship
     double altitude = 0; //above 70k in space.
   Scanner scanner = new Scanner(System.in);
   int seconds;
-  Connection connection;
+  DatabaseManager data = null;
   //make connection object, make setConnection(), connection will be put into AstroRemoval object
 
 int choice; 
@@ -295,7 +295,7 @@ private void clearCrew()
     }
   }
 }
-  public void Destruction(Connection connection, double fuel)
+  public void Destruction()
   {
     if (failure == true)
     {
@@ -309,43 +309,37 @@ private void clearCrew()
     shipCapacity = 0;
     fuel = 0.0;
 failure = false;
+removeAstronauts(data);
+clearCrew();
 crewNum = 0;
+failure2 = true;
     }
     }
   
-  public void removeAstronauts(Connection connection, Scanner scanner) 
+  public void removeAstronauts(DatabaseManager data) 
  {
   AstroRemoval astroRem = new AstroRemoval(crewNum);
    for (Astronaut a : crew) {
     if (a != null) {
       astroRem.addAstro(a);
-      a = astroRem.removeAstronauts(connection, scanner);
+      a = astroRem.removeAstronauts(data);
     }
+  }
    }
   
 
 
-//public void shipgoboom (Connection connection, Scanner scanner)
-//{
-
-//
-//ShipRemoval.shipgoboom();
-//}
 
 
 
 
 
 //WHY WONT YOU SAVE
-AstroRemoval placeholderremoval = new AstroRemoval(crewNum);
 
-   shipName = null;
-   clearCrew();
-   failure2 = true;
     // clear String crew, Int crewNum, double fuelcapacity, String shipname , int shipcapacity, double fuel
     //tell astroremoval to remove all astronauts that were part of crew
     //tell shipremoval to remove the ship
     //set failure back to false once everything is done so that way the next test dosent automatically fail
     
   }
-}
+
