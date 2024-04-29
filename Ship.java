@@ -27,7 +27,7 @@ public class Ship
     double altitude = 0; //above 70k in space.
   Scanner scanner = new Scanner(System.in);
   int seconds;
-  DatabaseManager data = null;
+  DatabaseManager data;
   //make connection object, make setConnection(), connection will be put into AstroRemoval object
 
 int choice; 
