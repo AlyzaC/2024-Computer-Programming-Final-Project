@@ -129,6 +129,7 @@ public void Space()
     //after 30 seconds the astronaut will return to the ship
     System.out.println("(name stuff here) has returned into the ship in time");
   spaceWalkComplete = true;
+
  }
  //if altitude goes below 70000 and inSpace is true returning is true and inSpace is false
   }
