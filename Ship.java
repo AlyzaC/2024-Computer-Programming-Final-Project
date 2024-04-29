@@ -203,7 +203,7 @@ public void addAstro(Astronaut astronaut)
 
 
 
-public void launch() //might need to be a private
+public void launch(double fuel) //might need to be a private
 { 
 
   //The code will first make sure that crewNum is equal to shipCapacity
@@ -295,7 +295,7 @@ private void clearCrew()
     }
   }
 }
-  public void Destruction(Connection connection)
+  public void Destruction(Connection connection, double fuel)
   {
     if (failure == true)
     {
