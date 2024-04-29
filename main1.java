@@ -21,6 +21,7 @@ public static void main(String[] args){
         dbManager = new DatabaseManager();
         astros = dbManager.databaseAstronautArrayRetrieval();
         ships = dbManager.databaseShipArrayRetrieval();
+        dbManager.setDBManager(dbManager);
         do {
             //Main menu for the program
             System.out.println("\nMission Control\n" +
@@ -924,6 +925,7 @@ public static void main(String[] args){
                                         ships[count].setFCap(shipFuelCapacity);
                                         ships[count].setFuel(shipCurrentFuel);
                                         ships[count].setSCap(shipCrewCapacity);
+                                        ships[count].setData(dbManager);
                                         break;
                                     }
                                 }
